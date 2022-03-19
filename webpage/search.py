@@ -31,6 +31,7 @@ from restaurant import restaurant
 #DATABASE_URL = 'file:reg.sqlite?mode=ro'
 
 # New database for restaurants 
+DATABASE_URL = 'file:teldatabase.sql?mode=ro'
 #-----------------------------------------------------------------------
 
 def __professor__():
@@ -194,7 +195,7 @@ def restaurant_search(restaurant):
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted 
-                stmt_str = "SELECT restaurantid, name"
+                stmt_str = "SELECT restaurantid, name "
                 stmt_str += "FROM restaurants"
 
                 # stmt_str = "SELECT classid, dept, "
@@ -209,7 +210,7 @@ def restaurant_search(restaurant):
                 # stmt_str += "crosslistings.courseid "
 
 # here will be where restaurant is diffenret 
-                stmt_str += 'AND name LIKE ? ESCAPE "\\"'
+                stmt_str += 'WHERE name LIKE ? ESCAPE "\\"'
 
                 # stmt_str += "ORDER BY dept,"
                 # stmt_str += "coursenum, classid"
@@ -229,7 +230,6 @@ def restaurant_search(restaurant):
                 while row is not None:
                     rowstring[0] = str(row[0])
                     rowstring[1] = str(row[1])
-
                     restaurants.append(restaurant(rowstring))
                     row = cursor.fetchone()
 

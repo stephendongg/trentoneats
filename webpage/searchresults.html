@@ -5,13 +5,12 @@
     </head>
     <table>
         <tbody>
-            <h1>Author Search Results</h1>
+            <h1>Restaurant Search Results</h1>
             
             {% if restaurantinfo | length == 0: %}
             {% else %}
                 {% for restaurant in restaurantinfo: %}
                     <tr>
-                        <!-- <td><a href = "/my-link/?classid={{course.get_courseid()}}&courseid={{course.get_coursenum()}}">{{course.get_courseid()}}</a> </td> -->
                         <td>{{restaurant.get_name()}}</td>
                     </tr>
                 {% endfor %}

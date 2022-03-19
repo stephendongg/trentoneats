@@ -31,6 +31,7 @@ def search_form():
     html = render_template('searchform.html',
         #ampm = get_ampm(),
         # current_time = get_current_time(),
+        restaurantinfo = restaurantinfo,
         error_msg = error_msg)
     response = make_response(html)
     return response
