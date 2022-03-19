@@ -5,22 +5,11 @@
      </head>
      <body>
          {% include 'header.html' %}
-         <!-- currently in the template of authors... adjust to real -->
-         <h1>Author Search</h1>
+         <h1>Restaurant Search</h1>
          <form auction="searchresults" method="get">
-             <input type="text" name="author">
+             <input type="text" name="restaurant">
              <input type="submit" value="Go">
-         </form>
-         <br>
-         <strong>{{error_msg}}</strong>
-         <br>
-         <br> 
-         <strong>Previous author serach: {{prev_author}}</strong>
-         <br>
-         <br>
          {% include 'footer.html' %} 
          {% include 'searchresults.html' %} 
-         <br>
-         <br>
      </body>
  </html> 
