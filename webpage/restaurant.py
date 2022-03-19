@@ -32,7 +32,7 @@ class restaurant:
         """course ID"""
         return self._name 
 
-    def get_restauranid(self):
+    def get_restaurantid(self):
         """restaurant ID"""
         return self._restaurantid
 

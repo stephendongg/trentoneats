@@ -34,128 +34,128 @@ from restaurant import restaurant
 DATABASE_URL = 'file:teldatabase.sql?mode=ro'
 #-----------------------------------------------------------------------
 
-def __professor__():
-    stmt_str = "SELECT profname "
-    stmt_str += "FROM profs, coursesprofs, classes "
-    stmt_str += "WHERE profs.profid = coursesprofs.profid "
-    stmt_str += "AND classes.courseid = coursesprofs.courseid "
-    stmt_str += "AND classes.classid = ? "
-    stmt_str += "ORDER BY profname"
-    return stmt_str
+# def __professor__():
+#     stmt_str = "SELECT profname "
+#     stmt_str += "FROM profs, coursesprofs, classes "
+#     stmt_str += "WHERE profs.profid = coursesprofs.profid "
+#     stmt_str += "AND classes.courseid = coursesprofs.courseid "
+#     stmt_str += "AND classes.classid = ? "
+#     stmt_str += "ORDER BY profname"
+#     return stmt_str
 
-def __dept_and_num__():
-    # Dept + number
-    stmt_str = "SELECT dept, coursenum "
-    stmt_str += "FROM crosslistings, classes "
-    stmt_str += "WHERE crosslistings.courseid = classes.courseid "
-    stmt_str += "AND classes.classid = ? "
-    stmt_str += "ORDER BY dept, coursenum"
-    return stmt_str
+# def __dept_and_num__():
+#     # Dept + number
+#     stmt_str = "SELECT dept, coursenum "
+#     stmt_str += "FROM crosslistings, classes "
+#     stmt_str += "WHERE crosslistings.courseid = classes.courseid "
+#     stmt_str += "AND classes.classid = ? "
+#     stmt_str += "ORDER BY dept, coursenum"
+#     return stmt_str
 
-def __main_selection__():
-    # Selections
-    stmt_str = "SELECT classid, courses.courseid, days, "
-    stmt_str += "starttime, endtime, "
-    stmt_str += "bldg, roomnum, dept, coursenum, area, title, "
-    stmt_str += "descrip, prereqs "
+# def __main_selection__():
+#     # Selections
+#     stmt_str = "SELECT classid, courses.courseid, days, "
+#     stmt_str += "starttime, endtime, "
+#     stmt_str += "bldg, roomnum, dept, coursenum, area, title, "
+#     stmt_str += "descrip, prereqs "
 
-    # From
-    stmt_str += "FROM classes, courses, crosslistings "
+#     # From
+#     stmt_str += "FROM classes, courses, crosslistings "
 
-    # Where Statements
-    stmt_str += "WHERE courses.courseid = crosslistings.courseid "
-    stmt_str += "AND courses.courseid = classes.courseid "
-    stmt_str += "AND classes.courseid = crosslistings.courseid "
+#     # Where Statements
+#     stmt_str += "WHERE courses.courseid = crosslistings.courseid "
+#     stmt_str += "AND courses.courseid = classes.courseid "
+#     stmt_str += "AND classes.courseid = crosslistings.courseid "
 
-    #FINAL AND -> ClassID
-    stmt_str += "AND classid = ? "
-    return stmt_str
+#     #FINAL AND -> ClassID
+#     stmt_str += "AND classid = ? "
+#     return stmt_str
 
-def courseid(row):
-    """return course id"""
-    return str(row[1])
+# def courseid(row):
+#     """return course id"""
+#     return str(row[1])
 
-def __search__(class_id):
-    class_id = str(class_id)
-    try:
-        with connect(DATABASE_URL, isolation_level=None,
-            uri=True) as connection:
+# def __search__(class_id):
+#     class_id = str(class_id)
+#     try:
+#         with connect(DATABASE_URL, isolation_level=None,
+#             uri=True) as connection:
 
-            with closing(connection.cursor()) as cursor:
-                stmt_str = __main_selection__()
-                cursor.execute(stmt_str, [class_id])
-                row = cursor.fetchone()
+#             with closing(connection.cursor()) as cursor:
+#                 stmt_str = __main_selection__()
+#                 cursor.execute(stmt_str, [class_id])
+#                 row = cursor.fetchone()
 
-                #CourseId
-                printstr = str(row[1]) + '\n'
+#                 #CourseId
+#                 printstr = str(row[1]) + '\n'
 
-                #Days, Start Time, End Time, Building, Room
-                printstr += str(row[2]) + '\n'
-                printstr += str(row[3]) + '\n'
-                printstr += str(row[4]) + '\n'
-                printstr += str(row[5]) + '\n'
-                printstr += str(row[6]) + '\n'
+#                 #Days, Start Time, End Time, Building, Room
+#                 printstr += str(row[2]) + '\n'
+#                 printstr += str(row[3]) + '\n'
+#                 printstr += str(row[4]) + '\n'
+#                 printstr += str(row[5]) + '\n'
+#                 printstr += str(row[6]) + '\n'
 
-                #temp statement for your department and number
-                temp_statement = __dept_and_num__()
-                cursor.execute(temp_statement, [class_id])
-                row = cursor.fetchone()
+#                 #temp statement for your department and number
+#                 temp_statement = __dept_and_num__()
+#                 cursor.execute(temp_statement, [class_id])
+#                 row = cursor.fetchone()
 
-                while row is not None:
-                    printstr += str(row[0]) + ' ' + str(row[1])
-                    row = cursor.fetchone()
-                    printstr += '@'
+#                 while row is not None:
+#                     printstr += str(row[0]) + ' ' + str(row[1])
+#                     row = cursor.fetchone()
+#                     printstr += '@'
 
-                cursor.execute(stmt_str, [class_id])
-                row = cursor.fetchone()
+#                 cursor.execute(stmt_str, [class_id])
+#                 row = cursor.fetchone()
 
-                printstr += '\n'
+#                 printstr += '\n'
 
-                #Area
-                printstr += str(row[9]) + '\n'
+#                 #Area
+#                 printstr += str(row[9]) + '\n'
 
-                #Title
-                printstr += str(row[10]) + '\n'
+#                 #Title
+#                 printstr += str(row[10]) + '\n'
 
-                #Description
-                printstr += str(row[11]) + '\n'
+#                 #Description
+#                 printstr += str(row[11]) + '\n'
 
-                #Prerequisites
-                printstr += str(row[12]) + '\n'
+#                 #Prerequisites
+#                 printstr += str(row[12]) + '\n'
 
-                # temp statement for professor
-                temp_statement = __professor__()
+#                 # temp statement for professor
+#                 temp_statement = __professor__()
 
-                cursor.execute(temp_statement, [class_id])
-                row = cursor.fetchone()
+#                 cursor.execute(temp_statement, [class_id])
+#                 row = cursor.fetchone()
 
-                while row is not None:
-                    printstr += str(row[0])
-                    row = cursor.fetchone()
-                    printstr += '@'
+#                 while row is not None:
+#                     printstr += str(row[0])
+#                     row = cursor.fetchone()
+#                     printstr += '@'
 
-                cursor.execute(stmt_str, [class_id])
-                row = cursor.fetchone()
+#                 cursor.execute(stmt_str, [class_id])
+#                 row = cursor.fetchone()
 
-                printstr = printstr.replace(',', ', ')
-                printstr = printstr.replace('.', '. ')
-                return printstr
+#                 printstr = printstr.replace(',', ', ')
+#                 printstr = printstr.replace('.', '. ')
+#                 return printstr
 
-    except DatabaseError as error:
-        print(sys.argv[0] + ": " + str(error), file=stderr)
-        error_msg = "A server error occurred. "
-        error_msg += "Please contact the system administrator."
-        return error_msg
+#     except DatabaseError as error:
+#         print(sys.argv[0] + ": " + str(error), file=stderr)
+#         error_msg = "A server error occurred. "
+#         error_msg += "Please contact the system administrator."
+#         return error_msg
 
 
-    except TypeError:
-        # Currently hard coded in... can we fix?
-        print(sys.argv[0] + ": no class with classid ",
-                            class_id, " exists", file=stderr)
-        error_msg = sys.argv[0] + ": no class with classid "
-        error_msg += class_id + " exists"
-        return error_msg
-        #sys.exit(1)
+#     except TypeError:
+#         # Currently hard coded in... can we fix?
+#         print(sys.argv[0] + ": no class with classid ",
+#                             class_id, " exists", file=stderr)
+#         error_msg = sys.argv[0] + ": no class with classid "
+#         error_msg += class_id + " exists"
+#         return error_msg
+#         #sys.exit(1)
 
 def adjust_inputs(restaurant):
     """format classes"""
@@ -195,7 +195,7 @@ def restaurant_search(restaurant):
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted 
-                stmt_str = "SELECT restaurantid, name "
+                stmt_str = "SELECT restaurant_id, name "
                 stmt_str += "FROM restaurants"
 
                 # stmt_str = "SELECT classid, dept, "
@@ -210,7 +210,7 @@ def restaurant_search(restaurant):
                 # stmt_str += "crosslistings.courseid "
 
 # here will be where restaurant is diffenret 
-                stmt_str += 'WHERE name LIKE ? ESCAPE "\\"'
+                #stmt_str += 'WHERE name LIKE ? ESCAPE "\\"'
 
                 # stmt_str += "ORDER BY dept,"
                 # stmt_str += "coursenum, classid"
@@ -241,7 +241,7 @@ def restaurant_search(restaurant):
 
     except DatabaseError as error:
         print(sys.argv[0] + ": " + str(error), file=stderr)
-        return "stdservererr"
+        return ("stdservererr")
 
 
 

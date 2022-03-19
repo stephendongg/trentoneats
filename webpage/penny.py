@@ -8,7 +8,7 @@ from urllib import response
 from flask import Flask, request, make_response, redirect,url_for
 from flask import render_template
 #sfrom database import search
-from search import __search__, restaurant_search
+from search import restaurant_search
 
 #-----------------------------------------------------------------------
 
