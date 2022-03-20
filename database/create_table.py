@@ -25,7 +25,7 @@ def create_tables():
             stars FLOAT NOT NULL
         )
         """,
-        """ 
+        """
         CREATE TABLE [IF NOT EXISTS] customers (
                 customer_id VARCHAR(20) PRIMARY KEY,
                 name VARCHAR(255),
@@ -38,7 +38,7 @@ def create_tables():
         """
         CREATE TABLE [IF NOT EXISTS] reviews (
                 review_id INTEGER PRIMARY KEY,
-                FOREIGN KEY (customer_id) 
+                FOREIGN KEY (customer_id)
                 REFERENCES customers (customer_id),
                 FOREIGN KEY (restaurant_id)
                 REFERENCES restaurants (restaurant_id),
