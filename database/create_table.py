@@ -4,10 +4,15 @@
 # Group: Trenton Eats Local
 # Author: Piers Ozuah
 
+<<<<<<< HEAD
 
 from sys import argv, stderr, exit
 from psycopg2 import connect
 import psycopg2
+=======
+from psycopg2 import connect, DatabaseError
+from config import config
+>>>>>>> searchbar_test
 
 
 def create_tables():
@@ -27,8 +32,13 @@ def create_tables():
             stars FLOAT NOT NULL
         )
         """,
+<<<<<<< HEAD
         """ 
         CREATE TABLE IF NOT EXISTS customers (
+=======
+        """
+        CREATE TABLE [IF NOT EXISTS] customers (
+>>>>>>> searchbar_test
                 customer_id VARCHAR(20) PRIMARY KEY,
                 name VARCHAR(255),
                 review_count INTEGER NOT NULL,
@@ -40,8 +50,12 @@ def create_tables():
         """
         CREATE TABLE IF NOT EXISTS reviews (
                 review_id INTEGER PRIMARY KEY,
+<<<<<<< HEAD
                 customer_id VARCHAR(20),
                 FOREIGN KEY (customer_id) 
+=======
+                FOREIGN KEY (customer_id)
+>>>>>>> searchbar_test
                 REFERENCES customers (customer_id),
                 restaurant_id VARCHAR(20),
                 FOREIGN KEY (restaurant_id)
@@ -91,6 +105,7 @@ def create_tables():
 # The following code was adapted from POSTGRESQL TUTORIAL
 
     try:
+<<<<<<< HEAD
         with connect(
                 host='localhost', port=5432, user='rmd', password='trentoneats333',
                 database='teldatabase') as connection:
@@ -104,6 +119,25 @@ def create_tables():
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
 
+=======
+        # read the connection parameters
+        params = config()
+        # connect to the PostgreSQL server
+        conn = connect(**params)
+        cur = conn.cursor()
+        # create table one by one
+        for command in commands:
+            cur.execute(command)
+        # close communication with the PostgreSQL database server
+        cur.close()
+        # commit the changes
+        conn.commit()
+    except (Exception, DatabaseError) as error:
+        print(error)
+
+        #conn.close()
+
+>>>>>>> searchbar_test
 
 if __name__ == '__main__':
     create_tables()

@@ -8,6 +8,7 @@ from urllib import response
 from flask import Flask, request, make_response, redirect,url_for
 from flask import render_template
 #sfrom database import search
+from search import restaurant_search
 
 #-----------------------------------------------------------------------
 
@@ -23,15 +24,15 @@ def search_form():
     if error_msg is None:
         error_msg = ''
 
-    prev_author = request.cookies.get('prev_author')
-    if prev_author is None:
-        prev_author = '(None)'
+    #Temp  ------- initial restaurant value 
+    restaurant = ""
+    restaurantinfo = restaurant_search(restaurant) #Exception handling omitted
 
     html = render_template('searchform.html',
         #ampm = get_ampm(),
         # current_time = get_current_time(),
-        error_msg = error_msg,
-        prev_author=prev_author)
+        restaurantinfo = restaurantinfo,
+        error_msg = error_msg)
     response = make_response(html)
     return response
 
@@ -39,22 +40,19 @@ def search_form():
 
 @app.route('/searchresults', methods = ['GET'])
 def search_results():
+    error_msg = request.args.get('error_msg')
+    if error_msg is None:
+        error_msg = ''
 
-    author = request.args.get('author')
-    if(author is None) or (author.strip() == ''):
-        error_msg = 'Please type an author name.'
-        return redirect(url_for('search_form', error_msg=error_msg))
+    restaurant = request.args.get('restaurant')
 
-    #book = search(author) #Exception handling omitted
+    restaurantinfo = restaurant_search(restaurant)
 
-    html = render_template('searchresults.html',
-        ampm=get_ampm(),
-        #current_time=get_current_time(),
-        author=author,
-        #books = books
+    html = render_template('searchform.html',
+        restaurantinfo = restaurantinfo
         )
     response = make_response(html)
-    response.set_cookie('prev_author', author)
+
     return response
 
 # Under Construction WebPages! These will be the ones that we will modify! 

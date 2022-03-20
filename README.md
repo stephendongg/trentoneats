@@ -18,3 +18,20 @@ Notes: Searchform and runserver.py is using authorsearch as a template, will be 
 * 2) Build out the structure for the about page and the join restaurant page
 * 3) Build out the restaurant display page.
 * 4) Frontend
+
+3/20/22: 
+
+TO RUN -> 
+1) make sure to create a trentoneats database in postgre, see dondero's
+notes or ask gc for help
+2) run create.py to create database
+3) run insert_mock.py to insert mock information
+4) run regserver.py 
+
+* Search functionality sort of working?
+
+Next Steps: 
+* !! 1) Populate with data about restaurnats
+* 2) Add restaurant details page
+* 4) Heroku + deployment 
+* 3) Frontend 
