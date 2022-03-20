@@ -4,7 +4,7 @@
 # Group: Trenton Eats Local
 # Author: Piers Ozuah
 
-import psycopg2
+from psycopg2 import connect, DatabaseError
 from config import config
 
 
@@ -66,7 +66,7 @@ def create_tables():
         # read the connection parameters
         params = config()
         # connect to the PostgreSQL server
-        conn = psycopg2.connect(**params)
+        conn = connect(**params)
         cur = conn.cursor()
         # create table one by one
         for command in commands:
@@ -75,10 +75,10 @@ def create_tables():
         cur.close()
         # commit the changes
         conn.commit()
-    except (Exception, psycopg2.DatabaseError) as error:
+    except (Exception, DatabaseError) as error:
         print(error)
 
-        conn.close()
+        #conn.close()
 
 
 if __name__ == '__main__':
