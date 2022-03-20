@@ -1,0 +1,12 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.header
+{
+    height: 100vh;
+}
+.sticky-top
+{
+    box-shadow: 0 5px 10px #efefef;
+}
