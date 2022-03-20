@@ -9,10 +9,9 @@
             
             {% if restaurantinfo | length == 0: %}
             {% else %}
-                {{restaurantinfo}}
                 {% for restaurant in restaurantinfo: %}
                     <tr>
-                        <td>{{restaurant}}</td>
+                        <td>{{restaurant.get_name()}}</td>
                     </tr>
                 {% endfor %}
             {% endif %}

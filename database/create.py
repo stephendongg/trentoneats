@@ -11,48 +11,46 @@ from psycopg2 import connect
 #-----------------------------------------------------------------------
 
 def main():
-    create_restaurant_string = "CREATE TABLE [IF NOT EXISTS] restaurants (
-        restaurant_id VARCHAR(20) PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
-        address VARCHAR(255) NOT NULL,
-        hours VARCHAR(255) NOT NULL,
-        open_closed BOOLEAN,
-        menu VARCHAR(255),
-        media VARCHAR(255),
-        tags VARCHAR(255),
-        review_count INTEGER,
-        stars FLOAT NOT NULL
-    )"
+    create_restaurant_string = "CREATE TABLE [IF NOT EXISTS] restaurants (" +
+        "restaurant_id VARCHAR(20) PRIMARY KEY," +
+        "name VARCHAR(255) NOT NULL," +
+        "address VARCHAR(255) NOT NULL," +
+        "hours VARCHAR(255) NOT NULL," +
+        "open_closed BOOLEAN," +
+        "menu VARCHAR(255)," +
+        "media VARCHAR(255)," +
+        "tags VARCHAR(255)," +
+        "review_count INTEGER," +
+        "stars FLOAT NOT NULL)"
 
-    create_customer_string = "CREATE TABLE [IF NOT EXISTS] customers (
-            customer_id VARCHAR(20) PRIMARY KEY,
-            name VARCHAR(255),
-            review_count INTEGER NOT NULL,
-            avg_rating FLOAT NOT NULL,
-            account_type VARCHAR(255) NOT NULL,
-            reported_count INT
-            )"
 
-    create_review_string = "CREATE TABLE [IF NOT EXISTS] reviews (
-            review_id INTEGER PRIMARY KEY,
-            FOREIGN KEY (customer_id)
-            REFERENCES customers (customer_id),
-            FOREIGN KEY (restaurant_id)
-            REFERENCES restaurants (restaurant_id),
-            date TIMESTAMP NOT NULL,
-            text TEXT NOT NULL,
-            price INTEGER,
-            taste INTEGER,
-            authenticity INTEGER,
-            coolness INTEGER,
-            overall INTEGER
-    )"
+    create_customer_string = "CREATE TABLE [IF NOT EXISTS] customers (" +
+            "customer_id VARCHAR(20) PRIMARY KEY," +
+            "name VARCHAR(255)," +
+            "review_count INTEGER NOT NULL," +
+            "avg_rating FLOAT NOT NULL," +
+            "account_type VARCHAR(255) NOT NULL," +
+            "reported_count INT)"
 
-    create_categories_string = "CREATE TABLE [IF NOT EXISTS] categories (
-            category VARCHAR(20) PRIMARY KEY,
-            FOREIGN KEY (restaurant_id)
-            REFERENCES restaurants (restaurant_id)
-    )"
+    create_review_string = "CREATE TABLE [IF NOT EXISTS] reviews (" +
+            "review_id INTEGER PRIMARY KEY," +
+            "FOREIGN KEY (customer_id)" +
+            "REFERENCES customers (customer_id)," +
+            "FOREIGN KEY (restaurant_id)" +
+            "REFERENCES restaurants (restaurant_id)," +
+            "date TIMESTAMP NOT NULL," +
+            "text TEXT NOT NULL," +
+            "price INTEGER," +
+            "taste INTEGER," +
+            "authenticity INTEGER," +
+            "coolness INTEGER," +
+            "overall INTEGER)"
+
+    create_categories_string = "CREATE TABLE [IF NOT EXISTS] categories (" +
+            "category VARCHAR(20) PRIMARY KEY," +
+            "FOREIGN KEY (restaurant_id)" +
+            "REFERENCES restaurants (restaurant_id))" 
+
 
     if len(argv) != 1:
         print('Usage: python create.py', file=stderr)

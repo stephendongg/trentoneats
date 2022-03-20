@@ -17,8 +17,9 @@ from pickle import dump
 from pickle import load
 
 from contextlib import closing
-from sqlite3 import DataError, DatabaseError
-from sqlite3 import connect
+# from sqlite3 import DataError, DatabaseError
+# from sqlite3 import connect
+from psycopg2 import connect, DatabaseError
 import argparse
 #loading
 
@@ -185,13 +186,13 @@ def adjust_inputs(restaurant):
     return restaurant
 
 
-def restaurant_search(restaurant):
+def restaurant_search(input):
     """search through courses"""
     try:
-        with connect(DATABASE_URL, isolation_level=None,
-            uri=True) as connection:
+        with connect(host='localhost', port=5432, user='rmd', password='xxx',
+        database="trentoneats") as connection:
 
-            restaurant = adjust_inputs(restaurant)
+            input = adjust_inputs(input)
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted 
@@ -215,7 +216,7 @@ def restaurant_search(restaurant):
                 # stmt_str += "ORDER BY dept,"
                 # stmt_str += "coursenum, classid"
 
-                cursor.execute(stmt_str, restaurant)
+                cursor.execute(stmt_str, input)
 
                 row = cursor.fetchone()
 

@@ -18,14 +18,14 @@ class restaurant:
         # self._title = rowstring[4]
         # self._details = details
     
-    def __str__(self):
-    # --- The following will be modified to work for restaurants 
-        string_form = str(self._name) + ' '
-        # string_form += str(self._dept) + ' '
-        # string_form += str(self._course_num) + ' '
-        # string_form += str(self._area) + ' '
-        # string_form += str(self._title)
-        return string_form
+    # def __str__(self):
+    # # --- The following will be modified to work for restaurants 
+    #     string_form = str(self._name) + ' '
+    #     # string_form += str(self._dept) + ' '
+    #     # string_form += str(self._course_num) + ' '
+    #     # string_form += str(self._area) + ' '
+    #     # string_form += str(self._title)
+    #     return string_form
     
     # Make sure to have name 
     def get_name(self):

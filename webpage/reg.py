@@ -19,7 +19,7 @@ import textwrap
 def __display__():
     try:
         with connect(host='localhost', port=5432, user='rmd', password='xxx',
-        database="teldatabase") as connection:
+        database="trentoneats") as connection:
 
             with connection.cursor() as cursor:
                 stmt_str = "SELECT restaurant_id, name "
