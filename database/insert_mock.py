@@ -28,7 +28,7 @@ def insert_mock():
     try:
         with connect(
                 host='localhost', port=5432, user='rmd', password='trentoneats333',
-                database='teldatabase') as connection:
+                database='trentoneats') as connection:
 
             with connection.cursor() as cursor:
                 # # create table one by one
@@ -40,6 +40,7 @@ def insert_mock():
         '9am-5pm everyday', TRUE, 'Playa Bowlsabowls.com/trenton',
         'playabowlos.com/media', 'Acai, Fruit' , 15, 4.2)
         """)
+                
                 # close communication with the PostgreSQL database server
                 cursor.close()
     except (Exception, psycopg2.DatabaseError) as error:
