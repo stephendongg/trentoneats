@@ -9,7 +9,10 @@
 from sys import argv, stderr, exit
 from psycopg2 import connect
 import psycopg2
+<<<<<<< HEAD
 
+=======
+>>>>>>> 227383094081c19913d4649903d576f0c84937ff
 
 def insert_restaurant():
     """ Insert our test restaurants"""

@@ -28,11 +28,7 @@ def insert_mock():
     try:
         with connect(
                 host='localhost', port=5432, user='rmd', password='trentoneats333',
-<<<<<<< HEAD
-                database='teldatabase') as connection:
-=======
                 database='trentoneats') as connection:
->>>>>>> searchbar_test
 
             with connection.cursor() as cursor:
                 # # create table one by one
@@ -41,16 +37,10 @@ def insert_mock():
         INSERT INTO restaurants (restaurant_id, name, address, hours,
         open_closed, menu, media, tags, review_count, stars )
         VALUES ('1', 'Playa Bowls', '24 Trenton Avenue, Trenton, NJ',
-<<<<<<< HEAD
-        '9am-5pm everyday', TRUE, 'Playa Bowlsabowls.com/trenton', 
-        'playabowlos.com/media', 'Acai, Fruit' , 15, 4.2)
-        """)
-=======
         '9am-5pm everyday', TRUE, 'Playa Bowlsabowls.com/trenton',
         'playabowlos.com/media', 'Acai, Fruit' , 15, 4.2)
         """)
                 
->>>>>>> searchbar_test
                 # close communication with the PostgreSQL database server
                 cursor.close()
     except (Exception, psycopg2.DatabaseError) as error:
