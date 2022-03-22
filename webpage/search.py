@@ -192,12 +192,13 @@ def restaurant_search(input):
         with connect(host='localhost', port=5432, user='rmd', password='xxx',
         database="trentoneats") as connection:
 
-            input = adjust_inputs(input)
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted 
                 stmt_str = "SELECT restaurant_id, name "
-                stmt_str += "FROM restaurants"
+                stmt_str += "FROM restaurants "
+                stmt_str += "WHERE name LIKE '%" + input + "%' "
+                #stmt_str += 'WHERE name LIKE ? ESCAPE "\\"'
 
                 # stmt_str = "SELECT classid, dept, "
                 # stmt_str += "coursenum, area, title "
@@ -211,12 +212,12 @@ def restaurant_search(input):
                 # stmt_str += "crosslistings.courseid "
 
 # here will be where restaurant is diffenret 
-                #stmt_str += 'WHERE name LIKE ? ESCAPE "\\"'
+                #stmt_str += 'WHERE name LIKE ' + input
 
                 # stmt_str += "ORDER BY dept,"
                 # stmt_str += "coursenum, classid"
 
-                cursor.execute(stmt_str, input)
+                cursor.execute(stmt_str)
 
                 row = cursor.fetchone()
 

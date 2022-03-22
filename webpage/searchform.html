@@ -2,9 +2,9 @@
 {% block title %} Best Restaurants in Trenton | Trenton local eats {% endblock %}
 {% block content %}
 <h1>Restaurant Search</h1>
-<form auction="searchresults" method="get">
-    <input type="text" name="author">
-    <input type="submit" value="Go">
+<form action="searchresults" method="get">
+    <input type="text" name="restaurant">
+    <input type="submit" value="Submit">
 </form>
 <br>
 <strong>{{error_msg}}</strong>
