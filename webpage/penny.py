@@ -48,7 +48,7 @@ def search_results():
 
     restaurantinfo = restaurant_search(restaurant)
 
-    html = render_template('searchresults.html',
+    html = render_template('searchform.html',
         restaurantinfo = restaurantinfo
         )
     response = make_response(html)
