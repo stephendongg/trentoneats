@@ -59,7 +59,7 @@ def insert_restaurant():
         INSERT INTO restaurants (restaurant_id, name, address, hours,
         open_closed, menu, media, tags, review_count, stars )
         VALUES ('4',
-        $$'Ila Mae's Restaurant'$$,
+        'Ila Mae''s Restaurant',
         '313 Market St, Trenton, NJ 08611',
         'Monday	Closed,
         Tuesday	9AM - 8PM,
@@ -119,7 +119,7 @@ def insert_restaurant():
         INSERT INTO restaurants (restaurant_id, name, address, hours,
         open_closed, menu, media, tags, review_count, stars )
         VALUES ('7',
-        $$'Don Julio's Bar and Grill'$$,
+        'Don Julio''s Bar and Grill',
         '900 Liberty St, Trenton, NJ 08611',
         'Monday	11AM - 2AM,
         Tuesday	11AM - 2AM,
@@ -179,7 +179,7 @@ def insert_restaurant():
         INSERT INTO restaurants (restaurant_id, name, address, hours,
         open_closed, menu, media, tags, review_count, stars )
         VALUES ('10',
-        $$'Trentini's'$$,
+        'Trentini''s',
         '635 S Clinton Ave, Trenton, NJ 08611',
         'Tuesday 10AM - 10PM,
         Wednesday 10AM - 10PM,
@@ -219,7 +219,7 @@ def insert_restaurant():
         INSERT INTO restaurants (restaurant_id, name, address, hours,
         open_closed, menu, media, tags, review_count, stars )
         VALUES ('12',
-        $$'Cooper's Riverview'$$,
+        'Cooper''s Riverview',
         '50 Riverview Plaza, Trenton, NJ 08611',
         'Tuesday 12PM - 2AM,
         Wednesday 12PM - 2AM,
