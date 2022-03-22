@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """This is search.py"""
-#-----------------------------------------------------------------------
+# -----------------------------------------------------------------------
 # search.py
-#-----------------------------------------------------------------------
+# -----------------------------------------------------------------------
 
 # Originally assignment 2's regserver.py -> adapted to search.py to import __search__ cand course_search
 # course_search -> searchbar = restaurant_search
@@ -21,19 +21,19 @@ from contextlib import closing
 # from sqlite3 import connect
 from psycopg2 import connect, DatabaseError
 import argparse
-#loading
+# loading
 
 
 from restaurant import restaurant
 
 
-#-----------------------------------------------------------------------
-#Old Database -> for the original reg
+# -----------------------------------------------------------------------
+# Old Database -> for the original reg
 #DATABASE_URL = 'file:reg.sqlite?mode=ro'
 
 # New database for restaurants
 DATABASE_URL = 'file:trentoneats.sql?mode=ro'
-#-----------------------------------------------------------------------
+# -----------------------------------------------------------------------
 
 # def __professor__():
 #     stmt_str = "SELECT profname "
@@ -190,14 +190,14 @@ def restaurant_search(input):
     """search through courses"""
     try:
         with connect(host='localhost', port=5432, user='rmd', password='xxx',
-        database="trentoneats") as connection:
-
+                     database="trentoneats") as connection:
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted
                 stmt_str = "SELECT restaurant_id, name, open_closed "
                 stmt_str += "FROM restaurants "
-                stmt_str += "WHERE name LIKE '%" + input + "%' "
+                stmt_str += "WHERE LOWER (name) LIKE LOWER ('%" + \
+                    input + "%') "
                 #stmt_str += 'WHERE name LIKE ? ESCAPE "\\"'
 
                 # stmt_str = "SELECT classid, dept, "
@@ -224,7 +224,7 @@ def restaurant_search(input):
                 # course list
                 restaurants = []
 
-                #rowstringlist this rowstring will contain all of the necessary values
+                # rowstringlist this rowstring will contain all of the necessary values
 
                 rowstring = ["", "", ""]
 
