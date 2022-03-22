@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # penny.oy
-# Author: Trenton Eats Local Team 
+# Author: Trenton Eats Local Team
 #-----------------------------------------------------------------------
 
 #from time import localtime, asctime, strftime
@@ -24,7 +24,7 @@ def search_form():
     if error_msg is None:
         error_msg = ''
 
-    #Temp  ------- initial restaurant value 
+    #Temp  ------- initial restaurant value
     restaurant = ""
     restaurantinfo = restaurant_search(restaurant) #Exception handling omitted
 
@@ -48,14 +48,14 @@ def search_results():
 
     restaurantinfo = restaurant_search(restaurant)
 
-    html = render_template('searchform.html',
+    html = render_template('searchresults.html',
         restaurantinfo = restaurantinfo
         )
     response = make_response(html)
 
     return response
 
-# Under Construction WebPages! These will be the ones that we will modify! 
+# Under Construction WebPages! These will be the ones that we will modify!
 #---------------------------------------------------------
 
 @app.route('/about', methods = ['GET'])
