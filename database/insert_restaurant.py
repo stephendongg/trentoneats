@@ -7,7 +7,7 @@
 
 from sys import argv, stderr, exit
 from psycopg2 import connect
-
+import psycopg2
 
 def insert_restaurant():
     """ Insert our test restaurants"""
@@ -330,8 +330,8 @@ def insert_restaurant():
 
             with connection.cursor() as cursor:
                 # # create table one by one
-                # for command in commands:
-                cursor.execute(commands)
+                for command in commands:
+                    cursor.execute(command)
 
                 # close communication with the PostgreSQL database server
                 cursor.close()
