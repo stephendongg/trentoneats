@@ -6,7 +6,7 @@
 
 # Originally assignment 2's regserver.py -> adapted to search.py to import __search__ cand course_search
 # course_search -> searchbar = restaurant_search
-# __search__ -> gets the details -> might be renamed to details 
+# __search__ -> gets the details -> might be renamed to details
 
 import sys
 from os import name
@@ -24,15 +24,15 @@ import argparse
 #loading
 
 
-from restaurant import restaurant 
+from restaurant import restaurant
 
 
 #-----------------------------------------------------------------------
 #Old Database -> for the original reg
 #DATABASE_URL = 'file:reg.sqlite?mode=ro'
 
-# New database for restaurants 
-DATABASE_URL = 'file:teldatabase.sql?mode=ro'
+# New database for restaurants
+DATABASE_URL = 'file:trentoneats.sql?mode=ro'
 #-----------------------------------------------------------------------
 
 # def __professor__():
@@ -162,7 +162,7 @@ def adjust_inputs(restaurant):
     """format classes"""
     restaurant = restaurant.replace('%', r'\%')
     restaurant = restaurant.replace('_', r'\_')
-    # This line probably not encessary lol 
+    # This line probably not encessary lol
     if restaurant == "placeholder":
         restaurant = "%"
 
@@ -194,7 +194,7 @@ def restaurant_search(input):
 
 
             with closing(connection.cursor()) as cursor:
-                # This needs to be adjusted 
+                # This needs to be adjusted
                 stmt_str = "SELECT restaurant_id, name, open_closed "
                 stmt_str += "FROM restaurants "
                 stmt_str += "WHERE name LIKE '%" + input + "%' "
@@ -211,7 +211,7 @@ def restaurant_search(input):
                 # stmt_str += "AND classes.courseid = "
                 # stmt_str += "crosslistings.courseid "
 
-# here will be where restaurant is diffenret 
+# here will be where restaurant is diffenret
                 #stmt_str += 'WHERE name LIKE ' + input
 
                 # stmt_str += "ORDER BY dept,"
@@ -228,7 +228,7 @@ def restaurant_search(input):
 
                 rowstring = ["", "", ""]
 
-                # This iwll parse through the rows and get all of the necsary values 
+                # This iwll parse through the rows and get all of the necsary values
                 while row is not None:
                     rowstring[0] = str(row[0])
                     rowstring[1] = str(row[1])
@@ -245,6 +245,3 @@ def restaurant_search(input):
     except DatabaseError as error:
         print(sys.argv[0] + ": " + str(error), file=stderr)
         return ("stdservererr")
-
-
-
