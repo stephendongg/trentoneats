@@ -8,6 +8,10 @@
 from tokenize import Floatnumber
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String
+from sqlalchemy import Float
+from sqlalchemy import Boolean
+# from sqlalchemy import Time 
+
 
 #Core QUestions:
 # 1) Boolean + float types? Timestamp types 
@@ -41,7 +45,8 @@ class reviews (Base):
     review_id = Column(Integer, primary_key=True)
     # customer_id VARCHAR(20), FOREIGN KEY (customer_id) REFERENCES customers (customer_id),
     # restaurant_id VARCHAR(20), FOREIGN KEY (restaurant_id) REFERENCES restaurants (restaurant_id),
-    # date TIMESTAMP NOT NULL,
+    # date TIMESTAMP NOT NULL, 
+    # Do i use Time for this? 
     # text TEXT NOT NULL,
     price = Column(Integer) 
     taste = Column(Integer)
