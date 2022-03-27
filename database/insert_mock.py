@@ -34,13 +34,13 @@ def insert_mock():
                 # # create table one by one
                 # for command in commands:
                 cursor.execute("""
-        INSERT INTO restaurants (restaurant_id, name, address, hours,
+        INSERT INTO restaurants (name, address, hours,
         open_closed, menu, media, tags, review_count, stars )
-        VALUES ('1', 'Playa Bowls', '24 Trenton Avenue, Trenton, NJ',
+        VALUES ('Playa Bowls', '24 Trenton Avenue, Trenton, NJ',
         '9am-5pm everyday', TRUE, 'Playa Bowlsabowls.com/trenton',
         'playabowlos.com/media', 'Acai, Fruit' , 15, 4.2)
         """)
-                
+
                 # close communication with the PostgreSQL database server
                 cursor.close()
     except (Exception, psycopg2.DatabaseError) as error:

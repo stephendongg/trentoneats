@@ -15,7 +15,7 @@ def create_tables():
     commands = (
         """
         CREATE TABLE IF NOT EXISTS restaurants (
-            restaurant_id VARCHAR(20) PRIMARY KEY,
+            restaurant_id SERIAL PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
             address VARCHAR(255) NOT NULL,
             hours VARCHAR(255) NOT NULL,
@@ -27,9 +27,9 @@ def create_tables():
             stars FLOAT NOT NULL
         )
         """,
-        """ 
+        """
         CREATE TABLE IF NOT EXISTS customers (
-                customer_id VARCHAR(20) PRIMARY KEY,
+                customer_id SERIAL PRIMARY KEY,
                 name VARCHAR(255),
                 review_count INTEGER NOT NULL,
                 avg_rating FLOAT NOT NULL,
@@ -39,9 +39,9 @@ def create_tables():
         """,
         """
         CREATE TABLE IF NOT EXISTS reviews (
-                review_id INTEGER PRIMARY KEY,
+                review_id SERIAL PRIMARY KEY,
                 customer_id VARCHAR(20),
-                FOREIGN KEY (customer_id) 
+                FOREIGN KEY (customer_id)
                 REFERENCES customers (customer_id),
                 restaurant_id VARCHAR(20),
                 FOREIGN KEY (restaurant_id)
@@ -57,7 +57,7 @@ def create_tables():
         """,
         """
         CREATE TABLE IF NOT EXISTS categories (
-                restaurant_id VARCHAR(20) PRIMARY KEY,
+                restaurant_id SERIAL PRIMARY KEY,
                 fast_food BOOLEAN,
                 fine_dining BOOLEAN,
                 casual_dining BOOLEAN,
@@ -74,9 +74,9 @@ def create_tables():
         """,
         """
         CREATE TABLE IF NOT EXISTS usertype (
-            user_id VARCHAR(20) PRIMARY KEY,
+            user_id SERIAL PRIMARY KEY,
             customer_id VARCHAR(20),
-            FOREIGN KEY (customer_id) 
+            FOREIGN KEY (customer_id)
             REFERENCES customers (customer_id),
             restaurant_id VARCHAR(20),
             FOREIGN KEY (restaurant_id)
