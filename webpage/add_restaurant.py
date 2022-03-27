@@ -16,20 +16,12 @@ import psycopg2
 def add_restaurant(restaurantName, restaurantAddress, restaurantHours,
 restaurantMenu, restaurantMedia, restaurantTags):
     stmt_str = """
-    INSERT INTO restaurants (restaurant_id, name, address, hours,
+    INSERT INTO restaurants (name, address, hours,
     open_closed, menu, media, tags, review_count, stars)
-    VALUES (""" + "-1" + """,
-    """ + restaurantName + """,
-    """ + restaurantAddress + """,
-    """ + restaurantHours + """,
-    """ + "TRUE" + """,
-    """ + restaurantMenu + """,
-    """ + restaurantMedia + """,
-    """ + restaurantTags + """,
-     0, 0); """
-    # """ + "0" + """,
-    # """ + "0" + """);"""
-
+    VALUES ( '"""
+    stmt_str += restaurantName + "','" + restaurantAddress + "','"
+    stmt_str += restaurantHours + "', 'TRUE', '" + restaurantMenu + "', '"
+    stmt_str += restaurantMedia + "', '" + restaurantTags + "', '0', '0');"
 
     try:
         with connect(
