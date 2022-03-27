@@ -5,37 +5,88 @@
 # Author: Bob Dondero
 #-----------------------------------------------------------------------
 
+from tokenize import Floatnumber
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String
 
+#Core QUestions:
+# 1) Boolean + float types? Timestamp types 
+# 2) relationships and references
+
 Base = declarative_base()
 
-class Books (Base):
-    __tablename__ = 'books'
-    isbn = Column(String, primary_key=True)
-    title = Column(String)
-    quantity = Column(Integer)
+class restaurants (Base):
+    __tablename__ = 'restaurants'
+    restaurant_id = Column(String(20), primary_key=True)
+    address = Column(String(225))
+    hours = Column(String(225))
+    open_closed = Column(Boolean)
+    menu = Column(String(225))
+    media = Column(String(225))
+    tags = Column(String(225))
+    review_count = Column(Integer)
+    stars = Column(Float)
 
-class Authors (Base):
-    __tablename__ = 'authors'
-    isbn = Column(String, primary_key=True)
-    author = Column(String, primary_key=True)
-
-class Orders (Base):
-    __tablename__ = 'orders'
-    isbn = Column(String, primary_key=True)
-    custid = Column(String, primary_key=True)
-    quantity = Column(Integer)
-
-class Customers (Base):
+class customers (Base): 
     __tablename__ = 'customers'
-    custid = Column(String, primary_key=True)
-    custname = Column(String)
-    street = Column(String)
-    zipcode = Column(String)
+    customer_id = Column(String(20), primary_key=True)
+    name = Column(String(225))
+    review_count = Column(Integer)
+    avg_rating = Column(Float)
+    account_type = Column(String(225))
+    reported_count = Column(Integer)
 
-class Zipcodes (Base):
-    __tablename__ = 'zipcodes'
-    zipcode = Column(String, primary_key=True)
-    city = Column(String)
-    state = Column(String)
+class reviews (Base): 
+    __tablename__ = 'reviews'
+    review_id = Column(Integer, primary_key=True)
+    # customer_id VARCHAR(20), FOREIGN KEY (customer_id) REFERENCES customers (customer_id),
+    # restaurant_id VARCHAR(20), FOREIGN KEY (restaurant_id) REFERENCES restaurants (restaurant_id),
+    # date TIMESTAMP NOT NULL,
+    # text TEXT NOT NULL,
+    price = Column(Integer) 
+    taste = Column(Integer)
+    authenticity = Column(Integer)
+    coolness = Column(Integer)
+    overall = Column(Integer)
+
+class categories (Base): 
+    __tablename__ = 'categories'
+    restaurant_id = Column(String(20), primary_key=True)
+    fast_food = Column(Boolean)
+    casual_dining = Column(Boolean) 
+    inexpensive = Column(Boolean)
+    moderate_price = Column(Boolean)
+    pricey = Column(Boolean)
+    priciest = Column(Boolean)
+    american = Column(Boolean)
+    french = Column(Boolean)
+    indian = Column(Boolean)
+    # FOREIGN KEY (restaurant_id)
+    #  REFERENCES restaurants (restaurant_id)
+
+class reviews (Base): 
+    __tablename__ = 'reviews'
+    review_id = Column(Integer, primary_key=True)
+    # customer_id VARCHAR(20), FOREIGN KEY (customer_id) REFERENCES customers (customer_id),
+    # restaurant_id VARCHAR(20), FOREIGN KEY (restaurant_id) REFERENCES restaurants (restaurant_id),
+    # date TIMESTAMP NOT NULL,
+    # text TEXT NOT NULL,
+    price = Column(Integer)
+    taste = Column(Integer)
+    authenticity = Column(Integer)
+    coolness = Column(Integer)
+    overall = Column(Integer) 
+
+class usertype (Base): 
+    __tablename__ = 'usertype'
+    user_id = Column(String(20), primary_key=True)
+    customer_id = Column(String(20))
+    # FOREIGN KEY (customer_id) 
+    # REFERENCES customers (customer_id),
+    # restaurant_id VARCHAR(20),
+    # FOREIGN KEY (restaurant_id)
+    # REFERENCES restaurants (restaurant_id),
+    admin = Column(Boolean)
+    restaurant = Column(Boolean)
+    customer = Column(Boolean) 
+   
