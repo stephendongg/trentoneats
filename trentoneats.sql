@@ -21,7 +21,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: categories; Type: TABLE; Schema: public; Owner: rmd
+-- Name: categories; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.categories (
@@ -30,10 +30,8 @@ CREATE TABLE public.categories (
 );
 
 
-ALTER TABLE public.categories OWNER TO rmd;
-
 --
--- Name: customers; Type: TABLE; Schema: public; Owner: rmd
+-- Name: customers; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.customers (
@@ -46,10 +44,8 @@ CREATE TABLE public.customers (
 );
 
 
-ALTER TABLE public.customers OWNER TO rmd;
-
 --
--- Name: restaurants; Type: TABLE; Schema: public; Owner: rmd
+-- Name: restaurants; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.restaurants (
@@ -66,10 +62,8 @@ CREATE TABLE public.restaurants (
 );
 
 
-ALTER TABLE public.restaurants OWNER TO rmd;
-
 --
--- Name: reviews; Type: TABLE; Schema: public; Owner: rmd
+-- Name: reviews; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.reviews (
@@ -86,10 +80,8 @@ CREATE TABLE public.reviews (
 );
 
 
-ALTER TABLE public.reviews OWNER TO rmd;
-
 --
--- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: rmd
+-- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.categories (category, restaurant_id) FROM stdin;
@@ -97,7 +89,7 @@ COPY public.categories (category, restaurant_id) FROM stdin;
 
 
 --
--- Data for Name: customers; Type: TABLE DATA; Schema: public; Owner: rmd
+-- Data for Name: customers; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.customers (customer_id, name, review_count, avg_rating, account_type, reported_count) FROM stdin;
@@ -105,7 +97,7 @@ COPY public.customers (customer_id, name, review_count, avg_rating, account_type
 
 
 --
--- Data for Name: restaurants; Type: TABLE DATA; Schema: public; Owner: rmd
+-- Data for Name: restaurants; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.restaurants (restaurant_id, name, address, hours, open_closed, menu, media, tags, review_count, stars) FROM stdin;
@@ -129,7 +121,7 @@ COPY public.restaurants (restaurant_id, name, address, hours, open_closed, menu,
 
 
 --
--- Data for Name: reviews; Type: TABLE DATA; Schema: public; Owner: rmd
+-- Data for Name: reviews; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.reviews (review_id, customer_id, restaurant_id, date, text, price, taste, authenticity, coolness, overall) FROM stdin;
@@ -137,7 +129,7 @@ COPY public.reviews (review_id, customer_id, restaurant_id, date, text, price, t
 
 
 --
--- Name: categories categories_pkey; Type: CONSTRAINT; Schema: public; Owner: rmd
+-- Name: categories categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.categories
@@ -145,7 +137,7 @@ ALTER TABLE ONLY public.categories
 
 
 --
--- Name: customers customers_pkey; Type: CONSTRAINT; Schema: public; Owner: rmd
+-- Name: customers customers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.customers
@@ -153,7 +145,7 @@ ALTER TABLE ONLY public.customers
 
 
 --
--- Name: restaurants restaurants_pkey; Type: CONSTRAINT; Schema: public; Owner: rmd
+-- Name: restaurants restaurants_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.restaurants
@@ -161,7 +153,7 @@ ALTER TABLE ONLY public.restaurants
 
 
 --
--- Name: reviews reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: rmd
+-- Name: reviews reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.reviews
@@ -169,7 +161,7 @@ ALTER TABLE ONLY public.reviews
 
 
 --
--- Name: categories categories_restaurant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: rmd
+-- Name: categories categories_restaurant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.categories
@@ -177,7 +169,7 @@ ALTER TABLE ONLY public.categories
 
 
 --
--- Name: reviews reviews_customer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: rmd
+-- Name: reviews reviews_customer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.reviews
@@ -185,7 +177,7 @@ ALTER TABLE ONLY public.reviews
 
 
 --
--- Name: reviews reviews_restaurant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: rmd
+-- Name: reviews reviews_restaurant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.reviews
