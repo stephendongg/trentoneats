@@ -1,23 +1,23 @@
 {% extends "base.html" %}
 {% block title %} Best Restaurants in Trenton | Trenton Local Eats {% endblock %}
 {% block content %}
-<strong>Name: </strong> info.name
+<strong>Name: </strong> {{info['name']}}
 <br>
-<strong>Address: </strong> info.name
+<strong>Address: </strong> {{info['address']}}
 <br>
-<strong>Hours: </strong> info.hours
+<strong>Hours: </strong> {{info['hours']}}
 <br>
-<strong>Open?: </strong> info.open_closed
+<strong>Open?: </strong> {{info['open_closed']}}
 <br>
-<strong>Menu: </strong> info.menu
+<strong>Menu: </strong> {{info['menu']}}
 <br>
-<strong>Media: </strong> info.media
+<strong>Media: </strong> {{info['media']}}
 <br>
-<strong>Tags: </strong> info.tags
+<strong>Tags: </strong> {{info['tags']}}
 <br>
-<strong>Review Count: </strong> info.review_count
+<strong>Review Count: </strong> {{info['review_count']}}
 <br>
-<strong>Stars: </strong> info.stars
+<strong>Stars: </strong> {{info['stars']}}
 <br>
 {% include 'footer.html' %}
 {% endblock %}

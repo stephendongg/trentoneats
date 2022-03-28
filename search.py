@@ -258,12 +258,12 @@ def get_restaurant_info(res_id):
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted
-                stmt_str = "SELECT name, address, hours, open_closed, media, "
-                stmt_str += "tags, review_count, stars FROM restaurants "
-                stmt_str += "WHERE restaurant_id = '" + res_id + "') "
+                stmt_str = "SELECT name, address, hours, open_closed, menu, "
+                stmt_str += "media, tags, review_count, stars FROM restaurants "
+                stmt_str += "WHERE restaurant_id = '" + res_id + "'; "
 
                 cursor.execute(stmt_str)
-
+                print(stmt_str)
                 row = cursor.fetchone()
 
                 # hashmap to hold object info
@@ -271,16 +271,16 @@ def get_restaurant_info(res_id):
 
 
                 # This will parse through the row and occupy the hashmap
-                while row is not None:
-                    info_obj[name] = str(row[0])
-                    info_obj[address] = str(row[1])
-                    info_obj[hours] = str(row[2])
-                    info_obj[open_closed] = str(row[3])
-                    info_obj[menu] = str(row[4])
-                    info_obj[media] = str(row[5])
-                    info_obj[tags] = str(row[6])
-                    info_obj[review_count] = str(row[7])
-                    info_obj[stars] = str(row[8])
+                if row is not None:
+                    info_obj['name'] = str(row[0])
+                    info_obj['address'] = str(row[1])
+                    info_obj['hours'] = str(row[2])
+                    info_obj['open_closed'] = str(row[3])
+                    info_obj['menu'] = str(row[4])
+                    info_obj['media'] = str(row[5])
+                    info_obj['tags'] = str(row[6])
+                    info_obj['review_count'] = str(row[7])
+                    info_obj['stars'] = str(row[8])
 
                 return info_obj
 

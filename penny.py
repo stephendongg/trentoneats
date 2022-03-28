@@ -98,7 +98,7 @@ def resdetails():
     name = request.args.get('name')
     id = request.args.get('id')
     info = get_restaurant_info(id)
-    html = render_template('resdetails.html', info)
+    html = render_template('resdetails.html', info = info)
     response =  make_response(html)
     return response
 

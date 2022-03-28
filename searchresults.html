@@ -16,7 +16,7 @@
                 {% for restaurant in restaurantinfo: %}
                     <tr>
                         <td>
-                          <a href=resdetails?name={{restaurant.get_name()}}&id={{restaurant.get_restaurantid()}}>
+                          <a href=resdetails?id={{restaurant.get_restaurantid()}}>
                             {{restaurant.get_name()}}</a>
                         </td>
                         <td>                            </td>
