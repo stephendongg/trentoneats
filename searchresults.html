@@ -15,7 +15,10 @@
             {% else %}
                 {% for restaurant in restaurantinfo: %}
                     <tr>
-                        <td>{{restaurant.get_name()}}</td>
+                        <td>
+                          <a href=resdetails?name={{restaurant.get_name()}}&id={{restaurant.get_restaurantid()}}>
+                            {{restaurant.get_name()}}</a>
+                        </td>
                         <td>                            </td>
                         <td>{{restaurant.get_openclose()}}</td>
                     </tr>

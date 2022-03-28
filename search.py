@@ -187,7 +187,7 @@ def adjust_inputs(restaurant):
 
 
 def restaurant_search(input):
-    """search through courses"""
+    """search through restaurants"""
     try:
         # with connect(host='localhost', port=5432, user='rmd', password='xxx',
         #              database="trentoneats") as connection:
@@ -239,6 +239,50 @@ def restaurant_search(input):
                     row = cursor.fetchone()
 
                 return restaurants
+
+    # Normally exit status 0.
+    # If database-related error, terminate with exit status 1.
+    # If erroneous command-line arguments terminate with exit status 2
+
+    except DatabaseError as error:
+        print(sys.argv[0] + ": " + str(error), file=stderr)
+        return ("stdservererr")
+
+def get_restaurant_info(res_id):
+    """find all information on one restaurant"""
+    try:
+        # with connect(host='localhost', port=5432, user='rmd', password='xxx',
+        #              database="trentoneats") as connection:
+        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+                     database="dequ5ope4nuoit") as connection:
+
+            with closing(connection.cursor()) as cursor:
+                # This needs to be adjusted
+                stmt_str = "SELECT name, address, hours, open_closed, media, "
+                stmt_str += "tags, review_count, stars FROM restaurants "
+                stmt_str += "WHERE restaurant_id = '" + res_id + "') "
+
+                cursor.execute(stmt_str)
+
+                row = cursor.fetchone()
+
+                # hashmap to hold object info
+                info_obj = {}
+
+
+                # This will parse through the row and occupy the hashmap
+                while row is not None:
+                    info_obj[name] = str(row[0])
+                    info_obj[address] = str(row[1])
+                    info_obj[hours] = str(row[2])
+                    info_obj[open_closed] = str(row[3])
+                    info_obj[menu] = str(row[4])
+                    info_obj[media] = str(row[5])
+                    info_obj[tags] = str(row[6])
+                    info_obj[review_count] = str(row[7])
+                    info_obj[stars] = str(row[8])
+
+                return info_obj
 
     # Normally exit status 0.
     # If database-related error, terminate with exit status 1.
