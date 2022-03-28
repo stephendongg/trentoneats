@@ -88,7 +88,9 @@ def addrestaurant():
         restaurantMenu = restaurantMenu,
         restaurantMedia = restaurantMedia,
         restaurantTags = restaurantTags)
-    return search_form()
+    html = render_template('joinrestaurant.html')
+    response = make_response(html)
+    return response
 
 #---------------------------------------------------------
 
