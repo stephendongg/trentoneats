@@ -1,6 +1,64 @@
 {% extends "base.html" %}
 {% block title %} I Am A Restaurant | Trenton Local Eats {% endblock %}
 {% block content %}
-Under Construction
+<br>
+<h2> Add your Restaurant Information</h2>
+<form action="addrestaurant" method="get">
+  <table>
+    <tr>
+      <td style="text-align: right">
+        <label for="restaurantName">Name:</label>
+      </td>
+      <td>
+        <input type="text" name="restaurantName" value="">
+      </td>
+    </tr>
+    <tr>
+      <td  style="text-align: right">
+        <label for="restaurantAddress">Address:</label>
+      </td>
+      <td>
+        <input type="text" name="restaurantAddress" value="">
+      </td>
+    </tr>
+    <tr>
+      <td  style="text-align: right">
+        <label for="restaurantHours">Hours:</label>
+      </td>
+      <td>
+        <input type="text" name="restaurantHours" value="">
+      </td>
+    </tr>
+    <tr>
+      <td  style="text-align: right">
+        <label for="restaurantMenu">Menu:</label>
+      </td>
+      <td>
+        <input type="text" name="restaurantMenu" value="">
+      </td>
+    </tr>
+    <tr>
+      <td  style="text-align: right">
+        <label for="restaurantMedia">Media:</label>
+      </td>
+      <td>
+        <input type="text" name="restaurantMedia" value="">
+      </td>
+    </tr>
+    <tr>
+      <td  style="text-align: right">
+        <label for="restaurantTags">Tags:</label>
+      </td>
+      <td>
+        <input type="text" name="restaurantTags" value="">
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><button type="submit">Add Restaurant</button></td>
+    </tr>
+
+  </table>
+</form>
 {% include 'footer.html' %}
 {% endblock %}

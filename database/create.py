@@ -12,7 +12,7 @@ from psycopg2 import connect
 
 def main():
     create_restaurant_string = "CREATE TABLE IF NOT EXISTS restaurants ("
-    create_restaurant_string += "restaurant_id VARCHAR(20) PRIMARY KEY,"
+    create_restaurant_string += "restaurant_id SERIAL PRIMARY KEY,"
     create_restaurant_string += "name VARCHAR(255) NOT NULL,"
     create_restaurant_string += "address VARCHAR(255) NOT NULL,"
     create_restaurant_string += "hours VARCHAR(255) NOT NULL,"
@@ -25,7 +25,7 @@ def main():
 
 
     create_customer_string = "CREATE TABLE IF NOT EXISTS customers ("
-    create_customer_string += "customer_id VARCHAR(20) PRIMARY KEY,"
+    create_customer_string += "customer_id SERIAL PRIMARY KEY,"
     create_customer_string += "name VARCHAR(255),"
     create_customer_string += "review_count INTEGER NOT NULL,"
     create_customer_string += "avg_rating FLOAT NOT NULL,"
@@ -33,11 +33,10 @@ def main():
     create_customer_string += "reported_count INT)"
 
     create_review_string = "CREATE TABLE IF NOT EXISTS reviews ("
-    create_review_string += "review_id INTEGER PRIMARY KEY,"
+    create_review_string += "review_id SERIAL PRIMARY KEY,"
     create_review_string += "customer_id VARCHAR(20),"
     create_review_string += "FOREIGN KEY (customer_id)"
     create_review_string += "REFERENCES customers (customer_id),"
-
     create_review_string += "restaurant_id VARCHAR(20),"
     create_review_string += "FOREIGN KEY (restaurant_id)"
     create_review_string += "REFERENCES restaurants (restaurant_id),"
@@ -49,11 +48,24 @@ def main():
     create_review_string += "coolness INTEGER,"
     create_review_string += "overall INTEGER)"
 
-    create_categories_string = "CREATE TABLE IF NOT EXISTS categories ("
-    create_categories_string += "category VARCHAR(20) PRIMARY KEY,"
-    create_categories_string += "restaurant_id VARCHAR(20),"
-    create_categories_string += "FOREIGN KEY (restaurant_id)"
-    create_categories_string += "REFERENCES restaurants (restaurant_id))"
+    create_categories_string = """
+                CREATE TABLE IF NOT EXISTS categories (
+                restaurant_id SERIAL PRIMARY KEY,
+                fast_food BOOLEAN,
+                fine_dining BOOLEAN,
+                casual_dining BOOLEAN,
+                inexpensive BOOLEAN,
+                moderate_price BOOLEAN,
+                pricey BOOLEAN,
+                priciest BOOLEAN,
+                american BOOLEAN,
+                french BOOLEAN,
+                indian BOOLEAN,
+                FOREIGN KEY (restaurant_id)
+                REFERENCES restaurants (restaurant_id)
+        )
+
+    """
 
 
     if len(argv) != 1:

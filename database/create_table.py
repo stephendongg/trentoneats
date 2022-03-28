@@ -15,7 +15,7 @@ def create_tables():
     commands = (
         """
         CREATE TABLE IF NOT EXISTS restaurants (
-            restaurant_id VARCHAR(20) PRIMARY KEY,
+            restaurant_id SERIAL PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
             address VARCHAR(255) NOT NULL,
             hours VARCHAR(255) NOT NULL,
@@ -27,9 +27,9 @@ def create_tables():
             stars FLOAT NOT NULL
         )
         """,
-        """ 
+        """
         CREATE TABLE IF NOT EXISTS customers (
-                customer_id VARCHAR(20) PRIMARY KEY,
+                customer_id SERIAL PRIMARY KEY,
                 name VARCHAR(255),
                 review_count INTEGER NOT NULL,
                 avg_rating FLOAT NOT NULL,
@@ -39,9 +39,9 @@ def create_tables():
         """,
         """
         CREATE TABLE IF NOT EXISTS reviews (
-                review_id INTEGER PRIMARY KEY,
+                review_id SERIAL PRIMARY KEY,
                 customer_id VARCHAR(20),
-                FOREIGN KEY (customer_id) 
+                FOREIGN KEY (customer_id)
                 REFERENCES customers (customer_id),
                 restaurant_id VARCHAR(20),
                 FOREIGN KEY (restaurant_id)
@@ -57,7 +57,7 @@ def create_tables():
         """,
         """
         CREATE TABLE IF NOT EXISTS categories (
-                restaurant_id VARCHAR(20) PRIMARY KEY,
+                restaurant_id SERIAL PRIMARY KEY,
                 fast_food BOOLEAN,
                 fine_dining BOOLEAN,
                 casual_dining BOOLEAN,
@@ -74,9 +74,9 @@ def create_tables():
         """,
         """
         CREATE TABLE IF NOT EXISTS usertype (
-            user_id VARCHAR(20) PRIMARY KEY,
+            user_id SERIAL PRIMARY KEY,
             customer_id VARCHAR(20),
-            FOREIGN KEY (customer_id) 
+            FOREIGN KEY (customer_id)
             REFERENCES customers (customer_id),
             restaurant_id VARCHAR(20),
             FOREIGN KEY (restaurant_id)
@@ -91,9 +91,11 @@ def create_tables():
 # The following code was adapted from POSTGRESQL TUTORIAL
 
     try:
-        with connect(
-                host='localhost', port=5432, user='rmd', password='trentoneats333',
-                database='trentoneats') as connection:
+        # with connect(
+        #         host='localhost', port=5432, user='rmd', password='trentoneats333',
+        #         database='trentoneats') as connection:
+        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+                     database="dequ5ope4nuoit") as connection:
 
             with connection.cursor() as cursor:
                 # create table one by one

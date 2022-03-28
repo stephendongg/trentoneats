@@ -16,9 +16,9 @@ def insert_restaurant():
 
     commands = [
         """
-        INSERT INTO restaurants (restaurant_id, name, address, hours,
+        INSERT INTO restaurants ( name, address, hours,
         open_closed, menu, media, tags, review_count, stars)
-        VALUES ('2',
+        VALUES (
         '1911 Smokehouse BBQ',
         '11 W Front St, Trenton, NJ 08608',
         'Monday	11AM - 3:30PM,
@@ -36,9 +36,9 @@ def insert_restaurant():
         """,
 
         """
-        INSERT INTO restaurants (restaurant_id, name, address, hours,
+        INSERT INTO restaurants ( name, address, hours,
         open_closed, menu, media, tags, review_count, stars )
-        VALUES ('3',
+        VALUES (
         'Bamboo Grill Jamaican Restaurant',
         '1005 Chambers St, Trenton, NJ 08611',
         'Monday	10AM - 7PM,
@@ -56,9 +56,9 @@ def insert_restaurant():
         """,
 
         """
-        INSERT INTO restaurants (restaurant_id, name, address, hours,
+        INSERT INTO restaurants (name, address, hours,
         open_closed, menu, media, tags, review_count, stars )
-        VALUES ('4',
+        VALUES (
         'Ila Mae''s Restaurant',
         '313 Market St, Trenton, NJ 08611',
         'Monday	Closed,
@@ -76,9 +76,9 @@ def insert_restaurant():
         """,
 
         """
-        INSERT INTO restaurants (restaurant_id, name, address, hours,
+        INSERT INTO restaurants ( name, address, hours,
         open_closed, menu, media, tags, review_count, stars )
-        VALUES ('5',
+        VALUES (
         'Blue Danube Restaurant',
         '538 Adeline St, Trenton, NJ 08611',
         'Monday	Closed
@@ -96,9 +96,9 @@ def insert_restaurant():
         """,
 
         """
-        INSERT INTO restaurants (restaurant_id, name, address, hours,
+        INSERT INTO restaurants ( name, address, hours,
         open_closed, menu, media, tags, review_count, stars )
-        VALUES ('6',
+        VALUES (
         'The Big Easy of Trenton Restaurant',
         '111 S Warren St, Trenton, NJ 08608',
         'Monday	12 - 7PM,
@@ -116,9 +116,9 @@ def insert_restaurant():
         """,
 
         """
-        INSERT INTO restaurants (restaurant_id, name, address, hours,
+        INSERT INTO restaurants ( name, address, hours,
         open_closed, menu, media, tags, review_count, stars )
-        VALUES ('7',
+        VALUES (
         'Don Julio''s Bar and Grill',
         '900 Liberty St, Trenton, NJ 08611',
         'Monday	11AM - 2AM,
@@ -136,9 +136,9 @@ def insert_restaurant():
         """,
 
         """
-        INSERT INTO restaurants (restaurant_id, name, address, hours,
+        INSERT INTO restaurants (name, address, hours,
         open_closed, menu, media, tags, review_count, stars )
-        VALUES ('8',
+        VALUES (
         'The Hummingbird Restaurant',
         '29 S Warren St, Trenton, NJ 08608',
         'Monday	10AM - 7PM,
@@ -156,9 +156,9 @@ def insert_restaurant():
         """,
 
         """
-        INSERT INTO restaurants (restaurant_id, name, address, hours,
+        INSERT INTO restaurants (name, address, hours,
         open_closed, menu, media, tags, review_count, stars )
-        VALUES ('9',
+        VALUES (
         'Sabor Latino',
         '293 Ashmore Ave, Trenton, NJ 08611',
         'Tuesday 10AM - 12AM,
@@ -176,9 +176,9 @@ def insert_restaurant():
         """,
 
         """
-        INSERT INTO restaurants (restaurant_id, name, address, hours,
+        INSERT INTO restaurants (name, address, hours,
         open_closed, menu, media, tags, review_count, stars )
-        VALUES ('10',
+        VALUES (
         'Trentini''s',
         '635 S Clinton Ave, Trenton, NJ 08611',
         'Tuesday 10AM - 10PM,
@@ -196,9 +196,9 @@ def insert_restaurant():
         """,
 
         """
-        INSERT INTO restaurants (restaurant_id, name, address, hours,
+        INSERT INTO restaurants (name, address, hours,
         open_closed, menu, media, tags, review_count, stars )
-        VALUES ('11',
+        VALUES (
         'Mama D Soul Food 2',
         '312 S Broad St, Trenton, NJ 08609',
         'Tuesday Closed,
@@ -216,9 +216,9 @@ def insert_restaurant():
         """,
 
         """
-        INSERT INTO restaurants (restaurant_id, name, address, hours,
+        INSERT INTO restaurants (name, address, hours,
         open_closed, menu, media, tags, review_count, stars )
-        VALUES ('12',
+        VALUES (
         'Cooper''s Riverview',
         '50 Riverview Plaza, Trenton, NJ 08611',
         'Tuesday 12PM - 2AM,
@@ -236,9 +236,9 @@ def insert_restaurant():
         """,
 
         """
-        INSERT INTO restaurants (restaurant_id, name, address, hours,
+        INSERT INTO restaurants (name, address, hours,
         open_closed, menu, media, tags, review_count, stars )
-        VALUES ('13',
+        VALUES (
         'Mi Ranchito Pizza and Tacos',
         '911 Chambers St, Trenton, NJ 08611',
         'Tuesday 10AM - 10PM,
@@ -256,9 +256,9 @@ def insert_restaurant():
         """,
 
         """
-        INSERT INTO restaurants (restaurant_id, name, address, hours,
+        INSERT INTO restaurants (name, address, hours,
         open_closed, menu, media, tags, review_count, stars )
-        VALUES ('14',
+        VALUES (
         'El Potrillo',
         '541 Roebling Ave, Trenton, NJ 08611',
         'Tuesday Closed,
@@ -276,9 +276,9 @@ def insert_restaurant():
         """,
 
         """
-        INSERT INTO restaurants (restaurant_id, name, address, hours,
+        INSERT INTO restaurants (name, address, hours,
         open_closed, menu, media, tags, review_count, stars )
-        VALUES ('15',
+        VALUES (
         'Chencha y Chole',
         '865 S Broad St, Trenton, NJ 08611',
         '11AM - 10PM everyday', TRUE,
@@ -290,9 +290,9 @@ def insert_restaurant():
         """,
 
         """
-        INSERT INTO restaurants (restaurant_id, name, address, hours,
+        INSERT INTO restaurants (name, address, hours,
         open_closed, menu, media, tags, review_count, stars )
-        VALUES ('16',
+        VALUES (
         'Casablanca Restaurant',
         '140 Washington St, Trenton, NJ 08611',
         'Monday	11AM - 2AM,
@@ -310,9 +310,11 @@ def insert_restaurant():
         """]
 
     try:
-        with connect(
-                host='localhost', port=5432, user='rmd', password='trentoneats333',
-                database='trentoneats') as connection:
+        # with connect(
+        #         host='localhost', port=5432, user='rmd', password='trentoneats333',
+        #         database='trentoneats') as connection:
+        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+                     database="dequ5ope4nuoit") as connection:
 
             with connection.cursor() as cursor:
                 # # create table one by one

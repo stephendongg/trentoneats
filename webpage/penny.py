@@ -9,6 +9,7 @@ from flask import Flask, request, make_response, redirect,url_for
 from flask import render_template
 #sfrom database import search
 from search import restaurant_search
+from add_restaurant import add_restaurant
 
 #-----------------------------------------------------------------------
 
@@ -70,6 +71,28 @@ def joinrestaurant():
     html = render_template('joinrestaurant.html')
     response =  make_response(html)
     return response
+
+#---------------------------------------------------------
+
+@app.route('/addrestaurant', methods = ['GET'])
+def addrestaurant():
+    restaurantName = request.args.get('restaurantName')
+    restaurantAddress = request.args.get('restaurantAddress')
+    restaurantHours = request.args.get('restaurantHours')
+    restaurantMenu = request.args.get('restaurantMenu')
+    restaurantMedia = request.args.get('restaurantMedia')
+    restaurantTags = request.args.get('restaurantTags')
+    add_restaurant(restaurantName = restaurantName,
+        restaurantAddress = restaurantAddress,
+        restaurantHours = restaurantHours,
+        restaurantMenu = restaurantMenu,
+        restaurantMedia = restaurantMedia,
+        restaurantTags = restaurantTags)
+    html = render_template('joinrestaurant.html')
+    response = make_response(html)
+    return response
+
+#---------------------------------------------------------
 
 @app.route('/login', methods = ['GET'])
 def login():
