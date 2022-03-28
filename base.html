@@ -2,7 +2,7 @@
 <html>
     <head>
         <!--link to css style file-->
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="static/style.css">
 
 
         <!--META VARIABLES FOR BOOTSTRAP-->
@@ -11,15 +11,15 @@
 
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
         <title>{% block title %}{% endblock %}</title>
     </head>
     <body>
-        <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #e3e7fd;">
-            <a class="navbar-brand" href="#">Explore Trenton's Restaurants!</a>
+        <nav class="navbar sticky-top navbar-expand-md navbar-light" style="background-color: #88d5d5;">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+              <span class="navbar-toggler-icon icon-bar"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse order-1 order-md-0 justify-content-start" id="navbarNav">
               <ul class="navbar-nav">
                 <li class="nav-item active">
                   <a class="nav-link" href="searchform">Home</a>
@@ -27,11 +27,16 @@
                 <li class="nav-item active">
                   <a class="nav-link" href="about">About</a>
                 </li>
+              </ul>
+            </div>
+            <a class="navbar-brand justify-content-center mx-auto order-0 order-md-1" href="#"><u>TRENTON EATS LOCAL</u></a>
+            <div class="collapse navbar-collapse order-2 order-md-2 justify-content-end" id="navbarNav">
+              <ul class="navbar-nav">
                 <li class="nav-item active">
-                  <a class="nav-link" href="joinrestaurant">I Am A Restuarant</a>
+                  <a class="nav-link" href="login">Login</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="login">Login</a>
+                  <a class="nav-link" href="joinrestaurant">I Am A Restuarant</a>
                 </li>
               </ul>
             </div>

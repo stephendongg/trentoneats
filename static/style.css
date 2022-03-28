@@ -1,0 +1,24 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+body
+{
+    font-family: sans-serif !important;
+
+}
+.navbar
+{
+    font-family:sans-serif !important;
+}
+
+.navbar a
+{
+    color: white !important;
+    font-weight: 750;
+}
+.navbar-toggler-icon.icon-bar
+{
+    font-size: 25px !important;
+}
