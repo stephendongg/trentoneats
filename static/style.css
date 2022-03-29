@@ -24,17 +24,11 @@ body
 }
 h1.explore
 {
-    color: #FFD700;
-    font-size: 6rem;
-    font-weight: bold;
-    font-family: "Arial Rounded MT Bold", "Gill Sans", sans-serif;
-}
-h1.explore
-{
+    padding-top: 0.2em;
     color: #FFD700;
     font-size: 9rem;
     font-weight: bold;
-    font-family: "Gill Sans", "Varela Round", sans-serif;
+    font-family: "Playfair Display", "Georgia", serif;
     text-align: center;
 }
 h2.restOfHeader
@@ -47,7 +41,7 @@ h2.restOfHeader span {
     color: #B22222;
     font-size: 6rem;
     font-weight: bold;
-    font-family: "Copperplate", "Gill Sans", sans-serif;
+    font-family: "Bradley Hand", "Gill Sans", sans-serif;
     text-align: center;
 }
 form {
