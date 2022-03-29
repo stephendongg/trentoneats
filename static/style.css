@@ -31,10 +31,11 @@ h1.explore
 }
 h1.explore
 {
+    padding-top: 0.5em;
     color: #FFD700;
     font-size: 9rem;
     font-weight: bold;
-    font-family: "Gill Sans", "Varela Round", sans-serif;
+    font-family: "Rockwell", "Varela Round", sans-serif;
     text-align: center;
 }
 h2.restOfHeader
@@ -47,7 +48,7 @@ h2.restOfHeader span {
     color: #B22222;
     font-size: 6rem;
     font-weight: bold;
-    font-family: "Copperplate", "Gill Sans", sans-serif;
+    font-family: "Bradley Hand", "Gill Sans", sans-serif;
     text-align: center;
 }
 form {
