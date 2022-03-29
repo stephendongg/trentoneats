@@ -11,7 +11,7 @@ import psycopg2
 
 #-----------------------------------------------------------------------
 
-# Current issue: figuring out how to know what to put in for id and open
+# Current issue: figuring out how to know what to put in for open
 
 def add_restaurant(restaurantName, restaurantAddress, restaurantHours,
 restaurantMenu, restaurantMedia, restaurantTags):

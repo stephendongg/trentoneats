@@ -8,7 +8,7 @@ from urllib import response
 from flask import Flask, request, make_response, redirect,url_for
 from flask import render_template
 #sfrom database import search
-from search import restaurant_search
+from search import restaurant_search, get_restaurant_info
 from add_restaurant import add_restaurant
 
 #-----------------------------------------------------------------------
@@ -93,6 +93,17 @@ def addrestaurant():
     return response
 
 #---------------------------------------------------------
+@app.route('/resdetails', methods = ['GET'])
+def resdetails():
+    name = request.args.get('name')
+    id = request.args.get('id')
+    info = get_restaurant_info(id)
+    html = render_template('resdetails.html', info = info)
+    response =  make_response(html)
+    return response
+
+#---------------------------------------------------------
+
 
 @app.route('/login', methods = ['GET'])
 def login():
