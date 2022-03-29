@@ -10,13 +10,13 @@ body
 }
 .navbar
 {
-    font-family:sans-serif !important;
+    font-weight: bold;
+    font-family: "Gill Sans", "Varela Round", sans-serif;
 }
 
 .navbar a
 {
     color: white !important;
-    font-weight: 750;
 }
 .navbar-toggler-icon.icon-bar
 {
