@@ -24,18 +24,11 @@ body
 }
 h1.explore
 {
-    color: #FFD700;
-    font-size: 6rem;
-    font-weight: bold;
-    font-family: "Arial Rounded MT Bold", "Gill Sans", sans-serif;
-}
-h1.explore
-{
-    padding-top: 0.5em;
+    padding-top: 0.2em;
     color: #FFD700;
     font-size: 9rem;
     font-weight: bold;
-    font-family: "Rockwell", "Varela Round", sans-serif;
+    font-family: "Playfair Display", "Georgia", serif;
     text-align: center;
 }
 h2.restOfHeader
