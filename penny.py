@@ -198,4 +198,5 @@ def logout():
 @app.route('/protected_area', methods=['GET'])
 @login_is_required
 def protected_area():
-    return f"Hello {session['name']}! <br/> <a href='/logout'><button>Logout</button></a>"
+    return f"Thank you for logging in {session['name']}! \
+     <br/> <a href='/logout'><button>Logout</button></a>"
