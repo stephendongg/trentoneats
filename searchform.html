@@ -1,16 +1,19 @@
 {% extends "base.html" %}
 {% block title %} Best Restaurants in Trenton | Trenton local eats {% endblock %}
 {% block content %}
-<h1>Restaurant Search</h1>
+<h1 class="explore">Explore</h1>
+<h2 class="restOfHeader">food, <span class=“trenton”>Trenton</span> style.</h2>
 <form action="searchresults" method="get">
-    <input type="text" name="restaurant">
-    <input type="submit" value="Submit">
+    <input type="text" name="restaurant" class="rest_search">
+    <input type="submit" value="Submit" class="submit">
 </form>
 <br>
 <strong>{{error_msg}}</strong>
 <br>
-{% include 'searchresults.html' %} 
-{% include 'footer.html' %} 
+<!--add design elements (circle, lines)-->
+<div id="turq_circle">
+    <p></p>
+</div>
+{% include 'searchresults.html' %}
+{% include 'footer.html' %}
 <br>
-<br>
-{% endblock %}
