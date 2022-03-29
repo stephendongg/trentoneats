@@ -186,7 +186,7 @@ def adjust_inputs(restaurant):
     return restaurant
 
 
-def restaurant_search(input):
+def restaurant_search(input, tags):
     """search through courses"""
     try:
         # with connect(host='localhost', port=5432, user='rmd', password='xxx',
@@ -196,28 +196,13 @@ def restaurant_search(input):
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted
-                stmt_str = "SELECT restaurant_id, name, open_closed "
+                stmt_str = "SELECT restaurant_id, name, open_closed, tags "
                 stmt_str += "FROM restaurants "
                 stmt_str += "WHERE LOWER (name) LIKE LOWER ('%" + \
                     input + "%') "
-                #stmt_str += 'WHERE name LIKE ? ESCAPE "\\"'
+                stmt_str += "AND LOWER (tags) LIKE LOWER ('%" + \
+                    tags + "%') "
 
-                # stmt_str = "SELECT classid, dept, "
-                # stmt_str += "coursenum, area, title "
-                # stmt_str += "FROM classes, courses, "
-                # stmt_str += "crosslistings "
-                # stmt_str += "WHERE courses.courseid = "
-                # stmt_str += "crosslistings.courseid "
-                # stmt_str += "AND courses.courseid = "
-                # stmt_str += "classes.courseid "
-                # stmt_str += "AND classes.courseid = "
-                # stmt_str += "crosslistings.courseid "
-
-# here will be where restaurant is diffenret
-                #stmt_str += 'WHERE name LIKE ' + input
-
-                # stmt_str += "ORDER BY dept,"
-                # stmt_str += "coursenum, classid"
 
                 cursor.execute(stmt_str)
 
@@ -228,13 +213,14 @@ def restaurant_search(input):
 
                 # rowstringlist this rowstring will contain all of the necessary values
 
-                rowstring = ["", "", ""]
+                rowstring = ["", "", "", ""]
 
                 # This iwll parse through the rows and get all of the necsary values
                 while row is not None:
                     rowstring[0] = str(row[0])
                     rowstring[1] = str(row[1])
                     rowstring[2] = str(row[2])
+                    rowstring[3] = str(row[3])
                     restaurants.append(restaurant(rowstring))
                     row = cursor.fetchone()
 

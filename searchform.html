@@ -3,7 +3,14 @@
 {% block content %}
 <h1>Restaurant Search</h1>
 <form action="searchresults" method="get">
+    Restaurant Name:
     <input type="text" name="restaurant">
+    <br>
+    Category:<input type="text" name="tags">
+    <br>
+    <br>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap">
+    </script>
     <input type="submit" value="Submit">
 </form>
 <br>

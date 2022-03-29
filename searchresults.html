@@ -9,6 +9,8 @@
             <tr>
               <td style="text-align: center"> <strong>Name</strong></td>
               <td>        </td>
+              <td tyle="text-align: center"> <strong> Tags </strong> </td>
+              <td>        </td>
               <td tyle="text-align: center"> <strong> Open? </strong> </td>
             </tr>
             {% if restaurantinfo | length == 0: %}
@@ -17,7 +19,10 @@
                     <tr>
                         <td>{{restaurant.get_name()}}</td>
                         <td>                            </td>
+                        <td>{{restaurant.get_tag()}}</td>
+                        <td>                            </td>
                         <td>{{restaurant.get_openclose()}}</td>
+
                     </tr>
                 {% endfor %}
             {% endif %}
