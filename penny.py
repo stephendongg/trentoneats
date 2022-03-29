@@ -133,7 +133,7 @@ def resdetails():
 GOOGLE_CLIENT_ID = "308675237756-nem83n7953b22dujose0okjmhfi9q6mf.apps.googleusercontent.com"
 
 client_secrets_file = os.path.join(
-    pathlib.Path(__file__).parent, "client_secret.json")
+    pathlib.Path(__file__).parent, "google-credentials.json")
 
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
