@@ -3,27 +3,29 @@
     <head>
         <title>Penny.com</title>
     </head>
-    <table>
-        <tbody>
-            <h1>Restaurant Search Results</h1>
-            <tr>
-              <td style="text-align: center"> <strong>Name</strong></td>
-              <td>        </td>
-              <td tyle="text-align: center"> <strong> Open? </strong> </td>
-            </tr>
-            {% if restaurantinfo | length == 0: %}
-            {% else %}
-                {% for restaurant in restaurantinfo: %}
-                    <tr>
-                        <td>
-                          <a href=resdetails?id={{restaurant.get_restaurantid()}}>
-                            {{restaurant.get_name()}}</a>
-                        </td>
-                        <td>                            </td>
-                        <td>{{restaurant.get_openclose()}}</td>
-                    </tr>
-                {% endfor %}
-            {% endif %}
-        </tbody>
-    </table>
+    <div class="container-fluid">
+        <table class = "table table-condensed">
+            <tbody>
+                <h1 class="text-center">Restaurant Search Results</h1>
+                <tr>
+                <td style="text-align: center"> <strong>Name</strong></td>
+                <td>        </td>
+                <td tyle="text-align: center"> <strong> Open? </strong> </td>
+                </tr>
+                {% if restaurantinfo | length == 0: %}
+                {% else %}
+                    {% for restaurant in restaurantinfo: %}
+                        <tr>
+                            <td>
+                            <a href=resdetails?id={{restaurant.get_restaurantid()}}>
+                                {{restaurant.get_name()}}</a>
+                            </td>
+                            <td>                            </td>
+                            <td>{{restaurant.get_openclose()}}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
 </html>
