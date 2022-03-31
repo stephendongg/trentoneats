@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %} Best Restaurants in Trenton | Trenton local eats {% endblock %}
 {% block content %}
+<!--title-->
 <h1 class="explore">Explore</h1>
 <h2 class="restOfHeader">food, <span class=“trenton”>Trenton</span> style.</h2>
 <form action="searchresults" method="get">
@@ -12,6 +13,22 @@
 <br>
 <!--add design elements (circle, lines)-->
 <div id="turq_circle"><p></p></div>
+
+<!--advanced search-->
+<div class="begin_adv_search">Don't have a specific restaurant in mind?</div>
+<div class = "adv_search_dropdown">
+    <a class="accordion-toggle collapsed" data-toggle="collapse" href="#advsearchId" type="checkbox">
+        Try advanced search filters
+    </a>
+</div>
+
+<div class="advanced_search_options" id="advsearchId" class=" collapse"> Add advanced search here </div>
+
+<!-- CDNs for font-awesome, bootstrap, JQuery -->
+<link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
 {% include 'searchresults.html' %} 
 {% include 'footer.html' %} 
 <br>
