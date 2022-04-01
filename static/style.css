@@ -24,7 +24,7 @@ body
 }
 h1.explore
 {
-    padding-top: 0.2em;
+    padding-top: 0.4em;
     color: #FFD700;
     font-size: 9rem;
     font-weight: bold;
@@ -63,4 +63,36 @@ form {
     display: flex;
     align-items: center;
     text-align: center;
+    font-family: "Rockwell", "Varela Round", sans-serif;
+}
+.begin_adv_search {
+    font-family: "Playfair Display", "Georgia", serif;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    position:relative;
+    top:-20px;
+}
+.adv_search_dropdown {
+    font-family: "Playfair Display", "Georgia", serif;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    position:relative;
+    top:-15px;
+}
+.advanced_search_options {
+    font-family: "Playfair Display", "Georgia", serif;
+    text-align: center;
+    font-size: 1.25rem;
+    position:relative;
+    top:-15px;
+}
+.accordion-toggle:after {
+    font-family: 'FontAwesome';
+    content: "\f0d7";
+    color: grey;
+  }
+.accordion-toggle.collapsed:after {
+    content: "\f0da"; 
 }
