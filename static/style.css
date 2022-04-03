@@ -20,7 +20,7 @@ body
 }
 .navbar-toggler-icon.icon-bar
 {
-    font-size: 25px !important;
+    font-size: 50px !important;
 }
 h1.explore
 {
@@ -42,6 +42,17 @@ h2.restOfHeader span {
     font-size: 6rem;
     font-weight: bold;
     font-family: "Bradley Hand", "Gill Sans", sans-serif;
+    text-align: center;
+}
+h2.addItHere{
+    color: #FFD700;
+    font-size: 5em;
+    font-weight: bold;
+    font-family: "Playfair Display", "Georgia", serif;
+    text-align: center; 
+}
+h4.resDetails{
+    font-family: "Courier", "Baskerville", monospace;
     text-align: center;
 }
 form {

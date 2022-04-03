@@ -1,23 +1,32 @@
 {% extends "base.html" %}
 {% block title %} Best Restaurants in Trenton | Trenton Local Eats {% endblock %}
 {% block content %}
-<strong>Name: </strong> {{info['name']}}
-<br>
-<strong>Address: </strong> {{info['address']}}
-<br>
-<strong>Hours: </strong> {{info['hours']}}
-<br>
-<strong>Open?: </strong> {{info['open_closed']}}
-<br>
-<strong>Menu: </strong> {{info['menu']}}
-<br>
-<strong>Media: </strong> {{info['media']}}
-<br>
-<strong>Tags: </strong> {{info['tags']}}
-<br>
-<strong>Review Count: </strong> {{info['review_count']}}
-<br>
-<strong>Stars: </strong> {{info['stars']}}
-<br>
+<div class="container-fluid pt-5 pb-5 bg-info">
+
+    <div class="row">
+        <div class="col-sm-6">
+            <img src="https://thumbor.thedailymeal.com/8luyHYVfcVm8WSPXT-FVz9Ub_kU=/870x565/filters:format(webp)/https://www.thedailymeal.com/sites/default/files/slides/1-tacobell-wiki-sphilbrick.JPG" class="img-thumbnail">
+        </div>
+        <div class="col-sm-6">
+            <div class="container-fluid bg-light">
+            <h2 class="restOfHeader">{{info['name']}}</h2>
+            </div>
+            <h4 class="resDetails">{{info['address']}}</h4>
+            <div class="row">
+                <div class="col-sm-6 px-3">
+                    <h4 class="resDetails">{{info['hours']}}</h4>
+                </div>
+                <div class="col-sm-6 px-5">
+                    <h4 class="resDetails"><strong>Open?: </strong> {{info['open_closed']}}</h4>
+                    <h4 class="resDetails"><strong>Media: </strong>{{info['media']}}</h4>
+                    <h4 class="resDetails"><strong>Review Count: </strong> {{info['review_count']}}</h4>
+                    <h4 class="resDetails"><strong>Stars: </strong> {{info['stars']}}</h4>
+                </div>
+            </div>
+        <h4 class="resDetails"><strong>Menu: </strong> {{info['menu']}}</h4>
+        </div>
+    </div>
+</div>
+
 {% include 'footer.html' %}
 {% endblock %}
