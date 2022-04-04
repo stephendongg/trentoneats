@@ -5,7 +5,9 @@
 
     <div class="row">
         <div class="col-sm-6">
-            <img src="https://thumbor.thedailymeal.com/8luyHYVfcVm8WSPXT-FVz9Ub_kU=/870x565/filters:format(webp)/https://www.thedailymeal.com/sites/default/files/slides/1-tacobell-wiki-sphilbrick.JPG" class="img-thumbnail">
+            <!-- <img src= {{info['open_closed']}} class="img-thumbnail"> -->
+            <!-- <img src="{{info['image']}}" class="img-thumbnail"> -->
+            <img id="temp" src="https://thumbor.thedailymeal.com/8luyHYVfcVm8WSPXT-FVz9Ub_kU=/870x565/filters:format(webp)/https://www.thedailymeal.com/sites/default/files/slides/1-tacobell-wiki-sphilbrick.JPG" class="img-thumbnail">
         </div>
         <div class="col-sm-6">
             <div class="container-fluid bg-light">
@@ -27,6 +29,18 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript"> 
+
+    function myFunction(){
+        if("{{info['image']}}" != "None") {
+            document.getElementById('temp').src = "{{info['image']}}";
+        }
+        
+    }
+    myFunction();
+
+</script>
 
 {% include 'footer.html' %}
 {% endblock %}

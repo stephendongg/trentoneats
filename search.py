@@ -260,7 +260,7 @@ def get_restaurant_info(res_id):
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted
                 stmt_str = "SELECT name, address, hours, open_closed, menu, "
-                stmt_str += "media, tags, review_count, stars FROM restaurants "
+                stmt_str += "media, tags, review_count, stars, image FROM restaurants "
                 stmt_str += "WHERE restaurant_id = '" + res_id + "'; "
 
                 cursor.execute(stmt_str)
@@ -282,6 +282,7 @@ def get_restaurant_info(res_id):
                     info_obj['tags'] = str(row[6])
                     info_obj['review_count'] = str(row[7])
                     info_obj['stars'] = str(row[8])
+                    info_obj['image'] = str(row[9])
 
                 return info_obj
 

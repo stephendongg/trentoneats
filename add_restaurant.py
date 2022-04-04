@@ -14,19 +14,21 @@ import psycopg2
 # Current issue: figuring out how to know what to put in for open
 
 def add_restaurant(restaurantName, restaurantAddress, restaurantHours,
-restaurantMenu, restaurantMedia, restaurantTags):
+restaurantMenu, restaurantMedia, restaurantTags, restaurantImage):
     stmt_str = """
     INSERT INTO restaurants (name, address, hours,
-    open_closed, menu, media, tags, review_count, stars)
+    open_closed, menu, media, tags, review_count, stars, image)
     VALUES ( '"""
     stmt_str += restaurantName + "','" + restaurantAddress + "','"
     stmt_str += restaurantHours + "', 'TRUE', '" + restaurantMenu + "', '"
-    stmt_str += restaurantMedia + "', '" + restaurantTags + "', '0', '0');"
+    stmt_str += restaurantMedia + "', '" + restaurantTags + "', '0', '0', '" + restaurantImage + "');"
 
     try:
-        with connect(
-            host='localhost', port=5432, user='rmd', password='trentoneats333',
-            database='trentoneats') as connection:
+        # with connect(
+        #     host='localhost', port=5432, user='rmd', password='trentoneats333',
+        #     database='trentoneats') as connection:
+        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+                database="dequ5ope4nuoit") as connection:
 
             with connection.cursor() as cursor:
                 print(stmt_str)

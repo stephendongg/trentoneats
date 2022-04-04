@@ -24,7 +24,8 @@ def create_tables():
             media VARCHAR(255),
             tags VARCHAR(255),
             review_count INTEGER,
-            stars FLOAT NOT NULL
+            stars FLOAT NOT NULL,
+            image VARCHAR(225)
         )
         """,
         """
@@ -40,10 +41,10 @@ def create_tables():
         """
         CREATE TABLE IF NOT EXISTS reviews (
                 review_id SERIAL PRIMARY KEY,
-                customer_id VARCHAR(20),
+                customer_id SERIAL,
                 FOREIGN KEY (customer_id)
                 REFERENCES customers (customer_id),
-                restaurant_id VARCHAR(20),
+                restaurant_id SERIAL,
                 FOREIGN KEY (restaurant_id)
                 REFERENCES restaurants (restaurant_id),
                 date TIMESTAMP NOT NULL,
@@ -75,10 +76,10 @@ def create_tables():
         """
         CREATE TABLE IF NOT EXISTS usertype (
             user_id SERIAL PRIMARY KEY,
-            customer_id VARCHAR(20),
+            customer_id SERIAL,
             FOREIGN KEY (customer_id)
             REFERENCES customers (customer_id),
-            restaurant_id VARCHAR(20),
+            restaurant_id SERIAL,
             FOREIGN KEY (restaurant_id)
             REFERENCES restaurants (restaurant_id),
             admin BOOLEAN,
