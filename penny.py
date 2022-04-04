@@ -98,12 +98,14 @@ def addrestaurant():
     restaurantMenu = request.args.get('restaurantMenu')
     restaurantMedia = request.args.get('restaurantMedia')
     restaurantTags = request.args.get('restaurantTags')
+    restaurantImage = request.args.get('restaurantImage')
     add_restaurant(restaurantName=restaurantName,
                    restaurantAddress=restaurantAddress,
                    restaurantHours=restaurantHours,
                    restaurantMenu=restaurantMenu,
                    restaurantMedia=restaurantMedia,
-                   restaurantTags=restaurantTags)
+                   restaurantTags=restaurantTags,
+                   restaurantImage=restaurantImage)
     html = render_template('joinrestaurant.html')
     response = make_response(html)
     return response
