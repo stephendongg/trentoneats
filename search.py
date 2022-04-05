@@ -197,7 +197,7 @@ def restaurant_search(input):
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted
-                stmt_str = "SELECT restaurant_id, name, open_closed "
+                stmt_str = "SELECT restaurant_id, name, open_closed, address, stars "
                 stmt_str += "FROM restaurants "
                 stmt_str += "WHERE LOWER (name) LIKE LOWER ('%" + \
                     input + "%') "
@@ -229,13 +229,15 @@ def restaurant_search(input):
 
                 # rowstringlist this rowstring will contain all of the necessary values
 
-                rowstring = ["", "", ""]
+                rowstring = ["", "", "", "", ""]
 
                 # This iwll parse through the rows and get all of the necsary values
                 while row is not None:
                     rowstring[0] = str(row[0])
                     rowstring[1] = str(row[1])
                     rowstring[2] = str(row[2])
+                    rowstring[3] = str(row[3])
+                    rowstring[4] = str(row[4])
                     restaurants.append(restaurant(rowstring))
                     row = cursor.fetchone()
 

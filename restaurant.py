@@ -13,6 +13,8 @@ class restaurant:
         self._restaurantid = rowstring[0]
         self._name = rowstring[1]
         self._openclose = rowstring[2]
+        self._address = rowstring[3]
+        self._stars = rowstring[4]
         # self._dept = rowstring[1]
         # self._course_num = rowstring[2]
         # self._area = rowstring[3]
@@ -40,6 +42,14 @@ class restaurant:
     def get_openclose(self):
         """restaurant ID"""
         return self._openclose
+    
+    def get_address(self):
+        """restaurant ID"""
+        return self._address
+
+    def get_stars(self):
+        """restaurant ID"""
+        return self._stars
 
     # def get_title(self):
     #     """title"""
