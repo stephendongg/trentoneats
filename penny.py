@@ -10,7 +10,6 @@ from flask import render_template
 # sfrom database import search
 from search import restaurant_search, get_restaurant_info
 from add_restaurant import add_restaurant
-from datetime import timedelta
 
 import os
 import pathlib
@@ -24,7 +23,6 @@ import google.auth.transport.requests
 
 app = Flask(__name__, template_folder='.')
 app.secret_key = "dsghabkjcn1iy2u6gdoyq"
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(seconds=2)
 
 # -----------------------------------------------------------------------
 
