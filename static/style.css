@@ -99,6 +99,18 @@ h4.resDetails{
 >>>>>>> new_homepage */
     text-align: center;
 }
+h3.aboutHeader1 {
+    font-size: 3rem;
+    font-family: "Courier", "Baskerville", monospace;
+    text-align: center;
+}
+h2.aboutHeader2{
+    font-size: 4rem;
+    color: #B22222;
+    font-weight: bold;
+    font-family: "Bradley Hand", "Gill Sans", sans-serif;
+    text-align: center;
+}
 h2.addItHere{
     color: #FFD700;
     font-size: 5em;
