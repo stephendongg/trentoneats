@@ -45,14 +45,51 @@
         <input type="text" name="restaurantMedia" value="">
       </td>
     </tr>
+    <br /><br />
     <tr>
-      <td  style="text-align: right">
-        <label for="restaurantTags">Tags:</label>
+      <td></td>
+      <td> <strong>Categories/Tags</strong></td>
+    </tr>
+    <tr>
+      <td  style="text-align: left">
+        <label for="diningTags">Dining:</label>
       </td>
       <td>
-        <input type="text" name="restaurantTags" value="">
+        <!-- <input type="text" name="restaurantTags" value=""> -->
+        <input type="checkbox" id="fastfood" name="type" value="fastfood">
+        <label for="fastfood"> Fast Food </label><br>
+        <input type="checkbox" id="casualdining" name="type" value="casualdining">
+        <label for="casualdining"> Casual Dining </label><br>
+        <input type="checkbox" id="finedining" name="type" value="finedining">
+        <label for="finedining"> Fine Dining</label><br><br>
       </td>
     </tr>
+    <tr>
+      <td  style="text-align: left">
+        <label for="cuisineTags">Cuisine:</label>
+      </td>
+      <td>
+        <input type="checkbox" id="" name="cuisine" value="indian">
+        <label for="indian"> Indian </label><br>
+        <input type="checkbox" id="american" name="cuisine" value="american">
+        <label for="american"> American </label><br>
+        <input type="checkbox" id="french" name="cuisine" value="french">
+        <label for="french"> French </label><br />
+        <input type="checkbox" id="other" name="getcuisine" value="other" onchange="document.getElementById('otherCuisine').disabled = !this.checked;" >
+        <label for="other"> Other </label> <input type="text" id = "otherCuisine" name="cuisine" value=""><br><br>
+      </td>
+    </tr>
+    <tr>
+      <td  style="text-align: left">
+        <label for="priceTags">Pricing:</label>
+      </td>
+      <td>
+        <input type="range" id="price" name="price" min="0" max="100">
+        <label for="price"> Average Cost of Restaurant Meal (between 0 and 100)</label>
+      </td>
+    </tr>
+
+
     <tr>
       <td></td>
       <td><button type="submit">Add Restaurant</button></td>

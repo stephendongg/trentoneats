@@ -14,14 +14,16 @@ import psycopg2
 # Current issue: figuring out how to know what to put in for id and open
 
 def add_restaurant(restaurantName, restaurantAddress, restaurantHours,
-restaurantMenu, restaurantMedia, restaurantTags):
+restaurantMenu, restaurantMedia, restaurantTags, cuisine, type, price):
     stmt_str = """
     INSERT INTO restaurants (name, address, hours,
-    open_closed, menu, media, tags, review_count, stars)
+    open_closed, menu, media, tags, review_count, stars, cuisine, type, price)
     VALUES ( '"""
     stmt_str += restaurantName + "','" + restaurantAddress + "','"
     stmt_str += restaurantHours + "', 'TRUE', '" + restaurantMenu + "', '"
-    stmt_str += restaurantMedia + "', '" + restaurantTags + "', '0', '0');"
+    stmt_str += restaurantMedia + "', '" + restaurantTags + "', '0', '0', "
+    stmt_str += "'" + ", ".join(cuisine) + "', '" + ", ".join(type)
+    stmt_str += "', '" + price + "');"
 
     try:
         with connect(

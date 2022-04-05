@@ -196,12 +196,20 @@ def restaurant_search(input, tags):
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted
-                stmt_str = "SELECT restaurant_id, name, open_closed, tags "
+                stmt_str = "SELECT restaurant_id, name, open_closed, tags, address, stars, cuisine, type, price "
                 stmt_str += "FROM restaurants "
                 stmt_str += "WHERE LOWER (name) LIKE LOWER ('%" + \
                     input + "%') "
+
+                # only checks for single value now"
                 stmt_str += "AND LOWER (tags) LIKE LOWER ('%" + \
                     tags + "%') "
+                stmt_str += "AND LOWER (cuisine) LIKE LOWER ('%" + \
+                    cuisine + "%') "
+                stmt_str += "AND LOWER (type) LIKE LOWER ('%" + \
+                    type + "%') "
+                stmt_str += "AND LOWER (price) LIKE LOWER ('%" + \
+                    price + "%') "
 
 
                 cursor.execute(stmt_str)
@@ -213,7 +221,7 @@ def restaurant_search(input, tags):
 
                 # rowstringlist this rowstring will contain all of the necessary values
 
-                rowstring = ["", "", "", ""]
+                rowstring = ["", "", "", "", "", "", "", "", ""]
 
                 # This iwll parse through the rows and get all of the necsary values
                 while row is not None:
@@ -221,6 +229,13 @@ def restaurant_search(input, tags):
                     rowstring[1] = str(row[1])
                     rowstring[2] = str(row[2])
                     rowstring[3] = str(row[3])
+                    rowstring[4] = str(row[4])
+                    rowstring[5] = str(row[5])
+                    rowstring[6] = str(row[6])
+                    rowstring[7] = str(row[7])
+                    rowstring[8] = str(row[8])
+
+
                     restaurants.append(restaurant(rowstring))
                     row = cursor.fetchone()
 

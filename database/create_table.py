@@ -12,7 +12,7 @@ import psycopg2
 
 def create_tables():
     """ create tables in the PostgreSQL database"""
-    commands = (
+    commands = [
         """
         CREATE TABLE IF NOT EXISTS restaurants (
             restaurant_id SERIAL PRIMARY KEY,
@@ -24,8 +24,11 @@ def create_tables():
             media VARCHAR(255),
             tags VARCHAR(255),
             review_count INTEGER,
-            stars FLOAT NOT NULL
-        )
+            stars FLOAT NOT NULL,
+            cuisine VARCHAR(255),
+            type VARCHAR(255),
+            price VARCHAR(255)
+            )
         """,
         """
         CREATE TABLE IF NOT EXISTS customers (
@@ -44,15 +47,16 @@ def create_tables():
                 FOREIGN KEY (customer_id)
                 REFERENCES customers (customer_id),
                 restaurant_id VARCHAR(20),
-                FOREIGN KEY (restaurant_id)
-                REFERENCES restaurants (restaurant_id),
                 date TIMESTAMP NOT NULL,
                 text TEXT NOT NULL,
                 price INTEGER,
                 taste INTEGER,
                 authenticity INTEGER,
                 coolness INTEGER,
-                overall INTEGER
+                overall INTEGER,
+                CONSTRAINT fk_restaurant_id
+                FOREIGN KEY (restaurant_id)
+                REFERENCES restaurants (restaurant_id)
         )
         """,
         """
@@ -68,6 +72,7 @@ def create_tables():
                 american BOOLEAN,
                 french BOOLEAN,
                 indian BOOLEAN,
+                CONSTRAINT fk_restaurant
                 FOREIGN KEY (restaurant_id)
                 REFERENCES restaurants (restaurant_id)
         )
@@ -79,23 +84,23 @@ def create_tables():
             FOREIGN KEY (customer_id)
             REFERENCES customers (customer_id),
             restaurant_id VARCHAR(20),
-            FOREIGN KEY (restaurant_id)
-            REFERENCES restaurants (restaurant_id),
             admin BOOLEAN,
             restaurant BOOLEAN,
-            customer BOOLEAN
-
+            customer BOOLEAN,
+            CONSTRAINT fk_restaurant
+            FOREIGN KEY (restaurant_id)
+            REFERENCES restaurants (restaurant_id)
         )
-        """)
+        """]
 
 # The following code was adapted from POSTGRESQL TUTORIAL
 
     try:
-        # with connect(
-        #         host='localhost', port=5432, user='rmd', password='trentoneats333',
-        #         database='trentoneats') as connection:
-        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                     database="dequ5ope4nuoit") as connection:
+         with connect(
+                 host='localhost', port=5432, user='rmd', password='trentoneats333',
+                database='trentoneats') as connection:
+        #with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+                    # database="dequ5ope4nuoit") as connection:
 
             with connection.cursor() as cursor:
                 # create table one by one
