@@ -99,6 +99,17 @@ h4.resDetails{
 >>>>>>> new_homepage */
     text-align: center;
 }
+h2.addItHere{
+    color: #FFD700;
+    font-size: 5em;
+    font-weight: bold;
+    font-family: "Playfair Display", "Georgia", serif;
+    text-align: center; 
+}
+h4.resDetails{
+    font-family: "Courier", "Baskerville", monospace;
+    text-align: center;
+}
 form {
     text-align: center;
 }
