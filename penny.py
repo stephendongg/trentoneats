@@ -180,7 +180,7 @@ def login():
 def callback():
 
     # encoding of link
-    link = request.build_absolute_uri()
+    link = request.url
     link = str(link)
     s = link.index("code=")
     cut0 = link[0:s+2]
