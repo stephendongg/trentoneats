@@ -279,3 +279,11 @@ h1.results{
 .list_div {
     margin: 0 auto;
 }
+#AboutCont{
+    background-color: #80000046;
+}
+#TrentonImg{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
