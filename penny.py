@@ -169,7 +169,7 @@ def login_is_required(function):
 @app.route('/login', methods=['GET'])
 def login():
 
-    session.clear()
+    # session.clear()
     # CHECK IF LOGGED IN IF LOGGED IN THEN LOG OUT
     authorization_url, state = flow.authorization_url()
     print(authorization_url)
@@ -182,6 +182,8 @@ def login():
 
 @app.route('/callback', methods=['GET'])
 def callback():
+    # Debugging
+    print(session["state"])
     flow.fetch_token(authorization_response=request.url)
     print(request.url)
 
