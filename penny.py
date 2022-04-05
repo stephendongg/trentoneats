@@ -81,7 +81,22 @@ def about():
 # ---------------------------------------------------------
 
 
+def authorized(function):
+    def wrapper2(*args, **kwargs):
+        if not (session["email"] == "pjozuah@princeton.edu" or session["email"] == "sd20@princeton.edu"
+                or session["email"] == "soumyag@princeton.edu" or session["email"] == "chukwuma@princeton.edu"
+                or session["email"] == "kao3@princeton.edu"):
+            html = render_template('unauthorized_login.html')
+            response = make_response(html)
+            return response
+        else:
+            return function()
+
+    return wrapper2
+
+
 @app.route('/joinrestaurant', methods=['GET'])
+@authorized
 def joinrestaurant():
     html = render_template('joinrestaurant.html')
     response = make_response(html)
@@ -125,13 +140,6 @@ def resdetails():
 # ---------------------------------------------------------
 
 
-# @app.route('/login', methods = ['GET'])
-# def login():
-#     html = render_template('login.html')
-#     response =  make_response(html)
-#     return response
-
-
 GOOGLE_CLIENT_ID = "308675237756-nem83n7953b22dujose0okjmhfi9q6mf.apps.googleusercontent.com"
 
 client_secrets_file = os.path.join(
@@ -144,6 +152,7 @@ flow = Flow.from_client_secrets_file(
     scopes=["https://www.googleapis.com/auth/userinfo.profile",
             "https://www.googleapis.com/auth/userinfo.email", "openid"],
     redirect_uri="https://trentoneats.herokuapp.com/callback"
+    # redirect_uri="http://127.0.0.1:8080/callback"
 )
 
 
@@ -188,6 +197,7 @@ def callback():
 
     session["google_id"] = id_info.get("sub")
     session["name"] = id_info.get("name")
+    session["email"] = id_info.get("email")
     return redirect("/protected_area")
 
 
@@ -200,5 +210,6 @@ def logout():
 @app.route('/protected_area', methods=['GET'])
 @login_is_required
 def protected_area():
-    return f"Thank you for logging in {session['name']}! \
-     <br/> <a href='/logout'><button>Logout</button></a>"
+    return redirect("/")
+    # return f"Thank you for logging in {session['name']}! \
+    #  <br/> <a href='/logout'><button>Logout</button></a>"
