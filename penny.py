@@ -85,7 +85,7 @@ def authorized(function):
     def wrapper2(*args, **kwargs):
         if (session.get("email") is None) or not (session["email"] == "pjozuah@princeton.edu" or session["email"] == "sd20@princeton.edu"
                                                   or session["email"] == "soumyag@princeton.edu" or session["email"] == "chukwuma@princeton.edu"
-                                                  or session["email"] == "kao3@princeton.edu"):
+                                                  or session["email"] == "kao3@princeton.edu" or session["email"] == "anatk@princeton.edu"):
             html = render_template('unauthorized_login.html')
             response = make_response(html)
             return response
