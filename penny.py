@@ -151,8 +151,8 @@ flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/userinfo.profile",
             "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    redirect_uri="https://trentoneats.herokuapp.com/callback"
-    # redirect_uri="http://127.0.0.1:8080/callback"
+    # redirect_uri="https://trentoneats.herokuapp.com/callback"
+    redirect_uri="http://127.0.0.1:8080/callback"
 )
 
 
@@ -168,7 +168,11 @@ def login_is_required(function):
 
 @app.route('/login', methods=['GET'])
 def login():
+
+    session.clear()
+    # CHECK IF LOGGED IN IF LOGGED IN THEN LOG OUT
     authorization_url, state = flow.authorization_url()
+    print(authorization_url)
     session["state"] = state
     return redirect(authorization_url)
     # html = render_template('login.html')
@@ -178,18 +182,8 @@ def login():
 
 @app.route('/callback', methods=['GET'])
 def callback():
-
-    # encoding of link
-    link = request.url
-    link = str(link)
-    s = link.index("code=")
-    cut0 = link[0:s+2]
-    cut1 = link[s+2:len(link)]
-    cut1 = cut1.replace("/", "%2F")
-    final = cut0+cut1
-    authorization_response = final
-
-    flow.fetch_token(authorization_response=authorization_response)
+    flow.fetch_token(authorization_response=request.url)
+    print(request.url)
 
     if not session["state"] == request.args["state"]:
         abort(500)  # State does not match!
