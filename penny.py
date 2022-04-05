@@ -172,7 +172,7 @@ def login():
     session.clear()
     # CHECK IF LOGGED IN IF LOGGED IN THEN LOG OUT
     authorization_url, state = flow.authorization_url()
-    print(authorization_url)
+    # print(authorization_url)
     session["state"] = state
     return redirect(authorization_url)
     # html = render_template('login.html')
@@ -183,9 +183,9 @@ def login():
 @app.route('/callback', methods=['GET'])
 def callback():
     # Debugging
-    print(session["state"])
+    # print(session["state"])
     flow.fetch_token(authorization_response=request.url)
-    print(request.url)
+    # print(request.url)
 
     if not session["state"] == request.args["state"]:
         abort(500)  # State does not match!
