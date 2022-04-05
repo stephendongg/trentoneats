@@ -178,7 +178,18 @@ def login():
 
 @app.route('/callback', methods=['GET'])
 def callback():
-    flow.fetch_token(authorization_response=request.url)
+
+    # encoding of link
+    link = request.build_absolute_uri()
+    link = str(link)
+    s = link.index("code=")
+    cut0 = link[0:s+2]
+    cut1 = link[s+2:len(link)]
+    cut1 = cut1.replace("/", "%2F")
+    final = cut0+cut1
+    authorization_response = final
+
+    flow.fetch_token(authorization_response=authorization_response)
 
     if not session["state"] == request.args["state"]:
         abort(500)  # State does not match!
