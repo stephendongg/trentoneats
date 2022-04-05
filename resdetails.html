@@ -2,7 +2,6 @@
 {% block title %} Best Restaurants in Trenton | Trenton Local Eats {% endblock %}
 {% block content %}
 <div class="container-fluid pt-5 pb-5 bg-info">
-
     <div class="row">
         <div class="col-sm-6">
             <!-- <img src= {{info['open_closed']}} class="img-thumbnail"> -->
@@ -15,10 +14,16 @@
             </div>
             <h4 class="resDetails">{{info['address']}}</h4>
             <div class="row">
-                <div class="col-sm-6 px-3">
-                    <h4 class="resDetails">{{info['hours']}}</h4>
+                <div class="col-sm-6 px-0">
+                    <h4 class="resDetails" id="MondayHours"></h4>
+                    <h4 class="resDetails" id="TuesdayHours"></h4>
+                    <h4 class="resDetails" id="WednesdayHours"></h4>
+                    <h4 class="resDetails" id="ThursdayHours"></h4>
+                    <h4 class="resDetails" id="FridayHours"></h4>
+                    <h4 class="resDetails" id="SaturdayHours"></h4>
+                    <h4 class="resDetails" id="SundayHours"></h4>
                 </div>
-                <div class="col-sm-6 px-5">
+                <div class="col-sm-6 px-3">
                     <h4 class="resDetails"><strong>Open?: </strong> {{info['open_closed']}}</h4>
                     <h4 class="resDetails"><strong>Media: </strong>{{info['media']}}</h4>
                     <h4 class="resDetails"><strong>Review Count: </strong> {{info['review_count']}}</h4>
@@ -30,6 +35,7 @@
     </div>
 </div>
 
+<!--Javascript code to add restaurant image to details page -->
 <script type="text/javascript"> 
 
     function myFunction(){
@@ -41,6 +47,50 @@
     myFunction();
 
 </script>
+
+<script>
+    'use strict';
+    let resData = "{{ info }}";
+
+    // Find index in split where hours are
+    let hours = resData.split(/&#39|&#34/);
+    let hoursIndex = 0;
+    for (let i = 0; i < hours.length; i++){
+        if (hours[i].includes('AM') & hours[i].includes('day')) {
+            hoursIndex = i;
+        }
+    }
+    hours = hours[hoursIndex].split(";")[1];
+    hours = hours.split(",");
+    let hourNode = document.getElementById("MondayHours");
+    hourNode.innerHTML = hours[0];
+    if (typeof hours[1] != 'undefined'){
+        hourNode = document.getElementById("TuesdayHours");
+        hourNode.innerHTML = hours[1];
+    }
+    if (typeof hours[2] != 'undefined'){
+        hourNode = document.getElementById("WednesdayHours");
+        hourNode.innerHTML = hours[2];
+    }
+    if (typeof hours[3] != 'undefined'){
+        hourNode = document.getElementById("ThursdayHours");
+        hourNode.innerHTML = hours[3];
+    }
+    if (typeof hours[4] != 'undefined'){
+        hourNode = document.getElementById("FridayHours");
+        hourNode.innerHTML = hours[4];
+    }
+    if (typeof hours[5] != 'undefined'){
+        hourNode = document.getElementById("SaturdayHours");
+        hourNode.innerHTML = hours[5];
+    }
+    if (typeof hours[6] != 'undefined'){
+        hourNode = document.getElementById("SundayHours");
+        hourNode.innerHTML = hours[6];
+    }
+
+</script>
+
 
 {% include 'footer.html' %}
 {% endblock %}
