@@ -184,7 +184,9 @@ def login():
 def callback():
     # Debugging
     # print(session["state"])
-    flow.fetch_token(authorization_response=request.url)
+    code = request.args.get('code')
+    flow.fetch_token(code=code)
+    # flow.fetch_token(authorization_response=request.url)
     # print(request.url)
 
     if not session["state"] == request.args["state"]:
