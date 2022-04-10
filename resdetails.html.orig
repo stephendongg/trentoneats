@@ -1,31 +1,6 @@
 {% extends "base.html" %}
 {% block title %} Best Restaurants in Trenton | Trenton Local Eats {% endblock %}
 {% block content %}
-<<<<<<< HEAD
-<strong>Name: </strong> {{info['name']}}
-<br>
-<strong>Address: </strong> {{info['address']}}
-<br>
-<strong>Hours: </strong> {{info['hours']}}
-<br>
-<strong>Open?: </strong> {{info['open_closed']}}
-<br>
-<strong>Menu: </strong> {{info['menu']}}
-<br>
-<strong>Media: </strong> {{info['media']}}
-<br>
-<strong>Tags: </strong> {{info['tags']}}
-<br>
-<strong>Review Count: </strong> {{info['review_count']}}
-<br>
-<strong>Stars: </strong> {{info['stars']}}
-<br>
-<strong>Cuisine: </strong> {{info['cuisine']}}
-<br>
-<strong>Price: </strong> {{info['price']}}
-<br>
-<strong>Type: </strong> {{info['type']}}
-=======
 <div class="container-fluid pt-5 pb-5 bg-info">
     <div class="row">
         <div class="col-sm-6">
@@ -53,6 +28,9 @@
                     <h4 class="resDetails"><strong>Media: </strong>{{info['media']}}</h4>
                     <h4 class="resDetails"><strong>Review Count: </strong> {{info['review_count']}}</h4>
                     <h4 class="resDetails"><strong>Stars: </strong> {{info['stars']}}</h4>
+                    <h4 class="resDetails"><strong>Stars: </strong> {{info['cuisine']}}</h4>
+                    <h4 class="resDetails"><strong>Stars: </strong> {{info['price']}}</h4>
+                    <h4 class="resDetails"><strong>Stars: </strong> {{info['type']}}</h4>
                 </div>
             </div>
         <h4 class="resDetails"><strong>Menu: </strong> {{info['menu']}}</h4>
@@ -61,13 +39,13 @@
 </div>
 
 <!--Javascript code to add restaurant image to details page -->
-<script type="text/javascript"> 
+<script type="text/javascript">
 
     function myFunction(){
         if("{{info['image']}}" != "None") {
             document.getElementById('temp').src = "{{info['image']}}";
         }
-        
+
     }
     myFunction();
 
@@ -116,7 +94,5 @@
 
 </script>
 
-
->>>>>>> refs/remotes/origin/main
 {% include 'footer.html' %}
 {% endblock %}
