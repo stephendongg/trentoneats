@@ -5,13 +5,13 @@
 }
 body
 {
-    font-family: sans-serif !important;
+    font-family: "Courier", "Baskerville", monospace !important;
 
 }
 .navbar
 {
     font-weight: bold;
-    font-family: "Gill Sans", "Varela Round", sans-serif;
+    font-family: "Playfair Display", "Georgia", serif;
 }
 
 .navbar a
@@ -299,3 +299,4 @@ h1.results{
     margin-left: auto;
     margin-right: auto;
 }
+

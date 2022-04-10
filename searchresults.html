@@ -41,14 +41,42 @@
                             </style>
                         </div>
                         <p class="mb-1">{{restaurant.get_address()}}</p>
-                        <span class="badge badge-info badge-pill ">Open? {{restaurant.get_openclose()}}</span>
-                        <span class="badge badge-info badge-pill">Cuisine Type</span>
-                        <span class="badge badge-info badge-pill">Price</span>
-                        <span class="badge badge-info badge-pill">Dining Type</span>
+                        <span class="badge badge-info badge-pill i"></span>
+                        <span class="badge badge-info badge-pill ii">Cuisine Type</span>
+                        <span class="badge badge-info badge-pill iii">Price</span>
+                        <span class="badge badge-info badge-pill iv">Dining Type</span>
                     </a> 
                 </div>
+
+
+<!--Function to get whether restaurant is open or closed-->
+                <script>
+                  'use strict';
+          
+
+                  function statusFunc() {
+                    let status = "{{ restaurant.get_openclose() }}";
+                    console.log(status);
+                    let node = document.getElementsByClassName("badge");
+                    let length = node.length;
+                    let i = node.length - 4;
+                    if (status == "True"){
+                      node[i].innerHTML = "Open";
+                    }
+                    else {
+                      node[i].innerHTML = "Closed";
+                    }
+                  }
+
+                  statusFunc();
+
+                </script>
+
                 {% endfor %}
             {% endif %}
+            
         </tbody>
     </table>
+
+
 </html>
