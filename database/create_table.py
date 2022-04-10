@@ -27,7 +27,8 @@ def create_tables():
             stars FLOAT NOT NULL,
             cuisine VARCHAR(255),
             type VARCHAR(255),
-            price VARCHAR(255)
+            price VARCHAR(255),
+            image VARCHAR(225)
             )
         """,
         """
@@ -43,10 +44,12 @@ def create_tables():
         """
         CREATE TABLE IF NOT EXISTS reviews (
                 review_id SERIAL PRIMARY KEY,
-                customer_id VARCHAR(20),
+                customer_id SERIAL,
                 FOREIGN KEY (customer_id)
                 REFERENCES customers (customer_id),
-                restaurant_id VARCHAR(20),
+                restaurant_id SERIAL,
+                FOREIGN KEY (restaurant_id)
+                REFERENCES restaurants (restaurant_id),
                 date TIMESTAMP NOT NULL,
                 text TEXT NOT NULL,
                 price INTEGER,
@@ -54,9 +57,6 @@ def create_tables():
                 authenticity INTEGER,
                 coolness INTEGER,
                 overall INTEGER,
-                CONSTRAINT fk_restaurant_id
-                FOREIGN KEY (restaurant_id)
-                REFERENCES restaurants (restaurant_id)
         )
         """,
         """
@@ -80,16 +80,15 @@ def create_tables():
         """
         CREATE TABLE IF NOT EXISTS usertype (
             user_id SERIAL PRIMARY KEY,
-            customer_id VARCHAR(20),
+            customer_id SERIAL,
             FOREIGN KEY (customer_id)
             REFERENCES customers (customer_id),
-            restaurant_id VARCHAR(20),
+            restaurant_id SERIAL,
+            FOREIGN KEY (restaurant_id)
+            REFERENCES restaurants (restaurant_id),
             admin BOOLEAN,
             restaurant BOOLEAN,
             customer BOOLEAN,
-            CONSTRAINT fk_restaurant
-            FOREIGN KEY (restaurant_id)
-            REFERENCES restaurants (restaurant_id)
         )
         """]
 

@@ -61,6 +61,14 @@ class restaurant:
         """restaurant ID"""
         return self._stars
 
+    def get_address(self):
+        """restaurant ID"""
+        return self._address
+
+    def get_stars(self):
+        """restaurant ID"""
+        return self._stars
+
     def get_cuisine(self):
         """restaurant ID"""
         return self._cuisine

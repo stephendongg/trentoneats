@@ -1,0 +1,301 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+body
+{
+    font-family: sans-serif !important;
+
+}
+.navbar
+{
+    font-weight: bold;
+    font-family: "Gill Sans", "Varela Round", sans-serif;
+}
+
+.navbar a
+{
+    color: white !important;
+}
+.navbar-toggler-icon.icon-bar
+{
+    font-size: 25px !important;
+}
+/* fade in properties */
+.fade-in-text1 {
+    animation: fadeIn linear 0.5s;
+    -webkit-animation: fadeIn linear 0.5s;
+    -moz-animation: fadeIn linear 0.5s;
+    -o-animation: fadeIn linear 0.5s;
+    -ms-animation: fadeIn linear 0.5s;
+  }
+
+.fade-in-text2 {
+    animation: fadeIn linear 1.5s;
+    -webkit-animation: fadeIn linear 1.5s;
+    -moz-animation: fadeIn linear 1.5s;
+    -o-animation: fadeIn linear 1.5s;
+    -ms-animation: fadeIn linear 1.5s;
+  }
+  
+  @keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-moz-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-webkit-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-o-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-ms-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+h1.explore
+{
+    padding-top: 0.4em;
+    color: #FFD700;
+    font-size: 9rem;
+    font-weight: bold;
+    font-family: "Playfair Display", "Georgia", serif;
+    text-align: center;
+}
+h2.restOfHeader
+{
+    font-size: 3rem;
+    font-family: "Courier", "Baskerville", monospace;
+    text-align: center;
+}
+h2.restOfHeader span {
+    color: #B22222;
+    font-size: 6rem;
+    font-weight: bold;
+    font-family: "Bradley Hand", "Gill Sans", sans-serif;
+/* <<<<<<< HEAD
+    text-align: center;
+}
+h2.addItHere{
+    color: #FFD700;
+    font-size: 5em;
+    font-weight: bold;
+    font-family: "Playfair Display", "Georgia", serif;
+    text-align: center; 
+}
+h4.resDetails{
+    font-family: "Courier", "Baskerville", monospace;
+=======
+>>>>>>> new_homepage */
+    text-align: center;
+}
+h3.aboutHeader1 {
+    font-size: 3rem;
+    font-family: "Courier", "Baskerville", monospace;
+    text-align: center;
+}
+h2.aboutHeader2{
+    font-size: 4rem;
+    color: #B22222;
+    font-weight: bold;
+    font-family: "Bradley Hand", "Gill Sans", sans-serif;
+    text-align: center;
+}
+h2.addItHere{
+    color: #FFD700;
+    font-size: 5em;
+    font-weight: bold;
+    font-family: "Playfair Display", "Georgia", serif;
+    text-align: center; 
+}
+h4.resDetails{
+    font-family: "Courier", "Baskerville", monospace;
+    text-align: center;
+}
+form {
+    text-align: center;
+}
+.rest_search {
+    width: 600px;
+    height: 40px;
+}
+.submit {
+    color: #B22222;
+    height: 40px;
+}
+.circle1 {
+    width: 320px;
+    height: 310px;
+    background-color: #008080be;
+    position:relative;
+    top:-175px;
+    left: -100px
+}
+.circle2 {
+    width: 200px;
+    height: 190px;
+    background-color: cornsilk;
+    position:relative;
+    top:-115px;
+    left: -40px
+}
+.circle3 {
+    width: 210px;
+    height: 200px;
+    background-color: #b22222e2;
+    position:relative;
+    top:-275px;
+    left: 50px
+}
+.circle4 {
+    width: 150px;
+    height: 140px;
+    background-color: #ffd900;
+    position:relative;
+    top:10px;
+    left: 70px
+}
+/* img {
+    border-radius: 50%;
+    position:relative;
+    top:-175px;
+    left: 40px
+} */
+.line1 {
+    position:relative;
+    top:-275px;
+    left: 1180px;
+    border-bottom: 25px solid rgba(0, 128, 128, 0.678);
+    border-radius: 10px;
+
+}
+.line2 {
+    position:relative;
+    top:-265px;
+    left: 1225px;
+    border-bottom: 25px solid rgba(0, 128, 128, 0.678);
+    border-radius: 10px;
+
+}
+.line3 {
+    position:relative;
+    top:-255px;
+    left: 1270px;
+    border-bottom: 25px solid rgba(0, 128, 128, 0.678);
+    border-radius: 10px;
+}
+/* advanced search elements */
+.btn {
+    font-family: "Playfair Display", "Georgia", serif;
+    background-color: #4CAF50;
+}
+.price_select {
+    position:relative;
+    padding-top: 30px;
+    font-family: "Playfair Display", "Georgia", serif;
+}
+.begin_adv_search {
+    font-family: "Playfair Display", "Georgia", serif;
+    text-align: center;
+/* <<<<<<< HEAD
+    font-family: "Rockwell", "Varela Round", sans-serif;
+}
+.begin_adv_search {
+    font-family: "Playfair Display", "Georgia", serif;
+    text-align: center;
+=======
+>>>>>>> new_homepage */
+    font-size: 1.5rem;
+    font-weight: bold;
+    position:relative;
+    top:-20px;
+}
+input[id="collapsible"] {
+    display: none;
+}
+.lbl-toggle {
+    font-family: "Playfair Display", "Georgia", serif;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    position:relative;
+    top:-15px;
+    color: #B22222;
+}
+.wrap-collabsible {
+    text-align: center;
+}
+.lbl-toggle::before {
+    content: ' ';
+    display: inline-block;
+  
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid currentColor;
+  
+    vertical-align: middle;
+    margin-right: .7rem;
+    transform: translateY(-2px);
+  
+    transition: transform .2s ease-out;
+}
+.collapsible-content {
+    max-height: 0px;
+    overflow: hidden;
+  
+    transition: max-height .25s ease-in-out;
+}
+.toggle:checked + .lbl-toggle + .collapsible-content {
+    max-height: 100vh;
+}
+.toggle:checked + .lbl-toggle::before {
+    transform: rotate(90deg) translateX(-3px);
+  }
+  
+  .toggle:checked + .lbl-toggle {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* search results */
+h1.results{
+    color: #008B8B;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: "Playfair Display", "Georgia", serif;
+    text-align: center;
+}
+.list-group{
+    display:inline-block;
+}
+.list-group .list-group-item  {
+    background-color: #80000046;
+    border-top: 1px solid #800000;
+    border-left-color: #800000;
+    border-right-color: #800000;
+    border-bottom: 1px solid #800000;
+}
+.list-group .list-group-item:hover {
+    background-color: #008b8b86;
+}
+.list_div {
+    margin: 0 auto;
+}
+#AboutCont{
+    background-color: #80000046;
+}
+#TrentonImg{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
