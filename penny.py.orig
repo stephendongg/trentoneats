@@ -37,12 +37,8 @@ def search_form():
 
     # Temp  ------- initial restaurant value
     restaurant = ""
-    price = ""
-    tags = ""
-    cuisine = ""
-    type = ""
     restaurantinfo = restaurant_search(
-        restaurant, tags, price, cuisine, type)  # Exception handling omitted
+        restaurant)  # Exception handling omitted
 
     html = render_template('searchform.html',
                            #ampm = get_ampm(),
@@ -63,19 +59,8 @@ def search_results():
 
     restaurant = request.args.get('restaurant')
     tags = request.args.get('tags')
-    if tags is None:
-        tags = ''
-    price = request.args.get('price')
-    if price is None:
-        price = ''
-    type = request.args.get('type')
-    if type is None:
-        type = ''
-    cuisine = request.args.get('cuisine')
-    if cuisine is None:
-        cuisine = ''
 
-    restaurantinfo = restaurant_search(restaurant, tags, price, type, cuisine)
+    restaurantinfo = restaurant_search(restaurant, tags)
 
     html = render_template('searchform.html',
                            restaurantinfo=restaurantinfo

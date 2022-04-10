@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %} Best Restaurants in Trenton | Trenton Local Eats {% endblock %}
+{% block content %}
+<<<<<<< HEAD
+<strong>Name: </strong> {{info['name']}}
+<br>
+<strong>Address: </strong> {{info['address']}}
+<br>
+<strong>Hours: </strong> {{info['hours']}}
+<br>
+<strong>Open?: </strong> {{info['open_closed']}}
+<br>
+<strong>Menu: </strong> {{info['menu']}}
+<br>
+<strong>Media: </strong> {{info['media']}}
+<br>
+<strong>Tags: </strong> {{info['tags']}}
+<br>
+<strong>Review Count: </strong> {{info['review_count']}}
+<br>
+<strong>Stars: </strong> {{info['stars']}}
+<br>
+<strong>Cuisine: </strong> {{info['cuisine']}}
+<br>
+<strong>Price: </strong> {{info['price']}}
+<br>
+<strong>Type: </strong> {{info['type']}}
+=======
+<div class="container-fluid pt-5 pb-5 bg-info">
+    <div class="row">
+        <div class="col-sm-6">
+            <!-- <img src= {{info['open_closed']}} class="img-thumbnail"> -->
+            <!-- <img src="{{info['image']}}" class="img-thumbnail"> -->
+            <img id="temp" src="https://thumbor.thedailymeal.com/8luyHYVfcVm8WSPXT-FVz9Ub_kU=/870x565/filters:format(webp)/https://www.thedailymeal.com/sites/default/files/slides/1-tacobell-wiki-sphilbrick.JPG" class="img-thumbnail">
+        </div>
+        <div class="col-sm-6">
+            <div class="container-fluid bg-light">
+            <h2 class="restOfHeader">{{info['name']}}</h2>
+            </div>
+            <h4 class="resDetails">{{info['address']}}</h4>
+            <div class="row">
+                <div class="col-sm-6 px-0">
+                    <h4 class="resDetails" id="MondayHours"></h4>
+                    <h4 class="resDetails" id="TuesdayHours"></h4>
+                    <h4 class="resDetails" id="WednesdayHours"></h4>
+                    <h4 class="resDetails" id="ThursdayHours"></h4>
+                    <h4 class="resDetails" id="FridayHours"></h4>
+                    <h4 class="resDetails" id="SaturdayHours"></h4>
+                    <h4 class="resDetails" id="SundayHours"></h4>
+                </div>
+                <div class="col-sm-6 px-3">
+                    <h4 class="resDetails"><strong>Open?: </strong> {{info['open_closed']}}</h4>
+                    <h4 class="resDetails"><strong>Media: </strong>{{info['media']}}</h4>
+                    <h4 class="resDetails"><strong>Review Count: </strong> {{info['review_count']}}</h4>
+                    <h4 class="resDetails"><strong>Stars: </strong> {{info['stars']}}</h4>
+                </div>
+            </div>
+        <h4 class="resDetails"><strong>Menu: </strong> {{info['menu']}}</h4>
+        </div>
+    </div>
+</div>
+
+<!--Javascript code to add restaurant image to details page -->
+<script type="text/javascript"> 
+
+    function myFunction(){
+        if("{{info['image']}}" != "None") {
+            document.getElementById('temp').src = "{{info['image']}}";
+        }
+        
+    }
+    myFunction();
+
+</script>
+
+<script>
+    'use strict';
+    let resData = "{{ info }}";
+
+    // Find index in split where hours are
+    let hours = resData.split(/&#39|&#34/);
+    let hoursIndex = 0;
+    for (let i = 0; i < hours.length; i++){
+        if (hours[i].includes('AM') & hours[i].includes('day')) {
+            hoursIndex = i;
+        }
+    }
+    hours = hours[hoursIndex].split(";")[1];
+    hours = hours.split(",");
+    let hourNode = document.getElementById("MondayHours");
+    hourNode.innerHTML = hours[0];
+    if (typeof hours[1] != 'undefined'){
+        hourNode = document.getElementById("TuesdayHours");
+        hourNode.innerHTML = hours[1];
+    }
+    if (typeof hours[2] != 'undefined'){
+        hourNode = document.getElementById("WednesdayHours");
+        hourNode.innerHTML = hours[2];
+    }
+    if (typeof hours[3] != 'undefined'){
+        hourNode = document.getElementById("ThursdayHours");
+        hourNode.innerHTML = hours[3];
+    }
+    if (typeof hours[4] != 'undefined'){
+        hourNode = document.getElementById("FridayHours");
+        hourNode.innerHTML = hours[4];
+    }
+    if (typeof hours[5] != 'undefined'){
+        hourNode = document.getElementById("SaturdayHours");
+        hourNode.innerHTML = hours[5];
+    }
+    if (typeof hours[6] != 'undefined'){
+        hourNode = document.getElementById("SundayHours");
+        hourNode.innerHTML = hours[6];
+    }
+
+</script>
+
+
+>>>>>>> refs/remotes/origin/main
+{% include 'footer.html' %}
+{% endblock %}

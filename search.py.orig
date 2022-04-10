@@ -186,7 +186,7 @@ def adjust_inputs(restaurant):
     return restaurant
 
 
-def restaurant_search(input, tags, price, type, cuisine):
+def restaurant_search(input):
     """search through restaurants"""
     try:
         # with connect(host='localhost', port=5432, user='rmd', password='xxx',

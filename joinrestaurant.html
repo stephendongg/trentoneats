@@ -29,7 +29,30 @@
   </div>
   <div class="form-group row">
     <label for="restaurantTags">Tags:</label>
-    <input type="text" class="form-control" name="restaurantTags" placeholder="Address" value="">
+    <input type="text" class="form-control" name="restaurantTags" placeholder="Tags" value="">
+  </div>
+  <div class="form-group row">
+    <strong>Categories/Tags</strong>
+    <input type="checkbox" class="form-control" id = "fastfood" name="type" placeholder="" value="Fast Food">
+    <label for="fastfood"> Fast Food </label><br>
+    <input type="checkbox" class="form-control" id="casualdining" name="type" placeholder="" value="Casual Dining">
+    <label for="casualdining"> Casual Dining </label><br>
+    <input type="checkbox" class="form-control" id="finedining" name="type" placeholder="" value="Fine Dining">
+    <label for="finedining"> Fine Dining </label><br>
+  </div>
+  <div class="form-group row">
+    <input type="checkbox" class="form-control" id="" name="cuisine" value="indian">
+    <label for="indian"> Indian </label><br>
+    <input type="checkbox" class="form-control" id="american" name="cuisine" value="american">
+    <label for="american"> American </label><br>
+    <input type="checkbox" class="form-control" id="french" name="cuisine" value="french">
+    <label for="french"> French </label><br />
+    <input type="checkbox" class="form-control" id="other" name="getcuisine" value="other" onchange="document.getElementById('otherCuisine').disabled = !this.checked;" >
+    <label for="other"> Other </label> <input type="text" id = "otherCuisine" name="cuisine" value=""><br><br>
+  </div>
+  <div class="form-group row">
+    <input type="range" class="form-control" id="price" name="price" min="0" max="100">
+    <label for="price"> Average Cost of Restaurant Meal (between 0 and 100)</label>
   </div>
   <div class="form-group row">
     <label for="image">Image:</label>
