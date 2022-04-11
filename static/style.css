@@ -118,7 +118,7 @@ h2.addItHere{
     font-family: "Playfair Display", "Georgia", serif;
     text-align: center; 
 }
-h4.resDetails{
+.resDetails{
     font-family: "Courier", "Baskerville", monospace;
     text-align: center;
 }
