@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 {% block title %} Best Restaurants in Trenton | Trenton Local Eats {% endblock %}
 {% block content %}
@@ -42,10 +43,10 @@
 
 <div class="container-fluid pt-5 pb-5 bg-info">
     <h2 class="restOfHeader">Details</h2>
-    <h4 class="resDetails"><strong>Media: </strong><a href="{{info['media']}}" target="__blank__">{{info['media']}}</a></h4>
+    <h4 class="resDetails"><strong>Media: </strong><a href="{{info['media']}}" target="__blank__" id="mediaLink">{{info['media']}}</a></h4>
     <h4 class="resDetails"><strong>Review Count: </strong> {{info['review_count']}}</h4>
     <h4 class="resDetails"><strong>Stars: </strong> {{info['stars']}}</h4>
-    <h4 class="resDetails"><strong>Menu: </strong><a href="{{info['menu']}}" target="__blank__">{{info['menu']}}</a></h4>
+    <h4 class="resDetails"><strong>Menu: </strong><a href="{{info['menu']}}" target="__blank__" id="menuLink">{{info['menu']}}</a></h4>
 </div>
 
 
@@ -68,7 +69,30 @@
 </script>
 
   
-<!--Google Maps-->
+<!--Javascript code to remove link if there is no media/menu-->
+<script type="text/javascript"> 
+
+    function myFunction(){
+        if("{{info['media']}}" == "None") {
+            document.getElementById('mediaLink').innerHTML = "";
+        }
+        
+    }
+    myFunction();
+
+</script>
+
+<script type="text/javascript"> 
+
+    function myFunction(){
+        if("{{info['menu']}}" == "None") {
+            document.getElementById('menuLink').innerHTML = "";
+        }
+        
+    }
+    myFunction();
+
+</script>
 
 <!--Javascript code to add restaurant image to details page -->
 <script type="text/javascript"> 
