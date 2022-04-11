@@ -11,6 +11,9 @@ from flask import render_template
 from search import restaurant_search, get_restaurant_info
 from add_restaurant import add_restaurant
 
+from reviews import add_review
+import datetime
+
 import os
 import pathlib
 import requests
@@ -127,11 +130,22 @@ def addrestaurant():
 # ---------------------------------------------------------
 
 
-@app.route('/resdetails', methods=['GET'])
+@app.route('/resdetails', methods=['GET', 'POST'])
 def resdetails():
     name = request.args.get('name')
     id = request.args.get('id')
+    # Info currently is: 
     info = get_restaurant_info(id)
+    # info_obj['name'] = str(row[0])
+    # info_obj['address'] = str(row[1])
+    # info_obj['hours'] = str(row[2])
+    # info_obj['open_closed'] = str(row[3])
+    # info_obj['menu'] = str(row[4])
+    # info_obj['media'] = str(row[5])
+    # info_obj['tags'] = str(row[6])
+    # info_obj['review_count'] = str(row[7])
+    # info_obj['stars'] = str(row[8])
+    # info_obj['image'] = str(row[9])
 
     #Separate Code here 
     #Stmt
@@ -139,7 +153,21 @@ def resdetails():
     # Just gotta fetch one of them. current_user_review = db.execute("SELECT * FROM reviews WHERE book_id=:book_id AND user_id=:user_id", {"book_id": book.id, "user_id": session["user_id"]}).fetchone()
     #book_extra = goodreads_lookup(isbn)
     
-    
+    if request.method == 'POST':
+        text = request.form['review-text']
+        text = text.strip()
+        error = None
+        if not text:
+            error = 'You didn\'t add any new reviews.'
+        if error is None:
+            # Gotta figure out if its customer taht we still want to link for placeolder
+            # Currently, placeholder reviews are all -10
+            #NEed Cusomter Ids sorted out.
+            add_review(-10, -10, id, datetime.datetime.now(), text)
+            #return redirect(url_for('review.dashboard'))
+        #flash(error)
+        #return render_template('review/create.html')
+
     html = render_template('resdetails.html', info=info)
     response = make_response(html)
     return response
@@ -191,7 +219,9 @@ def login():
 def callback():
     # Debugging
     # print(session["state"])
-    flow.fetch_token(authorization_response=request.url)
+    code = request.args.get('code')
+    flow.fetch_token(code=code)
+    # flow.fetch_token(authorization_response=request.url)
     # print(request.url)
 
     if not session["state"] == request.args["state"]:
@@ -227,3 +257,23 @@ def protected_area():
     return redirect("/")
     # return f"Thank you for logging in {session['name']}! \
     #  <br/> <a href='/logout'><button>Logout</button></a>"
+
+# @app.route('/create', methods=('GET', 'POST'))
+# @login_is_required
+# def create():
+#   if request.method == 'POST':
+#     text = request.form['review-text']
+#     text = text.strip()
+#     db = get_db()
+#     error = None
+#     if not text:
+#         error = 'You didn\'t add any new reviews.'
+#     if error is None:
+#         db.execute(
+#         'INSERT INTO review (author_id, content) VALUES (?, ?)',   
+#         (g.user['id'], text)
+#         )
+#         db.commit()
+#         return redirect(url_for('review.dashboard'))
+#     flash(error)
+#     return render_template('review/create.html')

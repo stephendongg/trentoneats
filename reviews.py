@@ -4,6 +4,7 @@
 # reviews.py
 # -----------------------------------------------------------------------
 
+from datetime import date
 import sys
 from os import name
 from sys import argv, stderr
@@ -16,6 +17,7 @@ from contextlib import closing
 # from sqlite3 import DataError, DatabaseError
 # from sqlite3 import connect
 from psycopg2 import connect, DatabaseError
+import psycopg2
 import argparse
 # loading
 
@@ -82,18 +84,24 @@ def review_search(input):
         return ("stdservererr")
 
 
-def add_review(review_id, customer_id, restaurant_id,
-date, text, price, taste, authenticity, coolness, overall):
-
+# def add_review(review_id, customer_id, restaurant_id,
+# date, text, price, taste, authenticity, coolness, overall):
+def add_review(review_id, customer_id, restaurant_id, date, text):
 # NEED TO ADJUST INSERTS? 
+    # stmt_str = """
+    # "INSERT INTO reviews (review_id, customer_id, restaurant_id, date ,
+    # text, price, taste, authenticity, coolness, overall) 
+    # VALUES  ( '"""
+    # stmt_str += review_id + "', '" + customer_id + "', '"
+    # stmt_str += restaurant_id + "', '" + date + "', '" + text + "', '"
+    # stmt_str += text + "', '" + price + "', '" + taste + "', '" 
+    # stmt_str += authenticity  +  "', '"  + coolness + "', '" + overall + "');"
     stmt_str = """
-    "INSERT INTO reviews (review_id, customer_id, restaurant_id, date ,
-    text, price, taste, authenticity, coolness, overall) 
+    INSERT INTO reviews (review_id, customer_id, restaurant_id, date,
+    text) 
     VALUES  ( '"""
-    stmt_str += review_id + "', '" + customer_id + "', '"
-    stmt_str += restaurant_id + "', '" + date + "', '" + text + "', '"
-    stmt_str += text + "', '" + price + "', '" + taste + "', '" 
-    stmt_str += authenticity  +  "', '"  + coolness + "', '" + overall + "');"
+    stmt_str += str(review_id) + "', '" + str(customer_id) + "', '" 
+    stmt_str += str(restaurant_id) + "', '" + str(date) + "', '" + text  + "');"
 
     try:
         with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
