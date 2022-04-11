@@ -68,7 +68,6 @@ def search_results():
 
     return response
 
-# Under Construction WebPages! These will be the ones that we will modify!
 # ---------------------------------------------------------
 
 
@@ -133,6 +132,14 @@ def resdetails():
     name = request.args.get('name')
     id = request.args.get('id')
     info = get_restaurant_info(id)
+
+    #Separate Code here 
+    #Stmt
+    #reviews = db.execute(
+    # Just gotta fetch one of them. current_user_review = db.execute("SELECT * FROM reviews WHERE book_id=:book_id AND user_id=:user_id", {"book_id": book.id, "user_id": session["user_id"]}).fetchone()
+    #book_extra = goodreads_lookup(isbn)
+    
+    
     html = render_template('resdetails.html', info=info)
     response = make_response(html)
     return response

@@ -1,12 +1,8 @@
 #!/usr/bin/env python
-"""This is search.py"""
+"""This is reviews.py"""
 # -----------------------------------------------------------------------
-# search.py
+# reviews.py
 # -----------------------------------------------------------------------
-
-# Originally assignment 2's regserver.py -> adapted to search.py to import __search__ cand course_search
-# course_search -> searchbar = restaurant_search
-# __search__ -> gets the details -> might be renamed to details
 
 import sys
 from os import name
@@ -35,7 +31,7 @@ from restaurant import restaurant
 DATABASE_URL = 'file:trentoneats.sql?mode=ro'
 # -----------------------------------------------------------------------
 
-def restaurant_search(input):
+def review_search(input):
     """search through restaurants"""
     try:
         # with connect(host='localhost', port=5432, user='rmd', password='xxx',
@@ -46,51 +42,36 @@ def restaurant_search(input):
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted
-                stmt_str = "SELECT restaurant_id, name, open_closed, address, stars "
-                stmt_str += "FROM restaurants "
-                stmt_str += "WHERE LOWER (name) LIKE LOWER ('%" + \
-                    input + "%') "
-                #stmt_str += 'WHERE name LIKE ? ESCAPE "\\"'
+                # stmt_str = "SELECT restaurant_id, name, open_closed, address, stars "
+                # stmt_str += "FROM restaurants "
+                # stmt_str += "WHERE LOWER (name) LIKE LOWER ('%" + \
+                #     input + "%') "
 
-                # stmt_str = "SELECT classid, dept, "
-                # stmt_str += "coursenum, area, title "
-                # stmt_str += "FROM classes, courses, "
-                # stmt_str += "crosslistings "
-                # stmt_str += "WHERE courses.courseid = "
-                # stmt_str += "crosslistings.courseid "
-                # stmt_str += "AND courses.courseid = "
-                # stmt_str += "classes.courseid "
-                # stmt_str += "AND classes.courseid = "
-                # stmt_str += "crosslistings.courseid "
+                # Review Search 
+                stmt_str = "SELECT customer_id, text "
+                stmt_str += "FROM reviews "
+                stmt_str += "WHERE restaurant_id = " + input
 
-# here will be where restaurant is diffenret
-                #stmt_str += 'WHERE name LIKE ' + input
-
-                # stmt_str += "ORDER BY dept,"
-                # stmt_str += "coursenum, classid"
 
                 cursor.execute(stmt_str)
 
                 row = cursor.fetchone()
 
                 # course list
-                restaurants = []
+                reviews = []
 
                 # rowstringlist this rowstring will contain all of the necessary values
 
-                rowstring = ["", "", "", "", ""]
+                rowstring = ["", ""]
 
                 # This iwll parse through the rows and get all of the necsary values
                 while row is not None:
                     rowstring[0] = str(row[0])
                     rowstring[1] = str(row[1])
-                    rowstring[2] = str(row[2])
-                    rowstring[3] = str(row[3])
-                    rowstring[4] = str(row[4])
-                    restaurants.append(restaurant(rowstring))
+                    reviews.append(rowstring)
                     row = cursor.fetchone()
 
-                return restaurants
+                return reviews
 
     # Normally exit status 0.
     # If database-related error, terminate with exit status 1.
@@ -99,6 +80,33 @@ def restaurant_search(input):
     except DatabaseError as error:
         print(sys.argv[0] + ": " + str(error), file=stderr)
         return ("stdservererr")
+
+
+def add_review(review_id, customer_id, restaurant_id,
+date, text, price, taste, authenticity, coolness, overall):
+
+# NEED TO ADJUST INSERTS? 
+    stmt_str = """
+    "INSERT INTO reviews (review_id, customer_id, restaurant_id, date ,
+    text, price, taste, authenticity, coolness, overall) 
+    VALUES  ( '"""
+    stmt_str += review_id + "', '" + customer_id + "', '"
+    stmt_str += restaurant_id + "', '" + date + "', '" + text + "', '"
+    stmt_str += text + "', '" + price + "', '" + taste + "', '" 
+    stmt_str += authenticity  +  "', '"  + coolness + "', '" + overall + "');"
+
+    try:
+        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+                database="dequ5ope4nuoit") as connection:
+
+            with connection.cursor() as cursor:
+                print(stmt_str)
+                cursor.execute(stmt_str)
+
+
+    except (Exception, psycopg2.DatabaseError) as ex:
+        print(ex, file=stderr)
+        exit(1)
 
 def get_restaurant_info(res_id):
     """find all information on one restaurant"""
