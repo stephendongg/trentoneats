@@ -12,9 +12,21 @@
             <div class="container-fluid bg-light">
             <h2 class="restOfHeader">{{info['name']}}</h2>
             </div>
-            <h4 class="resDetails">{{info['address']}}</h4>
+            <h3 class="resDetails">Location & Hours</h3>
             <div class="row">
-                <div class="col-sm-6 px-0">
+                <div class="col-md-6">
+                    <!--Google map-->
+                    <iframe id="resMap"
+                    width=100%
+                    height=100%
+                    frameborder="0" style="border:0"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDTtI041ge9u2teT2FtEXB32-CLTaeR7kU&q=11+W+Front+St,+Trenton,+NJ+08608"
+                    allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="resDetails"><strong id="OpenClose"></strong></h4>
                     <h4 class="resDetails" id="MondayHours"></h4>
                     <h4 class="resDetails" id="TuesdayHours"></h4>
                     <h4 class="resDetails" id="WednesdayHours"></h4>
@@ -23,17 +35,40 @@
                     <h4 class="resDetails" id="SaturdayHours"></h4>
                     <h4 class="resDetails" id="SundayHours"></h4>
                 </div>
-                <div class="col-sm-6 px-3">
-                    <h4 class="resDetails"><strong id="OpenClose"></strong></h4>
-                    <h4 class="resDetails"><strong>Media: </strong>{{info['media']}}</h4>
-                    <h4 class="resDetails"><strong>Review Count: </strong> {{info['review_count']}}</h4>
-                    <h4 class="resDetails"><strong>Stars: </strong> {{info['stars']}}</h4>
-                </div>
             </div>
-        <h4 class="resDetails"><strong>Menu: </strong> {{info['menu']}}</h4>
         </div>
     </div>
 </div>
+
+<div class="container-fluid pt-5 pb-5 bg-info">
+    <h2 class="restOfHeader">Details</h2>
+    <h4 class="resDetails"><strong>Media: </strong><a href="{{info['media']}}" target="__blank__">{{info['media']}}</a></h4>
+    <h4 class="resDetails"><strong>Review Count: </strong> {{info['review_count']}}</h4>
+    <h4 class="resDetails"><strong>Stars: </strong> {{info['stars']}}</h4>
+    <h4 class="resDetails"><strong>Menu: </strong><a href="{{info['menu']}}" target="__blank__">{{info['menu']}}</a></h4>
+</div>
+
+
+<!--Remove spaces in address so it is compatible with google maps-->
+<script>
+    "use strict";
+
+    let address = "{{ info['address'] }}";
+    let mapAddress = address.replace(/ /g, '+');
+    console.log(mapAddress);
+
+    let srcStr = "https://www.google.com/maps/embed/v1/place?key=AIzaSyDTtI041ge9u2teT2FtEXB32-CLTaeR7kU&q=" + mapAddress;
+
+    if("{{ info['address'] }}" != "None") {
+        document.getElementById('resMap').src = srcStr;
+    }
+
+
+
+</script>
+
+  
+<!--Google Maps-->
 
 <!--Javascript code to add restaurant image to details page -->
 <script type="text/javascript"> 
@@ -57,10 +92,10 @@
       let status = "{{ info['open_closed'] }}";
       let node = document.getElementById("OpenClose");
       if (status == "True"){
-        node.innerHTML = "Open";
+        node.innerHTML = "Open now";
       }
       else {
-        node.innerHTML = "Closed";
+        node.innerHTML = "Closed now";
       }
     }
 
