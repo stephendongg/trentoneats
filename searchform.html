@@ -1,168 +1,230 @@
-{% extends "base.html" %}
-{% block title %} Best Restaurants in Trenton | Trenton local eats {% endblock %}
-{% block content %}
-<!--title-->
-<h1 class="explore fade-in-text1">Explore</h1>
-<h2 class="restOfHeader fade-in-text2">food, <span class=“trenton”>Trenton</span> style.</h2>
-<div class="position-relative fade-in-text2 container-fluid">
-    <div class="circle1 rounded-circle position-absolute"></div>
-    <div class="circle2 rounded-circle position-absolute"></div>
-    <!--<img src="" alt="Food">-->
-    <div class="circle3 rounded-circle position-absolute"></div>
-    <div class="circle4 rounded-circle position-absolute"></div>
-    <hr class="line1" style="width:18%">
-    <hr class="line2" style="width:15%">
-    <hr class="line3" style="width:12%">
-</div>
-<form action="searchresults" method="get">
-    <input type="text" name="restaurant" class="rest_search", placeholder=" Enter a restaurant name here!">
-    <input type="submit" value="Submit" class="submit">
-</form>
-<br>
-<strong>{{error_msg}}</strong>
-<br>
-<!--add design elements (circle, lines)-->
-<div id="turq_circle"><p></p></div>
+<!DOCTYPE html>
+<html>
 
-<!--advanced search-->
-<div class="begin_adv_search">Don't have a specific restaurant in mind?</div>
-<div class="wrap-collabsible">
-    <input id="collapsible" class="toggle" href="#" type="checkbox">
-    <label for="collapsible" class="lbl-toggle">Try Advanced Search Filters</label>
-    <div class="collapsible-content">
-      <div class="content-inner">
-        <!--cuisine dropdown-->
-        <script>
-          $('select').selectpicker();
-        </script>
-        <div id="cuisine_select"> Select a Cuisine: </div>
-        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-        <script> $('select').selectpicker(); </script> -->
-        <select class="selectpicker" multiple data-live-search="true">
-            <option>BBQ</option>
-            <option>Jamaican</option>
-            <option>Grill</option>
-            <option>Soul</option>
-            <option>Eastern European</option>
-            <option>Dine-in</option>
-            <option>Bar & Grill</option>
-            <option>Dominican</option>
-            <option>Italian</option>
-            <option>English</option>
-            <option>Tacos</option>
-            <option>Mexican</option>
-            <option>Spanish</option>
-          </select>
-        <!--fix how spacing is done-->
-        <br>
-        <br>
-        <!--price radio buttons-->
-        <div id="price_select"> Select Price Range(s): </div>
-        <div class="container">
-        <div class="form-check-inline">
-            <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" value=""> $
-            </label>
-          </div>
-          <div class="form-check-inline">
-            <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" value=""> $$
-            </label>
-          </div>
-          <div class="form-check-inline">
-            <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" value=""> $$$
-            </label>
-          </div>
-        </div>
-        <br>
-        <!--dining type-->
-        <div id="dining_select"> Select Dining Type: </div>
-        <div class="form-check-inline">
-            <label class="form-check-label">
-              <input type="radio" class="form-check-input" name="optradio">Any!
-            </label>
-          </div>
-          <div class="form-check-inline">
-            <label class="form-check-label">
-              <input type="radio" class="form-check-input" name="optradio">Casual
-            </label>
-          </div>
-          <div class="form-check-inline disabled">
-            <label class="form-check-label">
-              <input type="radio" class="form-check-input" name="optradio">Fast Food
-            </label>
-          </div>
-          <div class="form-check-inline disabled">
-            <label class="form-check-label">
-              <input type="radio" class="form-check-input" name="optradio">Fine Dining
-            </label>
-          </div>
-          <br>
-          <br>
-          <!--include submit button here-->
-          <button type="submit" class="btn btn-primary">Submit</button>
-          <br>
-          <br>
-      </div>
+  <body>
+
+
+    {% extends "base.html" %}
+    {% block title %} Best Restaurants in Trenton | Trenton local eats {% endblock %}
+    {% block content %}
+    <!--title-->
+    <h1 class="explore fade-in-text1">Explore</h1>
+    <h2 class="restOfHeader fade-in-text2">food, <span class=“trenton”>Trenton</span> style.</h2>
+    <div class="position-relative fade-in-text2 container-fluid">
+        <div class="circle1 rounded-circle position-absolute"></div>
+        <div class="circle2 rounded-circle position-absolute"></div>
+        <!--<img src="" alt="Food">-->
+        <div class="circle3 rounded-circle position-absolute"></div>
+        <div class="circle4 rounded-circle position-absolute"></div>
+        <hr class="line1" style="width:18%">
+        <hr class="line2" style="width:15%">
+        <hr class="line3" style="width:12%">
     </div>
-  </div>
-<!-- <div class = "adv_search_dropdown">
-    <a class="accordion-toggle collapsed" data-toggle="collapse" href="#advsearchId" type="checkbox">
-        Try advanced search filters
-    </a>
-</div>
-<br>
-
-<div class="advanced_search_options" id="advsearchId" class="collapse"> 
-   <div class="dropdown">
-       cuisine dropdown
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Choose a Cuisine
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Any</a>
-            <a class="dropdown-item" href="#">American</a>
-            <a class="dropdown-item" href="#">French</a>
-            <a class="dropdown-item" href="#">Indian</a>
-            <a class="dropdown-item" href="#">Other</a>
-        </div>
+    <div class="row pt-0 px-3">
+      <div class = "col-sm-3 p-3">
+         <input class="form-control rest_search" type="text" id="restaurantInput" placeholder="Enter a restaurant name here!">
+       </div>
     </div>
     <br>
-    price range-->
-    <!--<span>Choose a Maximum Price: </span>
-    <input type="range" value="50" min="1" max="200" oninput="this.nextElementSibling.value = this.value" id="price_input" <span>&#36;</span>
-    <output>50</output>
+    <strong>{{error_msg}}</strong>
+    <br>
+    <!--add design elements (circle, lines)-->
+    <div id="turq_circle"><p></p></div>
 
-    <form class="multi-range-field my-5 pb-5">
-        <input id="multi20" class="multi-range" type="range" />
-      </form>
+    <!--advanced search-->
+    <div class="begin_adv_search">Don't have a specific restaurant in mind?</div>
+    <div class="wrap-collabsible">
+        <input id="collapsible" class="toggle" href="#" type="checkbox">
+        <label for="collapsible" class="lbl-toggle">Try Advanced Search Filters</label>
+        <div class="collapsible-content">
+          <div class="content-inner">
+            <!--cuisine dropdown
+            <script>
+              $('select').selectpicker();
+            </script> -->
+            <div id="cuisine_select"> Select a Cuisine: </div>
+            <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+            <script> $('select').selectpicker(); </script> -->
+            <select class="selectpicker" multiple data-live-search="true">
+                <option>BBQ</option>
+                <option>Jamaican</option>
+                <option>Grill</option>
+                <option>Soul</option>
+                <option>Eastern European</option>
+                <option>Dine-in</option>
+                <option>Bar & Grill</option>
+                <option>Dominican</option>
+                <option>Italian</option>
+                <option>English</option>
+                <option>Tacos</option>
+                <option>Mexican</option>
+                <option>Spanish</option>
+              </select>
+            <!--fix how spacing is done-->
+            <br>
+            <br>
+            <!--price radio buttons-->
+            <div id="price_select"> Select Price Range(s): </div>
+            <div class="container">
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" value=""> $
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" value=""> $$
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" value=""> $$$
+                </label>
+              </div>
+            </div>
+            <br>
+            <!--dining type-->
+            <div id="dining_select"> Select Dining Type: </div>
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="optradio">Any!
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="optradio">Casual
+                </label>
+              </div>
+              <div class="form-check-inline disabled">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="optradio">Fast Food
+                </label>
+              </div>
+              <div class="form-check-inline disabled">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="optradio">Fine Dining
+                </label>
+              </div>
+              <br>
+              <br>
+              <!--include submit button here-->
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <br>
+              <br>
+          </div>
+        </div>
+      </div>
+    <!-- <div class = "adv_search_dropdown">
+        <a class="accordion-toggle collapsed" data-toggle="collapse" href="#advsearchId" type="checkbox">
+            Try advanced search filters
+        </a>
+    </div>
+    <br>
 
-      
-   address
-    <form>
-        <div class="form-group">
-            <label>Location</label>
-            <input type="text" class="form-control" id="location_input" placeholder="Enter an address (or zipcode?) here">
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="within5">
-                <label class="form-check-label" for="within5">Less than 5 milees</label>
+    <div class="advanced_search_options" id="advsearchId" class="collapse">
+       <div class="dropdown">
+           cuisine dropdown
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Choose a Cuisine
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Any</a>
+                <a class="dropdown-item" href="#">American</a>
+                <a class="dropdown-item" href="#">French</a>
+                <a class="dropdown-item" href="#">Indian</a>
+                <a class="dropdown-item" href="#">Other</a>
             </div>
         </div>
-    </form> -->
-</div>
+        <br>
+        price range-->
+        <!--<span>Choose a Maximum Price: </span>
+        <input type="range" value="50" min="1" max="200" oninput="this.nextElementSibling.value = this.value" id="price_input" <span>&#36;</span>
+        <output>50</output>
 
-<!-- CDNs for font-awesome, bootstrap, JQuery -->
-<link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <form class="multi-range-field my-5 pb-5">
+            <input id="multi20" class="multi-range" type="range" />
+          </form>
 
 
-{% include 'searchresults.html' %} 
-{% include 'footer.html' %} 
-<br>
-<br>
-{% endblock %}
+       address
+        <form>
+            <div class="form-group">
+                <label>Location</label>
+                <input type="text" class="form-control" id="location_input" placeholder="Enter an address (or zipcode?) here">
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="within5">
+                    <label class="form-check-label" for="within5">Less than 5 milees</label>
+                </div>
+            </div>
+        </form> -->
+    </div>
+
+
+    {% include 'searchresults.html' %}
+    <div class="row">
+      <div class="col-12 grayborder" id="restaurantsDiv">
+      </div>
+    </div>
+    {% include 'footer.html' %}
+    <br>
+    <br>
+
+    <script src=
+     "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+    </script>
+
+    <!-- CDNs for font-awesome, bootstrap, JQuery
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+
+
+    <script>
+      'use strict';
+
+      $("a").attr("target", "_blank");
+      // $('select').selectpicker();
+
+      function handleResponse(response)
+       {
+          $('#restaurantsDiv').html(response);
+       }
+
+      let request = null;
+
+      function getResults()
+       {
+          console.log("Getting results");
+
+          let restaurantInput = $('#restaurantInput').val();
+
+          restaurantInput = encodeURIComponent(restaurantInput);
+
+          let url = '/searchresults?restaurant=' + restaurantInput
+
+          console.log(url);
+          if (request != null)
+             request.abort();
+
+          request = $.ajax(
+             {
+                type: 'GET',
+                url: url,
+                success: handleResponse
+             }
+          );
+       }
+      function setup()
+       {
+         getResults();
+          console.log("Changed the input buttons");
+          $("#restaurantInput").on("input", getResults);
+       }
+      $('document').ready(setup);
+    </script>
+    {% endblock %}
+  </body>
+</html>

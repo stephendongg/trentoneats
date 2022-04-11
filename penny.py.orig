@@ -30,7 +30,21 @@ app.secret_key = "dsghabkjcn1iy2u6gdoyq"
 @app.route('/', methods=['GET'])
 @app.route('/searchform', methods=['GET'])
 def search_form():
-    html = render_template('searchform.html')
+
+    error_msg = request.args.get('error_msg')
+    if error_msg is None:
+        error_msg = ''
+
+    # Temp  ------- initial restaurant value
+    restaurant = ""
+    restaurantinfo = restaurant_search(
+        restaurant)  # Exception handling omitted
+
+    html = render_template('searchform.html',
+                           #ampm = get_ampm(),
+                           # current_time = get_current_time(),
+                           restaurantinfo=restaurantinfo,
+                           error_msg=error_msg)
     response = make_response(html)
     return response
 
@@ -44,68 +58,16 @@ def search_results():
         error_msg = ''
 
     restaurant = request.args.get('restaurant')
-    if restaurant is None or restaurant.split()=="":
-        restaurant=""
+    tags = request.args.get('tags')
 
-    #tags = request.args.get('tags')
-    #if tags is None:
-    #    tags = ''
-    #price = request.args.get('price')
-    #if price is None:
-    #    price = ''
-    #type = request.args.get('type')
-    #if type is None:
-    #    type = ''
-    #cuisine = request.args.get('cuisine')
-    #if cuisine is None:
-    #    cuisine = ''
-    try:
-        restaurantinfo = restaurant_search(restaurant)
-    except:
-        html = render_template('servererror.html')
-        response = make_response(html)
-        return response
-    if restaurantinfo == "stdservererr":
-        print("Standard server error")
-        response = make_response('<div><p>Standard Server Error</p></div>')
-        return response
-    print(restaurantinfo)
-    print(type(restaurantinfo))
-    html = render_template('searchresults.html', restaurantinfo=restaurantinfo)
+    restaurantinfo = restaurant_search(restaurant, tags)
+
+    html = render_template('searchform.html',
+                           restaurantinfo=restaurantinfo
+                           )
     response = make_response(html)
+
     return response
-
-    html = ""
-    for restaurant in restaurantinfo:
-        html += "<div class='list-group' style='width:1050px; height:115px; margin: auto;'>"
-        html += "<a href='resdetails?id=" +restaurant.get_restaurantid() + "' class='list-group-item list-group-item-action' >"
-        html += "<div class='d-flex w-100 justify-content-between'>"
-        html += "<h5 class='mb-1'><strong>" + restaurant.get_name() + "</strong></h5>"
-        html += "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>"
-        html += "<div>"
-        html += "<span class='fa fa-star checked'></span>"
-        html += "<span class='fa fa-star checked'></span>"
-        html += "<span class='fa fa-star checked'></span>"
-        html += "<span class='fa fa-star'></span>"
-        html += "<span class='fa fa-star'></span>"
-        html += "</div>"
-        html += "<style>"
-        html += ".checked {"
-        html += "color: #FFD700;"
-        html += "}"
-        html += "</style>"
-        html += "</div>"
-        html += "<p class='mb-1'>" + restaurant.get_address() + "</p>"
-        html += "<span class='badge badge-info badge-pill i'></span>"
-        html += "<span class='badge badge-info badge-pill ii'>" + restaurant.get_cuisine() + "</span>"
-        html += "<span class='badge badge-info badge-pill iii'>" + restaurant.get_price() + "</span>"
-        html += "<span class='badge badge-info badge-pill iv'>" +restaurant.get_type()+ "</span>"
-        html += "</a>"
-        html += "</div>"
-
-    #response = make_response(html)
-
-    #return response
 
 # Under Construction WebPages! These will be the ones that we will modify!
 # ---------------------------------------------------------
@@ -124,7 +86,7 @@ def authorized(function):
     def wrapper2(*args, **kwargs):
         if (session.get("email") is None) or not (session["email"] == "pjozuah@princeton.edu" or session["email"] == "sd20@princeton.edu"
                                                   or session["email"] == "soumyag@princeton.edu" or session["email"] == "chukwuma@princeton.edu"
-                                                  or session["email"] == "kao3@princeton.edu" or session["email"] == "anatk@princeton.edu"):
+                                                  or session["email"] == "kao3@princeton.edu"):
             html = render_template('unauthorized_login.html')
             response = make_response(html)
             return response
@@ -248,7 +210,7 @@ def login():
     session.clear()
     # CHECK IF LOGGED IN IF LOGGED IN THEN LOG OUT
     authorization_url, state = flow.authorization_url()
-    # print(authorization_url)
+    print(authorization_url)
     session["state"] = state
     return redirect(authorization_url)
     # html = render_template('login.html')
@@ -259,11 +221,9 @@ def login():
 @app.route('/callback', methods=['GET'])
 def callback():
     # Debugging
-    # print(session["state"])
-    code = request.args.get('code')
-    flow.fetch_token(code=code)
-    # flow.fetch_token(authorization_response=request.url)
-    # print(request.url)
+    print(session["state"])
+    flow.fetch_token(authorization_response=request.url)
+    print(request.url)
 
     if not session["state"] == request.args["state"]:
         abort(500)  # State does not match!

@@ -4,7 +4,7 @@
 #-----------------------------------------------------------------------
 # Rowstring[0] -> restaurantid
 # rowstring[1] -> name
-class restaurant:
+class restaurantObj:
     """class Restaurant"""
 
     # Note: Rowstring is a list of inputs that needs to go into a restaurant
@@ -15,6 +15,10 @@ class restaurant:
         self._openclose = rowstring[2]
         self._address = rowstring[3]
         self._stars = rowstring[4]
+        self._cuisine = rowstring[5]
+        self._type = rowstring[6]
+        self._price = rowstring[7]
+        self._tag = rowstring[8]
         # self._dept = rowstring[1]
         # self._course_num = rowstring[2]
         # self._area = rowstring[3]
@@ -32,7 +36,7 @@ class restaurant:
 
     # Make sure to have name
     def get_name(self):
-        """course ID"""
+        """restaurant name"""
         return self._name
 
     def get_restaurantid(self):
@@ -40,16 +44,30 @@ class restaurant:
         return self._restaurantid
 
     def get_openclose(self):
-        """restaurant ID"""
+        """restaurant open or closed"""
         return self._openclose
-    
+
     def get_address(self):
-        """restaurant ID"""
+        """restaurant address"""
         return self._address
 
     def get_stars(self):
-        """restaurant ID"""
+        """restaurant stars"""
         return self._stars
+
+
+    def get_cuisine(self):
+        """restaurant cuisine"""
+        return self._cuisine
+
+    def get_type(self):
+        """restaurant type"""
+        return self._type
+
+    def get_price(self):
+        """restaurant price"""
+        return self._price
+
 
     # def get_title(self):
     #     """title"""

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <table>
+        <tbody>
+            <h1 class="results">Restaurant Search Results</h1>
+            {% if restaurantinfo | length == 0: %}
+            {% else %}
+                {% for restaurant in restaurantinfo: %}
+                 <!--<ul class="list-group">
+                <div class="list_div"> <a href="resdetails?id={{restaurant.get_restaurantid()}}" class="list-group-item list-group-item-action align-items-center d-flex justify-content-between">
+                      <div class="flex-column">
+                        {{restaurant.get_name()}}
+                        <p><small class="text-center">{{restaurant.get_address()}}</small></p>
+                        <span class="badge badge-info badge-pill ">Open/Closed</span>
+                        <span class="badge badge-info badge-pill">Cuisine Type</span>
+                        <span class="badge badge-info badge-pill">Price</span>
+                        <span class="badge badge-info badge-pill">Dining Type</span>
+                      </div>
+                      <div class="image-parent">
+                          <img src="random_restaurant.jpg" class="img-fluid" alt="restaurant">
+                      </div>
+                    </a>
+                </div> -->
+                  <div class="list-group" style="width:1050px; height:115px; margin: auto;">
+                      <a href="resdetails?id={{restaurant.get_restaurantid()}}" class="list-group-item list-group-item-action ">
+                          <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1"><strong>{{restaurant.get_name()}}</strong></h5>
+                            <!--add stars here -- need to grab from database-->
+                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                            <div>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                          </div>
+                            <style>
+                              .checked {
+                                color: #FFD700;
+                              }
+                              </style>
+                          </div>
+                          <p class="mb-1">{{restaurant.get_address()}}</p>
+                          <span class="badge badge-info badge-pill ">Open? {{restaurant.get_openclose()}}</span>
+                          <span class="badge badge-info badge-pill">Cuisine Type {{restaurant.get_cuisine()}}</span>
+                          <span class="badge badge-info badge-pill">Price {{restaurant.get_price()}}</span>
+                          <span class="badge badge-info badge-pill">Dining Type {{restaurant.get_type()}}</span>
+                      </a>
+                  </div>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+</html>

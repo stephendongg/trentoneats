@@ -24,7 +24,7 @@ import argparse
 # loading
 
 
-from restaurant import restaurant
+from restaurant import restaurantObj
 
 
 # -----------------------------------------------------------------------
@@ -186,21 +186,35 @@ def adjust_inputs(restaurant):
     return restaurant
 
 
-def restaurant_search(input):
+def restaurant_search(input): #, tags, price, type, cuisine):
     """search through restaurants"""
     try:
-        # with connect(host='localhost', port=5432, user='rmd', password='xxx',
-        #              database="trentoneats") as connection:
+         with connect(host='localhost', port=5432, user='rmd', password='xxx',
+                      database="trentoneats") as connection:
         # dequ5ope4nuoit
-        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                     database="dequ5ope4nuoit") as connection:
+        #with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+        #             database="dequ5ope4nuoit") as connection:
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted
-                stmt_str = "SELECT restaurant_id, name, open_closed, address, stars "
+                stmt_str = "SELECT restaurant_id, name, open_closed, address, "
+                stmt_str += "stars, cuisine, type, price, tags "
                 stmt_str += "FROM restaurants "
-                stmt_str += "WHERE LOWER (name) LIKE LOWER ('%" + \
-                    input + "%') "
+                stmt_str += "WHERE LOWER(name) LIKE '%%';"
+                #stmt_str += '%" + input + "%' "
+
+
+
+                # only checks for single value now"
+                #stmt_str += "AND LOWER (tags) LIKE LOWER ('%" + \
+                #    tags + "%') "
+                #stmt_str += "AND LOWER (cuisine) LIKE LOWER ('%" + \
+                #    cuisine + "%') "
+                #stmt_str += "AND LOWER (type) LIKE LOWER ('%" + \
+                #    type + "%') "
+                #stmt_str += "AND LOWER (price) LIKE LOWER ('%" + \
+                #    price + "%') "
+
                 #stmt_str += 'WHERE name LIKE ? ESCAPE "\\"'
 
                 # stmt_str = "SELECT classid, dept, "
@@ -219,9 +233,13 @@ def restaurant_search(input):
 
                 # stmt_str += "ORDER BY dept,"
                 # stmt_str += "coursenum, classid"
-
                 cursor.execute(stmt_str)
 
+                print(stmt_str)
+                input = '%' + input.lower() + '%'
+                print(input)
+                #cursor.execute(stmt_str, [input])
+                #cursor.execute(stmt_str, ["'bbq'"])
                 row = cursor.fetchone()
 
                 # course list
@@ -229,16 +247,26 @@ def restaurant_search(input):
 
                 # rowstringlist this rowstring will contain all of the necessary values
 
-                rowstring = ["", "", "", "", ""]
+                rowstring = ["", "", "", "", "", "", "", "", ""]
 
                 # This iwll parse through the rows and get all of the necsary values
-                while row is not None:
-                    rowstring[0] = str(row[0])
-                    rowstring[1] = str(row[1])
-                    rowstring[2] = str(row[2])
-                    rowstring[3] = str(row[3])
-                    rowstring[4] = str(row[4])
-                    restaurants.append(restaurant(rowstring))
+                while row:
+                    print(row)
+                    print(len(row))
+                    rowstring[0] = row[0]
+                    rowstring[1] = row[1]
+                    rowstring[2] = row[2]
+                    rowstring[3] = row[3]
+                    rowstring[4] = row[4]
+                    rowstring[5] = row[5]
+                    rowstring[6] = row[6]
+                    rowstring[7] = row[7]
+                    rowstring[8] = row[8]
+                    print("Check 1")
+                    res = restaurantObj(rowstring)
+                    print("Check 2")
+                    restaurants.append(res)
+                    print("Check 3")
                     row = cursor.fetchone()
 
                 return restaurants
@@ -254,15 +282,16 @@ def restaurant_search(input):
 def get_restaurant_info(res_id):
     """find all information on one restaurant"""
     try:
-        # with connect(host='localhost', port=5432, user='rmd', password='xxx',
-        #              database="trentoneats") as connection:
-        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                     database="dequ5ope4nuoit") as connection:
+         with connect(host='localhost', port=5432, user='rmd', password='xxx',
+                      database="trentoneats") as connection:
+        #with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+        #             database="dequ5ope4nuoit") as connection:
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted
                 stmt_str = "SELECT name, address, hours, open_closed, menu, "
-                stmt_str += "media, tags, review_count, stars, image FROM restaurants "
+                stmt_str += "media, tags, review_count, stars, image, "
+                stmt_str += "price, cuisine, type FROM restaurants "
                 stmt_str += "WHERE restaurant_id = '" + res_id + "'; "
 
                 cursor.execute(stmt_str)
@@ -285,6 +314,9 @@ def get_restaurant_info(res_id):
                     info_obj['review_count'] = str(row[7])
                     info_obj['stars'] = str(row[8])
                     info_obj['image'] = str(row[9])
+                    info_obj['price'] = str(row[10])
+                    info_obj['cuisine'] = str(row[11])
+                    info_obj['type'] = str(row[12])
 
                 return info_obj
 

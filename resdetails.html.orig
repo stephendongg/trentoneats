@@ -24,7 +24,7 @@
                     <h4 class="resDetails" id="SundayHours"></h4>
                 </div>
                 <div class="col-sm-6 px-3">
-                    <h4 class="resDetails"><strong id="OpenClose"></strong></h4>
+                    <h4 class="resDetails"><strong>Open?: </strong> {{info['open_closed']}}</h4>
                     <h4 class="resDetails"><strong>Media: </strong>{{info['media']}}</h4>
                     <h4 class="resDetails"><strong>Review Count: </strong> {{info['review_count']}}</h4>
                     <h4 class="resDetails"><strong>Stars: </strong> {{info['stars']}}</h4>
@@ -49,25 +49,6 @@
     }
     myFunction();
 
-</script>
-
-<!--Function to get whether restaurant is open or closed-->
-<script>
-    'use strict';
-
-
-    function statusFunc() {
-      let status = "{{ info['open_closed'] }}";
-      let node = document.getElementById("OpenClose");
-      if (status == "True"){
-        node.innerHTML = "Open";
-      }
-      else {
-        node.innerHTML = "Closed";
-      }
-    }
-
-    statusFunc();
 </script>
 
 <script>
@@ -112,7 +93,6 @@
     }
 
 </script>
-
 
 {% include 'footer.html' %}
 {% endblock %}
