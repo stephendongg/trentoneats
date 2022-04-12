@@ -200,45 +200,12 @@ def restaurant_search(input): #, tags, price, type, cuisine):
                 stmt_str = "SELECT restaurant_id, name, open_closed, address, "
                 stmt_str += "stars, cuisine, type, price, tags "
                 stmt_str += "FROM restaurants "
-                stmt_str += "WHERE LOWER(name) LIKE '%%';"
-                #stmt_str += '%" + input + "%' "
-
-
-
-                # only checks for single value now"
-                #stmt_str += "AND LOWER (tags) LIKE LOWER ('%" + \
-                #    tags + "%') "
-                #stmt_str += "AND LOWER (cuisine) LIKE LOWER ('%" + \
-                #    cuisine + "%') "
-                #stmt_str += "AND LOWER (type) LIKE LOWER ('%" + \
-                #    type + "%') "
-                #stmt_str += "AND LOWER (price) LIKE LOWER ('%" + \
-                #    price + "%') "
-
-                #stmt_str += 'WHERE name LIKE ? ESCAPE "\\"'
-
-                # stmt_str = "SELECT classid, dept, "
-                # stmt_str += "coursenum, area, title "
-                # stmt_str += "FROM classes, courses, "
-                # stmt_str += "crosslistings "
-                # stmt_str += "WHERE courses.courseid = "
-                # stmt_str += "crosslistings.courseid "
-                # stmt_str += "AND courses.courseid = "
-                # stmt_str += "classes.courseid "
-                # stmt_str += "AND classes.courseid = "
-                # stmt_str += "crosslistings.courseid "
-
-# here will be where restaurant is diffenret
-                #stmt_str += 'WHERE name LIKE ' + input
-
-                # stmt_str += "ORDER BY dept,"
-                # stmt_str += "coursenum, classid"
-                cursor.execute(stmt_str)
+                stmt_str += "WHERE LOWER(name) ILIKE %s"
 
                 print(stmt_str)
                 input = '%' + input.lower() + '%'
                 print(input)
-                #cursor.execute(stmt_str, [input])
+                cursor.execute(stmt_str, [input])
                 #cursor.execute(stmt_str, ["'bbq'"])
                 row = cursor.fetchone()
 

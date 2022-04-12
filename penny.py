@@ -61,6 +61,7 @@ def search_results():
     #    cuisine = ''
     try:
         restaurantinfo = restaurant_search(restaurant)
+        print(restaurantinfo)
     except:
         html = render_template('servererror.html')
         response = make_response(html)

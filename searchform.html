@@ -183,10 +183,11 @@
       'use strict';
 
       $("a").attr("target", "_blank");
-      // $('select').selectpicker();
+      $('select').selectpicker();
 
       function handleResponse(response)
        {
+          console.log(response)
           $('#restaurantsDiv').html(response);
        }
 
