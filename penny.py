@@ -11,7 +11,7 @@ from flask import render_template
 from search import restaurant_search, get_restaurant_info
 from add_restaurant import add_restaurant
 
-from reviews import add_review
+from reviews import add_review, review_search
 import datetime
 
 import os
@@ -68,7 +68,7 @@ def search_results():
                            restaurantinfo=restaurantinfo
                            )
     response = make_response(html)
-
+    
     return response
 
 # ---------------------------------------------------------
@@ -136,6 +136,7 @@ def resdetails():
     id = request.args.get('id')
     # Info currently is: 
     info = get_restaurant_info(id)
+    reviews = review_search(id)
     # info_obj['name'] = str(row[0])
     # info_obj['address'] = str(row[1])
     # info_obj['hours'] = str(row[2])
@@ -163,12 +164,16 @@ def resdetails():
             # Gotta figure out if its customer taht we still want to link for placeolder
             # Currently, placeholder reviews are all -10
             #NEed Cusomter Ids sorted out.
-            add_review(-10, -10, id, datetime.datetime.now(), text)
+            add_review(id, datetime.datetime.now(), text)
             #return redirect(url_for('review.dashboard'))
+            reviews = review_search(id)
         #flash(error)
         #return render_template('review/create.html')
 
-    html = render_template('resdetails.html', info=info)
+    
+
+    html = render_template('resdetails.html', info=info,
+                                            reviews=reviews)
     response = make_response(html)
     return response
 

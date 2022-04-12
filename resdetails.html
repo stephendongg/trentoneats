@@ -51,6 +51,15 @@
   </form>
 </div>
 {% endblock %}
+{% for review in reviews %}
+  <blockquote class="blockquote">
+    <p class="mb-0">{{ review[1] }}</p>
+      <footer class="blockquote-footer">
+        <!-- From @{{ review[0].split("@")[0] }} -->
+        From @{{ review[0] }}
+      </footer>
+  </blockquote>
+{% endfor %}
 
 
 <!--Javascript code to add restaurant image to details page -->

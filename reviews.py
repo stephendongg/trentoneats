@@ -50,9 +50,12 @@ def review_search(input):
                 #     input + "%') "
 
                 # Review Search 
-                stmt_str = "SELECT customer_id, text "
+                stmt_str = "SELECT date, text, review_id "
                 stmt_str += "FROM reviews "
-                stmt_str += "WHERE restaurant_id = " + input
+                stmt_str += "WHERE restaurant_id = '" + input + "';"
+                # stmt_str = "SELECT r.id, date, text, restaurant_id "
+                # stmt_str += "FROM reviews r JOIN restaurants u ON r.restaurant_id = u.restaurant_id "
+                # stmt_str += "WHERE restaurant_id = " + input
 
 
                 cursor.execute(stmt_str)
@@ -64,15 +67,16 @@ def review_search(input):
 
                 # rowstringlist this rowstring will contain all of the necessary values
 
-                rowstring = ["", ""]
+                rowstring = ["", "", ""]
 
                 # This iwll parse through the rows and get all of the necsary values
                 while row is not None:
                     rowstring[0] = str(row[0])
                     rowstring[1] = str(row[1])
+                    rowstring[2] = str(row[2])
                     reviews.append(rowstring)
                     row = cursor.fetchone()
-
+                
                 return reviews
 
     # Normally exit status 0.
@@ -86,7 +90,8 @@ def review_search(input):
 
 # def add_review(review_id, customer_id, restaurant_id,
 # date, text, price, taste, authenticity, coolness, overall):
-def add_review(review_id, customer_id, restaurant_id, date, text):
+# def add_review(review_id, customer_id, restaurant_id, date, text):
+def add_review(restaurant_id, date, text):
 # NEED TO ADJUST INSERTS? 
     # stmt_str = """
     # "INSERT INTO reviews (review_id, customer_id, restaurant_id, date ,
@@ -97,10 +102,9 @@ def add_review(review_id, customer_id, restaurant_id, date, text):
     # stmt_str += text + "', '" + price + "', '" + taste + "', '" 
     # stmt_str += authenticity  +  "', '"  + coolness + "', '" + overall + "');"
     stmt_str = """
-    INSERT INTO reviews (review_id, customer_id, restaurant_id, date,
+    INSERT INTO reviews (restaurant_id, date,
     text) 
     VALUES  ( '"""
-    stmt_str += str(review_id) + "', '" + str(customer_id) + "', '" 
     stmt_str += str(restaurant_id) + "', '" + str(date) + "', '" + text  + "');"
 
     try:
