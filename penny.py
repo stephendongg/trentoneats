@@ -44,7 +44,7 @@ def search_results():
         error_msg = ''
 
     restaurant = request.args.get('restaurant')
-    if restaurant is None or restaurant.split()=="":
+    if (restaurant is None) or (restaurant.split()==""):
         restaurant=""
 
     #tags = request.args.get('tags')
@@ -69,43 +69,9 @@ def search_results():
         print("Standard server error")
         response = make_response('<div><p>Standard Server Error</p></div>')
         return response
-    print(restaurantinfo)
-    print(type(restaurantinfo))
     html = render_template('searchresults.html', restaurantinfo=restaurantinfo)
     response = make_response(html)
     return response
-
-    html = ""
-    for restaurant in restaurantinfo:
-        html += "<div class='list-group' style='width:1050px; height:115px; margin: auto;'>"
-        html += "<a href='resdetails?id=" +restaurant.get_restaurantid() + "' class='list-group-item list-group-item-action' >"
-        html += "<div class='d-flex w-100 justify-content-between'>"
-        html += "<h5 class='mb-1'><strong>" + restaurant.get_name() + "</strong></h5>"
-        html += "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>"
-        html += "<div>"
-        html += "<span class='fa fa-star checked'></span>"
-        html += "<span class='fa fa-star checked'></span>"
-        html += "<span class='fa fa-star checked'></span>"
-        html += "<span class='fa fa-star'></span>"
-        html += "<span class='fa fa-star'></span>"
-        html += "</div>"
-        html += "<style>"
-        html += ".checked {"
-        html += "color: #FFD700;"
-        html += "}"
-        html += "</style>"
-        html += "</div>"
-        html += "<p class='mb-1'>" + restaurant.get_address() + "</p>"
-        html += "<span class='badge badge-info badge-pill i'></span>"
-        html += "<span class='badge badge-info badge-pill ii'>" + restaurant.get_cuisine() + "</span>"
-        html += "<span class='badge badge-info badge-pill iii'>" + restaurant.get_price() + "</span>"
-        html += "<span class='badge badge-info badge-pill iv'>" +restaurant.get_type()+ "</span>"
-        html += "</a>"
-        html += "</div>"
-
-    #response = make_response(html)
-
-    #return response
 
 # Under Construction WebPages! These will be the ones that we will modify!
 # ---------------------------------------------------------

@@ -251,8 +251,6 @@ def restaurant_search(input): #, tags, price, type, cuisine):
 
                 # This iwll parse through the rows and get all of the necsary values
                 while row:
-                    print(row)
-                    print(len(row))
                     rowstring[0] = row[0]
                     rowstring[1] = row[1]
                     rowstring[2] = row[2]
@@ -262,11 +260,8 @@ def restaurant_search(input): #, tags, price, type, cuisine):
                     rowstring[6] = row[6]
                     rowstring[7] = row[7]
                     rowstring[8] = row[8]
-                    print("Check 1")
                     res = restaurantObj(rowstring)
-                    print("Check 2")
                     restaurants.append(res)
-                    print("Check 3")
                     row = cursor.fetchone()
 
                 return restaurants
