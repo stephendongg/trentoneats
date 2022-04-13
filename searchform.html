@@ -19,7 +19,7 @@
     </div>
     <div class="row pt-0 px-3">
       <div class = "col-sm-3 p-3">
-         <input class="form-control" type="text" id="restaurantInput" placeholder="Enter a restaurant name here!">
+         <input class="form-control rest_search" type="text" id="restaurantInput" placeholder="Enter a restaurant name here!">
        </div>
     </div>
     <br>
@@ -36,9 +36,6 @@
         <div class="collapsible-content">
           <div class="content-inner">
             <!--cuisine dropdown -->
-            <script>
-              $('select').selectpicker();
-            </script>
             <div id="cuisine_select"> Select a Cuisine: </div>
             <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
@@ -160,6 +157,10 @@
         </form> -->
     </div>
 
+    <!-- CDNs for font-awesome, bootstrap, JQuery -->
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 
     <!--{% include 'searchresults.html' %} -->
     <div class="row">
@@ -183,7 +184,6 @@
       'use strict';
 
       $("a").attr("target", "_blank");
-      $('select').selectpicker();
 
       function handleResponse(response)
        {

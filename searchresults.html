@@ -30,32 +30,31 @@
                           <span class="badge badge-info badge-pill ii">{{restaurant.get_cuisine()}}</span>
                           <span class="badge badge-info badge-pill iii">{{restaurant.get_price()}}</span>
                           <span class="badge badge-info badge-pill iv">{{restaurant.get_type()}}</span>
+
                       </a>
                   </div>
 
 
-<!--Function to get whether restaurant is open or closed-->
-                <script>
-                  'use strict';
-
-
-                  function statusFunc() {
-                    let status = "{{ restaurant.get_openclose() }}";
-                    // console.log(status);
-                    let node = document.getElementsByClassName("badge");
-                    let length = node.length;
-                    let i = node.length - 4;
-                    if (status == "True"){
-                      node[i].innerHTML = "Open";
+                  <!--Function to get whether restaurant is open or closed-->
+                  <script>
+                    'use strict';
+                    function statusFunc() {
+                      let status = "{{restaurant.get_openclose()}}";
+                      console.log(status);
+                      let node = document.getElementsByClassName("badge");
+                      let length = node.length;
+                      let i = node.length - 4;
+                      if (status == "True"){
+                        node[i].innerHTML = "Open";
+                      }
+                      else {
+                        node[i].innerHTML = "Closed";
+                      }
                     }
-                    else {
-                      node[i].innerHTML = "Closed";
-                    }
-                  }
 
-                  statusFunc();
+                    statusFunc();
 
-                </script>
+                  </script>
 
                 {% endfor %}
             {% endif %}

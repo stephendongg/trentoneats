@@ -24,7 +24,7 @@ import argparse
 # loading
 
 
-from restaurant import restaurantObj
+from restaurant import restaurant
 
 
 # -----------------------------------------------------------------------
@@ -189,11 +189,11 @@ def adjust_inputs(restaurant):
 def restaurant_search(input): #, tags, price, type, cuisine):
     """search through restaurants"""
     try:
-         with connect(host='localhost', port=5432, user='rmd', password='xxx',
-                      database="trentoneats") as connection:
+         #with connect(host='localhost', port=5432, user='rmd', password='xxx',
+        #              database="trentoneats") as connection:
         # dequ5ope4nuoit
-        #with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-        #             database="dequ5ope4nuoit") as connection:
+        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+                     database="dequ5ope4nuoit") as connection:
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted
@@ -227,7 +227,7 @@ def restaurant_search(input): #, tags, price, type, cuisine):
                     rowstring[6] = row[6]
                     rowstring[7] = row[7]
                     rowstring[8] = row[8]
-                    res = restaurantObj(rowstring)
+                    res = restaurant(rowstring)
                     restaurants.append(res)
                     row = cursor.fetchone()
 
@@ -244,10 +244,10 @@ def restaurant_search(input): #, tags, price, type, cuisine):
 def get_restaurant_info(res_id):
     """find all information on one restaurant"""
     try:
-         with connect(host='localhost', port=5432, user='rmd', password='xxx',
-                      database="trentoneats") as connection:
-        #with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-        #             database="dequ5ope4nuoit") as connection:
+         #with connect(host='localhost', port=5432, user='rmd', password='xxx',
+        #              database="trentoneats") as connection:
+        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+                     database="dequ5ope4nuoit") as connection:
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted

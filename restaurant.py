@@ -4,7 +4,7 @@
 #-----------------------------------------------------------------------
 # Rowstring[0] -> restaurantid
 # rowstring[1] -> name
-class restaurantObj:
+class restaurant:
     """class Restaurant"""
 
     # Note: Rowstring is a list of inputs that needs to go into a restaurant
