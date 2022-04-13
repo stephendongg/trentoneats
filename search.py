@@ -202,9 +202,9 @@ def restaurant_search(input): #, tags, price, type, cuisine):
                 stmt_str += "FROM restaurants "
                 stmt_str += "WHERE LOWER(name) ILIKE %s"
 
-                print(stmt_str)
+                #print(stmt_str)
                 input = '%' + input.lower() + '%'
-                print(input)
+                #print(input)
                 cursor.execute(stmt_str, [input])
                 #cursor.execute(stmt_str, ["'bbq'"])
                 row = cursor.fetchone()

@@ -7,7 +7,7 @@
             {% else %}
                 {% for restaurant in restaurantinfo: %}
                   <div class="list-group" style="width:1050px; height:115px; margin: auto;">
-                      <a href="resdetails?id="+{{restaurant.get_restaurantid()}} class_="list-group-item list-group-item-action "/>
+                      <a href="resdetails?id={{restaurant.get_restaurantid()}}" class="list-group-item list-group-item-action">
                           <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1"><strong>{{restaurant.get_name()}}</strong></h5>
                             <!--add stars here ; need to grab from database-->
