@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
     <table>
+      <script>
+        var index = 0;
+      </script>
         <tbody>
             <h1 class="results"> Restaurant Search Results</h1>
             {% if restaurantinfo | length == 0: %}
@@ -41,26 +44,49 @@
                     function statusFunc() {
                       let status = "{{restaurant.get_openclose()}}";
                       console.log(status);
-                      let node = document.getElementsByClassName("badge");
-                      let length = node.length;
-                      let i = node.length - 4;
+                      let node = document.getElementsByClassName("badge badge-info badge-pill i");
                       if (status == "True"){
-                        node[i].innerHTML = "Open";
+                        node[index].innerHTML = "Open";
                       }
                       else {
-                        node[i].innerHTML = "Closed";
+                          node[index].innerHTML = "Closed";
                       }
+                      index++;
                     }
+                    
 
                     statusFunc();
 
                   </script>
 
+                  <!--Function to change colour depending on whether open or closed-->
+
+                  <script>
+                    'use strict';
+
+                    $('.badge').each(function(){
+                      if($(this).text() == 'Open'){
+                        $(this).css({'background-color' : '#32CD32'})
+                      }
+                      if($(this).text() == 'Closed'){
+                        $(this).css({'background-color' : '#D22B2B'})
+                      }
+
+
+                    });
+                  </script>
+
+
+
                 {% endfor %}
+                
             {% endif %}
+            
 
         </tbody>
     </table>
+
+
 
 
 </html>
