@@ -14,19 +14,7 @@
                           <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1"><strong>{{restaurant.get_name()}}</strong></h5>
                             <!--add stars here ; need to grab from database-->
-                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-                            <div>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                          </div>
-                            <style>
-                              .checked {
-                                color: #FFD700;
-                              }
-                              </style>
+                            <div class="Stars" style="--rating: {{restaurant.get_stars()}};" aria-label="Rating of this restaurant is {{restaurant.get_stars()}} out of 5."></div>
                           </div>
                           <p class="mb-1">{{restaurant.get_address()}}</p>
                           <span class="badge badge-info badge-pill i"></span>
