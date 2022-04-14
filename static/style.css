@@ -118,7 +118,7 @@ h2.addItHere{
     font-family: "Playfair Display", "Georgia", serif;
     text-align: center; 
 }
-h4.resDetails{
+.resDetails{
     font-family: "Courier", "Baskerville", monospace;
     text-align: center;
 }
@@ -299,4 +299,53 @@ h1.results{
     margin-left: auto;
     margin-right: auto;
 }
+/* styling for review carousel */
+.carousel-inner {
+    width : 100%;
+    max-height: 100%;
+    position : absolute ; 
+}
+.reviews {
+    width : 900px;
+    margin : 50px auto ;
 
+}
+.carousel-item {
+    width : 100px; 
+    height : 150px;
+    overflow : hidden ;
+    background-color : cornsilk ;
+    border-radius : 5px;
+    margin : 50px auto ;
+    position : relative ;
+    box-shadow : 0 0 10px -2px #ddd ;
+}
+.carousel-item :active {
+    width : 100px; 
+}
+.carousel-item img { 
+    width : 100px;
+    height : 100px; 
+    text-align : center ;
+    float : left ; 
+    margin : 25px; 
+  }
+.carousel-item p {
+    float : left ; 
+    width : 420px;
+    clear : right ;
+    text-align : justify ;
+    margin : 25px 0 10px 0;
+    font-size : 14px ; 
+    color : #aaa ;
+    line-height : 1.2em
+    
+  }
+.carousel-item h7 { 
+    float : left ; 
+    width: 200px; 
+    font-size : 14px ; 
+    color : #999 ;
+    font-weight : bold ;
+    font-style : italic ;
+  }

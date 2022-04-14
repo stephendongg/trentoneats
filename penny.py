@@ -6,7 +6,7 @@
 #from time import localtime, asctime, strftime
 from urllib import response
 from flask import Flask, request, make_response, redirect, url_for, session
-from flask import render_template
+from flask import render_template, abort
 # sfrom database import search
 from search import restaurant_search, get_restaurant_info
 from add_restaurant import add_restaurant
@@ -40,11 +40,13 @@ def search_form():
     restaurantinfo = restaurant_search(
         restaurant)  # Exception handling omitted
 
+    unique_id = session.get('google_id')
+
     html = render_template('searchform.html',
                            #ampm = get_ampm(),
                            # current_time = get_current_time(),
                            restaurantinfo=restaurantinfo,
-                           error_msg=error_msg)
+                           error_msg=error_msg, id=unique_id)
     response = make_response(html)
     return response
 
@@ -60,9 +62,10 @@ def search_results():
     restaurant = request.args.get('restaurant')
 
     restaurantinfo = restaurant_search(restaurant)
+    unique_id = session.get('google_id')
 
     html = render_template('searchform.html',
-                           restaurantinfo=restaurantinfo
+                           restaurantinfo=restaurantinfo, id=unique_id
                            )
     response = make_response(html)
 
@@ -74,7 +77,8 @@ def search_results():
 
 @app.route('/about', methods=['GET'])
 def about():
-    html = render_template('about.html')
+    unique_id = session.get('google_id')
+    html = render_template('about.html', id=unique_id)
     response = make_response(html)
     return response
 
@@ -83,10 +87,11 @@ def about():
 
 def authorized(function):
     def wrapper2(*args, **kwargs):
+        unique_id = session.get('google_id')
         if (session.get("email") is None) or not (session["email"] == "pjozuah@princeton.edu" or session["email"] == "sd20@princeton.edu"
                                                   or session["email"] == "soumyag@princeton.edu" or session["email"] == "chukwuma@princeton.edu"
                                                   or session["email"] == "kao3@princeton.edu" or session["email"] == "anatk@princeton.edu"):
-            html = render_template('unauthorized_login.html')
+            html = render_template('unauthorized_login.html', id=unique_id)
             response = make_response(html)
             return response
         else:
@@ -98,7 +103,8 @@ def authorized(function):
 @app.route('/joinrestaurant', methods=['GET'])
 @authorized
 def joinrestaurant():
-    html = render_template('joinrestaurant.html')
+    unique_id = session.get('google_id')
+    html = render_template('joinrestaurant.html', id=unique_id)
     response = make_response(html)
     return response
 
@@ -121,7 +127,8 @@ def addrestaurant():
                    restaurantMedia=restaurantMedia,
                    restaurantTags=restaurantTags,
                    restaurantImage=restaurantImage)
-    html = render_template('joinrestaurant.html')
+    unique_id = session.get('google_id')
+    html = render_template('joinrestaurant.html', id=unique_id)
     response = make_response(html)
     return response
 
@@ -133,7 +140,8 @@ def resdetails():
     name = request.args.get('name')
     id = request.args.get('id')
     info = get_restaurant_info(id)
-    html = render_template('resdetails.html', info=info)
+    unique_id = session.get('google_id')
+    html = render_template('resdetails.html', info=info, id=unique_id)
     response = make_response(html)
     return response
 
@@ -169,7 +177,7 @@ def login_is_required(function):
 @app.route('/login', methods=['GET'])
 def login():
 
-    session.clear()
+    # session.clear()
     # CHECK IF LOGGED IN IF LOGGED IN THEN LOG OUT
     authorization_url, state = flow.authorization_url()
     # print(authorization_url)
@@ -207,11 +215,24 @@ def callback():
     session["google_id"] = id_info.get("sub")
     session["name"] = id_info.get("name")
     session["email"] = id_info.get("email")
-    return redirect("/protected_area")
+
+    unique_id = session.get('google_id')
+    restaurant = ""
+    restaurantinfo = restaurant_search(
+        restaurant)  # Exception handling omitted
+    html = render_template('searchform.html',
+                           #ampm = get_ampm(),
+                           # current_time = get_current_time(),
+                           restaurantinfo=restaurantinfo,
+                           id=unique_id)
+    response = make_response(html)
+    return response
+    # return redirect("/")  # ,id=unique_id)
 
 
 @app.route('/logout', methods=['GET'])
 def logout():
+    session.pop('name', None)
     session.clear()
     return redirect("/")
 
@@ -222,3 +243,9 @@ def protected_area():
     return redirect("/")
     # return f"Thank you for logging in {session['name']}! \
     #  <br/> <a href='/logout'><button>Logout</button></a>"
+
+
+def authenticate():
+    if 'google_id' not in session:
+        abort(redirect(url_for('login')))
+    return session.get('name')

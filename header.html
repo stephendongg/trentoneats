@@ -1,8 +1,12 @@
 <!-- Will The Header Be a sort of Navigation Bar? WOP -->
 <hr>
-Welcome to <strong>Trenton Eats Local!</strong> 
- <a href="about">about</a> 
- <a href="searchform">home</a>
- <a href="joinrestaurant">I Am A Restaurant </a>
- <a href="login">login</a>
-<hr> 
+Welcome to <strong>Trenton Eats Local!</strong>
+<a href="about">about</a>
+<a href="searchform">home</a>
+<a href="joinrestaurant">I Am A Restaurant </a>
+{% if id not in session %}
+<a href="login">login</a>
+{% else %}
+<a href="logout">logout</a>
+{% endif %}
+<hr>
