@@ -36,11 +36,18 @@
                     <h4 class="resDetails" id="SaturdayHours"></h4>
                     <h4 class="resDetails" id="SundayHours"></h4>
                 </div>
+<<<<<<< HEAD
+=======
                 <div class="col-sm-6 px-3">
-                    <h4 class="resDetails"><strong>Cuisine: </strong> {{info['cuisine']}}</h4>
-                    <h4 class="resDetails"><strong>Price: </strong> {{info['price']}}</h4>
-                    <h4 class="resDetails"><strong>Type: </strong> {{info['type']}}</h4>
+                    <h4 class="resDetails"><strong id="OpenClose"></strong></h4>
+                    <h4 class="resDetails"><strong>Media: </strong>{{info['media']}}</h4>
+                    <h4 class="resDetails"><strong>Review Count: </strong> {{info['review_count']}}</h4>
+                    <h4 class="resDetails"><strong>Stars: </strong> {{info['stars']}}</h4>
+                    <h4 class="resDetails"><strong>Stars: </strong> {{info['cuisine']}}</h4>
+                    <h4 class="resDetails"><strong>Stars: </strong> {{info['price']}}</h4>
+                    <h4 class="resDetails"><strong>Stars: </strong> {{info['type']}}</h4>
                 </div>
+>>>>>>> ajax
             </div>
         </div>
     </div>
@@ -62,7 +69,7 @@
           <li data-target="#demo" data-slide-to="1"></li>
           <li data-target="#demo" data-slide-to="2"></li>
         </ul>
-
+      
         <!-- The slideshow; this is what to fill in with reviews table -->
         <div class="reviews">
         <div class="carousel-inner">
@@ -82,7 +89,7 @@
             <h7>Anonymous user</h7>
           </div>
         </div>
-
+      
         <!-- Left and right controls -->
         <a class="carousel-control-prev" href="#demo" data-slide="prev">
           <span class="carousel-control-prev-icon"></span>
@@ -90,7 +97,7 @@
         <a class="carousel-control-next" href="#demo" data-slide="next">
           <span class="carousel-control-next-icon"></span>
         </a>
-
+      
       </div>
     </div>
 </div>
@@ -114,27 +121,27 @@
 
 </script>
 
-
+  
 <!--Javascript code to remove link if there is no media/menu-->
-<script type="text/javascript">
+<script type="text/javascript"> 
 
     function myFunction(){
         if("{{info['media']}}" == "None") {
             document.getElementById('mediaLink').innerHTML = "";
         }
-
+        
     }
     myFunction();
 
 </script>
 
-<script type="text/javascript">
+<script type="text/javascript"> 
 
     function myFunction(){
         if("{{info['menu']}}" == "None") {
             document.getElementById('menuLink').innerHTML = "";
         }
-
+        
     }
     myFunction();
 

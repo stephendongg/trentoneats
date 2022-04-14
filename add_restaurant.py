@@ -12,16 +12,18 @@ import psycopg2
 #-----------------------------------------------------------------------
 
 # Current issue: figuring out how to know what to put in for open
-
 def add_restaurant(restaurantName, restaurantAddress, restaurantHours,
-restaurantMenu, restaurantMedia, restaurantTags, restaurantImage):
+restaurantMenu, restaurantMedia, restaurantTags, cuisine, type, price, restaurantImage):
     stmt_str = """
     INSERT INTO restaurants (name, address, hours,
-    open_closed, menu, media, tags, review_count, stars, image)
+    open_closed, menu, media, tags, review_count, stars, cuisine, type, price, image)
     VALUES ( '"""
     stmt_str += restaurantName + "','" + restaurantAddress + "','"
     stmt_str += restaurantHours + "', 'TRUE', '" + restaurantMenu + "', '"
-    stmt_str += restaurantMedia + "', '" + restaurantTags + "', '0', '0', '" + restaurantImage + "');"
+    stmt_str += restaurantMedia + "', '" + restaurantTags + "', '0', '0', '"
+    stmt_str += restaurantImage + "', "
+    stmt_str += "'" + ", ".join(cuisine) + "', '" + ", ".join(type)
+    stmt_str += "', '" + price + "');"
 
     try:
         # with connect(

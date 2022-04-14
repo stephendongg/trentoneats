@@ -25,6 +25,9 @@ def create_tables():
             tags VARCHAR(255),
             review_count INTEGER,
             stars FLOAT NOT NULL,
+            cuisine VARCHAR(255),
+            type VARCHAR(255),
+            price VARCHAR(255),
             image VARCHAR(225)
         )
         """,

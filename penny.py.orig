@@ -30,11 +30,27 @@ app.secret_key = "dsghabkjcn1iy2u6gdoyq"
 @app.route('/', methods=['GET'])
 @app.route('/searchform', methods=['GET'])
 def search_form():
+<<<<<<< HEAD
+
     error_msg = request.args.get('error_msg')
     if error_msg is None:
         error_msg = ''
+
+    # Temp  ------- initial restaurant value
+    restaurant = ""
+    restaurantinfo = restaurant_search(
+        restaurant)  # Exception handling omitted
+
     unique_id = session.get('google_id')
-    html = render_template('searchform.html', error_msg=error_msg, id=unique_id)
+
+    html = render_template('searchform.html',
+                           #ampm = get_ampm(),
+                           # current_time = get_current_time(),
+                           restaurantinfo=restaurantinfo,
+                           error_msg=error_msg, id=unique_id)
+=======
+    html = render_template('searchform.html')
+>>>>>>> ajax
     response = make_response(html)
     return response
 
@@ -48,9 +64,30 @@ def search_results():
         error_msg = ''
 
     restaurant = request.args.get('restaurant')
+<<<<<<< HEAD
+
+    restaurantinfo = restaurant_search(restaurant)
+    unique_id = session.get('google_id')
+
+    html = render_template('searchform.html',
+                           restaurantinfo=restaurantinfo, id=unique_id
+                           )
+=======
     if (restaurant is None) or (restaurant.split()==""):
         restaurant=""
 
+    #tags = request.args.get('tags')
+    #if tags is None:
+    #    tags = ''
+    #price = request.args.get('price')
+    #if price is None:
+    #    price = ''
+    #type = request.args.get('type')
+    #if type is None:
+    #    type = ''
+    #cuisine = request.args.get('cuisine')
+    #if cuisine is None:
+    #    cuisine = ''
     try:
         restaurantinfo = restaurant_search(restaurant)
     except:
@@ -61,9 +98,8 @@ def search_results():
         print("Standard server error")
         response = make_response('<div><p>Standard Server Error</p></div>')
         return response
-    unique_id = session.get('google_id')
-    html = render_template('searchresults.html', restaurantinfo=restaurantinfo,
-                            id=unique_id)
+    html = render_template('searchresults.html', restaurantinfo=restaurantinfo)
+>>>>>>> ajax
     response = make_response(html)
     return response
 
@@ -126,6 +162,17 @@ def addrestaurant():
         restaurantMedia = ""
     restaurantTags = request.args.get('restaurantTags')
     restaurantImage = request.args.get('restaurantImage')
+<<<<<<< HEAD
+    add_restaurant(restaurantName=restaurantName,
+                   restaurantAddress=restaurantAddress,
+                   restaurantHours=restaurantHours,
+                   restaurantMenu=restaurantMenu,
+                   restaurantMedia=restaurantMedia,
+                   restaurantTags=restaurantTags,
+                   restaurantImage=restaurantImage)
+    unique_id = session.get('google_id')
+    html = render_template('joinrestaurant.html', id=unique_id)
+=======
 
     if restaurantTags is None or restaurantTags.split()=="":
         restaurantTags = ""
@@ -160,8 +207,8 @@ def addrestaurant():
         type = type,
         price = price,
         restaurantImage = restaurantImage)
-    unique_id = session.get('google_id')
-    html = render_template('joinrestaurant.html', id=unique_id)
+    html = render_template('joinrestaurant.html')
+>>>>>>> ajax
     response = make_response(html)
     return response
 
