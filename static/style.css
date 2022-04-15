@@ -320,6 +320,20 @@ h1.results{
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+.Stars_Deets {
+    --percent: calc(var(--rating) / 5 * 100%);
+    display: inline-block;
+    font-size: 35px;
+    font-family: Times;
+    line-height: 1;
+}
+.Stars_Deets::before {
+    content: '★★★★★';
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
 /* styling for review carousel */
 .carousel-inner {
