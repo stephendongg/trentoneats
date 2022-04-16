@@ -1,82 +1,80 @@
 <!DOCTYPE html>
 <html>
     <table>
+      <script>
+        var index = 0;
+      </script>
         <tbody>
-            <h1 class="results">Restaurant Search Results</h1>
+            <h1 class="results"> Restaurant Search Results</h1>
             {% if restaurantinfo | length == 0: %}
             {% else %}
                 {% for restaurant in restaurantinfo: %}
-                 <!--<ul class="list-group">
-                <div class="list_div"> <a href="resdetails?id={{restaurant.get_restaurantid()}}" class="list-group-item list-group-item-action align-items-center d-flex justify-content-between">
-                      <div class="flex-column">
-                        {{restaurant.get_name()}}
-                        <p><small class="text-center">{{restaurant.get_address()}}</small></p>
-                        <span class="badge badge-info badge-pill ">Open/Closed</span>
-                        <span class="badge badge-info badge-pill">Cuisine Type</span>
-                        <span class="badge badge-info badge-pill">Price</span>
-                        <span class="badge badge-info badge-pill">Dining Type</span>
-                      </div>
-                      <div class="image-parent">
-                          <img src="random_restaurant.jpg" class="img-fluid" alt="restaurant">
-                      </div>
-                    </a>
-                </div> -->
-                <div class="list-group" style="width:1050px; height:115px; margin: auto;">
-                    <a href="resdetails?id={{restaurant.get_restaurantid()}}" class="list-group-item list-group-item-action ">
-                        <div class="d-flex w-100 justify-content-between">
-                          <h5 class="mb-1"><strong>{{restaurant.get_name()}}</strong></h5>
-                          <!--add stars here -- need to grab from database-->
-                          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-                          <div>
-                          <span class="fa fa-star checked"></span>
-                          <span class="fa fa-star checked"></span>
-                          <span class="fa fa-star checked"></span>
-                          <span class="fa fa-star"></span>
-                          <span class="fa fa-star"></span>
-                        </div>
-                          <style>
-                            .checked {
-                              color: #FFD700;
-                            }
-                            </style>
-                        </div>
-                        <p class="mb-1">{{restaurant.get_address()}}</p>
-                        <span class="badge badge-info badge-pill i"></span>
-                        <span class="badge badge-info badge-pill ii">Cuisine Type</span>
-                        <span class="badge badge-info badge-pill iii">Price</span>
-                        <span class="badge badge-info badge-pill iv">Dining Type</span>
-                    </a> 
-                </div>
+                  <div class="list-group" style="width:1050px; height:115px; margin: auto;">
+                      <a href="resdetails?id={{restaurant.get_restaurantid()}}" class="list-group-item list-group-item-action">
+                          <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1"><strong>{{restaurant.get_name()}}</strong></h5>
+                            <!--add stars here ; need to grab from database-->
+                            <div class="Stars" style="--rating: {{restaurant.get_stars()}};" aria-label="Rating of this restaurant is {{restaurant.get_stars()}} out of 5."></div>
+                          </div>
+                          <p class="mb-1">{{restaurant.get_address()}}</p>
+                          <span class="badge badge-info badge-pill i"></span>
+                          <span class="badge badge-info badge-pill ii">{{restaurant.get_cuisine()}}</span>
+                          <span class="badge badge-info badge-pill iii">{{restaurant.get_price()}}</span>
+                          <span class="badge badge-info badge-pill iv">{{restaurant.get_type()}}</span>
+
+                      </a>
+                  </div>
 
 
-<!--Function to get whether restaurant is open or closed-->
-                <script>
-                  'use strict';
-          
-
-                  function statusFunc() {
-                    let status = "{{ restaurant.get_openclose() }}";
-                    console.log(status);
-                    let node = document.getElementsByClassName("badge");
-                    let length = node.length;
-                    let i = node.length - 4;
-                    if (status == "True"){
-                      node[i].innerHTML = "Open";
+                  <!--Function to get whether restaurant is open or closed-->
+                  <script>
+                    'use strict';
+                    function statusFunc() {
+                      let status = "{{restaurant.get_openclose()}}";
+                      console.log(status);
+                      let node = document.getElementsByClassName("badge badge-info badge-pill i");
+                      if (status == "True"){
+                        node[index].innerHTML = "Open";
+                      }
+                      else {
+                          node[index].innerHTML = "Closed";
+                      }
+                      index++;
                     }
-                    else {
-                      node[i].innerHTML = "Closed";
-                    }
-                  }
+                    
 
-                  statusFunc();
+                    statusFunc();
 
-                </script>
+                  </script>
+
+                  <!--Function to change colour depending on whether open or closed-->
+
+                  <script>
+                    'use strict';
+
+                    $('.badge').each(function(){
+                      if($(this).text() == 'Open'){
+                        $(this).css({'background-color' : '#32CD32'})
+                      }
+                      if($(this).text() == 'Closed'){
+                        $(this).css({'background-color' : '#D22B2B'})
+                      }
+
+
+                    });
+                  </script>
+
+
 
                 {% endfor %}
+                
             {% endif %}
             
+
         </tbody>
     </table>
+
+
 
 
 </html>

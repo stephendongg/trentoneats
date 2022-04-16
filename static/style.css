@@ -299,6 +299,42 @@ h1.results{
     margin-left: auto;
     margin-right: auto;
 }
+/* styling for stars */
+:root {
+    --star-size: 25px;
+    --star-color: rgb(108, 105, 105);
+    --star-background: #fc0;
+  }
+  
+.Stars {
+    --percent: calc(var(--rating) / 5 * 100%);
+    display: inline-block;
+    font-size: var(--star-size);
+    font-family: Times;
+    line-height: 1;
+}
+.Stars::before {
+    content: '★★★★★';
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.Stars_Deets {
+    --percent: calc(var(--rating) / 5 * 100%);
+    display: inline-block;
+    font-size: 35px;
+    font-family: Times;
+    line-height: 1;
+}
+.Stars_Deets::before {
+    content: '★★★★★';
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 /* styling for review carousel */
 .carousel-inner {
     width : 100%;
