@@ -93,10 +93,11 @@
 
 <div class="container-fluid pt-5 pb-5 bg-info">
     <h2 class="restOfHeader">Details</h2>
-    <h4 class="resDetails"><strong>Media: </strong><a href="{{info['media']}}" target="__blank__" id="mediaLink">{{info['media']}}</a></h4>
+    <h4 class="resDetails"><strong id="officialWebsite">Official Website: </strong><a href="{{info['media']}}" target="__blank__" id="mediaLink">{{info['media']}}</a></h4>
     <h4 class="resDetails"><strong>Review Count: </strong> {{info['review_count']}}</h4>
     <h4 class="resDetails"><strong>Stars: </strong> <div class="Stars_Deets" style="--rating: {{info['stars']}};"></div> </h4>
-    <h4 class="resDetails"><strong>Menu: </strong><a href="{{info['menu']}}" target="__blank__" id="menuLink">{{info['menu']}}</a></h4>
+    <h4 class="resDetails" id="menuLink"><a href="{{info['menu']}}" class="btn btn-primary btn-lg" target="__blank__" id="menuLink">Menu <i class="bi bi-box-arrow-up-right"></i></i></a></h4>
+    
     <!--create a reviews carousel-->
      <!--use reviews table for each restaurant and populate panel with each review (for loop with jinja scripts)-->
      <div id="demo" class="carousel slide" data-ride="carousel">
@@ -171,19 +172,12 @@
     function myFunction(){
         if("{{info['media']}}" == "None") {
             document.getElementById('mediaLink').innerHTML = "";
+            document.getElementById('officialWebsite').innerHTML = "";
         }
-
-    }
-    myFunction();
-
-</script>
-
-<script type="text/javascript">
-
-    function myFunction(){
         if("{{info['menu']}}" == "None") {
             document.getElementById('menuLink').innerHTML = "";
         }
+
 
     }
     myFunction();
