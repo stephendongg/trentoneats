@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 {% block title %} I Am A Restaurant | Trenton Local Eats {% endblock %}
 {% block content %}
+<!-- Slider Information -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" />
+
+
 <br>
 <div class="container-fluid col-md-8 pb-5 px-5 mx-auto">
 <center><h2 class="restOfHeader">Do you own a restuarant?</h2></center>
@@ -15,8 +21,46 @@
     <label for="restaurantAddress">Address:</label>
     <input type="text" class="form-control" name="restaurantAddress" placeholder="Address" value="">
   </div>
+
+  <!-- Hours -->
   <div class="form-group row">
-    <label for="restaurantHours">Hours:</label>
+    <label for="restaurantHours">Hours:</label> <br>
+    <div id="checkboxes">
+      <input type="checkbox"> Monday <br>
+      From: <input type="text"> To: <input type="text"> <br>
+
+      <!-- Slider Test (Monday) -->
+      <!-- <div id="time-range">
+        <p>Time Range: <span class="slider-time">04:30</span> - <span class="slider-time">45:30</span></p>
+        <div class="sliders_step1">
+          <div id="slider-range"></div>
+        </div>
+      </div> -->
+      
+      <input type="checkbox"> Tuesday <br>
+      From: <input type="text"> To: <input type="text"> <br>
+      <!-- Slider Test (Monday) -->
+      <!-- <div id="time-range">
+        <p>Time Range: <span class="slider-time">04:30</span> - <span class="slider-time">45:30</span></p>
+        <div class="sliders_step1">
+          <div id="slider-range"></div>
+        </div>
+      </div> -->
+      <input type="checkbox"> Wednesday <br>
+      From: <input type="text"> To: <input type="text"> <br>
+      <input type="checkbox"> Thursday <br>
+      From: <input type="text"> To: <input type="text"> <br>
+      <input type="checkbox"> Friday <br>
+      From: <input type="text"> To: <input type="text"> <br>
+      <input type="checkbox"> Saturday <br>
+      From: <input type="text"> To: <input type="text"> <br>
+      <input type="checkbox"> Sunday <br>
+      From: <input type="text"> To: <input type="text"> <br>
+      
+    </div>
+
+
+    
     <input type="text" class="form-control" name="restaurantHours" placeholder="Opening Hours" value="">
   </div>
   <div class="form-group row">
@@ -64,9 +108,8 @@
   </div>
 
   <button type="submit" class="submit">Submit</button>
-
-
 </form>
+
 
 
 
@@ -79,7 +122,7 @@
 
 <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
 
-<script type="text/javascript">
+<script>
 var myWidget = cloudinary.createUploadWidget({
   cloudName: 'duknapu84',
   uploadPreset: 'geozzbbn'}, (error, result) => {
@@ -89,10 +132,27 @@ var myWidget = cloudinary.createUploadWidget({
     }
   }
 )
+$("#slider-range").slider({
+  range: true,
+  min: 0,
+  max: 1440,
+  step: 15,
+  values: [270, 2730],
+  slide: function(e, ui) {
+    $('.slider-time').each(function(i) {
+      var hours = ("00" + Math.floor(ui.values[i] / 60)).slice(-2);
+      var mins = ("00" + (ui.values[i] - (hours * 60))).slice(-2);
+      $(this).html(hours + ':' + mins);
+    });
+  }
+});
 
 document.getElementById("upload_widget").addEventListener("click", function(){
     myWidget.open();
   }, false);
+
+
+
 </script>
 
 {% include 'footer.html' %}
