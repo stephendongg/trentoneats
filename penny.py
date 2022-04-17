@@ -11,6 +11,9 @@ from flask import render_template, abort
 from search import restaurant_search, get_restaurant_info
 from add_restaurant import add_restaurant
 
+from reviews import add_review, review_search
+import datetime
+
 import os
 import pathlib
 import requests
@@ -65,9 +68,9 @@ def search_results():
     html = render_template('searchresults.html', restaurantinfo=restaurantinfo,
                             id=unique_id)
     response = make_response(html)
+    
     return response
 
-# Under Construction WebPages! These will be the ones that we will modify!
 # ---------------------------------------------------------
 
 
@@ -168,13 +171,55 @@ def addrestaurant():
 # ---------------------------------------------------------
 
 
-@app.route('/resdetails', methods=['GET'])
+@app.route('/resdetails', methods=['GET', 'POST'])
 def resdetails():
     name = request.args.get('name')
     id = request.args.get('id')
+    # Info currently is: 
     info = get_restaurant_info(id)
+    # This line is new. 
     unique_id = session.get('google_id')
-    html = render_template('resdetails.html', info=info, id=unique_id)
+    #html = render_template('resdetails.html', info=info, id=unique_id)
+    reviews = review_search(id)
+    # info_obj['name'] = str(row[0])
+    # info_obj['address'] = str(row[1])
+    # info_obj['hours'] = str(row[2])
+    # info_obj['open_closed'] = str(row[3])
+    # info_obj['menu'] = str(row[4])
+    # info_obj['media'] = str(row[5])
+    # info_obj['tags'] = str(row[6])
+    # info_obj['review_count'] = str(row[7])
+    # info_obj['stars'] = str(row[8])
+    # info_obj['image'] = str(row[9])
+
+    #Separate Code here 
+    #Stmt
+    #reviews = db.execute(
+    # Just gotta fetch one of them. current_user_review = db.execute("SELECT * FROM reviews WHERE book_id=:book_id AND user_id=:user_id", {"book_id": book.id, "user_id": session["user_id"]}).fetchone()
+    #book_extra = goodreads_lookup(isbn)
+    
+    if request.method == 'POST':
+        text = request.form['review-text']
+        rating = request.form['rating']
+        print(rating)
+        text = text.strip()
+        error = None
+        if not text:
+            error = 'You didn\'t add any new reviews.'
+        if error is None:
+            # Gotta figure out if its customer taht we still want to link for placeolder
+            # Currently, placeholder reviews are all -10
+            #NEed Cusomter Ids sorted out.
+            add_review(id, datetime.datetime.now(), text, rating)
+            #return redirect(url_for('review.dashboard'))
+            reviews = review_search(id)
+        #flash(error)
+        #return render_template('review/create.html')
+
+    
+
+    html = render_template('resdetails.html', info=info,
+                                            reviews=reviews, id=unique_id)
     response = make_response(html)
     return response
 
@@ -192,8 +237,8 @@ flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/userinfo.profile",
             "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    redirect_uri="https://trentoneats.herokuapp.com/callback"
-    # redirect_uri="http://127.0.0.1:8080/callback"
+    # redirect_uri="https://trentoneats.herokuapp.com/callback"
+    redirect_uri="http://127.0.0.1:8080/callback"
 )
 
 
@@ -230,8 +275,8 @@ def callback():
     # flow.fetch_token(authorization_response=request.url)
     # print(request.url)
 
-    if not session["state"] == request.args["state"]:
-        abort(500)  # State does not match!
+    # if not session["state"] == request.args["state"]:
+    #     abort(500)  # State does not match!
 
     credentials = flow.credentials
     request_session = requests.session()
@@ -282,3 +327,4 @@ def authenticate():
     if 'google_id' not in session:
         abort(redirect(url_for('login')))
     return session.get('name')
+

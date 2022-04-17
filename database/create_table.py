@@ -41,12 +41,27 @@ def create_tables():
                 reported_count INT
                 )
         """,
+        # """
+        # CREATE TABLE IF NOT EXISTS reviews (
+        #         review_id SERIAL PRIMARY KEY,
+        #         customer_id SERIAL,
+        #         FOREIGN KEY (customer_id)
+        #         REFERENCES customers (customer_id),
+        #         restaurant_id SERIAL,
+        #         FOREIGN KEY (restaurant_id)
+        #         REFERENCES restaurants (restaurant_id),
+        #         date TIMESTAMP NOT NULL,
+        #         text TEXT NOT NULL,
+        #         price INTEGER,
+        #         taste INTEGER,
+        #         authenticity INTEGER,
+        #         coolness INTEGER,
+        #         overall INTEGER
+        # )
+        # """,
         """
         CREATE TABLE IF NOT EXISTS reviews (
                 review_id SERIAL PRIMARY KEY,
-                customer_id SERIAL,
-                FOREIGN KEY (customer_id)
-                REFERENCES customers (customer_id),
                 restaurant_id SERIAL,
                 FOREIGN KEY (restaurant_id)
                 REFERENCES restaurants (restaurant_id),

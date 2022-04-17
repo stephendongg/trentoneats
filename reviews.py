@@ -1,13 +1,10 @@
 #!/usr/bin/env python
-"""This is search.py"""
+"""This is reviews.py"""
 # -----------------------------------------------------------------------
-# search.py
+# reviews.py
 # -----------------------------------------------------------------------
 
-# Originally assignment 2's regserver.py -> adapted to search.py to import __search__ cand course_search
-# course_search -> searchbar = restaurant_search
-# __search__ -> gets the details -> might be renamed to details
-
+from datetime import date
 import sys
 from os import name
 from sys import argv, stderr
@@ -20,6 +17,7 @@ from contextlib import closing
 # from sqlite3 import DataError, DatabaseError
 # from sqlite3 import connect
 from psycopg2 import connect, DatabaseError
+import psycopg2
 import argparse
 # loading
 
@@ -35,10 +33,10 @@ from restaurant import restaurant
 DATABASE_URL = 'file:trentoneats.sql?mode=ro'
 # -----------------------------------------------------------------------
 
-def restaurant_search(input):
+def review_search(input):
     """search through restaurants"""
     try:
-         #with connect(host='localhost', port=5432, user='rmd', password='xxx',
+        # with connect(host='localhost', port=5432, user='rmd', password='xxx',
         #              database="trentoneats") as connection:
         # dequ5ope4nuoit
         with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
@@ -46,41 +44,41 @@ def restaurant_search(input):
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted
-                stmt_str = "SELECT restaurant_id, name, open_closed, address, "
-                stmt_str += "stars, cuisine, type, price, tags "
-                stmt_str += "FROM restaurants "
-                stmt_str += "WHERE LOWER(name) ILIKE %s"
+                # stmt_str = "SELECT restaurant_id, name, open_closed, address, stars "
+                # stmt_str += "FROM restaurants "
+                # stmt_str += "WHERE LOWER (name) LIKE LOWER ('%" + \
+                #     input + "%') "
 
-                #print(stmt_str)
-                input = '%' + input.lower() + '%'
-                #print(input)
-                cursor.execute(stmt_str, [input])
-                #cursor.execute(stmt_str, ["'bbq'"])
+                # Review Search 
+                stmt_str = "SELECT date, text, review_id "
+                stmt_str += "FROM reviews "
+                stmt_str += "WHERE restaurant_id = '" + input + "';"
+                # stmt_str = "SELECT r.id, date, text, restaurant_id "
+                # stmt_str += "FROM reviews r JOIN restaurants u ON r.restaurant_id = u.restaurant_id "
+                # stmt_str += "WHERE restaurant_id = " + input
+
+
+                cursor.execute(stmt_str)
+
                 row = cursor.fetchone()
 
                 # course list
-                restaurants = []
+                reviews = []
 
                 # rowstringlist this rowstring will contain all of the necessary values
 
-                rowstring = ["", "", "", "", "", "", "", "", ""]
+                rowstring = ["", "", ""]
 
                 # This iwll parse through the rows and get all of the necsary values
-                while row:
-                    rowstring[0] = row[0]
-                    rowstring[1] = row[1]
-                    rowstring[2] = row[2]
-                    rowstring[3] = row[3]
-                    rowstring[4] = row[4]
-                    rowstring[5] = row[5]
-                    rowstring[6] = row[6]
-                    rowstring[7] = row[7]
-                    rowstring[8] = row[8]
-                    res = restaurant(rowstring)
-                    restaurants.append(res)
+                while row is not None:
+                    rowstring = ["", "", ""]
+                    rowstring[0] = str(row[0])
+                    rowstring[1] = str(row[1])
+                    rowstring[2] = str(row[2])
+                    reviews.append(rowstring)
                     row = cursor.fetchone()
-
-                return restaurants
+                
+                return reviews
 
     # Normally exit status 0.
     # If database-related error, terminate with exit status 1.
@@ -90,10 +88,33 @@ def restaurant_search(input):
         print(sys.argv[0] + ": " + str(error), file=stderr)
         return ("stdservererr")
 
+
+
+def add_review(restaurant_id, date, text, rating):
+
+    stmt_str = """
+    INSERT INTO reviews (restaurant_id, date,
+    text, overall) 
+    VALUES  ( '"""
+    stmt_str += str(restaurant_id) + "', '" + str(date) + "', '" + text + "', '" + rating + "');"
+
+    try:
+        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+                database="dequ5ope4nuoit") as connection:
+
+            with connection.cursor() as cursor:
+                print(stmt_str)
+                cursor.execute(stmt_str)
+
+
+    except (Exception, psycopg2.DatabaseError) as ex:
+        print(ex, file=stderr)
+        exit(1)
+
 def get_restaurant_info(res_id):
     """find all information on one restaurant"""
     try:
-         #with connect(host='localhost', port=5432, user='rmd', password='xxx',
+        # with connect(host='localhost', port=5432, user='rmd', password='xxx',
         #              database="trentoneats") as connection:
         with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
                      database="dequ5ope4nuoit") as connection:
@@ -101,8 +122,7 @@ def get_restaurant_info(res_id):
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted
                 stmt_str = "SELECT name, address, hours, open_closed, menu, "
-                stmt_str += "media, tags, review_count, stars, image, "
-                stmt_str += "price, cuisine, type FROM restaurants "
+                stmt_str += "media, tags, review_count, stars, image FROM restaurants "
                 stmt_str += "WHERE restaurant_id = '" + res_id + "'; "
 
                 cursor.execute(stmt_str)
@@ -125,9 +145,6 @@ def get_restaurant_info(res_id):
                     info_obj['review_count'] = str(row[7])
                     info_obj['stars'] = str(row[8])
                     info_obj['image'] = str(row[9])
-                    info_obj['price'] = str(row[10])
-                    info_obj['cuisine'] = str(row[11])
-                    info_obj['type'] = str(row[12])
 
                 return info_obj
 

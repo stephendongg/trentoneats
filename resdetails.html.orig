@@ -36,18 +36,6 @@
                     <h4 class="resDetails" id="SaturdayHours"></h4>
                     <h4 class="resDetails" id="SundayHours"></h4>
                 </div>
-<<<<<<< HEAD
-=======
-                <div class="col-sm-6 px-3">
-                    <h4 class="resDetails"><strong id="OpenClose"></strong></h4>
-                    <h4 class="resDetails"><strong>Media: </strong>{{info['media']}}</h4>
-                    <h4 class="resDetails"><strong>Review Count: </strong> {{info['review_count']}}</h4>
-                    <h4 class="resDetails"><strong>Stars: </strong> {{info['stars']}}</h4>
-                    <h4 class="resDetails"><strong>Stars: </strong> {{info['cuisine']}}</h4>
-                    <h4 class="resDetails"><strong>Stars: </strong> {{info['price']}}</h4>
-                    <h4 class="resDetails"><strong>Stars: </strong> {{info['type']}}</h4>
-                </div>
->>>>>>> ajax
             </div>
         </div>
     </div>
