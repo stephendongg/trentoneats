@@ -49,7 +49,7 @@
 <!-- Adding a Review -->
 {% block header %}
 <div class="container" style="text-align: center; padding-top: 20px;">
-  <h1>{% block title2 %}Write a new review for this restaurant!{% endblock %}</h1>
+  <h1>{% block title2 %}Write a review for this restaurant!{% endblock %}</h1>
 </div>
 {% endblock %}
 {% block content2 %}
@@ -74,30 +74,30 @@
       <textarea class="form-control" rows="3" name="review-text">   
       </textarea>
     </div>
-    <button class="btn btn-primary" type="submit">Submit</button>
+    <button class="btn btn-primary" type="submit" style = "margin-bottom: 10px;">Submit</button>
+
   </form>
 </div>
 {% endblock %}
 
 <!-- Seeing the Reviews  -->
-{% for review in reviews %}
+<!-- {% for review in reviews %}
   <blockquote class="blockquote">
     <p class="mb-0">{{ review[1] }}</p>
-      <footer class="blockquote-footer">
+      <footer class="blockquote-footer"> -->
         <!-- From @{{ review[0].split("@")[0] }} -->
-        From @{{ review[0] }}
+       <!-- From @{{ review[0] }}
       </footer>
   </blockquote>
-{% endfor %}
+{% endfor %} -->
 
 
 <div class="container-fluid pt-5 pb-5 bg-info">
     <h2 class="restOfHeader">Details</h2>
-    <h4 class="resDetails"><strong id="officialWebsite">Official Website: </strong><a href="{{info['media']}}" target="__blank__" id="mediaLink">{{info['media']}}</a></h4>
+    <h4 class="resDetails"><strong>Media: </strong><a href="{{info['media']}}" target="__blank__" id="mediaLink">{{info['media']}}</a></h4>
     <h4 class="resDetails"><strong>Review Count: </strong> {{info['review_count']}}</h4>
     <h4 class="resDetails"><strong>Stars: </strong> <div class="Stars_Deets" style="--rating: {{info['stars']}};"></div> </h4>
-    <h4 class="resDetails" id="menuLink"><a href="{{info['menu']}}" class="btn btn-primary btn-lg" target="__blank__" id="menuLink">Menu <i class="bi bi-box-arrow-up-right"></i></i></a></h4>
-    
+    <h4 class="resDetails"><strong>Menu: </strong><a href="{{info['menu']}}" target="__blank__" id="menuLink">{{info['menu']}}</a></h4>
     <!--create a reviews carousel-->
      <!--use reviews table for each restaurant and populate panel with each review (for loop with jinja scripts)-->
      <div id="demo" class="carousel slide" data-ride="carousel">
@@ -118,20 +118,19 @@
           {% for review in reviews %}
           {% if loop.index0 == 0 %}
           <div class="carousel-item active">
-            <img src="webpage/person.png"
             <p>{{ review[1] }}</p>
-            <h7>From @{{ review[0] }}</h7>
+            <h8 style="text-align: center;">From @{{ review[0] }}</h8>
           </div>
           {% else %}
           <div class="carousel-item">
-            <img src="webpage/person.png"
             <p>{{ review[1] }}</p>
-            <h7>From @{{ review[0] }}</h7>
+            <h8>From @{{ review[0] }}</h8>
           </div>
           {% endif %}
           {% endfor %}
         </div>
 
+        {% if reviews|length > 0 %}
         <!-- Left and right controls -->
         <a class="carousel-control-prev" href="#demo" data-slide="prev">
           <span class="carousel-control-prev-icon"></span>
@@ -139,6 +138,7 @@
         <a class="carousel-control-next" href="#demo" data-slide="next">
           <span class="carousel-control-next-icon"></span>
         </a>
+        {% endif %}
 
       </div>
     </div>
@@ -172,12 +172,19 @@
     function myFunction(){
         if("{{info['media']}}" == "None") {
             document.getElementById('mediaLink').innerHTML = "";
-            document.getElementById('officialWebsite').innerHTML = "";
         }
+
+    }
+    myFunction();
+
+</script>
+
+<script type="text/javascript">
+
+    function myFunction(){
         if("{{info['menu']}}" == "None") {
             document.getElementById('menuLink').innerHTML = "";
         }
-
 
     }
     myFunction();

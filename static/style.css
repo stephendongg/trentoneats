@@ -359,27 +359,19 @@ h1.results{
 .carousel-item :active {
     width : 100px; 
 }
-.carousel-item img { 
+/*.carousel-item img { 
     width : 100px;
     height : 100px; 
     text-align : center ;
     float : left ; 
     margin : 25px; 
-  }
+  } */
 .carousel-item p {
-    float : left ; 
-    width : 420px;
-    clear : right ;
-    text-align : justify ;
-    margin : 25px 0 10px 0;
-    font-size : 14px ; 
-    color : #aaa ;
-    line-height : 1.2em
-    
+    text-align: center;
+    padding-top: 10px;
   }
-.carousel-item h7 { 
-    float : left ; 
-    width: 200px; 
+.carousel-item h8 { 
+    text-align: center;
     font-size : 14px ; 
     color : #999 ;
     font-weight : bold ;
