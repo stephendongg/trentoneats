@@ -81,7 +81,12 @@ def search_results():
 @app.route('/myrestaurant', methods=['GET'])
 def myrestaurant():
     unique_id = session.get('google_id')
-    restaurantinfo = get_favorites(session["email"])
+    favorites = get_favorites(session["email"])
+    #for restaurant in favorites
+
+    resid = favorites[1]
+    print("this is resid" + resid)
+    restaurantinfo = restaurant_search(resid)
     #html = render_template('myrestaurant.html', id=unique_id)
     html = render_template('myrestaurant.html', restaurantinfo = restaurantinfo)
     response = make_response(html)
@@ -376,8 +381,8 @@ flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/userinfo.profile",
             "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    #redirect_uri="https://trentoneats.herokuapp.com/callback"
-    redirect_uri="http://127.0.0.1:8080/callback"
+    redirect_uri="https://trentoneats.herokuapp.com/callback"
+    #redirect_uri="http://127.0.0.1:8080/callback"
 )
 
 
