@@ -48,8 +48,8 @@
 
 <!-- Adding a Review -->
 {% block header %}
-<div class="container">
-  <h1>{% block title2 %}Write a new review{% endblock %}</h1>
+<div class="container" style="text-align: center; padding-top: 20px;">
+  <h1>{% block title2 %}Write a review for this restaurant!{% endblock %}</h1>
 </div>
 {% endblock %}
 {% block content2 %}
@@ -74,21 +74,22 @@
       <textarea class="form-control" rows="3" name="review-text">   
       </textarea>
     </div>
-    <button class="btn btn-primary" type="submit">Submit</button>
+    <button class="btn btn-primary" type="submit" style = "margin-bottom: 10px;">Submit</button>
+
   </form>
 </div>
 {% endblock %}
 
-<!-- Seeing the Reivews  -->
-{% for review in reviews %}
+<!-- Seeing the Reviews  -->
+<!-- {% for review in reviews %}
   <blockquote class="blockquote">
     <p class="mb-0">{{ review[1] }}</p>
-      <footer class="blockquote-footer">
+      <footer class="blockquote-footer"> -->
         <!-- From @{{ review[0].split("@")[0] }} -->
-        From @{{ review[0] }}
+       <!-- From @{{ review[0] }}
       </footer>
   </blockquote>
-{% endfor %}
+{% endfor %} -->
 
 
 <div class="container-fluid pt-5 pb-5 bg-info">
@@ -100,34 +101,36 @@
     <!--create a reviews carousel-->
      <!--use reviews table for each restaurant and populate panel with each review (for loop with jinja scripts)-->
      <div id="demo" class="carousel slide" data-ride="carousel">
-
-        <!-- Indicators -->
+        <!-- Add indicators -->
         <ul class="carousel-indicators">
+          {% for review in reviews %}
+          {% if loop.index0 == 0 %}
           <li data-target="#demo" data-slide-to="0" class="active"></li>
-          <li data-target="#demo" data-slide-to="1"></li>
-          <li data-target="#demo" data-slide-to="2"></li>
+          {% else %}
+          <li data-target="#demo" data-slide-to="{{loop.index0}}"></li>
+           {% endif %}
+           {% endfor %}
         </ul>
 
         <!-- The slideshow; this is what to fill in with reviews table -->
         <div class="reviews">
         <div class="carousel-inner">
+          {% for review in reviews %}
+          {% if loop.index0 == 0 %}
           <div class="carousel-item active">
-              <img src="webpage/person.png"
-              <p>This is a sample review. This restuarant was great!</p>
-              <h7>Anonymous user</h7>
+            <p>{{ review[1] }}</p>
+            <h8 style="text-align: center;">From @{{ review[0] }}</h8>
           </div>
+          {% else %}
           <div class="carousel-item">
-            <img src="webpage/person.png"
-            <p>This is a sample review. This restuarant was great!</p>
-            <h7>Anonymous user</h7>
+            <p>{{ review[1] }}</p>
+            <h8>From @{{ review[0] }}</h8>
           </div>
-          <div class="carousel-item">
-            <img src="webpage/person.png"
-            <p>This is a sample review. This restuarant was great!</p>
-            <h7>Anonymous user</h7>
-          </div>
+          {% endif %}
+          {% endfor %}
         </div>
 
+        {% if reviews|length > 0 %}
         <!-- Left and right controls -->
         <a class="carousel-control-prev" href="#demo" data-slide="prev">
           <span class="carousel-control-prev-icon"></span>
@@ -135,12 +138,15 @@
         <a class="carousel-control-next" href="#demo" data-slide="next">
           <span class="carousel-control-next-icon"></span>
         </a>
+        {% endif %}
 
       </div>
     </div>
 </div>
 
-
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <!--Remove spaces in address so it is compatible with google maps-->
 <script>
     "use strict";
