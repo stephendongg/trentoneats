@@ -12,6 +12,10 @@ from search import restaurant_search, get_restaurant_info
 from add_restaurant import add_restaurant
 
 from reviews import add_review, review_search
+
+from admin import admin_search 
+from users import user_exists, user_add
+
 import datetime
 
 import os
@@ -100,9 +104,7 @@ def about():
 def authorized(function):
     def wrapper2(*args, **kwargs):
         unique_id = session.get('google_id')
-        if (session.get("email") is None) or not (session["email"] == "pjozuah@princeton.edu" or session["email"] == "sd20@princeton.edu"
-                                                  or session["email"] == "soumyag@princeton.edu" or session["email"] == "chukwuma@princeton.edu"
-                                                  or session["email"] == "kao3@princeton.edu" or session["email"] == "anatk@princeton.edu"):
+        if (session.get("email") is None) or not admin_search(session["email"]):
             html = render_template('unauthorized_login.html', id=unique_id)
             response = make_response(html)
             return response
@@ -227,16 +229,17 @@ def addrestaurant():
 
 # ---------------------------------------------------------
 
-
 @app.route('/resdetails', methods=['GET', 'POST'])
 def resdetails():
     name = request.args.get('name')
     id = request.args.get('id')
+    session['resid'] = id
     # Info currently is: 
     info = get_restaurant_info(id)
     # This line is new. 
     unique_id = session.get('google_id')
     #html = render_template('resdetails.html', info=info, id=unique_id)
+
     reviews = review_search(id)
     # info_obj['name'] = str(row[0])
     # info_obj['address'] = str(row[1])
@@ -280,6 +283,23 @@ def resdetails():
     response = make_response(html)
     return response
 
+@app.route('/test', methods=['GET', 'POST'])
+def test():
+    #name = request.args.get('name')
+    #id = request.args.get('id')
+    id = session['resid']
+    return redirect('/resdetails', id=id)
+    # Info currently is: 
+    info = get_restaurant_info(id)
+    # This line is new. 
+    unique_id = session.get('google_id')
+    #html = render_template('resdetails.html', info=info, id=unique_id)
+    reviews = review_search(id)
+
+    html = render_template('resdetails.html', info=info,
+                                            reviews=reviews, id=unique_id)
+    response = make_response(html)
+    return response
 # ---------------------------------------------------------
 
 
@@ -347,9 +367,12 @@ def callback():
         audience=GOOGLE_CLIENT_ID
     )
 
+    session["email"] = id_info.get("email")
     session["google_id"] = id_info.get("sub")
     session["name"] = id_info.get("name")
-    session["email"] = id_info.get("email")
+
+    if (not user_exists(session["email"])):
+        user_add(session["email"],  session["google_id"], session["name"])
 
     unique_id = session.get('google_id')
     restaurant = ""
