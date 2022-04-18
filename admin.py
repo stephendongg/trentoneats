@@ -46,7 +46,7 @@ def admin_search(email):
                 # This needs to be adjusted
                 stmt_str = "SELECT email "
                 stmt_str += "FROM administrators "
-                stmt_str += "WHERE email = "
+                stmt_str += "WHERE email = '" + email + "'; "
 
                 cursor.execute(stmt_str, [email])
                 #cursor.execute(stmt_str, ["'bbq'"])
@@ -68,6 +68,9 @@ def admin_search(email):
                 if (len(admins) > 0):
                     return True
                 return False
+                # if row is not None:
+                #     return True
+                # return False
 
     # Normally exit status 0.
     # If database-related error, terminate with exit status 1.
@@ -75,4 +78,5 @@ def admin_search(email):
 
     except DatabaseError as error:
         print(sys.argv[0] + ": " + str(error), file=stderr)
-        return ("stdservererr")
+        return False
+        # return ("stdservererr")

@@ -102,11 +102,17 @@ def create_tables():
         """,
         """
         CREATE TABLE IF NOT EXISTS favoriterestaurants (
-            FOREIGN KEY (email) PRIMARY KEY
+            favoriterestaurantid SERIAL PRIMARY KEY,
+            email VARCHAR(255) NOT NULL,
+            FOREIGN KEY (email)
             REFERENCES users (email),
-            restaurant_id SERIAL
+            restaurant_id SERIAL NOT NULL,
+            FOREIGN KEY (restaurant_id)
+            REFERENCES restaurants (restaurant_id)
+            
         )
         """)
+        #restaurant_id SERIAL
 
 # The following code was adapted from POSTGRESQL TUTORIAL
 

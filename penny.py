@@ -14,7 +14,7 @@ from add_restaurant import add_restaurant
 from reviews import add_review, review_search
 
 from admin import admin_search 
-from users import user_exists, user_add
+from users import user_exists, user_add, add_favorite_restaurant, is_favorite_restaurant, get_favorites
 
 import datetime
 
@@ -80,10 +80,10 @@ def search_results():
 
 @app.route('/myrestaurant', methods=['GET'])
 def myrestaurant():
-
     unique_id = session.get('google_id')
+    restaurantinfo = get_favorites(session["email"])
     #html = render_template('myrestaurant.html', id=unique_id)
-    html = render_template('myrestaurant.html')
+    html = render_template('myrestaurant.html', restaurantinfo = restaurantinfo)
     response = make_response(html)
     return response
 
@@ -104,7 +104,7 @@ def about():
 def authorized(function):
     def wrapper2(*args, **kwargs):
         unique_id = session.get('google_id')
-        if (session.get("email") is None) or not admin_search(session["email"]):
+        if ((session.get("email") is None) or (not admin_search(session["email"]))):
             html = render_template('unauthorized_login.html', id=unique_id)
             response = make_response(html)
             return response
@@ -287,6 +287,68 @@ def resdetails():
 def test():
     #name = request.args.get('name')
     #id = request.args.get('id')
+    name = request.args.get('name')
+    id = session['resid'] 
+    info = get_restaurant_info(id)
+    # This line is new. 
+    unique_id = session.get('google_id')
+    #html = render_template('resdetails.html', info=info, id=unique_id)
+
+    reviews = review_search(id)
+    # Info currently is: 
+    info = get_restaurant_info(id)
+    # This line is new. 
+    #html = render_template('resdetails.html', info=info, id=unique_id)
+
+    # info_obj['name'] = str(row[0])
+    # info_obj['address'] = str(row[1])
+    # info_obj['hours'] = str(row[2])
+    # info_obj['open_closed'] = str(row[3])
+    # info_obj['menu'] = str(row[4])
+    # info_obj['media'] = str(row[5])
+    # info_obj['tags'] = str(row[6])
+    # info_obj['review_count'] = str(row[7])
+    # info_obj['stars'] = str(row[8])
+    # info_obj['image'] = str(row[9])
+
+    # -- ADD TO FAVORITE -- 
+    if (not is_favorite_restaurant(session["email"], id)):
+        add_favorite_restaurant(session["email"], id)
+    else:
+        print("already a favorite!")
+        # HOW DO I MAKE THIS DISSAPEAR.
+    
+    if request.method == 'POST':
+        text = request.form['review-text']
+        rating = request.form['rating']
+        print(rating)
+        text = text.strip()
+        error = None
+        if not text:
+            error = 'You didn\'t add any new reviews.'
+        if error is None:
+            # Gotta figure out if its customer taht we still want to link for placeolder
+            # Currently, placeholder reviews are all -10
+            #NEed Cusomter Ids sorted out.
+            add_review(id, datetime.datetime.now(), text, rating)
+            #return redirect(url_for('review.dashboard'))
+            reviews = review_search(id)
+        #flash(error)
+        #return render_template('review/create.html')
+
+    
+
+    html = render_template('resdetails.html', info=info,
+                                            reviews=reviews, id=unique_id)
+    response = make_response(html)
+    return response
+
+    
+
+    html = render_template('resdetails.html', info=info,
+                                            reviews=reviews, id=unique_id)
+    response = make_response(html)
+    return response
     id = session['resid']
     return redirect('/resdetails', id=id)
     # Info currently is: 
@@ -299,7 +361,7 @@ def test():
     html = render_template('resdetails.html', info=info,
                                             reviews=reviews, id=unique_id)
     response = make_response(html)
-    return response
+    return responsez
 # ---------------------------------------------------------
 
 
@@ -372,7 +434,7 @@ def callback():
     session["name"] = id_info.get("name")
 
     if (not user_exists(session["email"])):
-        user_add(session["email"],  session["google_id"], session["name"])
+        user_add(session["email"], session["name"])
 
     unique_id = session.get('google_id')
     restaurant = ""

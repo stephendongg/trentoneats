@@ -2,6 +2,25 @@
 {% extends "base.html" %}
 {% block title %} Best Restaurants in Trenton | Trenton Local Eats {% endblock %}
 {% block content %}
+<table>
+    <script>
+      var index = 0;
+    </script>
+      <tbody>
+          <h1 class="results"> Restaurant Search Results</h1>
+          {% if restaurantinfo | length == 0: %}
+          {% else %}
+              {% for restaurant in restaurantinfo: %}
+                <p>{{restaurant}}</p>
+              {% endfor %}
+              
+          {% endif %}
+          
+
+      </tbody>
+  </table>
+
+
 
 
 
