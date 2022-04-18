@@ -135,18 +135,45 @@ def addrestaurant():
     restaurantHours = ""
 
     # -> weekday lol 
-    weekdayHours = "Monday " + request.args.get('mondaystart') + " - " + request.args.get('mondayend') + ", "
-    weekdayHours += "Tuesday " + request.args.get('tuesdaystart') + " - " + request.args.get('tuesdayend') + ", "
-    weekdayHours += "Wednesday " + request.args.get('wednesdaystart') + " - " + request.args.get('wednesdayend') + ", "
-    weekdayHours += "Thursday " + request.args.get('thursdaystart') + " - " + request.args.get('thursdayend') + ", "
-    weekdayHours += "Friday " + request.args.get('fridaystart') + " - " + request.args.get('fridayend') + ", "
-    weekdayHours += "Saturday " + request.args.get('saturdaystart') + " - " + request.args.get('saturdayend') + ", "
-    weekdayHours += "Sunday " + request.args.get('sundaystart') + " - " + request.args.get('sundayend')
+    weekdayHours = ""
+    if request.args.get('mondayopen'):
+        weekdayHours += "Monday " + request.args.get('mondaystart') + " - " + request.args.get('mondayend') + ", "
+    else:
+        weekdayHours += "Monday Closed, "
+    if request.args.get('tuesdayopen'):
+        weekdayHours += "Tuesday " + request.args.get('tuesdaystart') + " - " + request.args.get('tuesdayend') + ", "
+    else:
+        weekdayHours += "Tuesday Closed, "
+    if request.args.get('wednesdayopen'):
+        weekdayHours += "Wednesday " + request.args.get('wednesdaystart') + " - " + request.args.get('wednesdayend') + ", "
+    else:
+        weekdayHours += "Wednesday Closed, "
+    if request.args.get('thursdayopen'):
+        weekdayHours += "Thursday " + request.args.get('thursdaystart') + " - " + request.args.get('thursdayend') + ", "
+    else:
+        weekdayHours += "Thursday Closed, "
+    if request.args.get('fridayopen'):
+        weekdayHours += "Friday " + request.args.get('fridaystart') + " - " + request.args.get('fridayend') + ", "
+    else:
+        weekdayHours += "Friday Closed, "
+    if request.args.get('saturdayopen'):
+        weekdayHours += "Saturday " + request.args.get('saturdaystart') + " - " + request.args.get('saturdayend') + ", "
+    else:
+        weekdayHours += "Saturday Closed, "
+    if request.args.get('sundayopen'):
+        weekdayHours += "Sunday " + request.args.get('sundaystart') + " - " + request.args.get('sundayend')
+    else:
+        weekdayHours += "Sunday Closed"
+    
+    
+    
+    
+    
+    
+
 
     restaurantHours = weekdayHours
 
-    # RESTAURANT HOURS END 
-    # restaurantHours = request.args.get('restaurantHours')
 
     # change?
     if restaurantHours is None or restaurantHours.split()=="":
