@@ -442,13 +442,13 @@ def callback():
         user_add(session["email"], session["name"])
 
     unique_id = session.get('google_id')
-    restaurant = ""
-    restaurantinfo = restaurant_search(
-        restaurant)  # Exception handling omitted
+    #restaurant = ""
+    #restaurantinfo = restaurant_search(
+     #   restaurant)  # Exception handling omitted
     html = render_template('searchform.html',
                            #ampm = get_ampm(),
                            # current_time = get_current_time(),
-                           restaurantinfo=restaurantinfo,
+                           #restaurantinfo=restaurantinfo,
                            id=unique_id)
     response = make_response(html)
     return response
