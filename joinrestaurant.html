@@ -1,11 +1,33 @@
 {% extends "base.html" %}
 {% block title %} I Am A Restaurant | Trenton Local Eats {% endblock %}
 {% block content %}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<!-- jquery time picker -->
+<!-- <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+<script src="jquery-1.11.0.min.js"></script> <script src="jquery.timepicker.js" type="text/javascript"></script> -->
 <!-- Slider Information -->
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" />
 
+<!-- Jquery time picker new -->
+<script src="//code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+
+<!-- TimePicker Imports -->
+<!-- <script type="text/javascript" src="/node_modules/jquery.js"></script>
+<script type="text/javascript" src="/path/to/moment.js"></script>
+<script type="text/javascript" src="/path/to/bootstrap/js/transition.js"></script>
+<script type="text/javascript" src="/path/to/bootstrap/js/collapse.js"></script>
+<script type="text/javascript" src="/path/to/bootstrap/dist/bootstrap.min.js"></script>
+<script type="text/javascript" src="/path/to/bootstrap-datetimepicker.min.js"></script> -->
 
 <br>
 <div class="container-fluid col-md-8 pb-5 px-5 mx-auto">
@@ -24,44 +46,39 @@
 
   <!-- Hours -->
   <div class="form-group row">
-    <label for="restaurantHours">Hours:</label> <br>
+    <label for="checkboxes">Hours:</label>
     <div id="checkboxes">
+      <br>
       <input type="checkbox"> Monday <br>
-      From: <input type="text"> To: <input type="text"> <br>
+      From: <input type="text" class="timepicker" name="mondaystart" /> 
+      To:  <input type="text" class="timepicker" name="mondayend" /> <br>
 
-      <!-- Slider Test (Monday) -->
-      <!-- <div id="time-range">
-        <p>Time Range: <span class="slider-time">04:30</span> - <span class="slider-time">45:30</span></p>
-        <div class="sliders_step1">
-          <div id="slider-range"></div>
-        </div>
-      </div> -->
-      
       <input type="checkbox"> Tuesday <br>
-      From: <input type="text"> To: <input type="text"> <br>
-      <!-- Slider Test (Monday) -->
-      <!-- <div id="time-range">
-        <p>Time Range: <span class="slider-time">04:30</span> - <span class="slider-time">45:30</span></p>
-        <div class="sliders_step1">
-          <div id="slider-range"></div>
-        </div>
-      </div> -->
+      From: <input type="text" class="timepicker" name="tuesdaystart" /> 
+      To:  <input type="text" class="timepicker" name="tuesdayend" /> <br>
+      
       <input type="checkbox"> Wednesday <br>
-      From: <input type="text"> To: <input type="text"> <br>
+      From: <input type="text" class="timepicker" name="wednesdaystart" /> 
+      To:  <input type="text" class="timepicker" name="wednesdayend" /> <br>
       <input type="checkbox"> Thursday <br>
-      From: <input type="text"> To: <input type="text"> <br>
+      From: <input type="text" class="timepicker" name="thursdaystart" /> 
+      To:  <input type="text" class="timepicker" name="thursdayend" /> <br>
       <input type="checkbox"> Friday <br>
-      From: <input type="text"> To: <input type="text"> <br>
+      From: <input type="text" class="timepicker" name="fridaystart" /> 
+      To:  <input type="text" class="timepicker" name="fridayend" /> <br>
       <input type="checkbox"> Saturday <br>
-      From: <input type="text"> To: <input type="text"> <br>
+      From: <input type="text" class="timepicker" name="saturdaystart" /> 
+      To:  <input type="text" class="timepicker" name="saturdayend" /> <br>
       <input type="checkbox"> Sunday <br>
-      From: <input type="text"> To: <input type="text"> <br>
+      From: <input type="text" class="timepicker" name="sundaystart" /> 
+      To:  <input type="text" class="timepicker" name="sundayend" /> <br>
       
     </div>
 
 
-    
-    <input type="text" class="form-control" name="restaurantHours" placeholder="Opening Hours" value="">
+    <br>
+    <!-- This is just temporarily here until we connect lol
+    <input type="text" class="form-control" name="restaurantHours" placeholder="Opening Hours" value=""> -->
   </div>
   <div class="form-group row">
     <label for="restaurantMenu">Menu:</label>
@@ -110,6 +127,33 @@
   <button type="submit" class="submit">Submit</button>
 </form>
 
+<!-- <div class="container">
+  <div class="row">
+     <div class='col-sm-6'>
+        <div class="form-group">
+           <div class='input-group date' id='datetimepicker1'>
+              <input type='text' class="form-control" />
+              <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+           </div>
+        </div>
+     </div>
+     <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
+     </script>
+  </div>
+</div> -->
+
+<input type="text" id="timepicker"/>
+<script type="text/javascript">
+  $(document).ready(function() {
+     $('#timepicker').timepicker();
+  });
+</script>
+
 
 
 
@@ -153,6 +197,23 @@ document.getElementById("upload_widget").addEventListener("click", function(){
 
 
 
+</script>
+
+<!-- TimePicker widget-->
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.timepicker').timepicker({
+           timeFormat: 'h:mm p',
+           interval: 30,
+           minTime: '10',
+           maxTime: '6:00pm',
+           defaultTime: '11',
+           startTime: '10:00',
+           dynamic: false,
+           dropdown: true,
+           scrollbar: true
+        });
+  });
 </script>
 
 {% include 'footer.html' %}
