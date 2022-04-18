@@ -76,59 +76,10 @@ def search_results():
 
 @app.route('/myrestaurant', methods=['GET'])
 def myrestaurant():
-    restaurantName = request.args.get('restaurantName')
-    if restaurantName is None or restaurantName.split()=="":
-        restaurantName = ""
-    restaurantAddress = request.args.get('restaurantAddress')
-    if restaurantAddress is None or restaurantAddress.split()=="":
-        restaurantAddress = ""
-    restaurantHours = request.args.get('restaurantHours')
-    if restaurantHours is None or restaurantHours.split()=="":
-        restaurantHours = ""
-    restaurantMenu = request.args.get('restaurantMenu')
-    if restaurantMenu is None or restaurantMenu.split()=="":
-        restaurantMenu = ""
-    restaurantMedia = request.args.get('restaurantMedia')
-    if restaurantMedia is None or restaurantMedia.split()=="":
-        restaurantMedia = ""
-    restaurantTags = request.args.get('restaurantTags')
-    restaurantImage = request.args.get('restaurantImage')
 
-    if restaurantTags is None or restaurantTags.split()=="":
-        restaurantTags = ""
-
-    type= request.args.getlist('type')
-    for i in range(len(type)):
-        if type[i] is None or type[i].split()=="":
-            type[i] = ""
-    cuisine = request.args.getlist('cuisine')
-    for i in range(len(cuisine)):
-        if cuisine[i] is None or cuisine[i].split()=="":
-            cuisine[i] = ""
-
-    priceNum = request.args.get('price')
-    if priceNum is None or priceNum.split()=="":
-        priceNum = ""
-    priceNum = int(priceNum)
-    price = 'inexpensive'
-    if priceNum >= 10 and priceNum < 25:
-        price = 'moderate'
-    if priceNum >= 25:
-        price = 'pricey'
-
-
-    add_restaurant(restaurantName = restaurantName,
-        restaurantAddress = restaurantAddress,
-        restaurantHours = restaurantHours,
-        restaurantMenu = restaurantMenu,
-        restaurantMedia = restaurantMedia,
-        restaurantTags = restaurantTags,
-        cuisine = cuisine,
-        type = type,
-        price = price,
-        restaurantImage = restaurantImage)
     unique_id = session.get('google_id')
-    html = render_template('myrestaurant.html', id=unique_id)
+    #html = render_template('myrestaurant.html', id=unique_id)
+    html = render_template('myrestaurant.html')
     response = make_response(html)
     return response
 
@@ -180,7 +131,24 @@ def addrestaurant():
     restaurantAddress = request.args.get('restaurantAddress')
     if restaurantAddress is None or restaurantAddress.split()=="":
         restaurantAddress = ""
-    restaurantHours = request.args.get('restaurantHours')
+    # RESTAURANT HOURS START
+    restaurantHours = ""
+
+    # -> weekday lol 
+    weekdayHours = "Monday " + request.args.get('mondaystart') + " - " + request.args.get('mondayend') + ", "
+    weekdayHours += "Tuesday " + request.args.get('tuesdaystart') + " - " + request.args.get('tuesdayend') + ", "
+    weekdayHours += "Wednesday " + request.args.get('wednesdaystart') + " - " + request.args.get('wednesdayend') + ", "
+    weekdayHours += "Thursday " + request.args.get('thursdaystart') + " - " + request.args.get('thursdayend') + ", "
+    weekdayHours += "Friday " + request.args.get('fridaystart') + " - " + request.args.get('fridayend') + ", "
+    weekdayHours += "Saturday " + request.args.get('saturdaystart') + " - " + request.args.get('saturdayend') + ", "
+    weekdayHours += "Sunday " + request.args.get('sundaystart') + " - " + request.args.get('sundayend')
+
+    restaurantHours = weekdayHours
+
+    # RESTAURANT HOURS END 
+    # restaurantHours = request.args.get('restaurantHours')
+
+    # change?
     if restaurantHours is None or restaurantHours.split()=="":
         restaurantHours = ""
     restaurantMenu = request.args.get('restaurantMenu')
