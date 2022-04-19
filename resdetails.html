@@ -266,7 +266,6 @@
 <script>
     var geocoder;
     var map;
-    var bounds;
 
     address = "{{ info['address'] }}";
   
@@ -275,9 +274,21 @@
         zoom: 16,
         center: {lat: -34.397, lng: 150.644}
       });
-      bounds = new google.maps.LatLngBounds();
+      var bounds = new google.maps.LatLngBounds();
       geocoder = new google.maps.Geocoder();
-      codeAddress(geocoder, map);
+      geocoder.geocode({'address': address}, function(results, status) {
+        if (status === 'OK') {
+          map.setCenter(results[0].geometry.location);
+          var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+          });
+          bounds.extend(marker.position);
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
+      });
+     // codeAddress(geocoder, map);
 
       const successCallback = (pos) => {
         console.log(pos);
