@@ -266,6 +266,7 @@
 <script>
     var geocoder;
     var map;
+    var bounds = new google.maps.LatLngBounds();
     address = "{{ info['address'] }}";
   
     function initMap() {
@@ -282,16 +283,29 @@
         var marker = new google.maps.Marker({
             map: map,
             position: { lat: pos.coords.latitude, lng: pos.coords.longitude},
+            icon: {
+              path: google.maps.SymbolPath.CIRCLE,
+              scale: 10,
+              fillOpacity: 1,
+              strokeWeight: 2,
+              fillColor: '#5384ED',
+              strokeColor: '#ffffff',
+            },
           });
+
+        bounds.extend(marker.position);
+        map.fitBounds(bounds);
       }
 
       const errorCallback = (error) => {
         console.error(error);
       }
 
-      const watchId = navigator.geolocation.watchPosition(successCallback, errorCallback);
+      navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
+      // const watchId = navigator.geolocation.watchPosition(successCallback, errorCallback);
 
+      //THIRD ARGUMENT TO GET CURRENT POSITION
 
     }
    
