@@ -134,6 +134,7 @@ def loggedin(function):
 @loggedin
 def myrestaurant():
     unique_id = session.get('google_id')
+    admin = is_admin()
     restaurantinfo = get_favorites(session["email"])
     # for restaurant in favorites
 
@@ -141,7 +142,8 @@ def myrestaurant():
     #print("this is resid" + resid)
     #restaurantinfo = restaurant_search(resid)
     #html = render_template('myrestaurant.html', id=unique_id)
-    html = render_template('myfavorite.html', restaurantinfo=restaurantinfo)
+    html = render_template('myfavorite.html', restaurantinfo=restaurantinfo,
+                           admin=admin)
     response = make_response(html)
     return response
  # ---------------------------------------------------------
@@ -298,7 +300,7 @@ def resdetails():
 
     reviews = review_search(id)
 
-    # OK HERE IS FAVORITE INFO! 
+    # OK HERE IS FAVORITE INFO!
 
     favorite = -1
     # -1 - not logged in, 1 = favorite, 0 = not favorite
@@ -350,15 +352,13 @@ def test():
     # This line is new.
     #html = render_template('resdetails.html', info=info, id=unique_id)
 
-    
-
     # -- ADD TO FAVORITE --
     if (not is_favorite_restaurant(session["email"], id)):
         add_favorite_restaurant(session["email"], id)
     else:
         delete_favorite_restaurant(session["email"], id)
         # HOW DO I MAKE THIS DISSAPEAR.
-    
+
     # -1 - not logged in, 1 = favorite, 0 = not favorite
     if (not session.get("email") is None):
         if is_favorite_restaurant(session["email"], id):
@@ -372,7 +372,6 @@ def test():
     else:
         isLoggedin = False
 
-    
     if request.method == 'POST':
         text = request.form['review-text']
         rating = request.form['rating']
