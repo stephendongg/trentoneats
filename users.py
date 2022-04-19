@@ -128,6 +128,26 @@ def add_favorite_restaurant(email, restaurantid):
         print(ex, file=stderr)
         exit(1)
 
+def delete_favorite_restaurant(email, restaurantid):
+
+    stmt_str = "DELETE FROM favoriterestaurants "
+    stmt_str += "WHERE email = '" + email + "'"
+    stmt_str += " AND restaurant_id = '" + restaurantid + "'; " 
+
+
+    try:
+        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+                database="dequ5ope4nuoit") as connection:
+
+            with connection.cursor() as cursor:
+                print(stmt_str)
+                cursor.execute(stmt_str)
+
+
+    except (Exception, psycopg2.DatabaseError) as ex:
+        print(ex, file=stderr)
+        exit(1)
+
 def is_favorite_restaurant(email, restaurantid):
     """search through restaurants"""
     try:

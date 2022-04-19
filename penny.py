@@ -14,7 +14,7 @@ from add_restaurant import add_restaurant
 from reviews import add_review, review_search
 
 from admin import admin_search
-from users import user_exists, user_add, add_favorite_restaurant, is_favorite_restaurant, get_favorites
+from users import user_exists, user_add, add_favorite_restaurant, is_favorite_restaurant, get_favorites, delete_favorite_restaurant
 
 import datetime
 
@@ -247,6 +247,7 @@ def addrestaurant():
     if priceNum >= 25:
         price = 'pricey'
 
+    
     add_restaurant(restaurantName=restaurantName,
                    restaurantAddress=restaurantAddress,
                    restaurantHours=restaurantHours,
@@ -272,29 +273,26 @@ def resdetails():
     id = request.args.get('id')
     admin = is_admin()
     session['resid'] = id
-    # Info currently is:
     info = get_restaurant_info(id)
-    # This line is new.
     unique_id = session.get('google_id')
-    #html = render_template('resdetails.html', info=info, id=unique_id)
 
     reviews = review_search(id)
-    # info_obj['name'] = str(row[0])
-    # info_obj['address'] = str(row[1])
-    # info_obj['hours'] = str(row[2])
-    # info_obj['open_closed'] = str(row[3])
-    # info_obj['menu'] = str(row[4])
-    # info_obj['media'] = str(row[5])
-    # info_obj['tags'] = str(row[6])
-    # info_obj['review_count'] = str(row[7])
-    # info_obj['stars'] = str(row[8])
-    # info_obj['image'] = str(row[9])
 
-    # Separate Code here
-    # Stmt
-    # reviews = db.execute(
-    # Just gotta fetch one of them. current_user_review = db.execute("SELECT * FROM reviews WHERE book_id=:book_id AND user_id=:user_id", {"book_id": book.id, "user_id": session["user_id"]}).fetchone()
-    #book_extra = goodreads_lookup(isbn)
+    # OK HERE IS FAVORITE INFO! 
+
+    favorite = -1
+    # -1 - not logged in, 1 = favorite, 0 = not favorite
+    if (not session.get("email") is None):
+        if is_favorite_restaurant(session["email"], id):
+            favorite = 1
+        else:
+            favorite = 0
+
+    # LOGGGED IN INFO
+    if (not session.get("email") is None):
+        isLoggedin = True
+    else:
+        isLoggedin = False
 
     if request.method == 'POST':
         text = request.form['review-text']
@@ -305,22 +303,16 @@ def resdetails():
         if not text:
             error = 'You didn\'t add any new reviews.'
         if error is None:
-            # Gotta figure out if its customer taht we still want to link for placeolder
-            # Currently, placeholder reviews are all -10
-            # NEed Cusomter Ids sorted out.
             add_review(id, datetime.datetime.now(), text, rating)
-            # return redirect(url_for('review.dashboard'))
             reviews = review_search(id)
-        # flash(error)
-        # return render_template('review/create.html')
 
     html = render_template('resdetails.html', info=info,
-                           reviews=reviews, id=unique_id, admin=admin)
+                           reviews=reviews, id=unique_id, admin=admin, favorite=favorite, loggedin=isLoggedin)
     response = make_response(html)
     return response
 
 
-@app.route('/test', methods=['GET', 'POST'])
+@app.route('/added', methods=['GET', 'POST'])
 def test():
     #name = request.args.get('name')
     #id = request.args.get('id')
@@ -338,24 +330,29 @@ def test():
     # This line is new.
     #html = render_template('resdetails.html', info=info, id=unique_id)
 
-    # info_obj['name'] = str(row[0])
-    # info_obj['address'] = str(row[1])
-    # info_obj['hours'] = str(row[2])
-    # info_obj['open_closed'] = str(row[3])
-    # info_obj['menu'] = str(row[4])
-    # info_obj['media'] = str(row[5])
-    # info_obj['tags'] = str(row[6])
-    # info_obj['review_count'] = str(row[7])
-    # info_obj['stars'] = str(row[8])
-    # info_obj['image'] = str(row[9])
+    
 
     # -- ADD TO FAVORITE --
     if (not is_favorite_restaurant(session["email"], id)):
         add_favorite_restaurant(session["email"], id)
     else:
-        print("already a favorite!")
+        delete_favorite_restaurant(session["email"], id)
         # HOW DO I MAKE THIS DISSAPEAR.
+    
+    # -1 - not logged in, 1 = favorite, 0 = not favorite
+    if (not session.get("email") is None):
+        if is_favorite_restaurant(session["email"], id):
+            favorite = 1
+        else:
+            favorite = 0
 
+    # LOGGGED IN INFO
+    if (not session.get("email") is None):
+        isLoggedin = True
+    else:
+        isLoggedin = False
+
+    
     if request.method == 'POST':
         text = request.form['review-text']
         rating = request.form['rating']
@@ -375,7 +372,7 @@ def test():
         # return render_template('review/create.html')
 
     html = render_template('resdetails.html', info=info,
-                           reviews=reviews, id=unique_id, admin=admin)
+                           reviews=reviews, id=unique_id, admin=admin, favorite=favorite, loggedin=isLoggedin)
     response = make_response(html)
     return response
 
@@ -412,8 +409,8 @@ flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/userinfo.profile",
             "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    redirect_uri="https://trentoneats.herokuapp.com/callback"
-    #redirect_uri="http://127.0.0.1:8080/callback"
+    #redirect_uri="https://trentoneats.herokuapp.com/callback"
+    redirect_uri="http://127.0.0.1:8080/callback"
 )
 
 

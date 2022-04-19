@@ -46,16 +46,16 @@
 </div>
 <!-- Adding A Favorite [UNDER CONSTRUCTION]-->
 <div class="container" style="text-align: center; padding-top: 20px;">
-  <a href="test" class="list-group-item list-group-item-action">Add Favorite Restaurant</a>
+  <a href="added" id ="favoritebutton" class="list-group-item list-group-item-action"></a>
 </div>
 <!-- Adding a Review -->
 {% block header %}
-<div class="container" style="text-align: center; padding-top: 20px;">
+<div class="container" id="reviewTitle" style="text-align: center; padding-top: 20px;">
   <h1>{% block title2 %}Write a review for this restaurant!{% endblock %}</h1>
 </div>
 {% endblock %}
 {% block content2 %}
-<div class="container">
+<div class="container" id="review">
     <!-- This is the Post Method -->
 
   <form method="post">
@@ -290,10 +290,6 @@
           alert('Geocode was not successful for the following reason: ' + status);
         }
       });
-
-
-  
-    
     }
   </script>
   
@@ -302,7 +298,44 @@
     let link = "https://www.google.com/maps/dir//" + "{{ info['address'] }}";
     document.getElementById("directionsLink").href = link;
   </script>
+  <script>
+    let link = "https://www.google.com/maps/dir//" + "{{ info['address'] }}";
+    document.getElementById("directionsLink").href = link;
+  </script>
+
+  <!-- switching the href of the addfavorite test -->
+  <script type="text/javascript">
+
+    function favoriteButton(){
+        if("{{favorite}}" == -1 ) {
+            document.getElementById('favoritebutton').hidden = true;
+            document.getElementById('favoritebutton').innerHTML = "Not Logged In";
+        }
+        if("{{favorite}}" == 0 ) {
+          document.getElementById('favoritebutton').hidden = false;
+            document.getElementById('favoritebutton').innerHTML = "add favorite";
+        }
+        if("{{favorite}}" == 1 ) {
+            document.getElementById('favoritebutton').hidden = false;
+            document.getElementById('favoritebutton').innerHTML = "removeFavorite";
+        }
+
+    }
+    favoriteButton();
+    function isLoggedIn(){
+        if("{{loggedin}}" == "False" ) {
+          document.getElementById("reviewTitle").hidden = true;
+          document.getElementById("review").hidden = true;
+        }
+        if("{{loggedin}}" == "True" ) {
+          document.getElementById("reviewTitle").hidden = flase;
+          document.getElementById("review").hidden = false;
+        }
+    }
+    isLoggedIn();
 
 
+</script>
+  
 {% include 'footer.html' %}
 {% endblock %}
