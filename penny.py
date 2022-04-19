@@ -5,10 +5,11 @@
 
 #from time import localtime, asctime, strftime
 from urllib import response
+from add_requests import add_requests
 from flask import Flask, request, make_response, redirect, url_for, session
 from flask import render_template, abort
 # sfrom database import search
-from search import restaurant_search, get_restaurant_info
+from search import get_request_info, restaurant_search, get_restaurant_info, request_search
 from add_restaurant import add_restaurant
 
 from reviews import add_review, review_search
@@ -111,7 +112,9 @@ def authorized(function):
             return function()
     return wrapper2
 
-# Logged in Requirement 
+# Logged in Requirement
+
+
 def loggedin(function):
     def wrapper3(*args, **kwargs):
         unique_id = session.get('google_id')
@@ -124,25 +127,28 @@ def loggedin(function):
     return wrapper3
 # ---------------------------------------------------------
 
-# FAVORITE RESTAURANTS 
+# FAVORITE RESTAURANTS
+
 
 @app.route('/myfavorite', methods=['GET'])
 @loggedin
 def myrestaurant():
     unique_id = session.get('google_id')
     restaurantinfo = get_favorites(session["email"])
-    #for restaurant in favorites
+    # for restaurant in favorites
 
     #resid = favorites[1]
     #print("this is resid" + resid)
     #restaurantinfo = restaurant_search(resid)
     #html = render_template('myrestaurant.html', id=unique_id)
-    html = render_template('myfavorite.html', restaurantinfo = restaurantinfo)
+    html = render_template('myfavorite.html', restaurantinfo=restaurantinfo)
     response = make_response(html)
     return response
  # ---------------------------------------------------------
 
-# default 
+# default
+
+
 @app.route('/joinrestaurant', methods=['GET'])
 @authorized
 def joinrestaurant():
@@ -154,7 +160,9 @@ def joinrestaurant():
 
 # ---------------------------------------------------------
 
-# when submitted 
+# when submitted
+
+
 @app.route('/addrestaurant', methods=['GET'])
 def addrestaurant():
     restaurantName = request.args.get('restaurantName')
@@ -247,16 +255,29 @@ def addrestaurant():
     if priceNum >= 25:
         price = 'pricey'
 
-    add_restaurant(restaurantName=restaurantName,
-                   restaurantAddress=restaurantAddress,
-                   restaurantHours=restaurantHours,
-                   restaurantMenu=restaurantMenu,
-                   restaurantMedia=restaurantMedia,
-                   restaurantTags=restaurantTags,
-                   cuisine=cuisine,
-                   type=type,
-                   price=price,
-                   restaurantImage=restaurantImage)
+    # trying to add to requests table first
+
+    add_requests(restaurantName=restaurantName,
+                 restaurantAddress=restaurantAddress,
+                 restaurantHours=restaurantHours,
+                 restaurantMenu=restaurantMenu,
+                 restaurantMedia=restaurantMedia,
+                 restaurantTags=restaurantTags,
+                 cuisine=cuisine,
+                 type=type,
+                 price=price,
+                 restaurantImage=restaurantImage)
+
+    # add_restaurant(restaurantName=restaurantName,
+    #                restaurantAddress=restaurantAddress,
+    #                restaurantHours=restaurantHours,
+    #                restaurantMenu=restaurantMenu,
+    #                restaurantMedia=restaurantMedia,
+    #                restaurantTags=restaurantTags,
+    #                cuisine=cuisine,
+    #                type=type,
+    #                price=price,
+    #                restaurantImage=restaurantImage)
     unique_id = session.get('google_id')
     admin = is_admin()
     html = render_template('joinrestaurant.html', id=unique_id, admin=admin)
@@ -379,17 +400,15 @@ def test():
     response = make_response(html)
     return response
 
-    
-
     # html = render_template('resdetails.html', info=info,
     #                                         reviews=reviews, id=unique_id)
     # response = make_response(html)
     # return response
     # id = session['resid']
     # return redirect('/resdetails', id=id)
-    # # Info currently is: 
+    # # Info currently is:
     # info = get_restaurant_info(id)
-    # # This line is new. 
+    # # This line is new.
     # unique_id = session.get('google_id')
     # #html = render_template('resdetails.html', info=info, id=unique_id)
     # reviews = review_search(id)
@@ -412,8 +431,8 @@ flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/userinfo.profile",
             "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    redirect_uri="https://trentoneats.herokuapp.com/callback"
-    #redirect_uri="http://127.0.0.1:8080/callback"
+    # redirect_uri="https://trentoneats.herokuapp.com/callback"
+    redirect_uri="http://127.0.0.1:8080/callback"
 )
 
 
@@ -508,10 +527,101 @@ def authenticate():
     return session.get('name')
 
 
-@app.route('/requests', methods=['GET'])
-def reqeusts_area():
+# ------------------------------------------------------------------------
+# Handle admin requests
+
+
+@app.route('/requestresults', methods=['GET'])
+def request_results():
+    error_msg = request.args.get('error_msg')
+    if error_msg is None:
+        error_msg = ''
+
+    restaurant = request.args.get('restaurant')
+    if (restaurant is None) or (restaurant.split() == ""):
+        restaurant = ""
+
+    try:
+        restaurantinfo = request_search(restaurant)
+    except:
+        html = render_template('servererror.html')
+        response = make_response(html)
+        return response
+    if restaurantinfo == "stdservererr":
+        print("Standard server error")
+        response = make_response('<div><p>Standard Server Error</p></div>')
+        return response
     unique_id = session.get('google_id')
     admin = is_admin()
-    html = render_template('about.html', id=unique_id, admin=admin)
+    html = render_template('requestresults.html', restaurantinfo=restaurantinfo,
+                           id=unique_id, admin=admin)
+    response = make_response(html)
+
+    return response
+
+
+@app.route('/requests', methods=['GET'])
+def reqeusts_area():
+    error_msg = request.args.get('error_msg')
+    if error_msg is None:
+        error_msg = ''
+    unique_id = session.get('google_id')
+    admin = is_admin()
+    html = render_template(
+        'requestform.html', error_msg=error_msg, id=unique_id, admin=admin)
+    response = make_response(html)
+    return response
+
+
+@app.route('/requestdetails', methods=['GET', 'POST'])
+def request_details():
+    name = request.args.get('name')
+    id = request.args.get('id')
+    admin = is_admin()
+    session['resid'] = id
+    # Info currently is:
+    info = get_request_info(id)
+    # This line is new.
+    unique_id = session.get('google_id')
+    #html = render_template('resdetails.html', info=info, id=unique_id)
+
+    reviews = review_search(id)
+    # info_obj['name'] = str(row[0])
+    # info_obj['address'] = str(row[1])
+    # info_obj['hours'] = str(row[2])
+    # info_obj['open_closed'] = str(row[3])
+    # info_obj['menu'] = str(row[4])
+    # info_obj['media'] = str(row[5])
+    # info_obj['tags'] = str(row[6])
+    # info_obj['review_count'] = str(row[7])
+    # info_obj['stars'] = str(row[8])
+    # info_obj['image'] = str(row[9])
+
+    # Separate Code here
+    # Stmt
+    # reviews = db.execute(
+    # Just gotta fetch one of them. current_user_review = db.execute("SELECT * FROM reviews WHERE book_id=:book_id AND user_id=:user_id", {"book_id": book.id, "user_id": session["user_id"]}).fetchone()
+    #book_extra = goodreads_lookup(isbn)
+
+    if request.method == 'POST':
+        text = request.form['review-text']
+        rating = request.form['rating']
+        print(rating)
+        text = text.strip()
+        error = None
+        if not text:
+            error = 'You didn\'t add any new reviews.'
+        if error is None:
+            # Gotta figure out if its customer taht we still want to link for placeolder
+            # Currently, placeholder reviews are all -10
+            # NEed Cusomter Ids sorted out.
+            add_review(id, datetime.datetime.now(), text, rating)
+            # return redirect(url_for('review.dashboard'))
+            reviews = review_search(id)
+        # flash(error)
+        # return render_template('review/create.html')
+
+    html = render_template('requestdetails.html', info=info,
+                           reviews=reviews, id=unique_id, admin=admin)
     response = make_response(html)
     return response
