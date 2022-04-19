@@ -275,7 +275,26 @@
       });
       geocoder = new google.maps.Geocoder();
       codeAddress(geocoder, map);
-}
+
+      const successCallback = (position) => {
+        console.log(position)
+      }
+
+      const errorCallback = (error) => {
+        console.error(error)
+      }
+
+      navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+
+
+
+    }
+   
+
+
+
+    
+  
   
     function codeAddress(geocoder, map) {
       geocoder.geocode({'address': address}, function(results, status) {
@@ -290,10 +309,6 @@
           alert('Geocode was not successful for the following reason: ' + status);
         }
       });
-
-
-  
-    
     }
   </script>
   
