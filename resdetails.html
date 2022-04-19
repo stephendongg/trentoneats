@@ -310,13 +310,8 @@
 
     }
    
-
-
-
-    
   
-  
-    function codeAddress(geocoder, map) {
+    function codeAddress(geocoder, map, bounds) {
       geocoder.geocode({'address': address}, function(results, status) {
         if (status === 'OK') {
           map.setCenter(results[0].geometry.location);
@@ -324,6 +319,7 @@
             map: map,
             position: results[0].geometry.location
           });
+          bounds.extend(marker.position);
         } else {
           alert('Geocode was not successful for the following reason: ' + status);
         }
