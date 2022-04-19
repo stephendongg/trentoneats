@@ -454,7 +454,7 @@ def login():
     authorization_url, state = flow.authorization_url()
     # print(authorization_url)
     session["state"] = state
-    return redirect(authorization_url)
+    return redirect(str(authorization_url) + "&prompt=consent")
     # html = render_template('login.html')
     # response = make_response(html)
     # return response
@@ -509,6 +509,10 @@ def callback():
 @app.route('/logout', methods=['GET'])
 def logout():
     session.pop('name', None)
+    session.pop('state', None)
+    session.pop('email', None)
+    session.pop('google_id', None)
+    session.pop('resid', None)
     session.clear()
     return redirect("/")
 
