@@ -276,12 +276,16 @@
       geocoder = new google.maps.Geocoder();
       codeAddress(geocoder, map);
 
-      const successCallback = (position) => {
-        console.log(position)
+      const successCallback = (pos) => {
+        console.log(pos);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: pos
+          });
       }
 
       const errorCallback = (error) => {
-        console.error(error)
+        console.error(error);
       }
 
       navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
