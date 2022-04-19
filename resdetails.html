@@ -278,6 +278,7 @@
 
       const successCallback = (pos) => {
         console.log(pos);
+        console.log(pos[latitude]);
         var marker = new google.maps.Marker({
             map: map,
             position: pos
@@ -288,7 +289,7 @@
         console.error(error);
       }
 
-      navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+      const watchId = navigator.geolocation.watchPosition(successCallback, errorCallback);
 
 
 
@@ -304,7 +305,6 @@
       geocoder.geocode({'address': address}, function(results, status) {
         if (status === 'OK') {
           map.setCenter(results[0].geometry.location);
-          console.log(results[0].geometry.location)
           var marker = new google.maps.Marker({
             map: map,
             position: results[0].geometry.location
