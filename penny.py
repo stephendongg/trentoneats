@@ -112,7 +112,9 @@ def authorized(function):
             return function()
     return wrapper2
 
-# Logged in Requirement 
+# Logged in Requirement
+
+
 def loggedin(function):
     def wrapper3(*args, **kwargs):
         unique_id = session.get('google_id')
@@ -125,25 +127,28 @@ def loggedin(function):
     return wrapper3
 # ---------------------------------------------------------
 
-# FAVORITE RESTAURANTS 
+# FAVORITE RESTAURANTS
+
 
 @app.route('/myfavorite', methods=['GET'])
 @loggedin
 def myrestaurant():
     unique_id = session.get('google_id')
     restaurantinfo = get_favorites(session["email"])
-    #for restaurant in favorites
+    # for restaurant in favorites
 
     #resid = favorites[1]
     #print("this is resid" + resid)
     #restaurantinfo = restaurant_search(resid)
     #html = render_template('myrestaurant.html', id=unique_id)
-    html = render_template('myfavorite.html', restaurantinfo = restaurantinfo)
+    html = render_template('myfavorite.html', restaurantinfo=restaurantinfo)
     response = make_response(html)
     return response
  # ---------------------------------------------------------
 
-# default 
+# default
+
+
 @app.route('/joinrestaurant', methods=['GET'])
 @authorized
 def joinrestaurant():
@@ -155,7 +160,9 @@ def joinrestaurant():
 
 # ---------------------------------------------------------
 
-# when submitted 
+# when submitted
+
+
 @app.route('/addrestaurant', methods=['GET'])
 def addrestaurant():
     restaurantName = request.args.get('restaurantName')
@@ -393,17 +400,15 @@ def test():
     response = make_response(html)
     return response
 
-    
-
     # html = render_template('resdetails.html', info=info,
     #                                         reviews=reviews, id=unique_id)
     # response = make_response(html)
     # return response
     # id = session['resid']
     # return redirect('/resdetails', id=id)
-    # # Info currently is: 
+    # # Info currently is:
     # info = get_restaurant_info(id)
-    # # This line is new. 
+    # # This line is new.
     # unique_id = session.get('google_id')
     # #html = render_template('resdetails.html', info=info, id=unique_id)
     # reviews = review_search(id)
@@ -426,13 +431,8 @@ flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/userinfo.profile",
             "https://www.googleapis.com/auth/userinfo.email", "openid"],
-<<<<<<< Updated upstream
-    redirect_uri="https://trentoneats.herokuapp.com/callback"
-    #redirect_uri="http://127.0.0.1:8080/callback"
-=======
     # redirect_uri="https://trentoneats.herokuapp.com/callback"
     redirect_uri="http://127.0.0.1:8080/callback"
->>>>>>> Stashed changes
 )
 
 
