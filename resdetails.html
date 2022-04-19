@@ -274,7 +274,6 @@
         zoom: 16,
         center: {lat: -34.397, lng: 150.644}
       });
-      var bounds = new google.maps.LatLngBounds();
       geocoder = new google.maps.Geocoder();
       
       codeAddress(geocoder, map);
@@ -295,8 +294,6 @@
             },
           });
 
-        bounds.extend(marker.position);
-        map.fitBounds(bounds);
       }
 
       const errorCallback = (error) => {
@@ -310,8 +307,7 @@
       //THIRD ARGUMENT TO GET CURRENT POSITION
 
     }
-   
-  
+    
     function codeAddress(geocoder, map, bounds) {
       geocoder.geocode({'address': address}, function(results, status) {
         if (status === 'OK') {
