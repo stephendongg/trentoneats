@@ -15,7 +15,14 @@
           <h5 class="mb-1"><strong>{{restaurant.get_name()}}</strong></h5>
           <!--add stars here ; need to grab from database-->
           <div class="Stars" style="--rating: {{restaurant.get_stars()}};"
-            aria-label="Rating of this restaurant is {{restaurant.get_stars()}} out of 5."></div>
+            aria-label="Rating of this restaurant is {{restaurant.get_stars()}} out of 5.">
+
+            <!-- <form action="/requests" method="post">
+              <button type="submit" name="submit_button" value="Approve">Approve</button>
+              <button type="submit" name="submit_button" value="Deny">Deny</button>
+            </form> -->
+
+          </div>
         </div>
         <p class="mb-1">{{restaurant.get_address()}}</p>
         <span class="badge badge-info badge-pill i"></span>
@@ -25,6 +32,12 @@
 
       </a>
     </div>
+
+
+    <!-- <form action="/requests" method="post">
+      <button type="submit" name="submit_button" value="Approve">Approve</button>
+      <button type="submit" name="submit_button" value="Deny">Deny</button>
+    </form> -->
 
 
     <!--Function to get whether restaurant is open or closed-->
