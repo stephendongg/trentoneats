@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-md-6" id="map">
                 </div>
-                <script async
+                <script async defer
                     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGum5waTdk-9CADxl2qUegf1d4kzm146U&callback=initMap">
                 </script>
                 <div class="col-md-6">
@@ -270,6 +270,7 @@
     address = "{{ info['address'] }}";
   
     function initMap() {
+      console.log("HERE")
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 16,
         center: {lat: -34.397, lng: 150.644}
@@ -307,7 +308,7 @@
       //THIRD ARGUMENT TO GET CURRENT POSITION
 
     }
-    
+
     function codeAddress(geocoder, map, bounds) {
       geocoder.geocode({'address': address}, function(results, status) {
         if (status === 'OK') {
