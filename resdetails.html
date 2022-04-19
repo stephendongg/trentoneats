@@ -266,7 +266,7 @@
 <script>
     var geocoder;
     var map;
-    var bounds = new google.maps.LatLngBounds();
+
     address = "{{ info['address'] }}";
   
     function initMap() {
@@ -274,6 +274,7 @@
         zoom: 16,
         center: {lat: -34.397, lng: 150.644}
       });
+      var bounds = new google.maps.LatLngBounds();
       geocoder = new google.maps.Geocoder();
       codeAddress(geocoder, map);
 
