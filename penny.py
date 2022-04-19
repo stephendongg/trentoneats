@@ -8,6 +8,7 @@ from urllib import response
 from add_requests import add_requests
 from flask import Flask, request, make_response, redirect, url_for, session
 from flask import render_template, abort
+from requestshelper import delete_request, delete_request_add_res
 # sfrom database import search
 from search import get_request_info, restaurant_search, get_restaurant_info, request_search
 from add_restaurant import add_restaurant
@@ -134,6 +135,7 @@ def loggedin(function):
 @loggedin
 def myrestaurant():
     unique_id = session.get('google_id')
+    admin = is_admin()
     restaurantinfo = get_favorites(session["email"])
     # for restaurant in favorites
 
@@ -141,7 +143,8 @@ def myrestaurant():
     #print("this is resid" + resid)
     #restaurantinfo = restaurant_search(resid)
     #html = render_template('myrestaurant.html', id=unique_id)
-    html = render_template('myfavorite.html', restaurantinfo=restaurantinfo)
+    html = render_template('myfavorite.html', restaurantinfo=restaurantinfo,
+                           admin=admin)
     response = make_response(html)
     return response
  # ---------------------------------------------------------
@@ -298,7 +301,7 @@ def resdetails():
 
     reviews = review_search(id)
 
-    # OK HERE IS FAVORITE INFO! 
+    # OK HERE IS FAVORITE INFO!
 
     favorite = -1
     # -1 - not logged in, 1 = favorite, 0 = not favorite
@@ -350,15 +353,13 @@ def test():
     # This line is new.
     #html = render_template('resdetails.html', info=info, id=unique_id)
 
-    
-
     # -- ADD TO FAVORITE --
     if (not is_favorite_restaurant(session["email"], id)):
         add_favorite_restaurant(session["email"], id)
     else:
         delete_favorite_restaurant(session["email"], id)
         # HOW DO I MAKE THIS DISSAPEAR.
-    
+
     # -1 - not logged in, 1 = favorite, 0 = not favorite
     if (not session.get("email") is None):
         if is_favorite_restaurant(session["email"], id):
@@ -372,7 +373,6 @@ def test():
     else:
         isLoggedin = False
 
-    
     if request.method == 'POST':
         text = request.form['review-text']
         rating = request.form['rating']
@@ -427,8 +427,8 @@ flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/userinfo.profile",
             "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    redirect_uri="https://trentoneats.herokuapp.com/callback"
-    #redirect_uri="http://127.0.0.1:8080/callback"
+    # redirect_uri="https://trentoneats.herokuapp.com/callback"
+    redirect_uri="http://127.0.0.1:8080/callback"
 )
 
 
@@ -604,22 +604,15 @@ def request_details():
     #book_extra = goodreads_lookup(isbn)
 
     if request.method == 'POST':
-        text = request.form['review-text']
-        rating = request.form['rating']
-        print(rating)
-        text = text.strip()
-        error = None
-        if not text:
-            error = 'You didn\'t add any new reviews.'
-        if error is None:
-            # Gotta figure out if its customer taht we still want to link for placeolder
-            # Currently, placeholder reviews are all -10
-            # NEed Cusomter Ids sorted out.
-            add_review(id, datetime.datetime.now(), text, rating)
-            # return redirect(url_for('review.dashboard'))
-            reviews = review_search(id)
-        # flash(error)
-        # return render_template('review/create.html')
+        if request.form['submit_button'] == 'Deny':
+            print("DENY CLICKED")
+            delete_request(id)
+            html = render_template('requestform.html', info=info,
+                                   reviews=reviews, id=unique_id, admin=admin)
+            response = make_response(html)
+            return response
+        elif request.form['submit_button'] == 'Approve':
+            delete_request_add_res(id)
 
     html = render_template('requestdetails.html', info=info,
                            reviews=reviews, id=unique_id, admin=admin)

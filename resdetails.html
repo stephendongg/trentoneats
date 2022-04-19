@@ -2,66 +2,69 @@
 {% block title %} Best Restaurants in Trenton | Trenton Local Eats {% endblock %}
 {% block content %}
 <div class="container-fluid pt-5 pb-5 bg-info">
-    <div class="row">
-        <div class="col-sm-6">
-            <!-- <img src= {{info['open_closed']}} class="img-thumbnail"> -->
-            <!-- <img src="{{info['image']}}" class="img-thumbnail"> -->
-            <img id="temp" src="https://thumbor.thedailymeal.com/8luyHYVfcVm8WSPXT-FVz9Ub_kU=/870x565/filters:format(webp)/https://www.thedailymeal.com/sites/default/files/slides/1-tacobell-wiki-sphilbrick.JPG" class="img-thumbnail">
-        </div>
-        <div class="col-sm-6">
-            <div class="container-fluid bg-light">
-            <h2 class="restOfHeader">{{info['name']}}</h2>
-            </div>
-            <h3 class="resDetails">Location & Hours</h3>
-            <div class="row">
-                <div class="col-md-6" id="map">
-                </div>
-                <script async
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGum5waTdk-9CADxl2qUegf1d4kzm146U&callback=initMap">
-                </script>
-                <div class="col-md-6">
-                    <h4 class="resDetails"><strong id="OpenClose"></strong></h4>
-                    <h4 class="resDetails" id="MondayHours"></h4>
-                    <h4 class="resDetails" id="TuesdayHours"></h4>
-                    <h4 class="resDetails" id="WednesdayHours"></h4>
-                    <h4 class="resDetails" id="ThursdayHours"></h4>
-                    <h4 class="resDetails" id="FridayHours"></h4>
-                    <h4 class="resDetails" id="SaturdayHours"></h4>
-                    <h4 class="resDetails" id="SundayHours"></h4>
-                </div>
-                <div class="col-sm-4 pt-3">
-                    <h4 class="resDetails"><i class="bi bi-geo-alt-fill"></i>{{ info['address'] }}</h4>
-                  </div>
-                  <div class="col-sm-2 p-3">
-                    <a href="" target="__blank__" class="btn btn-light" id="directionsLink"><strong>Get Directions <i class="bi bi-box-arrow-up-right"></i></strong></a>
-                  </div>
-                  <div class="col-sm-6 p-3">
-                      <h4 class="resDetails"><strong>Cuisine: </strong> {{info['cuisine']}}</h4>
-                      <h4 class="resDetails"><strong>Price: </strong> {{info['price']}}</h4>
-                      <h4 class="resDetails"><strong>Type: </strong> {{info['type']}}</h4>
-                  </div>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <!-- <img src= {{info['open_closed']}} class="img-thumbnail"> -->
+      <!-- <img src="{{info['image']}}" class="img-thumbnail"> -->
+      <img id="temp"
+        src="https://thumbor.thedailymeal.com/8luyHYVfcVm8WSPXT-FVz9Ub_kU=/870x565/filters:format(webp)/https://www.thedailymeal.com/sites/default/files/slides/1-tacobell-wiki-sphilbrick.JPG"
+        class="img-thumbnail">
     </div>
+    <div class="col-sm-6">
+      <div class="container-fluid bg-light">
+        <h2 class="restOfHeader">{{info['name']}}</h2>
+      </div>
+      <h3 class="resDetails">Location & Hours</h3>
+      <div class="row">
+        <div class="col-md-6" id="map">
+        </div>
+        <script async
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGum5waTdk-9CADxl2qUegf1d4kzm146U&callback=initMap">
+          </script>
+        <div class="col-md-6">
+          <h4 class="resDetails"><strong id="OpenClose"></strong></h4>
+          <h4 class="resDetails" id="MondayHours"></h4>
+          <h4 class="resDetails" id="TuesdayHours"></h4>
+          <h4 class="resDetails" id="WednesdayHours"></h4>
+          <h4 class="resDetails" id="ThursdayHours"></h4>
+          <h4 class="resDetails" id="FridayHours"></h4>
+          <h4 class="resDetails" id="SaturdayHours"></h4>
+          <h4 class="resDetails" id="SundayHours"></h4>
+        </div>
+        <div class="col-sm-4 pt-3">
+          <h4 class="resDetails"><i class="bi bi-geo-alt-fill"></i>{{ info['address'] }}</h4>
+        </div>
+        <div class="col-sm-2 p-3">
+          <a href="" target="__blank__" class="btn btn-light" id="directionsLink"><strong>Get Directions <i
+                class="bi bi-box-arrow-up-right"></i></strong></a>
+        </div>
+        <div class="col-sm-6 p-3">
+          <h4 class="resDetails"><strong>Cuisine: </strong> {{info['cuisine']}}</h4>
+          <h4 class="resDetails"><strong>Price: </strong> {{info['price']}}</h4>
+          <h4 class="resDetails"><strong>Type: </strong> {{info['type']}}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- Adding A Favorite [UNDER CONSTRUCTION]-->
 <div class="container" style="text-align: center; padding-top: 20px;">
-  <a href="added" id ="favoritebutton" class="list-group-item list-group-item-action"></a>
+  <a href="test" class="list-group-item list-group-item-action">Add Favorite Restaurant</a>
 </div>
 <!-- Adding a Review -->
 {% block header %}
-<div class="container" id="reviewTitle" style="text-align: center; padding-top: 20px;">
+<div class="container" style="text-align: center; padding-top: 20px;">
   <h1>{% block title2 %}Write a review for this restaurant!{% endblock %}</h1>
 </div>
 {% endblock %}
 {% block content2 %}
-<div class="container" id="review">
-    <!-- This is the Post Method -->
+<div class="container">
+  <!-- This is the Post Method -->
 
   <form method="post">
     <div class="form-group">
-        <label for="rating">Give a Rating: </label>
-        <!--<select id="rating" name="rating">
+      <label for="rating">Give a Rating: </label>
+      <!--<select id="rating" name="rating">
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -69,25 +72,19 @@
             <option value="4">4</option>
             <option value="5">5</option>
         </select>-->
-        <br>
-        <label class="rating-label">
-          <input
-            class="user_rating"
-            max="5"
-            oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)"
-            step="0.5"
-            style="--value:2.5"
-            type="range"
-            value="2.5">
-        </label>
-        <br>
+      <br>
+      <label class="rating-label">
+        <input class="user_rating" max="5" oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)"
+          step="0.5" style="--value:2.5" type="range" value="2.5">
+      </label>
+      <br>
       <label for="exampleFormControlTextarea1">Your review:</label>
-        <!-- Add icon library -->
-        
-      <textarea class="form-control" rows="3" name="review-text">   
+      <!-- Add icon library -->
+
+      <textarea class="form-control" rows="3" name="review-text">
       </textarea>
     </div>
-    <button class="btn btn-primary" type="submit" style = "margin-bottom: 10px;">Submit</button>
+    <button class="btn btn-primary" type="submit" style="margin-bottom: 10px;">Submit</button>
 
   </form>
 </div>
@@ -98,274 +95,243 @@
   <blockquote class="blockquote">
     <p class="mb-0">{{ review[1] }}</p>
       <footer class="blockquote-footer"> -->
-        <!-- From @{{ review[0].split("@")[0] }} -->
-       <!-- From @{{ review[0] }}
+<!-- From @{{ review[0].split("@")[0] }} -->
+<!-- From @{{ review[0] }}
       </footer>
   </blockquote>
 {% endfor %} -->
 
 
 <div class="container-fluid pt-5 pb-5 bg-info">
-    <h2 class="restOfHeader">Details</h2>
-    <h4 class="resDetails" id="mediaLink"><strong>Official Website: </strong><a href="{{info['media']}}" target="__blank__">{{info['media']}}</a></h4>
-    <h4 class="resDetails"><strong>Review Count: </strong> {{info['review_count']}}</h4>
-    <h4 class="resDetails"><strong>Stars: </strong> <div class="Stars_Deets" style="--rating: {{info['stars']}};"></div> </h4>
-    <h4 class="resDetails" id="menuLink"><a href="{{info['menu']}}" class="btn btn-primary btn-lg" target="__blank__" id="menuLink">Menu <i class="bi bi-box-arrow-up-right"></i></a></h4>
-    <!--create a reviews carousel-->
-     <!--use reviews table for each restaurant and populate panel with each review (for loop with jinja scripts)-->
-     <div id="demo" class="carousel slide" data-ride="carousel">
-        <!-- Add indicators -->
-        <ul class="carousel-indicators">
-          {% for review in reviews %}
-          {% if loop.index0 == 0 %}
-          <li data-target="#demo" data-slide-to="0" class="active"></li>
-          {% else %}
-          <li data-target="#demo" data-slide-to="{{loop.index0}}"></li>
-           {% endif %}
-           {% endfor %}
-        </ul>
+  <h2 class="restOfHeader">Details</h2>
+  <h4 class="resDetails" id="mediaLink"><strong>Official Website: </strong><a href="{{info['media']}}"
+      target="__blank__">{{info['media']}}</a></h4>
+  <h4 class="resDetails"><strong>Review Count: </strong> {{info['review_count']}}</h4>
+  <h4 class="resDetails"><strong>Stars: </strong>
+    <div class="Stars_Deets" style="--rating: {{info['stars']}};"></div>
+  </h4>
+  <h4 class="resDetails" id="menuLink"><a href="{{info['menu']}}" class="btn btn-primary btn-lg" target="__blank__"
+      id="menuLink">Menu <i class="bi bi-box-arrow-up-right"></i></a></h4>
+  <!--create a reviews carousel-->
+  <!--use reviews table for each restaurant and populate panel with each review (for loop with jinja scripts)-->
+  <div id="demo" class="carousel slide" data-ride="carousel">
+    <!-- Add indicators -->
+    <ul class="carousel-indicators">
+      {% for review in reviews %}
+      {% if loop.index0 == 0 %}
+      <li data-target="#demo" data-slide-to="0" class="active"></li>
+      {% else %}
+      <li data-target="#demo" data-slide-to="{{loop.index0}}"></li>
+      {% endif %}
+      {% endfor %}
+    </ul>
 
-        <!-- The slideshow; this is what to fill in with reviews table -->
-        <div class="reviews">
-        <div class="carousel-inner">
-          {% for review in reviews %}
-          {% if loop.index0 == 0 %}
-          <div class="carousel-item active">
-            <p>{{ review[1] }}</p>
-            <h8 style="text-align: center;">From @{{ review[0] }}</h8>
-          </div>
-          {% else %}
-          <div class="carousel-item">
-            <p>{{ review[1] }}</p>
-            <h8>From @{{ review[0] }}</h8>
-          </div>
-          {% endif %}
-          {% endfor %}
+    <!-- The slideshow; this is what to fill in with reviews table -->
+    <div class="reviews">
+      <div class="carousel-inner">
+        {% for review in reviews %}
+        {% if loop.index0 == 0 %}
+        <div class="carousel-item active">
+          <p>{{ review[1] }}</p>
+          <h8 style="text-align: center;">From @{{ review[0] }}</h8>
         </div>
-
-        {% if reviews|length > 0 %}
-        <!-- Left and right controls -->
-        <a class="carousel-control-prev" href="#demo" data-slide="prev">
-          <span class="carousel-control-prev-icon"></span>
-        </a>
-        <a class="carousel-control-next" href="#demo" data-slide="next">
-          <span class="carousel-control-next-icon"></span>
-        </a>
+        {% else %}
+        <div class="carousel-item">
+          <p>{{ review[1] }}</p>
+          <h8>From @{{ review[0] }}</h8>
+        </div>
         {% endif %}
-
+        {% endfor %}
       </div>
+
+      {% if reviews|length > 0 %}
+      <!-- Left and right controls -->
+      <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
+      {% endif %}
+
     </div>
+  </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 <!--Javascript code to remove link if there is no media/menu-->
 <script type="text/javascript">
 
-    function myFunction(){
-        if("{{info['media']}}" == "None") {
-            document.getElementById('mediaLink').innerHTML = "";
-        }
-
+  function myFunction() {
+    if ("{{info['media']}}" == "None") {
+      document.getElementById('mediaLink').innerHTML = "";
     }
-    myFunction();
+
+  }
+  myFunction();
 
 </script>
 
 <script type="text/javascript">
 
-    function myFunction(){
-        if("{{info['menu']}}" == "None") {
-            document.getElementById('menuLink').innerHTML = "";
-        }
-
+  function myFunction() {
+    if ("{{info['menu']}}" == "None") {
+      document.getElementById('menuLink').innerHTML = "";
     }
-    myFunction();
+
+  }
+  myFunction();
 
 </script>
 
 <!--Javascript code to add restaurant image to details page -->
 <script type="text/javascript">
 
-    function myFunction(){
-        if("{{info['image']}}" != "None") {
-            document.getElementById('temp').src = "{{info['image']}}";
-        }
-
+  function myFunction() {
+    if ("{{info['image']}}" != "None") {
+      document.getElementById('temp').src = "{{info['image']}}";
     }
-    myFunction();
+
+  }
+  myFunction();
 
 </script>
 
 <!--Function to get whether restaurant is open or closed-->
 <script>
-    'use strict';
+  'use strict';
 
 
-    function statusFunc() {
-      let status = "{{ info['open_closed'] }}";
-      let node = document.getElementById("OpenClose");
-      if (status == "True"){
-        node.innerHTML = "Open now";
-      }
-      else {
-        node.innerHTML = "Closed now";
-      }
+  function statusFunc() {
+    let status = "{{ info['open_closed'] }}";
+    let node = document.getElementById("OpenClose");
+    if (status == "True") {
+      node.innerHTML = "Open now";
     }
+    else {
+      node.innerHTML = "Closed now";
+    }
+  }
 
-    statusFunc();
+  statusFunc();
 </script>
 
 <script>
-    'use strict';
-    let resData = "{{ info }}";
+  'use strict';
+  let resData = "{{ info }}";
 
-    // Find index in split where hours are
-    let hours = resData.split(/&#39|&#34/);
-    let hoursIndex = 0;
-    for (let i = 0; i < hours.length; i++){
-        if (hours[i].includes('AM') & hours[i].includes('day')) {
-            hoursIndex = i;
-        }
+  // Find index in split where hours are
+  let hours = resData.split(/&#39|&#34/);
+  let hoursIndex = 0;
+  for (let i = 0; i < hours.length; i++) {
+    if (hours[i].includes('AM') & hours[i].includes('day')) {
+      hoursIndex = i;
     }
-    hours = hours[hoursIndex].split(";")[1];
-    hours = hours.split(",");
-    let hourNode = document.getElementById("MondayHours");
-    hourNode.innerHTML = hours[0];
-    if (typeof hours[1] != 'undefined'){
-        hourNode = document.getElementById("TuesdayHours");
-        hourNode.innerHTML = hours[1];
-    }
-    if (typeof hours[2] != 'undefined'){
-        hourNode = document.getElementById("WednesdayHours");
-        hourNode.innerHTML = hours[2];
-    }
-    if (typeof hours[3] != 'undefined'){
-        hourNode = document.getElementById("ThursdayHours");
-        hourNode.innerHTML = hours[3];
-    }
-    if (typeof hours[4] != 'undefined'){
-        hourNode = document.getElementById("FridayHours");
-        hourNode.innerHTML = hours[4];
-    }
-    if (typeof hours[5] != 'undefined'){
-        hourNode = document.getElementById("SaturdayHours");
-        hourNode.innerHTML = hours[5];
-    }
-    if (typeof hours[6] != 'undefined'){
-        hourNode = document.getElementById("SundayHours");
-        hourNode.innerHTML = hours[6];
-    }
+  }
+  hours = hours[hoursIndex].split(";")[1];
+  hours = hours.split(",");
+  let hourNode = document.getElementById("MondayHours");
+  hourNode.innerHTML = hours[0];
+  if (typeof hours[1] != 'undefined') {
+    hourNode = document.getElementById("TuesdayHours");
+    hourNode.innerHTML = hours[1];
+  }
+  if (typeof hours[2] != 'undefined') {
+    hourNode = document.getElementById("WednesdayHours");
+    hourNode.innerHTML = hours[2];
+  }
+  if (typeof hours[3] != 'undefined') {
+    hourNode = document.getElementById("ThursdayHours");
+    hourNode.innerHTML = hours[3];
+  }
+  if (typeof hours[4] != 'undefined') {
+    hourNode = document.getElementById("FridayHours");
+    hourNode.innerHTML = hours[4];
+  }
+  if (typeof hours[5] != 'undefined') {
+    hourNode = document.getElementById("SaturdayHours");
+    hourNode.innerHTML = hours[5];
+  }
+  if (typeof hours[6] != 'undefined') {
+    hourNode = document.getElementById("SundayHours");
+    hourNode.innerHTML = hours[6];
+  }
 
 </script>
 
 <!--Google Maps API-->
 
 <script>
-    var geocoder;
-    var map;
-    address = "{{ info['address'] }}";
+  var geocoder;
+  var map;
+  address = "{{ info['address'] }}";
 
-    function initMap() {
+  function initMap() {
 
-      var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 16,
-        center: {lat: -34.397, lng: 150.644}
-      });
-      geocoder = new google.maps.Geocoder();
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 16,
+      center: {lat: -34.397, lng: 150.644}
+    });
+    geocoder = new google.maps.Geocoder();
 
-      codeAddress(geocoder, map);
+    codeAddress(geocoder, map);
 
-      const successCallback = (pos) => {
-        console.log(pos);
-        console.log(pos.coords.latitude);
+    const successCallback = (pos) => {
+      console.log(pos);
+      console.log(pos.coords.latitude);
+      var marker = new google.maps.Marker({
+          map: map,
+          position: { lat: pos.coords.latitude, lng: pos.coords.longitude},
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 10,
+            fillOpacity: 1,
+            strokeWeight: 2,
+            fillColor: '#5384ED',
+            strokeColor: '#ffffff',
+          },
+        });
+    }
+
+    const errorCallback = (error) => {
+      console.error(error);
+    }
+
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+
+    // const watchId = navigator.geolocation.watchPosition(successCallback, errorCallback);
+
+    //THIRD ARGUMENT TO GET CURRENT POSITION
+
+  }
+
+  function codeAddress(geocoder, map, bounds) {
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status === 'OK') {
+        map.setCenter(results[0].geometry.location);
         var marker = new google.maps.Marker({
-            map: map,
-            position: { lat: pos.coords.latitude, lng: pos.coords.longitude},
-            icon: {
-              path: google.maps.SymbolPath.CIRCLE,
-              scale: 10,
-              fillOpacity: 1,
-              strokeWeight: 2,
-              fillColor: '#5384ED',
-              strokeColor: '#ffffff',
-            },
-          });
-
+          map: map,
+          position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
       }
-
-      const errorCallback = (error) => {
-        console.error(error);
-      }
-
-      navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-
-      // const watchId = navigator.geolocation.watchPosition(successCallback, errorCallback);
-
-      //THIRD ARGUMENT TO GET CURRENT POSITION
-
-    }
-
-    function codeAddress(geocoder, map, bounds) {
-      geocoder.geocode({'address': address}, function(results, status) {
-        if (status === 'OK') {
-          map.setCenter(results[0].geometry.location);
-          var marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location
-          });
-        } else {
-          alert('Geocode was not successful for the following reason: ' + status);
-        }
-      });
-    }
-  </script>
-  
-  <!--Function to make directions link for Google Maps-->
-  <script>
-    let link = "https://www.google.com/maps/dir//" + "{{ info['address'] }}";
-    document.getElementById("directionsLink").href = link;
-  </script>
-  <script>
-    let link = "https://www.google.com/maps/dir//" + "{{ info['address'] }}";
-    document.getElementById("directionsLink").href = link;
-  </script>
-
-  <!-- switching the href of the addfavorite test -->
-  <script type="text/javascript">
-
-    function favoriteButton(){
-        if("{{favorite}}" == -1 ) {
-            document.getElementById('favoritebutton').hidden = true;
-            document.getElementById('favoritebutton').innerHTML = "Not Logged In";
-        }
-        if("{{favorite}}" == 0 ) {
-          document.getElementById('favoritebutton').hidden = false;
-            document.getElementById('favoritebutton').innerHTML = "add favorite";
-        }
-        if("{{favorite}}" == 1 ) {
-            document.getElementById('favoritebutton').hidden = false;
-            document.getElementById('favoritebutton').innerHTML = "removeFavorite";
-        }
-
-    }
-    favoriteButton();
-    function isLoggedIn(){
-        if("{{loggedin}}" == "False" ) {
-          document.getElementById("reviewTitle").hidden = true;
-          document.getElementById("review").hidden = true;
-        }
-        if("{{loggedin}}" == "True" ) {
-          document.getElementById("reviewTitle").hidden = flase;
-          document.getElementById("review").hidden = false;
-        }
-    }
-    isLoggedIn();
-
-
+    });
+  }
 </script>
-  
+
+<!--Function to make directions link for Google Maps-->
+<script>
+  let link = "https://www.google.com/maps/dir//" + "{{ info['address'] }}";
+  document.getElementById("directionsLink").href = link;
+</script>
+
+
 {% include 'footer.html' %}
 {% endblock %}

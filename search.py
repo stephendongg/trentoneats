@@ -210,7 +210,7 @@ def get_request_info(res_id):
                 stmt_str = "SELECT name, address, hours, open_closed, menu, "
                 stmt_str += "media, tags, review_count, stars, image, "
                 stmt_str += "price, cuisine, type FROM requests "
-                stmt_str += "WHERE restaurant_id = '" + res_id + "'; "
+                stmt_str += "WHERE request_id = '" + res_id + "'; "
 
                 cursor.execute(stmt_str)
                 print(stmt_str)
