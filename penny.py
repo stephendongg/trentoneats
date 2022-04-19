@@ -74,23 +74,7 @@ def search_results():
     response = make_response(html)
     
     return response
-# ---------------------------------------------------------
 
-
-
-@app.route('/myrestaurant', methods=['GET'])
-def myrestaurant():
-    unique_id = session.get('google_id')
-    favorites = get_favorites(session["email"])
-    #for restaurant in favorites
-
-    resid = favorites[1]
-    print("this is resid" + resid)
-    restaurantinfo = restaurant_search(resid)
-    #html = render_template('myrestaurant.html', id=unique_id)
-    html = render_template('myrestaurant.html', restaurantinfo = restaurantinfo)
-    response = make_response(html)
-    return response
 
 
 # ---------------------------------------------------------
@@ -118,7 +102,39 @@ def authorized(function):
 
     return wrapper2
 
+# Logged in Requirement 
+def loggedin(function):
+    def wrapper3(*args, **kwargs):
+        unique_id = session.get('google_id')
+        if (session.get("email") is None):
+            html = render_template('unauthorized_login.html', id=unique_id)
+            response = make_response(html)
+            return response
+        else:
+            return function()
 
+    return wrapper3
+# ---------------------------------------------------------
+
+# FAVORITE RESTAURANTS 
+
+@app.route('/myfavorite', methods=['GET'])
+@loggedin
+def myrestaurant():
+    unique_id = session.get('google_id')
+    restaurantinfo = get_favorites(session["email"])
+    #for restaurant in favorites
+
+    #resid = favorites[1]
+    #print("this is resid" + resid)
+    #restaurantinfo = restaurant_search(resid)
+    #html = render_template('myrestaurant.html', id=unique_id)
+    html = render_template('myfavorite.html', restaurantinfo = restaurantinfo)
+    response = make_response(html)
+    return response
+ # ---------------------------------------------------------
+
+# default 
 @app.route('/joinrestaurant', methods=['GET'])
 @authorized
 def joinrestaurant():
@@ -129,8 +145,9 @@ def joinrestaurant():
 
 # ---------------------------------------------------------
 
-
+# when submitted 
 @app.route('/addrestaurant', methods=['GET'])
+@authorized
 def addrestaurant():
     restaurantName = request.args.get('restaurantName')
     if restaurantName is None or restaurantName.split()=="":
@@ -350,23 +367,23 @@ def test():
 
     
 
-    html = render_template('resdetails.html', info=info,
-                                            reviews=reviews, id=unique_id)
-    response = make_response(html)
-    return response
-    id = session['resid']
-    return redirect('/resdetails', id=id)
-    # Info currently is: 
-    info = get_restaurant_info(id)
-    # This line is new. 
-    unique_id = session.get('google_id')
-    #html = render_template('resdetails.html', info=info, id=unique_id)
-    reviews = review_search(id)
+    # html = render_template('resdetails.html', info=info,
+    #                                         reviews=reviews, id=unique_id)
+    # response = make_response(html)
+    # return response
+    # id = session['resid']
+    # return redirect('/resdetails', id=id)
+    # # Info currently is: 
+    # info = get_restaurant_info(id)
+    # # This line is new. 
+    # unique_id = session.get('google_id')
+    # #html = render_template('resdetails.html', info=info, id=unique_id)
+    # reviews = review_search(id)
 
-    html = render_template('resdetails.html', info=info,
-                                            reviews=reviews, id=unique_id)
-    response = make_response(html)
-    return responsez
+    # html = render_template('resdetails.html', info=info,
+    #                                         reviews=reviews, id=unique_id)
+    # response = make_response(html)
+    # return responsez
 # ---------------------------------------------------------
 
 
@@ -381,8 +398,8 @@ flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/userinfo.profile",
             "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    redirect_uri="https://trentoneats.herokuapp.com/callback"
-    #redirect_uri="http://127.0.0.1:8080/callback"
+    #redirect_uri="https://trentoneats.herokuapp.com/callback"
+    redirect_uri="http://127.0.0.1:8080/callback"
 )
 
 

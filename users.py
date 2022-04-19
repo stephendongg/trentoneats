@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""This is reviews.py"""
+"""This is users.py.py"""
 # -----------------------------------------------------------------------
 # reviews.py
 # -----------------------------------------------------------------------
@@ -18,6 +18,7 @@ from contextlib import closing
 # from sqlite3 import connect
 from psycopg2 import connect, DatabaseError
 import psycopg2
+import restaurant
 import argparse
 # loading
 
@@ -171,8 +172,52 @@ def is_favorite_restaurant(email, restaurantid):
         print(sys.argv[0] + ": " + str(error), file=stderr)
         return ("stdservererr")
 
+
+
+def findinfo(id): 
+        """search through restaurants"""
+        try:
+            #with connect(host='localhost', port=5432, user='rmd', password='xxx',
+            #              database="trentoneats") as connection:
+            # dequ5ope4nuoit
+            with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+                        database="dequ5ope4nuoit") as connection:
+
+                with closing(connection.cursor()) as cursor:
+                    # This needs to be adjusted
+                    stmt_str = "SELECT restaurant_id, name, open_closed, address, "
+                    stmt_str += "stars, cuisine, type, price, tags "
+                    stmt_str += "FROM restaurants "
+                    stmt_str += "WHERE restaurant_id = '" + str(id) + "';"
+
+                    #print(input)
+                    cursor.execute(stmt_str, [id])
+                    row = cursor.fetchone()
+
+                    # course list
+
+                    # rowstringlist this rowstring will contain all of the necessary values
+
+                    rowstring = ["", "", "", "", "", "", "", "", ""]
+
+                    # This iwll parse through the rows and get all of the necsary values
+                    rowstring[0] = row[0]
+                    rowstring[1] = row[1]
+                    rowstring[2] = row[2]
+                    rowstring[3] = row[3]
+                    rowstring[4] = row[4]
+                    rowstring[5] = row[5]
+                    rowstring[6] = row[6]
+                    rowstring[7] = row[7]
+                    rowstring[8] = row[8]
+                    return (rowstring)
+        except DatabaseError as error:
+            print(sys.argv[0] + ": " + str(error), file=stderr)
+            return ("stdservererr")
+
 def get_favorites(email):
     """search through restaurants"""
+    print("test")
     try:
     
         with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
@@ -195,12 +240,15 @@ def get_favorites(email):
 
                 rowstring = ["", ""]
 
+
                 # This iwll parse through the rows and get all of the necsary values
                 while row is not None:
-                    rowstring = ["", ""]
-                    rowstring[0] = row[0]
-                    rowstring[1] = row[1]
-                    restaurants.append(rowstring)
+                    # rowstring = ["", ""]
+                    res = findinfo(row[1])
+                    myres = restaurant(res)
+                    # rowstring[0] = row[0]
+                    # rowstring[1] = row[1]
+                    restaurants.append(myres)
                     row = cursor.fetchone()
                 return restaurants
 
