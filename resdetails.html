@@ -60,15 +60,26 @@
 
   <form method="post">
     <div class="form-group">
-        <label for="rating">Give a Rating</label>
-        <select id="rating" name="rating">
+        <label for="rating">Give a Rating: </label>
+        <!--<select id="rating" name="rating">
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
             <option value="5">5</option>
-        </select>
+        </select>-->
+        <br>
+        <label class="rating-label">
+          <input
+            class="user_rating"
+            max="5"
+            oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)"
+            step="0.5"
+            style="--value:2.5"
+            type="range"
+            value="2.5">
+        </label>
         <br>
       <label for="exampleFormControlTextarea1">Your review:</label>
         <!-- Add icon library -->
@@ -96,7 +107,7 @@
 
 <div class="container-fluid pt-5 pb-5 bg-info">
     <h2 class="restOfHeader">Details</h2>
-    <h4 class="resDetails"><strong>Official Website: </strong><a href="{{info['media']}}" target="__blank__" id="mediaLink">{{info['media']}}</a></h4>
+    <h4 class="resDetails" id="mediaLink"><strong>Official Website: </strong><a href="{{info['media']}}" target="__blank__">{{info['media']}}</a></h4>
     <h4 class="resDetails"><strong>Review Count: </strong> {{info['review_count']}}</h4>
     <h4 class="resDetails"><strong>Stars: </strong> <div class="Stars_Deets" style="--rating: {{info['stars']}};"></div> </h4>
     <h4 class="resDetails" id="menuLink"><a href="{{info['menu']}}" class="btn btn-primary btn-lg" target="__blank__" id="menuLink">Menu <i class="bi bi-box-arrow-up-right"></i></a></h4>
@@ -264,12 +275,13 @@
       });
       geocoder = new google.maps.Geocoder();
       codeAddress(geocoder, map);
-    }
+}
   
     function codeAddress(geocoder, map) {
       geocoder.geocode({'address': address}, function(results, status) {
         if (status === 'OK') {
           map.setCenter(results[0].geometry.location);
+          console.log(results[0].geometry.location)
           var marker = new google.maps.Marker({
             map: map,
             position: results[0].geometry.location
@@ -278,6 +290,8 @@
           alert('Geocode was not successful for the following reason: ' + status);
         }
       });
+
+
   
     
     }
