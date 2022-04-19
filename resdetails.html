@@ -276,19 +276,8 @@
       });
       var bounds = new google.maps.LatLngBounds();
       geocoder = new google.maps.Geocoder();
-      geocoder.geocode({'address': address}, function(results, status) {
-        if (status === 'OK') {
-          map.setCenter(results[0].geometry.location);
-          var marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location
-          });
-          bounds.extend(marker.position);
-        } else {
-          alert('Geocode was not successful for the following reason: ' + status);
-        }
-      });
-     // codeAddress(geocoder, map);
+      
+      codeAddress(geocoder, map);
 
       const successCallback = (pos) => {
         console.log(pos);
@@ -331,7 +320,6 @@
             map: map,
             position: results[0].geometry.location
           });
-          bounds.extend(marker.position);
         } else {
           alert('Geocode was not successful for the following reason: ' + status);
         }
