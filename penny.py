@@ -109,7 +109,6 @@ def authorized(function):
             return response
         else:
             return function()
-
     return wrapper2
 
 # Logged in Requirement 
@@ -122,7 +121,6 @@ def loggedin(function):
             return response
         else:
             return function()
-
     return wrapper3
 # ---------------------------------------------------------
 
@@ -158,7 +156,6 @@ def joinrestaurant():
 
 # when submitted 
 @app.route('/addrestaurant', methods=['GET'])
-@authorized
 def addrestaurant():
     restaurantName = request.args.get('restaurantName')
     if restaurantName is None or restaurantName.split() == "":
