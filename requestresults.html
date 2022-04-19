@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<table>
+  <script>
+    var index = 0;
+  </script>
+  <tbody>
+    <h1 class="results"> Restaurant Search Results</h1>
+    {% if restaurantinfo | length == 0: %}
+    {% else %}
+    {% for restaurant in restaurantinfo: %}
+    <div class="list-group" style="width:1050px; height:115px; margin: auto;">
+      <a href="requestdetails?id={{restaurant.get_restaurantid()}}" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1"><strong>{{restaurant.get_name()}}</strong></h5>
+          <!--add stars here ; need to grab from database-->
+          <div class="Stars" style="--rating: {{restaurant.get_stars()}};"
+            aria-label="Rating of this restaurant is {{restaurant.get_stars()}} out of 5."></div>
+        </div>
+        <p class="mb-1">{{restaurant.get_address()}}</p>
+        <span class="badge badge-info badge-pill i"></span>
+        <span class="badge badge-info badge-pill ii">{{restaurant.get_cuisine()}}</span>
+        <span class="badge badge-info badge-pill iii">{{restaurant.get_price()}}</span>
+        <span class="badge badge-info badge-pill iv">{{restaurant.get_type()}}</span>
+
+      </a>
+    </div>
+
+
+    <!--Function to get whether restaurant is open or closed-->
+    <script>
+      'use strict';
+      function statusFunc() {
+        let status = "{{restaurant.get_openclose()}}";
+        console.log(status);
+        let node = document.getElementsByClassName("badge badge-info badge-pill i");
+        if (status == "True") {
+          node[index].innerHTML = "Open";
+        }
+        else {
+          node[index].innerHTML = "Closed";
+        }
+        index++;
+      }
+
+
+      statusFunc();
+
+    </script>
+
+    <!--Function to change colour depending on whether open or closed-->
+
+    <script>
+      'use strict';
+
+      $('.badge').each(function () {
+        if ($(this).text() == 'Open') {
+          $(this).css({ 'background-color': '#32CD32' })
+        }
+        if ($(this).text() == 'Closed') {
+          $(this).css({ 'background-color': '#D22B2B' })
+        }
+
+
+      });
+    </script>
+
+
+
+    {% endfor %}
+
+    {% endif %}
+
+
+  </tbody>
+</table>
+
+
+
+
+</html>
