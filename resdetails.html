@@ -322,6 +322,12 @@
       });
     }
   </script>
+  
+  <!--Function to make directions link for Google Maps-->
+  <script>
+    let link = "https://www.google.com/maps/dir//" + "{{ info['address'] }}";
+    document.getElementById("directionsLink").href = link;
+  </script>
 
 
 {% include 'footer.html' %}
