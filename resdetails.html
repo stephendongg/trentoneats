@@ -267,21 +267,51 @@
     var geocoder;
     var map;
     address = "{{ info['address'] }}";
-  
+
     function initMap() {
+
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 16,
         center: {lat: -34.397, lng: 150.644}
       });
       geocoder = new google.maps.Geocoder();
+
       codeAddress(geocoder, map);
-}
-  
-    function codeAddress(geocoder, map) {
+
+      const successCallback = (pos) => {
+        console.log(pos);
+        console.log(pos.coords.latitude);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: { lat: pos.coords.latitude, lng: pos.coords.longitude},
+            icon: {
+              path: google.maps.SymbolPath.CIRCLE,
+              scale: 10,
+              fillOpacity: 1,
+              strokeWeight: 2,
+              fillColor: '#5384ED',
+              strokeColor: '#ffffff',
+            },
+          });
+
+      }
+
+      const errorCallback = (error) => {
+        console.error(error);
+      }
+
+      navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+
+      // const watchId = navigator.geolocation.watchPosition(successCallback, errorCallback);
+
+      //THIRD ARGUMENT TO GET CURRENT POSITION
+
+    }
+
+    function codeAddress(geocoder, map, bounds) {
       geocoder.geocode({'address': address}, function(results, status) {
         if (status === 'OK') {
           map.setCenter(results[0].geometry.location);
-          console.log(results[0].geometry.location)
           var marker = new google.maps.Marker({
             map: map,
             position: results[0].geometry.location
