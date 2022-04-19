@@ -275,12 +275,32 @@
       });
       geocoder = new google.maps.Geocoder();
       codeAddress(geocoder, map);
+      if (navigator.geolocation) {
+        (position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+        console.log("Here now");
+        console.log(pos);
+
+          var marker = new google.maps.Marker({
+            position: pos,
+            map: map
+      });
     }
+  }
+    //  var marker = new google.maps.Marker({
+      //  position: new google.maps.LatLng(-45, 144),
+        //map: map
+    
+}
   
     function codeAddress(geocoder, map) {
       geocoder.geocode({'address': address}, function(results, status) {
         if (status === 'OK') {
           map.setCenter(results[0].geometry.location);
+          console.log(results[0].geometry.location)
           var marker = new google.maps.Marker({
             map: map,
             position: results[0].geometry.location
@@ -289,6 +309,8 @@
           alert('Geocode was not successful for the following reason: ' + status);
         }
       });
+
+
   
     
     }
