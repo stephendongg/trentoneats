@@ -278,7 +278,7 @@
 
       const successCallback = (pos) => {
         console.log(pos);
-        console.log(pos['latitude']);
+        console.log(pos.coords.latitude);
         var marker = new google.maps.Marker({
             map: map,
             position: pos
