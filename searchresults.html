@@ -6,6 +6,18 @@
       </script>
         <tbody>
             <h1 class="results"> Restaurant Search Results</h1>
+            <br>
+            <div class="dropdown" style="text-align:center;">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="">
+                Sort Restaurants By:
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item" type="button">Show Best Rated Restaurants First </button>
+                <button class="dropdown-item" type="button">Price (Low to High)</button>
+                <button class="dropdown-item" type="button">Price (High to Low)</button>
+              </div>
+            </div>
+            <br>
             {% if restaurantinfo | length == 0: %}
             {% else %}
                 {% for restaurant in restaurantinfo: %}
@@ -13,7 +25,7 @@
                       <a href="resdetails?id={{restaurant.get_restaurantid()}}" class="list-group-item list-group-item-action">
                           <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1"><strong>{{restaurant.get_name()}}</strong></h5>
-                            <!--add stars here ; need to grab from database-->
+                            <!--add stars here-->
                             <div class="Stars" style="--rating: {{restaurant.get_stars()}};" aria-label="Rating of this restaurant is {{restaurant.get_stars()}} out of 5."></div>
                           </div>
                           <p class="mb-1">{{restaurant.get_address()}}</p>
@@ -21,7 +33,6 @@
                           <span class="badge badge-info badge-pill ii">{{restaurant.get_cuisine()}}</span>
                           <span class="badge badge-info badge-pill iii">{{restaurant.get_price()}}</span>
                           <span class="badge badge-info badge-pill iv">{{restaurant.get_type()}}</span>
-
                       </a>
                   </div>
 
