@@ -282,33 +282,6 @@
 
     codeAddress(geocoder, map);
 
-    const successCallback = (pos) => {
-      console.log(pos);
-      console.log(pos.coords.latitude);
-      var marker = new google.maps.Marker({
-          map: map,
-          position: { lat: pos.coords.latitude, lng: pos.coords.longitude},
-          icon: {
-            path: google.maps.SymbolPath.CIRCLE,
-            scale: 10,
-            fillOpacity: 1,
-            strokeWeight: 2,
-            fillColor: '#5384ED',
-            strokeColor: '#ffffff',
-          },
-        });
-    }
-
-    const errorCallback = (error) => {
-      console.error(error);
-    }
-
-    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-
-    // const watchId = navigator.geolocation.watchPosition(successCallback, errorCallback);
-
-    //THIRD ARGUMENT TO GET CURRENT POSITION
-
   }
 
   function codeAddress(geocoder, map, bounds) {
