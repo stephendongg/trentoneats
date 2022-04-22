@@ -169,7 +169,7 @@
 <script type="text/javascript">
 
   function myFunction() {
-    if ("{{info['media']}}" == "None") {
+    if ("{{info['media']}}" == "None" || "{{info['media']}}" == "") {
       document.getElementById('mediaLink').innerHTML = "";
     }
 
@@ -181,7 +181,7 @@
 <script type="text/javascript">
 
   function myFunction() {
-    if ("{{info['menu']}}" == "None") {
+    if ("{{info['menu']}}" == "None" || "{{info['menu']}}" == "") {
       document.getElementById('menuLink').innerHTML = "";
     }
 
