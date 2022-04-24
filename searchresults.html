@@ -6,22 +6,25 @@
       </script>
         <tbody>
             <h1 class="results"> Restaurant Search Results</h1>
-            <br>
             <div class="dropdown" style="text-align:center;">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #88d5d5;">
                 Sort Restaurants By:
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button class="dropdown-item" type="button">Show Best Rated Restaurants First </button>
-                <button class="dropdown-item" type="button">Price (Low to High)</button>
-                <button class="dropdown-item" type="button">Price (High to Low)</button>
+                <button class="dropdown-item" type="button" onclick="rating_sort()">Show Best Rated Restaurants First </button>
+                <button class="dropdown-item" type="button" onclick="price_sort_LH()">Price (Low to High)</button>
+                <button class="dropdown-item" type="button" onclick="price_sort_HL()">Price (High to Low)</button>
               </div>
             </div>
             <br>
             {% if restaurantinfo | length == 0: %}
             {% else %}
+            <table class="table table-borderless" style="margin-top: 0px;" id = "rest_table">
+            <tbody>
                 {% for restaurant in restaurantinfo: %}
-                  <div class="list-group" style="width:1050px; height:115px; margin: auto;">
+                <tr>
+                  <td>
+                  <div class="list-group" style="width:1050px; height:106px; margin: auto;">
                       <a href="resdetails?id={{restaurant.get_restaurantid()}}" class="list-group-item list-group-item-action">
                           <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1"><strong>{{restaurant.get_name()}}</strong></h5>
@@ -35,6 +38,10 @@
                           <span class="badge badge-info badge-pill iv">{{restaurant.get_type()}}</span>
                       </a>
                   </div>
+                  </td>
+                  <td style = "display: none;">{{restaurant.get_stars()}}</td>
+                  <td style = "display: none;">{{restaurant.get_price()}}</td>
+                  </tr>
 
 
                   <!--Function to get whether restaurant is open or closed-->
@@ -75,17 +82,94 @@
                     });
                   </script>
 
+                  <!--Sorting functions-->
+                  <!--Ratings-->
+                  <script>
+                    'use strict';
+                    function rating_sort() {
+                      var table, rows, switching, i, x, y, shouldSwitch;
+                      table = document.getElementById("rest_table");
+                      switching = true;
+                      while (switching) {
+                        switching = false;
+                        rows = table.rows;
+                        for (i = 1; i < (rows.length - 1); i++) {
+                          shouldSwitch = false;
+                          x = rows[i].getElementsByTagName("TD")[1];
+                          y = rows[i + 1].getElementsByTagName("TD")[1];
+                          if (parseFloat(y.innerText) > parseFloat(x.innerText)) {
+                            shouldSwitch = true;
+                            break;
+                          }
+                        }
+                        if (shouldSwitch) {
+                          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                          switching = true;
+                        }
+                      }
+                    }
 
-
+                  </script>
+                  <!--Price Low to High-->
+                  <!--CAUTION: NEED TO TALK TO JUSTICE!!! not sure if price right now is reepresented by an integer or if it's something like "inexpensive"-->
+                  <script>
+                    'use strict';
+                    function price_sort_LH() {
+                      var table, rows, switching, i, x, y, shouldSwitch;
+                      table = document.getElementById("rest_table");
+                      switching = true;
+                      while (switching) {
+                        switching = false;
+                        rows = table.rows;
+                        for (i = 1; i < (rows.length - 1); i++) {
+                          shouldSwitch = false;
+                          x = rows[i].getElementsByTagName("TD")[2];
+                          y = rows[i + 1].getElementsByTagName("TD")[2];
+                          if (parseFloat(x.innerText) > parseFloat(y.innerText)) {
+                            shouldSwitch = true;
+                            break;
+                          }
+                        }
+                        if (shouldSwitch) {
+                          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                          switching = true;
+                        }
+                      }
+                    }
+                  </script>
+                  <!--Price High to Low-->
+                  <script>
+                    'use strict';
+                    function price_sort_HL() {
+                      var table, rows, switching, i, x, y, shouldSwitch;
+                      table = document.getElementById("rest_table");
+                      switching = true;
+                      while (switching) {
+                        switching = false;
+                        rows = table.rows;
+                        for (i = 1; i < (rows.length - 1); i++) {
+                          shouldSwitch = false;
+                          x = rows[i].getElementsByTagName("TD")[2];
+                          y = rows[i + 1].getElementsByTagName("TD")[2];
+                          if (parseFloat(y.innerText) > parseFloat(x.innerText)) {
+                            shouldSwitch = true;
+                            break;
+                          }
+                        }
+                        if (shouldSwitch) {
+                          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                          switching = true;
+                        }
+                      }
+                    }
+                    </script>
                 {% endfor %}
+              </tbody>
+            </table>
                 
             {% endif %}
             
 
         </tbody>
     </table>
-
-
-
-
 </html>

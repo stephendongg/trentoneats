@@ -207,6 +207,7 @@ form {
 .begin_adv_search {
     font-family: "Playfair Display", "Georgia", serif;
     text-align: center;
+
 /* <<<<<<< HEAD
     font-family: "Rockwell", "Varela Round", sans-serif;
 }
@@ -215,7 +216,7 @@ form {
     text-align: center;
 =======
 >>>>>>> new_homepage */
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: bold;
     position:relative;
     top:-20px;
@@ -270,7 +271,7 @@ input[id="collapsible"] {
 /* search results */
 h1.results{
     color: #008B8B;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: bold;
     font-family: "Playfair Display", "Georgia", serif;
     text-align: center;
@@ -449,3 +450,4 @@ h1.results{
   [dir="rtl"] .rating--nojs::-webkit-slider-thumb {
     box-shadow: var(--w) 0 0 var(--w) var(--fill);
   }
+
