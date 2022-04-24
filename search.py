@@ -250,7 +250,7 @@ def restaurant_search(input, cuisine, type, price): #, tags, price, type, cuisin
         with connect(host='localhost', port=5432, user='rmd', password='xxx',
                       database="trentoneats") as connection:
         # dequ5ope4nuoit
-        # with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+         #with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
         #             database="dequ5ope4nuoit") as connection:
 
             with closing(connection.cursor()) as cursor:
@@ -258,27 +258,34 @@ def restaurant_search(input, cuisine, type, price): #, tags, price, type, cuisin
                 # This needs to be adjusted
                 nullPrice = False
                 nullType = False
+                nullCuisine = False
                 stmt_str = "SELECT restaurant_id, name, open_closed, address, "
                 stmt_str += "stars, cuisine, type, price, tags "
                 stmt_str += "FROM restaurants "
                 stmt_str += "WHERE LOWER(name) ILIKE %s "
                 if price == "":
-                    stmt_str += "OR price IS NULL "
+                    stmt_str += "AND price IS NULL "
                     nullPrice = True
                 else:
                     stmt_str += "AND LOWER(price) ILIKE %s "
                     price = '%' + price.lower() + '%'
                 if type == "":
-                    stmt_str += "OR type IS NULL "
+                    stmt_str += "AND type IS NULL"
                     nullType = True
                 else:
-                    stmt_str += "AND LOWER(type) ILIKE %s "
+                    stmt_str += "AND LOWER(type) ILIKE %s"
                     type = '%' + type.lower() + '%'
-                if cuisine == []:
-                    stmt_str += "OR cuisine IS NULL"
+                if cuisine == "":
+                    stmt_str += "AND cuisine IS NULL"
+                    nullCuisine = True
                 else:
-                    stmt_str += "AND LOWER(cuisine) IN ('"
-                    stmt_str += "','".join(cuisine.lower().split(",")) + "');"
+                    c = cuisine.lower().split(",")
+                    for i in c:
+                        stmt_str += " AND LOWER(cuisine) ILIKE '%" + i + "%'"
+                    #stmt_str += "AND LOWER(cuisine) ILIKE %s "
+                    #cuisine = cuisine.lower()
+                    # stmt_str += "AND LOWER(cuisine) IN ('"
+                stmt_str += ";"
 
                 input = '%' + input.lower() + '%'
 
@@ -293,15 +300,18 @@ def restaurant_search(input, cuisine, type, price): #, tags, price, type, cuisin
                     print(stmt_str % (input, type))
                 elif not nullPrice:
                     print('Hit 3')
-                    cursor.execute(stmt_str, [input, price ])
+                    cursor.execute(stmt_str, [input, price])
                     print(stmt_str % (input, price))
-
-                else:
+                elif not nullCuisine:
                     print('Hit 4')
+                    print(stmt_str % (input))
+                    cursor.execute(stmt_str, [input])
+                else:
+                    print('Hit 5')
+                    print(stmt_str % input)
                     cursor.execute(stmt_str, [input])
                     #cursor.execute(stmt_str)
 
-                    print(stmt_str % input)
                 row = cursor.fetchone()
 
                 # course list

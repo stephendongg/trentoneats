@@ -24,7 +24,15 @@ restaurantMenu, restaurantMedia, restaurantTags, cuisine, type, price, restauran
     stmt_str += restaurantImage + "', '"
     stmt_str += ", ".join(cuisine)
     stmt_str += "', '" + type + "', '" + price + "');"
-
+    # stmt_str = """
+    # INSERT INTO restaurants (name, address, hours,
+    # open_closed, menu, media, tags, review_count, stars, image, cuisine, type, price)
+    # VALUES ('%s', '%s','"
+    # stmt_str += restaurantHours + "', 'TRUE', '" + restaurantMenu + "', '"
+    # stmt_str += restaurantMedia + "', '" + restaurantTags + "', '0', '0', '"
+    # stmt_str += restaurantImage + "', '"
+    # stmt_str += ", ".join(cuisine)
+    # stmt_str += "', '" + type + "', '" + price + "');"
 
     try:
         # with connect(
