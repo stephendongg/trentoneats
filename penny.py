@@ -51,9 +51,22 @@ def search_results():
     if (restaurant is None) or (restaurant.split()==""):
         restaurant=""
 
+    price = request.args.get('price')
+    if (price is None) or (price.split()==""):
+        price=""
+
+    type = request.args.get('type')
+    if (type is None) or (type.split()==""):
+        type = ""
+
+    cuisine = request.args.get('cuisine')
+    if (cuisine is None) or (cuisine ==[]):
+        cuisine= "%%"
+
     try:
-        restaurantinfo = restaurant_search(restaurant)
-    except:
+        restaurantinfo = restaurant_search(restaurant, cuisine, type, price)
+    except Exception as e:
+        print(e)
         html = render_template('servererror.html')
         response = make_response(html)
         return response
@@ -130,10 +143,9 @@ def addrestaurant():
     if restaurantTags is None or restaurantTags.split()=="":
         restaurantTags = ""
 
-    type= request.args.getlist('type')
-    for i in range(len(type)):
-        if type[i] is None or type[i].split()=="":
-            type[i] = ""
+    type= request.args.get('type')
+    if type is None or type.split()=="":
+        type = ""
     cuisine = request.args.getlist('cuisine')
     for i in range(len(cuisine)):
         if cuisine[i] is None or cuisine[i].split()=="":
@@ -192,8 +204,8 @@ flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/userinfo.profile",
             "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    redirect_uri="https://trentoneats.herokuapp.com/callback"
-    # redirect_uri="http://127.0.0.1:8080/callback"
+    #redirect_uri="https://trentoneats.herokuapp.com/callback"
+    redirect_uri="http://127.0.0.1:8080/callback"
 )
 
 
@@ -251,8 +263,34 @@ def callback():
 
     unique_id = session.get('google_id')
     restaurant = ""
-    restaurantinfo = restaurant_search(
-        restaurant)  # Exception handling omitted
+    cuisine = "%%"
+    type = ""
+    price = ""
+
+    # price = request.args.get('price')
+    # if (price is None) or (price.split()==""):
+    #     price=""
+    #
+    # type = request.args.get('type')
+    # if (type is None) or (type.split()==""):
+    #     type = ""
+    #
+    # cuisine = request.args.get('cuisine')
+    # if (cuisine is None) or (cuisine ==[]):
+    #     cuisine=["%%"]
+    restaurantinfo = restaurant_search(restaurant, cuisine, type, price)
+
+    #restaurantinfo = restaurant_search(restaurant)
+    # try:
+    #     restaurantinfo = restaurant_search(restaurant, cuisine, type, price)
+    # except:
+    #     html = render_template('servererror.html')
+    #     response = make_response(html)
+    #     return response
+    # if restaurantinfo == "stdservererr":
+    #     print("Standard server error")
+    #     response = make_response('<div><p>Standard Server Error</p></div>')
+    #     return response
     html = render_template('searchform.html',
                            #ampm = get_ampm(),
                            # current_time = get_current_time(),

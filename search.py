@@ -185,28 +185,123 @@ def adjust_inputs(restaurant):
     # return inputs
     return restaurant
 
+# def restaurant_search(input): #, tags, price, type, cuisine):
+#     """search through restaurants"""
+#     try:
+#         print('Trying')
+#          #with connect(host='localhost', port=5432, user='rmd', password='xxx',
+#         #              database="trentoneats") as connection:
+#         # dequ5ope4nuoit
+#         with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+#                      database="dequ5ope4nuoit") as connection:
+#
+#             print("****")
+#             with closing(connection.cursor()) as cursor:
+#                 print('Tried')
+#
+#                 # This needs to be adjustedf
+#                 stmt_str = "SELECT restaurant_id, name, open_closed, address, "
+#                 stmt_str += "stars, cuisine, type, price, tags "
+#                 stmt_str += "FROM restaurants "
+#                 stmt_str += "WHERE LOWER(name) ILIKE %s;"
+#
+#
+#                 input = '%' + input.lower() + '%'
+#
+#                 print(stmt_str)
+#                 cursor.execute(stmt_str, [input])
+#                 row = cursor.fetchone()
+#
+#                 # course list
+#                 restaurants = []
+#
+#                 # rowstringlist this rowstring will contain all of the necessary values
+#
+#                 rowstring = ["", "", "", "", "", "", "", "", ""]
+#
+#                 # This iwll parse through the rows and get all of the necsary values
+#                 while row:
+#                     rowstring[0] = row[0]
+#                     rowstring[1] = row[1]
+#                     rowstring[2] = row[2]
+#                     rowstring[3] = row[3]
+#                     rowstring[4] = row[4]
+#                     rowstring[5] = row[5]
+#                     rowstring[6] = row[6]
+#                     rowstring[7] = row[7]
+#                     rowstring[8] = row[8]
+#                     res = restaurant(rowstring)
+#                     restaurants.append(res)
+#                     row = cursor.fetchone()
+#
+#                 return restaurants
+#
+#     # Normally exit status 0.
+#     # If database-related error, terminate with exit status 1.
+#     # If erroneous command-line arguments terminate with exit status 2
+#
+#     except DatabaseError as error:
+#         print(sys.argv[0] + ": " + str(error), file=stderr)
+#         return ("stdservererr")
 
-def restaurant_search(input): #, tags, price, type, cuisine):
+def restaurant_search(input, cuisine, type, price): #, tags, price, type, cuisine):
     """search through restaurants"""
     try:
-         #with connect(host='localhost', port=5432, user='rmd', password='xxx',
-        #              database="trentoneats") as connection:
+        with connect(host='localhost', port=5432, user='rmd', password='xxx',
+                      database="trentoneats") as connection:
         # dequ5ope4nuoit
-        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                     database="dequ5ope4nuoit") as connection:
+        # with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+        #             database="dequ5ope4nuoit") as connection:
 
             with closing(connection.cursor()) as cursor:
+
                 # This needs to be adjusted
+                nullPrice = False
+                nullType = False
                 stmt_str = "SELECT restaurant_id, name, open_closed, address, "
                 stmt_str += "stars, cuisine, type, price, tags "
                 stmt_str += "FROM restaurants "
-                stmt_str += "WHERE LOWER(name) ILIKE %s"
+                stmt_str += "WHERE LOWER(name) ILIKE '%%' "
+                if price == "":
+                    stmt_str += "OR price IS NULL "
+                    nullPrice = True
+                else:
+                    stmt_str += "AND LOWER(price) ILIKE %s "
+                    price = '%' + price.lower() + '%'
+                if type == "":
+                    stmt_str += "OR type IS NULL "
+                    nullType = True
+                else:
+                    stmt_str += "AND LOWER(type) ILIKE %s "
+                    type = '%' + type.lower() + '%'
+                if cuisine == []:
+                    stmt_str += "OR cuisine IS NULL"
+                else:
+                    stmt_str += "AND LOWER(cuisine) IN ('"
+                    stmt_str += "','".join(cuisine.lower().split(",")) + "');"
 
-                #print(stmt_str)
                 input = '%' + input.lower() + '%'
-                #print(input)
-                cursor.execute(stmt_str, [input])
-                #cursor.execute(stmt_str, ["'bbq'"])
+
+                print(stmt_str)
+                if not nullPrice and not nullType:
+                    print('Hit 1')
+                    cursor.execute(stmt_str, [input, price, type])
+                    print(stmt_str % (input, price, type))
+                elif not nullType:
+                    print('Hit 2')
+                    cursor.execute(stmt_str, [input, type])
+                    print(stmt_str % (input, type))
+                elif not nullPrice:
+                    print('Hit 3')
+                    cursor.execute(stmt_str, [input, price ])
+                    print(stmt_str % (input, price))
+
+                else:
+                    print('Hit 4')
+                    #cursor.execute(stmt_str, (input,))
+                    cursor.execute(stmt_str)
+
+                    #print(stmt_str % input)
                 row = cursor.fetchone()
 
                 # course list

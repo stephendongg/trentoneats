@@ -41,7 +41,7 @@
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
             <script> $('select').selectpicker(); </script> -->
-            <select class="selectpicker" multiple data-live-search="true">
+            <select id= "cuisineSelect" class="selectpicker" multiple data-live-search="true">
                 <option>BBQ</option>
                 <option>Jamaican</option>
                 <option>Grill</option>
@@ -64,17 +64,17 @@
             <div class="container">
             <div class="form-check-inline">
                 <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" value=""> $
+                  <input type="checkbox" class="form-check-input" id="$" value=""> $
                 </label>
               </div>
               <div class="form-check-inline">
                 <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" value=""> $$
+                  <input type="checkbox" class="form-check-input" id="$$" value=""> $$
                 </label>
               </div>
               <div class="form-check-inline">
                 <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" value=""> $$$
+                  <input type="checkbox" class="form-check-input" id="$$$" value=""> $$$
                 </label>
               </div>
             </div>
@@ -83,28 +83,28 @@
             <div id="dining_select"> Select Dining Type: </div>
             <div class="form-check-inline">
                 <label class="form-check-label">
-                  <input type="radio" class="form-check-input" name="optradio">Any!
+                  <input type="radio" class="form-check-input" id= "any" name="optradio">Any!
                 </label>
               </div>
               <div class="form-check-inline">
                 <label class="form-check-label">
-                  <input type="radio" class="form-check-input" name="optradio">Casual
+                  <input type="radio" class="form-check-input" id="casual" name="optradio">Casual
                 </label>
               </div>
               <div class="form-check-inline disabled">
                 <label class="form-check-label">
-                  <input type="radio" class="form-check-input" name="optradio">Fast Food
+                  <input type="radio" class="form-check-input" id="fastfood" name="optradio">Fast Food
                 </label>
               </div>
               <div class="form-check-inline disabled">
                 <label class="form-check-label">
-                  <input type="radio" class="form-check-input" name="optradio">Fine Dining
+                  <input type="radio" class="form-check-input" id="fine" name="optradio">Fine Dining
                 </label>
               </div>
               <br>
               <br>
               <!--include submit button here-->
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary" id = "advancedSubmit">Submit</button>
               <br>
               <br>
           </div>
@@ -185,7 +185,6 @@
 
       function handleResponse(response)
        {
-          console.log(response)
           $('#restaurantsDiv').html(response);
        }
 
@@ -213,11 +212,95 @@
              }
           );
        }
+
+       function getAdvancedResults()
+        {
+           console.log("Getting advanced results");
+
+           let restaurantInput = $('#restaurantInput').val();
+
+           // Getting selected texts from cuisine texts
+           var options = document.getElementById('cuisineSelect').selectedOptions;
+           var cuisineVals = Array.from(options).map(({ text }) => text);
+           for (let i= 0; i < cuisineVals.length; i++){
+             cuisineVals[i] = '%' + cuisineVals[i] + '%'
+           }
+          console.log("Cuisine: " + cuisineVals);
+
+
+           // Getting type VALUES
+           var type = "";
+           if($('#casual').prop('checked')){
+             type = 'casual';
+           }
+           else if($('#fastfood').prop('checked')){
+             type = 'fastfood';
+           }
+           else if($('#fine').prop('checked')){
+             type = 'fine';
+           }
+           else{
+             console.log('Any');
+           }
+           console.log("Type: " + type);
+
+           // Getting price VALUES
+           // var priceVals = [];
+           // if(document. getElementById('$'). clicked == true){
+           //   priceVals.push('inexpensive');
+           // }
+           // if(document. getElementById('$$'). clicked == true){
+           //   priceVals.push('moderate');
+           // }
+           // if(document. getElementById('$$$'). clicked == true){
+           //   priceVals.push('pricey');
+           // }
+           var priceVal = ""
+           if (document.getElementById('$').checked== true){
+             priceVal = 'inexpensive';
+           }
+           else if (document.getElementById('$$').checked == true){
+             priceVal = 'moderate';
+           }
+           else if (document.getElementById('$$$').checked == true){
+             priceVal = 'pricey';
+           }
+           else {
+             priceVal = ""
+           }
+           console.log("Price: " + priceVal);
+
+           restaurantInput = encodeURIComponent(restaurantInput);
+           type = encodeURIComponent(type);
+           priceVal = encodeURIComponent(priceVal);
+           cuisineVals = encodeURIComponent(cuisineVals);
+           console.log("Cuisine: " + cuisineVals);
+
+
+           let url = '/searchresults?restaurant=' + restaurantInput
+           url += '&price='+priceVal + '&cuisine=' + cuisineVals
+           url += '&type=' + type
+
+           console.log(url);
+           if (request != null)
+              request.abort();
+
+           request = $.ajax(
+              {
+                 type: 'GET',
+                 url: url,
+                 success: handleResponse
+              }
+           );
+        }
+
+
       function setup()
        {
          getResults();
           console.log("Changed the input buttons");
           $("#restaurantInput").on("input", getResults);
+          $("#advancedSubmit").on("click", getAdvancedResults);
        }
       $('document').ready(setup);
     </script>
