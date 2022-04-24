@@ -320,13 +320,14 @@ def resdetails():
     if request.method == 'POST':
         text = request.form['review-text']
         rating = request.form['rating']
+        email = session["email"]
         print(rating)
         text = text.strip()
         error = None
         if not text:
             error = 'You didn\'t add any new reviews.'
         if error is None:
-            add_review(id, datetime.datetime.now(), text, rating)
+            add_review(id, datetime.datetime.now(), text, rating, email)
             reviews = review_search(id)
 
     html = render_template('resdetails.html', info=info,
@@ -376,6 +377,7 @@ def test():
     if request.method == 'POST':
         text = request.form['review-text']
         rating = request.form['rating']
+        email = session["email"]
         print(rating)
         text = text.strip()
         error = None
@@ -385,7 +387,7 @@ def test():
             # Gotta figure out if its customer taht we still want to link for placeolder
             # Currently, placeholder reviews are all -10
             # NEed Cusomter Ids sorted out.
-            add_review(id, datetime.datetime.now(), text, rating)
+            add_review(id, datetime.datetime.now(), text, rating, email)
             # return redirect(url_for('review.dashboard'))
             reviews = review_search(id)
         # flash(error)
@@ -427,8 +429,8 @@ flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/userinfo.profile",
             "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    redirect_uri="https://trentoneats.herokuapp.com/callback"
-    #redirect_uri="http://127.0.0.1:8080/callback"
+    #redirect_uri="https://trentoneats.herokuapp.com/callback"
+    redirect_uri="http://127.0.0.1:8080/callback"
 )
 
 

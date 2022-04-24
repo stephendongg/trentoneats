@@ -50,7 +50,7 @@ def review_search(input):
                 #     input + "%') "
 
                 # Review Search 
-                stmt_str = "SELECT date, text, review_id "
+                stmt_str = "SELECT date, text, review_id, email "
                 stmt_str += "FROM reviews "
                 stmt_str += "WHERE restaurant_id = '" + input + "';"
                 # stmt_str = "SELECT r.id, date, text, restaurant_id "
@@ -67,14 +67,15 @@ def review_search(input):
 
                 # rowstringlist this rowstring will contain all of the necessary values
 
-                rowstring = ["", "", ""]
+                rowstring = ["", "", "", ""]
 
                 # This iwll parse through the rows and get all of the necsary values
                 while row is not None:
-                    rowstring = ["", "", ""]
+                    rowstring = ["", "", "", ""]
                     rowstring[0] = str(row[0])
                     rowstring[1] = str(row[1])
                     rowstring[2] = str(row[2])
+                    rowstring[3] = str(row[3])
                     reviews.append(rowstring)
                     row = cursor.fetchone()
                 
@@ -90,13 +91,13 @@ def review_search(input):
 
 
 
-def add_review(restaurant_id, date, text, rating):
+def add_review(restaurant_id, date, text, rating, email):
 
     stmt_str = """
     INSERT INTO reviews (restaurant_id, date,
-    text, overall) 
+    text, overall, email) 
     VALUES  ( '"""
-    stmt_str += str(restaurant_id) + "', '" + str(date) + "', '" + text + "', '" + rating + "');"
+    stmt_str += str(restaurant_id) + "', '" + str(date) + "', '" + text + "', '" + rating + "', '" + email +"');"
 
     try:
         with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
