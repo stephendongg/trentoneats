@@ -307,8 +307,37 @@ def insert_restaurant():
         'Spanish' ,
         372,
         4.1);
+        """,
+        """
+        INSERT INTO administrators (email)
+        VALUES (
+        'sd20@princeton.edu');
+        """,
+        """
+        INSERT INTO administrators (email)
+        VALUES (
+        'pjozuah@princeton.edu');
+        """,
+        """
+        INSERT INTO administrators (email)
+        VALUES (
+        'soumyag@princeton.edu');
+        """,
+        """
+        INSERT INTO administrators (email)
+        VALUES (
+        'chukwuma@princeton.edu');
+        """,
+        """
+        INSERT INTO administrators (email)
+        VALUES (
+        'anatk@princeton.edu');
+        """,
+        """
+        INSERT INTO administrators (email)
+        VALUES (
+        'kao3@princeton.edu');
         """]
-
     try:
         # with connect(
         #         host='localhost', port=5432, user='rmd', password='trentoneats333',

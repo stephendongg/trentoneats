@@ -44,19 +44,17 @@ def create_tables():
         """
         CREATE TABLE IF NOT EXISTS reviews (
                 review_id SERIAL PRIMARY KEY,
-                customer_id SERIAL,
-                FOREIGN KEY (customer_id)
-                REFERENCES customers (customer_id),
                 restaurant_id SERIAL,
                 FOREIGN KEY (restaurant_id)
                 REFERENCES restaurants (restaurant_id),
+                email VARCHAR(255), 
                 date TIMESTAMP NOT NULL,
                 text TEXT NOT NULL,
                 price INTEGER,
                 taste INTEGER,
                 authenticity INTEGER,
                 coolness INTEGER,
-                overall INTEGER
+                overall FLOAT
         )
         """,
         """
@@ -76,21 +74,64 @@ def create_tables():
                 REFERENCES restaurants (restaurant_id)
         )
         """,
-        """
-        CREATE TABLE IF NOT EXISTS usertype (
-            user_id SERIAL PRIMARY KEY,
-            customer_id SERIAL,
-            FOREIGN KEY (customer_id)
-            REFERENCES customers (customer_id),
-            restaurant_id SERIAL,
-            FOREIGN KEY (restaurant_id)
-            REFERENCES restaurants (restaurant_id),
-            admin BOOLEAN,
-            restaurant BOOLEAN,
-            customer BOOLEAN
+        # """
+        # CREATE TABLE IF NOT EXISTS usertype (
+        #     user_id SERIAL PRIMARY KEY,
+        #     customer_id SERIAL,
+        #     FOREIGN KEY (customer_id)
+        #     REFERENCES customers (customer_id),
+        #     restaurant_id SERIAL,
+        #     FOREIGN KEY (restaurant_id)
+        #     REFERENCES restaurants (restaurant_id),
+        #     admin BOOLEAN,
+        #     restaurant BOOLEAN,
+        #     customer BOOLEAN
 
+        # )
+        # """
+        """
+        CREATE TABLE IF NOT EXISTS administrators (
+            email VARCHAR(255) NOT NULL PRIMARY KEY
+        )
+        """,
+        """
+        CREATE TABLE IF NOT EXISTS users (
+            email VARCHAR(255) NOT NULL PRIMARY KEY,
+            googleid INTEGER,
+            name VARCHAR(255)
+        )
+        """,
+        """
+        CREATE TABLE IF NOT EXISTS requests (
+            request_id SERIAL PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            address VARCHAR(255) NOT NULL,
+            hours VARCHAR(255) NOT NULL,
+            open_closed BOOLEAN,
+            menu VARCHAR(255),
+            media VARCHAR(255),
+            tags VARCHAR(255),
+            review_count INTEGER,
+            stars FLOAT NOT NULL,
+            cuisine VARCHAR(255),
+            type VARCHAR(255),
+            price VARCHAR(255),
+            image VARCHAR(225)
+        )
+        """,
+        """
+        CREATE TABLE IF NOT EXISTS favoriterestaurants (
+            favoriterestaurantid SERIAL PRIMARY KEY,
+            email VARCHAR(255) NOT NULL,
+            FOREIGN KEY (email)
+            REFERENCES users (email),
+            restaurant_id SERIAL NOT NULL,
+            FOREIGN KEY (restaurant_id)
+            REFERENCES restaurants (restaurant_id)
+            
         )
         """)
+    # restaurant_id SERIAL
 
 # The following code was adapted from POSTGRESQL TUTORIAL
 

@@ -1,6 +1,34 @@
 {% extends "base.html" %}
 {% block title %} I Am A Restaurant | Trenton Local Eats {% endblock %}
 {% block content %}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<!-- jquery time picker -->
+<!-- <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+<script src="jquery-1.11.0.min.js"></script> <script src="jquery.timepicker.js" type="text/javascript"></script> -->
+<!-- Slider Information -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" />
+
+<!-- Jquery time picker new -->
+<script src="//code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+
+<!-- TimePicker Imports -->
+<!-- <script type="text/javascript" src="/node_modules/jquery.js"></script>
+<script type="text/javascript" src="/path/to/moment.js"></script>
+<script type="text/javascript" src="/path/to/bootstrap/js/transition.js"></script>
+<script type="text/javascript" src="/path/to/bootstrap/js/collapse.js"></script>
+<script type="text/javascript" src="/path/to/bootstrap/dist/bootstrap.min.js"></script>
+<script type="text/javascript" src="/path/to/bootstrap-datetimepicker.min.js"></script> -->
+
 <br>
 <div class="container-fluid col-md-8 pb-5 px-5 mx-auto">
 <center><h2 class="restOfHeader">Do you own a restuarant?</h2></center>
@@ -13,43 +41,149 @@
   </div>
   <div class="form-group row">
     <label for="restaurantAddress">Address:</label>
-    <input type="text" class="form-control" name="restaurantAddress" placeholder="Address" value="">
+    <input type="text" id="autocomplete" class="form-control" name="restaurantAddress" placeholder="Address" value="">
+  </div>
+
+  <!-- Hours -->
+  <div class="form-group row">
+    <label for="checkboxes">Hours:</label>
+    <div id="checkboxes">
+      <br>
+      Monday Open? <input type="checkbox" name="mondayopen" checked> <br>
+      From: <input type="text" class="timepicker" name="mondaystart" /> 
+      To:  <input type="text" class="timepicker" name="mondayend" /> <br>
+
+      Tuesday Open? <input type="checkbox" name="tuedayopen" checked> <br>
+      From: <input type="text" class="timepicker" name="tuesdaystart" /> 
+      To:  <input type="text" class="timepicker" name="tuesdayend" /> <br>
+      
+      Wednesday Open? <input type="checkbox" name="wednesdayopen" checked> <br>
+      From: <input type="text" class="timepicker" name="wednesdaystart" /> 
+      To:  <input type="text" class="timepicker" name="wednesdayend" /> <br>
+      Thursday Open? <input type="checkbox" name="thursdayopen" checked> <br>
+      From: <input type="text" class="timepicker" name="thursdaystart" /> 
+      To:  <input type="text" class="timepicker" name="thursdayend" /> <br>
+      Friday Open? <input type="checkbox" name="fridayopen" checked> <br>
+      From: <input type="text" class="timepicker" name="fridaystart" /> 
+      To:  <input type="text" class="timepicker" name="fridayend" /> <br>
+      Saturday Open? <input type="checkbox" name="saturdayopen" checked> <br>
+      From: <input type="text" class="timepicker" name="saturdaystart" /> 
+      To:  <input type="text" class="timepicker" name="saturdayend" /> <br>
+      Sunday Open? <input type="checkbox" name="sundayopen" checked> <br>
+      From: <input type="text" class="timepicker" name="sundaystart" /> 
+      To:  <input type="text" class="timepicker" name="sundayend" /> <br>
+      
+    </div>
+
+
+    <br>
+    <!-- This is just temporarily here until we connect lol
+    <input type="text" class="form-control" name="restaurantHours" placeholder="Opening Hours" value=""> -->
   </div>
   <div class="form-group row">
-    <label for="restaurantHours">Hours:</label>
-    <input type="text" class="form-control" name="restaurantHours" placeholder="Opening Hours" value="">
-  </div>
-  <div class="form-group row">
-    <label for="restaurantMenu">Menu:</label>
+    <label for="restaurantMenu">Menu Link:</label>
     <input type="text" class="form-control" name="restaurantMenu" placeholder="Menu" value="">
   </div>
   <div class="form-group row">
-    <label for="restaurantMedia">Media:</label>
-    <input type="text" class="form-control" name="restaurantMedia" placeholder="Media" value="">
+    <label for="restaurantMedia">Website Link:</label>
+    <input type="text" class="form-control" name="restaurantMedia" placeholder="Website" value="">
   </div>
-  <div class="form-group row">
+  <!--Previous Tags-->
+  <!--<div class="form-group row">
     <label for="restaurantTags">Tags:</label>
     <input type="text" class="form-control" name="restaurantTags" placeholder="Tags" value="">
+  </div>-->
+  <!--Restuarant Type-->
+  <div class="form-check">
+    <strong>Restaurant Type:</strong>
+    <input type="radio" class="form-check-input" id = "fastfood" name="type" value="Fast Food">
+    <label for="fastfood"> Fast Food </label>
+    <input type="radio" class="form-check-input" id="casualdining" name="type" value="Casual Dining">
+    <label for="casualdining"> Casual Dining </label>
+    <input type="radio" class="form-check-input" id="finedining" name="type" value="Fine Dining">
+    <label for="finedining"> Fine Dining </label>
   </div>
-  <div class="form-group row">
-    <strong>Categories/Tags</strong>
-    <input type="checkbox" class="form-control" id = "fastfood" name="type" placeholder="" value="Fast Food">
-    <label for="fastfood"> Fast Food </label><br>
-    <input type="checkbox" class="form-control" id="casualdining" name="type" placeholder="" value="Casual Dining">
-    <label for="casualdining"> Casual Dining </label><br>
-    <input type="checkbox" class="form-control" id="finedining" name="type" placeholder="" value="Fine Dining">
-    <label for="finedining"> Fine Dining </label><br>
+  <!--Check Cuisine-->
+  <div class="form-check">
+    <label for="indian">
+      <input type="checkbox" class="form-check-input" name="cuisine" value="indian">Indian 
+    </label>
   </div>
-  <div class="form-group row">
-    <input type="checkbox" class="form-control" id="" name="cuisine" value="indian">
-    <label for="indian"> Indian </label><br>
-    <input type="checkbox" class="form-control" id="american" name="cuisine" value="american">
-    <label for="american"> American </label><br>
-    <input type="checkbox" class="form-control" id="french" name="cuisine" value="french">
-    <label for="french"> French </label><br />
-    <input type="checkbox" class="form-control" id="other" name="getcuisine" value="other" onchange="document.getElementById('otherCuisine').disabled = !this.checked;" >
-    <label for="other"> Other </label> <input type="text" id = "otherCuisine" name="cuisine" value=""><br><br>
+  <div class="form-check">
+    <label for="american"> 
+      <input type="checkbox" class="form-check-input" id="american" name="cuisine" value="american">American 
+    </label>
   </div>
+  <div class="form-check">
+    <label for="french"> 
+      <input type="checkbox" class="form-check-input" id="french" name="cuisine" value="french">French
+    </label>
+  </div>
+  <div class="form-check">
+    <label for="bbq"> 
+      <input type="checkbox" class="form-check-input" id="bbq" name="cuisine" value="bbq">BBQ
+    </label>
+  </div>
+  <div class="form-check">
+    <label for="jamaican"> 
+      <input type="checkbox" class="form-check-input" id="jamaican" name="cuisine" value="jamaican">Jamaican
+    </label>
+  </div>
+  <div class="form-check">
+    <label for="grill"> 
+      <input type="checkbox" class="form-check-input" id="grill" name="cuisine" value="grill">Grill
+    </label>
+  </div>
+  <div class="form-check">
+    <label for="bar"> 
+      <input type="checkbox" class="form-check-input" id="barandgrill" name="cuisine" value="barandgrill">Bar
+    </label>
+  </div>
+  <div class="form-check">
+    <label for="soul"> 
+      <input type="checkbox" class="form-check-input" id="soul" name="cuisine" value="soul">Soul
+    </label>
+  </div>
+  <div class="form-check">
+    <label for="easterneuropean"> 
+      <input type="checkbox" class="form-check-input" id="easterneuropean" name="cuisine" value="easterneuropean">Eastern European
+    </label>
+  </div>
+  <div class="form-check">
+    <label for="dominican"> 
+      <input type="checkbox" class="form-check-input" id="dominican" name="cuisine" value="dominican">Dominican
+    </label>
+  </div>
+  <div class="form-check">
+    <label for="italian"> 
+      <input type="checkbox" class="form-check-input" id="italian" name="cuisine" value="italian">Italian
+    </label>
+  </div>
+  <div class="form-check">
+    <label for="english"> 
+      <input type="checkbox" class="form-check-input" id="english" name="cuisine" value="english">English
+    </label>
+  </div>
+  <div class="form-check">
+    <label for="mexican"> 
+      <input type="checkbox" class="form-check-input" id="mexican" name="cuisine" value="mexican">Mexican
+    </label>
+  </div>
+  <div class="form-check">
+    <label for="spanish"> 
+      <input type="checkbox" class="form-check-input" id="spanish" name="cuisine" value="spanish">Spanish
+    </label>
+  </div>
+  <div class="form-check">
+    <label for="other"> 
+      <input type="checkbox" class="form-check-input" id="other" name="cuisine" value="other">Other 
+    </label>
+  </div>
+  
+  <!--Previous code for Other-->
+    <!--<input type="checkbox" class="form-control" id="other" name="getcuisine" value="other" onchange="document.getElementById('otherCuisine').disabled = !this.checked;" >
+    <label for="other"> Other </label> <input type="text" id = "otherCuisine" name="cuisine" value=""><br><br>-->
+  <!--Choosing Price-->
   <div class="form-group row">
     <input type="range" class="form-control" id="price" name="price" min="0" max="100">
     <label for="price"> Average Cost of Restaurant Meal (between 0 and 100)</label>
@@ -64,10 +198,7 @@
   </div>
 
   <button type="submit" class="submit">Submit</button>
-
-
 </form>
-
 
 
 <!-- <div class="form-group row">
@@ -79,7 +210,7 @@
 
 <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
 
-<script type="text/javascript">
+<script>
 var myWidget = cloudinary.createUploadWidget({
   cloudName: 'duknapu84',
   uploadPreset: 'geozzbbn'}, (error, result) => {
@@ -89,11 +220,64 @@ var myWidget = cloudinary.createUploadWidget({
     }
   }
 )
+$("#slider-range").slider({
+  range: true,
+  min: 0,
+  max: 1440,
+  step: 15,
+  values: [270, 2730],
+  slide: function(e, ui) {
+    $('.slider-time').each(function(i) {
+      var hours = ("00" + Math.floor(ui.values[i] / 60)).slice(-2);
+      var mins = ("00" + (ui.values[i] - (hours * 60))).slice(-2);
+      $(this).html(hours + ':' + mins);
+    });
+  }
+});
 
 document.getElementById("upload_widget").addEventListener("click", function(){
     myWidget.open();
   }, false);
+
+
+
 </script>
+
+<!-- TimePicker widget-->
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.timepicker').timepicker({
+           timeFormat: 'h:mm p',
+           interval: 30,
+           minTime: '10',
+           maxTime: '6:00pm',
+           defaultTime: '11',
+           startTime: '10:00',
+           dynamic: false,
+           dropdown: true,
+           scrollbar: true
+        });
+  });
+</script>
+
+<!--Google Maps Autocomplete Feature-->
+<script>
+  let autocomplete;
+  function initAutocomplete() {
+    autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById('autocomplete'),
+      {
+        types: ['address'],
+        componentRestrictions: {'country': ['US']},
+        fields: ['formatted_address']
+      }
+    );
+  }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGum5waTdk-9CADxl2qUegf1d4kzm146U&libraries=places&callback=initAutocomplete">
+</script>
+
 
 {% include 'footer.html' %}
 {% endblock %}
