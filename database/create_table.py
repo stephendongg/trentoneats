@@ -93,13 +93,31 @@ def create_tables():
             email VARCHAR(255) NOT NULL PRIMARY KEY
         )
         """,
-         """
+        """
         CREATE TABLE IF NOT EXISTS users (
             email VARCHAR(255) NOT NULL PRIMARY KEY,
             googleid INTEGER,
             name VARCHAR(255)
         )
         """,
+        """
+        CREATE TABLE IF NOT EXISTS requests (
+            restaurant_id SERIAL PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            address VARCHAR(255) NOT NULL,
+            hours VARCHAR(255) NOT NULL,
+            open_closed BOOLEAN,
+            menu VARCHAR(255),
+            media VARCHAR(255),
+            tags VARCHAR(255),
+            review_count INTEGER,
+            stars FLOAT NOT NULL,
+            cuisine VARCHAR(255),
+            type VARCHAR(255),
+            price VARCHAR(255),
+            image VARCHAR(225)
+        )
+        """
         """
         CREATE TABLE IF NOT EXISTS favoriterestaurants (
             favoriterestaurantid SERIAL PRIMARY KEY,
@@ -112,7 +130,7 @@ def create_tables():
             
         )
         """)
-        #restaurant_id SERIAL
+    # restaurant_id SERIAL
 
 # The following code was adapted from POSTGRESQL TUTORIAL
 
