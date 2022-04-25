@@ -125,8 +125,8 @@ def delete_request_add_res(request_id):
                     info_obj['tags'] + "', '0', '0', '"
                 stmt_str2 += info_obj['image'] + "', "
                 stmt_str2 += "'" + \
-                    ", " + info_obj['cuisine'] + \
-                    "', '" + ", " + info_obj['type']
+                    + info_obj['cuisine'] + \
+                    "', '" + info_obj['type']
                 stmt_str2 += "', '" + info_obj['price'] + "');"
 
                 print(stmt_str2)
