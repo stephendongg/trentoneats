@@ -20,7 +20,7 @@
     </div> -->
     <div class="row pt-0 px-3 justify-content-center">
         <input class="rest_search" type="text" id="restaurantInput" placeholder="Enter a restaurant name here!">
-        
+
     </div>
     <a class = "row pt-0 px-3 justify-content-center" href="resdetails?id={{randomrestaurant - 1}}"> Surprise Me! </a>
     <br>
@@ -268,17 +268,15 @@
            // }
            var priceVal = ""
            if (document.getElementById('$').checked== true){
-             priceVal = 'inexpensive';
+             priceVal += 'inexpensive';
            }
-           else if (document.getElementById('$$').checked == true){
-             priceVal = 'moderate';
+           if (document.getElementById('$$').checked == true){
+             priceVal += ', moderate';
            }
-           else if (document.getElementById('$$$').checked == true){
-             priceVal = 'pricey';
+           if (document.getElementById('$$$').checked == true){
+             priceVal += ', pricey';
            }
-           else {
-             priceVal = ""
-           }
+
            console.log("Price: " + priceVal);
 
            restaurantInput = encodeURIComponent(restaurantInput);

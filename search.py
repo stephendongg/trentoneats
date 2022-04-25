@@ -58,12 +58,15 @@ def restaurant_search(input, cuisine, type, price): #, tags, price, type, cuisin
                 stmt_str = "SELECT restaurant_id, name, open_closed, address, "
                 stmt_str += "stars, cuisine, type, price, tags "
                 stmt_str += "FROM restaurants "
-                stmt_str += "WHERE LOWER(name) ILIKE %s "
+                stmt_str += "WHERE LOWER(name) ILIKE %s"
                 if price == "":
                     nullPrice = True
                 else:
                     stmt_str += "AND LOWER(price) ILIKE %s "
                     price = '%' + price.lower() + '%'
+                    # p = price.lower().split(", ")
+                    # for i in p:
+                    #     stmt_str += " OR LOWER(price) ILIKE '%" + i + "%'"
                 if type == "":
                     nullType = True
                 else:
@@ -83,7 +86,7 @@ def restaurant_search(input, cuisine, type, price): #, tags, price, type, cuisin
                     print('Hit 1')
                     cursor.execute(stmt_str, [input, price, type])
                     print(stmt_str % (input, price, type))
-                elif not nullType:
+                if not nullType:
                     print('Hit 2')
                     cursor.execute(stmt_str, [input, type])
                     print(stmt_str % (input, type))
