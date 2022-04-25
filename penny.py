@@ -150,6 +150,7 @@ def addrestaurant():
     for i in range(len(cuisine)):
         if cuisine[i] is None or cuisine[i].split()=="":
             cuisine[i] = ""
+    cuisine = ', '.join(cuisine)
 
     priceNum = request.args.get('price')
     if priceNum is None or priceNum.split()=="":

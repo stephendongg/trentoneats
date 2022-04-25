@@ -14,25 +14,10 @@ import psycopg2
 # Current issue: figuring out how to know what to put in for open
 def add_restaurant(restaurantName, restaurantAddress, restaurantHours,
 restaurantMenu, restaurantMedia, restaurantTags, cuisine, type, price, restaurantImage):
-    stmt_str = """
-    INSERT INTO restaurants (name, address, hours,
-    open_closed, menu, media, tags, review_count, stars, image, cuisine, type, price)
-    VALUES ('"""
-    stmt_str += restaurantName + "','" + restaurantAddress + "','"
-    stmt_str += restaurantHours + "', 'TRUE', '" + restaurantMenu + "', '"
-    stmt_str += restaurantMedia + "', '" + restaurantTags + "', '0', '0', '"
-    stmt_str += restaurantImage + "', '"
-    stmt_str += ", ".join(cuisine)
-    stmt_str += "', '" + type + "', '" + price + "');"
-    # stmt_str = """
-    # INSERT INTO restaurants (name, address, hours,
-    # open_closed, menu, media, tags, review_count, stars, image, cuisine, type, price)
-    # VALUES ('%s', '%s','"
-    # stmt_str += restaurantHours + "', 'TRUE', '" + restaurantMenu + "', '"
-    # stmt_str += restaurantMedia + "', '" + restaurantTags + "', '0', '0', '"
-    # stmt_str += restaurantImage + "', '"
-    # stmt_str += ", ".join(cuisine)
-    # stmt_str += "', '" + type + "', '" + price + "');"
+    stmt_str = """INSERT INTO restaurants (name, address, hours, open_closed,
+    menu, media, tags, review_count, stars, image, cuisine, type, price)
+    VALUES (%s, %s,%s, 'TRUE', %s, %s, %s, 0, 0, %s, %s, %s , %s);"""
+
 
     try:
         # with connect(
@@ -43,8 +28,10 @@ restaurantMenu, restaurantMedia, restaurantTags, cuisine, type, price, restauran
 
             with connection.cursor() as cursor:
                 print(stmt_str)
-                cursor.execute(stmt_str)
-
+                cursor.execute(stmt_str,
+                 [restaurantName, restaurantAddress, restaurantHours,
+                 restaurantMenu, restaurantMedia, restaurantTags,
+                 restaurantIamge, cuisine, type, price])
 
     except (Exception, psycopg2.DatabaseError) as ex:
         print(ex, file=stderr)
