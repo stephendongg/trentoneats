@@ -41,7 +41,7 @@ app.secret_key = "dsghabkjcn1iy2u6gdoyq"
 @app.route('/searchform', methods=['GET'])
 def search_form():
 
-    # Note! Figure out how to make it refresh.. Look int oCss. 
+    # Note! Figure out how to make it refresh.. Look int oCss.
     #randomrestaurant = random.randint(0, restaurants_count() - 1)
     error_msg = request.args.get('error_msg')
     if error_msg is None:
@@ -66,9 +66,22 @@ def search_results():
     if (restaurant is None) or (restaurant.split() == ""):
         restaurant = ""
 
+    price = request.args.get('price')
+    if (price is None) or (price.split()==""):
+        price=""
+
+    type = request.args.get('type')
+    if (type is None) or (type.split()==""):
+        type = ""
+
+    cuisine = request.args.get('cuisine')
+    if (cuisine is None) or (cuisine ==[]):
+        cuisine= "%%"
+
     try:
-        restaurantinfo = restaurant_search(restaurant)
-    except:
+        restaurantinfo = restaurant_search(restaurant, cuisine, type, price)
+    except Exception as e:
+        print(e)
         html = render_template('servererror.html')
         response = make_response(html)
         return response
@@ -243,14 +256,14 @@ def addrestaurant():
     if restaurantTags is None or restaurantTags.split() == "":
         restaurantTags = ""
 
-    type = request.args.getlist('type')
-    for i in range(len(type)):
-        if type[i] is None or type[i].split() == "":
-            type[i] = ""
+    type= request.args.get('type')
+    if type is None or type.split()=="":
+        type = ""
     cuisine = request.args.getlist('cuisine')
     for i in range(len(cuisine)):
         if cuisine[i] is None or cuisine[i].split() == "":
             cuisine[i] = ""
+    cuisine = ', '.join(cuisine)
 
     priceNum = request.args.get('price')
     if priceNum is None or priceNum.split() == "":
@@ -496,10 +509,14 @@ def callback():
         user_add(session["email"], session["name"])
 
     unique_id = session.get('google_id')
+    restaurant = ""
+    cuisine = "%%"
+    type = ""
+    price = ""
     admin = is_admin()
-    # restaurant = ""
-    # restaurantinfo = restaurant_search(
-    #     restaurant)  # Exception handling omitted
+
+    restaurantinfo = restaurant_search(restaurant, cuisine, type, price)
+
     html = render_template('searchform.html',
                            #ampm = get_ampm(),
                            # current_time = get_current_time(),

@@ -49,7 +49,7 @@
                     'use strict';
                     function statusFunc() {
                       let status = "{{restaurant.get_openclose()}}";
-                      console.log(status);
+                      //console.log(status);
                       let node = document.getElementsByClassName("badge badge-info badge-pill i");
                       if (status == "True"){
                         node[index].innerHTML = "Open";
@@ -59,7 +59,7 @@
                       }
                       index++;
                     }
-                    
+
 
                     statusFunc();
 
@@ -166,9 +166,9 @@
                 {% endfor %}
               </tbody>
             </table>
-                
+
             {% endif %}
-            
+
 
         </tbody>
     </table>
