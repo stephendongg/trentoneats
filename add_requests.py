@@ -23,9 +23,8 @@ def add_requests(restaurantName, restaurantAddress, restaurantHours,
     stmt_str += restaurantName + "','" + restaurantAddress + "','"
     stmt_str += restaurantHours + "', 'TRUE', '" + restaurantMenu + "', '"
     stmt_str += restaurantMedia + "', '" + restaurantTags + "', '0', '0', '"
-    stmt_str += restaurantImage + "', "
-    stmt_str += "'" + ", ".join(cuisine) + "', '" + ", ".join(type)
-    stmt_str += "', '" + price + "');"
+    stmt_str += ", '".join(cuisine) + "', '" + ", '".join(type)
+    stmt_str += "', '" + price + "', '" + restaurantImage + "');"
 
     try:
         # with connect(

@@ -196,6 +196,32 @@ def request_search(input):
         print(sys.argv[0] + ": " + str(error), file=stderr)
         return ("stdservererr")
 
+def restaurants_count():
+    """search through restaurants"""
+    try:
+        # with connect(host='localhost', port=5432, user='rmd', password='xxx',
+        #              database="trentoneats") as connection:
+        # dequ5ope4nuoit
+        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+                     database="dequ5ope4nuoit") as connection:
+
+            with closing(connection.cursor()) as cursor:
+                # This needs to be adjusted
+                stmt_str = "SELECT COUNT(*) "
+                stmt_str += "FROM restaurants;"
+
+                cursor.execute(stmt_str)
+                row = cursor.fetchone()
+
+                return row[0]
+
+    # Normally exit status 0.
+    # If database-related error, terminate with exit status 1.
+    # If erroneous command-line arguments terminate with exit status 2
+
+    except DatabaseError as error:
+        print(sys.argv[0] + ": " + str(error), file=stderr)
+        return ("stdservererr")
 
 def get_request_info(res_id):
     """find all information on one restaurant"""

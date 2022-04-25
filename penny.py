@@ -10,7 +10,7 @@ from flask import Flask, request, make_response, redirect, url_for, session
 from flask import render_template, abort
 from requestshelper import delete_request, delete_request_add_res
 # sfrom database import search
-from search import get_request_info, restaurant_search, get_restaurant_info, request_search
+from search import get_request_info, restaurant_search, get_restaurant_info, request_search, restaurants_count
 from add_restaurant import add_restaurant
 
 from reviews import add_review, review_search
@@ -18,6 +18,7 @@ from reviews import add_review, review_search
 from admin import admin_search
 from users import user_exists, user_add, add_favorite_restaurant, is_favorite_restaurant, get_favorites, delete_favorite_restaurant
 
+import random
 import datetime
 
 import os
@@ -39,13 +40,16 @@ app.secret_key = "dsghabkjcn1iy2u6gdoyq"
 @app.route('/', methods=['GET'])
 @app.route('/searchform', methods=['GET'])
 def search_form():
+
+    # Note! Figure out how to make it refresh.. Look int oCss. 
+    #randomrestaurant = random.randint(0, restaurants_count() - 1)
     error_msg = request.args.get('error_msg')
     if error_msg is None:
         error_msg = ''
     unique_id = session.get('google_id')
     admin = is_admin()
     html = render_template(
-        'searchform.html', error_msg=error_msg, id=unique_id, admin=admin)
+        'searchform.html', error_msg=error_msg, id=unique_id, admin=admin, randomrestaurant = random.randint(0, restaurants_count() - 1))
     response = make_response(html)
     return response
 
@@ -498,7 +502,7 @@ def callback():
                            #ampm = get_ampm(),
                            # current_time = get_current_time(),
                            #    restaurantinfo=restaurantinfo,
-                           id=unique_id, admin=admin)
+                           id=unique_id, admin=admin, randomrestaurant = random.randint(0, restaurants_count() - 1))
     response = make_response(html)
     return response
     # return redirect("/")  # ,id=unique_id)
