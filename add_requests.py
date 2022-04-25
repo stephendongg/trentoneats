@@ -16,11 +16,6 @@ import psycopg2
 
 def add_requests(restaurantName, restaurantAddress, restaurantHours,
                  restaurantMenu, restaurantMedia, restaurantTags, cuisine, type, price, restaurantImage):
-<<<<<<< HEAD
-    stmt_str = """INSERT INTO restaurants (name, address, hours, open_closed,
-    menu, media, tags, review_count, stars, image, cuisine, type, price)
-    VALUES (%s, %s,%s, 'TRUE', %s, %s, %s, 0, 0, %s, %s, %s , %s);"""
-=======
     stmt_str = """
     INSERT INTO requests (name, address, hours,
     open_closed, menu, media, tags, review_count, stars, cuisine, type, price, image)
@@ -30,7 +25,6 @@ def add_requests(restaurantName, restaurantAddress, restaurantHours,
     stmt_str += restaurantMedia + "', '" + restaurantTags + "', '0', '0', '"
     stmt_str += ", '".join(cuisine) + "', '" + ", '".join(type)
     stmt_str += "', '" + price + "', '" + restaurantImage + "');"
->>>>>>> a0c047557e72daf8bda1cdaf8fe722bbef45df73
 
     try:
         # with connect(
