@@ -102,7 +102,7 @@ def create_tables():
         """,
         """
         CREATE TABLE IF NOT EXISTS requests (
-            restaurant_id SERIAL PRIMARY KEY,
+            request_id SERIAL PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
             address VARCHAR(255) NOT NULL,
             hours VARCHAR(255) NOT NULL,
