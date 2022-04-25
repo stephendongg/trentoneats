@@ -50,7 +50,7 @@ def review_search(input):
                 #     input + "%') "
 
                 # Review Search 
-                stmt_str = "SELECT date, text, review_id "
+                stmt_str = "SELECT date, text, review_id, email "
                 stmt_str += "FROM reviews "
                 stmt_str += "WHERE restaurant_id = '" + input + "';"
                 # stmt_str = "SELECT r.id, date, text, restaurant_id "
@@ -67,14 +67,15 @@ def review_search(input):
 
                 # rowstringlist this rowstring will contain all of the necessary values
 
-                rowstring = ["", "", ""]
+                rowstring = ["", "", "", ""]
 
                 # This iwll parse through the rows and get all of the necsary values
                 while row is not None:
-                    rowstring = ["", "", ""]
+                    rowstring = ["", "", "", ""]
                     rowstring[0] = str(row[0])
                     rowstring[1] = str(row[1])
                     rowstring[2] = str(row[2])
+                    rowstring[3] = str(row[3])
                     reviews.append(rowstring)
                     row = cursor.fetchone()
                 
@@ -90,13 +91,13 @@ def review_search(input):
 
 
 
-def add_review(restaurant_id, date, text, rating):
+def add_review(restaurant_id, date, text, rating, email):
 
     stmt_str = """
     INSERT INTO reviews (restaurant_id, date,
-    text, overall) 
+    text, overall, email) 
     VALUES  ( '"""
-    stmt_str += str(restaurant_id) + "', '" + str(date) + "', '" + text + "', '" + rating + "');"
+    stmt_str += str(restaurant_id) + "', '" + str(date) + "', '" + text + "', '" + rating + "', '" + email +"');"
 
     try:
         with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
@@ -147,6 +148,73 @@ def get_restaurant_info(res_id):
                     info_obj['image'] = str(row[9])
 
                 return info_obj
+
+    # Normally exit status 0.
+    # If database-related error, terminate with exit status 1.
+    # If erroneous command-line arguments terminate with exit status 2
+
+    except DatabaseError as error:
+        print(sys.argv[0] + ": " + str(error), file=stderr)
+        return ("stdservererr")
+
+
+def update_ratings(input):
+    """search through restaurants"""
+    try:
+        # with connect(host='localhost', port=5432, user='rmd', password='xxx',
+        #              database="trentoneats") as connection:
+        # dequ5ope4nuoit
+        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+                     database="dequ5ope4nuoit") as connection:
+
+            with closing(connection.cursor()) as cursor:
+                # This needs to be adjusted
+                # stmt_str = "SELECT restaurant_id, name, open_closed, address, stars "
+                # stmt_str += "FROM restaurants "
+                # stmt_str += "WHERE LOWER (name) LIKE LOWER ('%" + \
+                #     input + "%') "
+
+                # Review Search 
+                stmt_str = "SELECT overall "
+                stmt_str += "FROM reviews "
+                stmt_str += "WHERE restaurant_id = '" + input + "';"
+                # stmt_str = "SELECT r.id, date, text, restaurant_id "
+                # stmt_str += "FROM reviews r JOIN restaurants u ON r.restaurant_id = u.restaurant_id "
+                # stmt_str += "WHERE restaurant_id = " + input
+
+
+                cursor.execute(stmt_str)
+
+                row = cursor.fetchone()
+
+                # course list
+                reviews = []
+                # counter 
+                counter = 0
+
+                # rowstringlist this rowstring will contain all of the necessary values
+
+                rowstring = [0]
+
+                # This iwll parse through the rows and get all of the necsary values
+                while row is not None:
+                    counter = counter + 1
+                    reviews.append(row[0])
+                    row = cursor.fetchone()
+                averageRating = 0
+                if counter != 0: 
+                    averageRating = sum(reviews)/len(reviews)
+                #return averageRating
+            with closing(connection.cursor()) as cursor:
+                stmt_str = "UPDATE restaurants "
+                stmt_str += "SET stars = '" + str(averageRating) + "' "
+                stmt_str += "WHERE restaurant_id = '" + input + "';"
+
+                cursor.execute(stmt_str)
+                return averageRating
+
+
+
 
     # Normally exit status 0.
     # If database-related error, terminate with exit status 1.

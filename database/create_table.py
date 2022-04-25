@@ -47,13 +47,14 @@ def create_tables():
                 restaurant_id SERIAL,
                 FOREIGN KEY (restaurant_id)
                 REFERENCES restaurants (restaurant_id),
+                email VARCHAR(255), 
                 date TIMESTAMP NOT NULL,
                 text TEXT NOT NULL,
                 price INTEGER,
                 taste INTEGER,
                 authenticity INTEGER,
                 coolness INTEGER,
-                overall INTEGER
+                overall FLOAT
         )
         """,
         """

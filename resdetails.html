@@ -64,17 +64,17 @@
   <form method="post" id="addreview">
     <div class="form-group">
       <label for="rating">Give a Rating: </label>
-      <select id="rating" name="rating">
+      <!-- <select id="rating" name="rating">
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
             <option value="5">5</option>
-        </select>
+        </select> -->
       <br>
       <label class="rating-label">
-        <input class="user_rating" max="5" oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)"
+        <input id = "rating" name = "rating" class="user_rating" max="5" oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)"
           step="0.5" style="--value:2.5" type="range" value="2.5">
       </label>
       <br>
@@ -133,12 +133,14 @@
         {% if loop.index0 == 0 %}
         <div class="carousel-item active">
           <p>{{ review[1] }}</p>
-          <h8 style="text-align: center;">From @{{ review[0] }}</h8>
+          <h8 style="text-align: center;">From @{{ review[3] }}</h8> <br>
+          <h8 style="text-align: center;"> @{{ review[0] }}</h8>
         </div>
         {% else %}
         <div class="carousel-item">
           <p>{{ review[1] }}</p>
-          <h8>From @{{ review[0] }}</h8>
+          <h8 style="text-align: center;">From @{{ review[3] }}</h8> <br>
+          <h8> @{{ review[0] }}</h8>
         </div>
         {% endif %}
         {% endfor %}
