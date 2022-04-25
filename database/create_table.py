@@ -117,7 +117,7 @@ def create_tables():
             price VARCHAR(255),
             image VARCHAR(225)
         )
-        """
+        """,
         """
         CREATE TABLE IF NOT EXISTS favoriterestaurants (
             favoriterestaurantid SERIAL PRIMARY KEY,
