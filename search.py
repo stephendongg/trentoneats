@@ -258,33 +258,25 @@ def restaurant_search(input, cuisine, type, price): #, tags, price, type, cuisin
                 # This needs to be adjusted
                 nullPrice = False
                 nullType = False
-                nullCuisine = False
                 stmt_str = "SELECT restaurant_id, name, open_closed, address, "
                 stmt_str += "stars, cuisine, type, price, tags "
                 stmt_str += "FROM restaurants "
                 stmt_str += "WHERE LOWER(name) ILIKE %s "
                 if price == "":
-                    stmt_str += "AND price IS NULL "
                     nullPrice = True
                 else:
                     stmt_str += "AND LOWER(price) ILIKE %s "
                     price = '%' + price.lower() + '%'
                 if type == "":
-                    stmt_str += "AND type IS NULL"
                     nullType = True
                 else:
                     stmt_str += "AND LOWER(type) ILIKE %s"
                     type = '%' + type.lower() + '%'
-                if cuisine == "":
-                    stmt_str += "AND cuisine IS NULL"
-                    nullCuisine = True
-                else:
+                if cuisine != "%%":
                     c = cuisine.lower().split(",")
                     for i in c:
                         stmt_str += " AND LOWER(cuisine) ILIKE '%" + i + "%'"
-                    #stmt_str += "AND LOWER(cuisine) ILIKE %s "
-                    #cuisine = cuisine.lower()
-                    # stmt_str += "AND LOWER(cuisine) IN ('"
+
                 stmt_str += ";"
 
                 input = '%' + input.lower() + '%'
@@ -302,10 +294,6 @@ def restaurant_search(input, cuisine, type, price): #, tags, price, type, cuisin
                     print('Hit 3')
                     cursor.execute(stmt_str, [input, price])
                     print(stmt_str % (input, price))
-                elif not nullCuisine:
-                    print('Hit 4')
-                    print(stmt_str % (input))
-                    cursor.execute(stmt_str, [input])
                 else:
                     print('Hit 5')
                     print(stmt_str % input)
