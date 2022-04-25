@@ -13,7 +13,7 @@ from requestshelper import delete_request, delete_request_add_res
 from search import get_request_info, restaurant_search, get_restaurant_info, request_search, restaurants_count
 from add_restaurant import add_restaurant
 
-from reviews import add_review, review_search
+from reviews import add_review, review_search, update_ratings
 
 from admin import admin_search
 from users import user_exists, user_add, add_favorite_restaurant, is_favorite_restaurant, get_favorites, delete_favorite_restaurant
@@ -332,6 +332,7 @@ def resdetails():
             error = 'You didn\'t add any new reviews.'
         if error is None:
             add_review(id, datetime.datetime.now(), text, rating, email)
+            update_ratings(id)
             reviews = review_search(id)
 
     html = render_template('resdetails.html', info=info,
@@ -392,6 +393,7 @@ def test():
             # Currently, placeholder reviews are all -10
             # NEed Cusomter Ids sorted out.
             add_review(id, datetime.datetime.now(), text, rating, email)
+            update_ratings(id)
             # return redirect(url_for('review.dashboard'))
             reviews = review_search(id)
         # flash(error)

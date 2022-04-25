@@ -54,7 +54,7 @@ def create_tables():
                 taste INTEGER,
                 authenticity INTEGER,
                 coolness INTEGER,
-                overall INTEGER
+                overall FLOAT
         )
         """,
         """

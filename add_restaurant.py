@@ -41,6 +41,7 @@ def add_restaurant(restaurantName, restaurantAddress, restaurantHours,
         print(ex, file=stderr)
         exit(1)
 
+
 # -----------------------------------------------------------------------
 
 
