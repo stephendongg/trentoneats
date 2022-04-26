@@ -135,11 +135,17 @@
         {% if loop.index0 == 0 %}
         <div class="carousel-item active">
           <p>{{ review[1] }}</p>
+          <br>
+          <br>
+          <h8 style="text-align: center;">From @{{ review[3] }}</h8> <br>
           <h8 style="text-align: center;">From @{{ review[0] }}</h8>
         </div>
         {% else %}
         <div class="carousel-item">
           <p>{{ review[1] }}</p>
+          <br>
+          <br>
+          <h8 style="text-align: center;">From @{{ review[3] }}</h8> <br>
           <h8>From @{{ review[0] }}</h8>
         </div>
         {% endif %}
