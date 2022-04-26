@@ -17,7 +17,8 @@ def insert_restaurant():
     commands = [
         """
         INSERT INTO restaurants ( name, address, hours,
-        open_closed, menu, media, tags, review_count, stars)
+        open_closed, menu, media, tags, review_count, stars,
+        cuisine, type, price)
         VALUES (
         '1911 Smokehouse BBQ',
         '11 W Front St, Trenton, NJ 08608',
@@ -32,12 +33,16 @@ def insert_restaurant():
         'https://1911bbq.com',
         'BBQ',
         12,
-        5.0);
+        5.0,
+        'BBQ, Grill, American',
+        'Fast Food',
+        'Moderate $$');
         """,
 
         """
         INSERT INTO restaurants ( name, address, hours,
-        open_closed, menu, media, tags, review_count, stars )
+        open_closed, menu, media, tags, review_count, stars,
+        cuisine, type, price)
         VALUES (
         'Bamboo Grill Jamaican Restaurant',
         '1005 Chambers St, Trenton, NJ 08611',
@@ -52,12 +57,16 @@ def insert_restaurant():
         'None',
         'Jamaican, Grill',
         1,
-        3.2);
+        3.2,
+        'BBQ, Grill, Jamaican',
+        'Fast Food',
+        'Moderate $$');
         """,
 
         """
         INSERT INTO restaurants (name, address, hours,
-        open_closed, menu, media, tags, review_count, stars )
+        open_closed, menu, media, tags, review_count, stars,
+        cuisine, type, price)
         VALUES (
         'Ila Mae''s Restaurant',
         '313 Market St, Trenton, NJ 08611',
@@ -72,12 +81,16 @@ def insert_restaurant():
         'None',
         'Soul',
         10,
-        4.3);
+        4.3,
+        'Soul',
+        'Casual',
+        'Moderate $$');
         """,
 
         """
         INSERT INTO restaurants ( name, address, hours,
-        open_closed, menu, media, tags, review_count, stars )
+        open_closed, menu, media, tags, review_count, stars,
+        cuisine, type, price)
         VALUES (
         'Blue Danube Restaurant',
         '538 Adeline St, Trenton, NJ 08611',
@@ -92,12 +105,16 @@ def insert_restaurant():
         'http://www.bluedanuberestaurant.net/about.php',
         'Eastern European' ,
         273,
-        4.6);
+        4.6,
+        'Eastern European',
+        'Casual',
+        'Moderate $$');
         """,
 
         """
         INSERT INTO restaurants ( name, address, hours,
-        open_closed, menu, media, tags, review_count, stars )
+        open_closed, menu, media, tags, review_count, stars,
+        cuisine, type, price)
         VALUES (
         'The Big Easy of Trenton Restaurant',
         '111 S Warren St, Trenton, NJ 08608',
@@ -112,12 +129,16 @@ def insert_restaurant():
         'None',
         'Dine-in' ,
         260,
-        4.5);
+        4.5,
+        'Dine-in, Soul',
+        'Casual',
+        'Moderate $$');
         """,
 
         """
         INSERT INTO restaurants ( name, address, hours,
-        open_closed, menu, media, tags, review_count, stars )
+        open_closed, menu, media, tags, review_count, stars,
+        cuisine, type, price)
         VALUES (
         'Don Julio''s Bar and Grill',
         '900 Liberty St, Trenton, NJ 08611',
@@ -132,12 +153,17 @@ def insert_restaurant():
         'None',
         'Bar & Grill' ,
         190,
-        4.3);
+        4.3,
+        'Bar & Grill',
+        'Casual',
+        'Moderate $$'
+        );
         """,
 
         """
         INSERT INTO restaurants (name, address, hours,
-        open_closed, menu, media, tags, review_count, stars )
+        open_closed, menu, media, tags, review_count, stars,
+        cuisine, type, price)
         VALUES (
         'The Hummingbird Restaurant',
         '29 S Warren St, Trenton, NJ 08608',
@@ -152,12 +178,16 @@ def insert_restaurant():
         'None',
         'Jamaican' ,
         282,
-        4.2);
+        4.2,
+        'Jamaican',
+        'Casual',
+        'Moderate $$');
         """,
 
         """
         INSERT INTO restaurants (name, address, hours,
-        open_closed, menu, media, tags, review_count, stars )
+        open_closed, menu, media, tags, review_count, stars,
+        cuisine, type, price)
         VALUES (
         'Sabor Latino',
         '293 Ashmore Ave, Trenton, NJ 08611',
@@ -172,12 +202,16 @@ def insert_restaurant():
         'None',
         'Dominican' ,
         80,
-        4.1);
+        4.1,
+        'Dominican, Mexican',
+        'Casual',
+        'Moderate $$');
         """,
 
         """
         INSERT INTO restaurants (name, address, hours,
-        open_closed, menu, media, tags, review_count, stars )
+        open_closed, menu, media, tags, review_count, stars,
+        cuisine, type, price)
         VALUES (
         'Trentini''s',
         '635 S Clinton Ave, Trenton, NJ 08611',
@@ -192,12 +226,16 @@ def insert_restaurant():
         'https://trentinismenu.com/index.html',
         'Italian' ,
         420,
-        4.1);
+        4.1,
+        'Italian, Mediterranean, Spanish',
+        'Casual',
+        'Inexpensive $');
         """,
 
         """
         INSERT INTO restaurants (name, address, hours,
-        open_closed, menu, media, tags, review_count, stars )
+        open_closed, menu, media, tags, review_count, stars,
+        cuisine, type, price)
         VALUES (
         'Mama D Soul Food 2',
         '312 S Broad St, Trenton, NJ 08609',
@@ -212,12 +250,16 @@ def insert_restaurant():
         'None',
         'Soul' ,
         112,
-        3.9);
+        3.9,
+        'Soul',
+        'Fast Food',
+        'Inexpensive $');
         """,
 
         """
         INSERT INTO restaurants (name, address, hours,
-        open_closed, menu, media, tags, review_count, stars )
+        open_closed, menu, media, tags, review_count, stars,
+        cuisine, type, price)
         VALUES (
         'Cooper''s Riverview',
         '50 Riverview Plaza, Trenton, NJ 08611',
@@ -232,12 +274,16 @@ def insert_restaurant():
         'None',
         'English' ,
         455,
-        4.0);
+        4.0,
+        'English',
+        'Fine Dining',
+        'Pricey $$$');
         """,
 
         """
         INSERT INTO restaurants (name, address, hours,
-        open_closed, menu, media, tags, review_count, stars )
+        open_closed, menu, media, tags, review_count, stars,
+        cuisine, type, price)
         VALUES (
         'Mi Ranchito Pizza and Tacos',
         '911 Chambers St, Trenton, NJ 08611',
@@ -252,12 +298,16 @@ def insert_restaurant():
         'None',
         'Tacos' ,
         61,
-        4.7);
+        4.7,
+        'Mexican, Tacos',
+        'Casual',
+        'Inexpensive $');
         """,
 
         """
         INSERT INTO restaurants (name, address, hours,
-        open_closed, menu, media, tags, review_count, stars )
+        open_closed, menu, media, tags, review_count, stars,
+        cuisine, type, price)
         VALUES (
         'El Potrillo',
         '541 Roebling Ave, Trenton, NJ 08611',
@@ -272,12 +322,16 @@ def insert_restaurant():
         'None',
         'Mexican' ,
         213,
-        3.9);
+        3.9,
+        'Mexican',
+        'Casual',
+        'Moderate $$');
         """,
 
         """
         INSERT INTO restaurants (name, address, hours,
-        open_closed, menu, media, tags, review_count, stars )
+        open_closed, menu, media, tags, review_count, stars,
+        cuisine, type, price)
         VALUES (
         'Chencha y Chole',
         '865 S Broad St, Trenton, NJ 08611',
@@ -286,12 +340,16 @@ def insert_restaurant():
         'None',
         'Mexican' ,
         319,
-        4.2);
+        4.2,
+        'Mexican',
+        'Casual',
+        'Inexpensive $');
         """,
 
         """
         INSERT INTO restaurants (name, address, hours,
-        open_closed, menu, media, tags, review_count, stars )
+        open_closed, menu, media, tags, review_count, stars,
+        cuisine, type, price)
         VALUES (
         'Casablanca Restaurant',
         '140 Washington St, Trenton, NJ 08611',
@@ -306,7 +364,10 @@ def insert_restaurant():
         'None',
         'Spanish' ,
         372,
-        4.1);
+        4.1,
+        'Spanish',
+        'Casual',
+        'Moderate $$');
         """,
         """
         INSERT INTO administrators (email)
@@ -339,11 +400,11 @@ def insert_restaurant():
         'kao3@princeton.edu');
         """]
     try:
-        # with connect(
-        #         host='localhost', port=5432, user='rmd', password='trentoneats333',
-        #         database='trentoneats') as connection:
-        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                     database="dequ5ope4nuoit") as connection:
+        with connect(
+                host='localhost', port=5432, user='rmd', password='trentoneats333',
+                database='trentoneats') as connection:
+        # with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+        #              database="dequ5ope4nuoit") as connection:
 
             with connection.cursor() as cursor:
                 # # create table one by one

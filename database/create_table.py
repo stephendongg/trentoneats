@@ -47,7 +47,7 @@ def create_tables():
                 restaurant_id SERIAL,
                 FOREIGN KEY (restaurant_id)
                 REFERENCES restaurants (restaurant_id),
-                email VARCHAR(255), 
+                email VARCHAR(255),
                 date TIMESTAMP NOT NULL,
                 text TEXT NOT NULL,
                 price INTEGER,
@@ -128,7 +128,7 @@ def create_tables():
             restaurant_id SERIAL NOT NULL,
             FOREIGN KEY (restaurant_id)
             REFERENCES restaurants (restaurant_id)
-            
+
         )
         """)
     # restaurant_id SERIAL
@@ -136,11 +136,11 @@ def create_tables():
 # The following code was adapted from POSTGRESQL TUTORIAL
 
     try:
-        # with connect(
-        #         host='localhost', port=5432, user='rmd', password='trentoneats333',
-        #         database='trentoneats') as connection:
-        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                     database="dequ5ope4nuoit") as connection:
+        with connect(
+                host='localhost', port=5432, user='rmd', password='trentoneats333',
+                database='trentoneats') as connection:
+        # with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+        #              database="dequ5ope4nuoit") as connection:
 
             with connection.cursor() as cursor:
                 # create table one by one
