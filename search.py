@@ -47,8 +47,8 @@ def restaurant_search(input, cuisine, type, price): #, tags, price, type, cuisin
         # with connect(host='localhost', port=5432, user='rmd', password='xxx',
         #               database="trentoneats") as connection:
         # dequ5ope4nuoit
-         with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                    database="dequ5ope4nuoit") as connection:
+        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+                database="dequ5ope4nuoit") as connection:
 
             with closing(connection.cursor()) as cursor:
 
@@ -63,7 +63,7 @@ def restaurant_search(input, cuisine, type, price): #, tags, price, type, cuisin
                     nullPrice = True
                 else:
                     stmt_str += "AND LOWER(price) ILIKE %s "
-                    price = '%' + price.lower() + '%'
+                    price = '%' + price + '%'
                     # p = price.lower().split(", ")
                     # for i in p:
                     #     stmt_str += " OR LOWER(price) ILIKE '%" + i + "%'"
