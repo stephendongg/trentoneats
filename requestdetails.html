@@ -48,13 +48,13 @@
   </div>
 </div>
 <!-- Adding A Favorite [UNDER CONSTRUCTION]-->
-<div class="container" style="text-align: center; padding-top: 20px;">
+<!-- <div class="container" style="text-align: center; padding-top: 20px;">
   <a href="test" class="list-group-item list-group-item-action">Add Favorite Restaurant</a>
-</div>
+</div> -->
 <!-- Adding a Review -->
 {% block header %}
 <div class="container" style="text-align: center; padding-top: 20px;">
-  <h1>{% block title2 %}Write a review for this restaurant!{% endblock %}</h1>
+  <h1>{% block title2 %}Approve or Deny this restaurant!{% endblock %}</h1>
 </div>
 {% endblock %}
 {% block content2 %}
@@ -63,7 +63,7 @@
 
   <form method="post">
     <div class="form-group">
-      <label for="rating">Give a Rating: </label>
+      <!-- <label for="rating">Give a Rating: </label> -->
       <!--<select id="rating" name="rating">
             <option value="0">0</option>
             <option value="1">1</option>
@@ -72,19 +72,19 @@
             <option value="4">4</option>
             <option value="5">5</option>
         </select>-->
-      <br>
+      <!-- <br>
       <label class="rating-label">
         <input class="user_rating" max="5" oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)"
           step="0.5" style="--value:2.5" type="range" value="2.5">
       </label>
       <br>
-      <label for="exampleFormControlTextarea1">Your review:</label>
+      <label for="exampleFormControlTextarea1">Your review:</label> -->
       <!-- Add icon library -->
-
+<!-- 
       <textarea class="form-control" rows="3" name="review-text">
       </textarea>
     </div>
-    <button class="btn btn-primary" type="submit" style="margin-bottom: 10px;">Submit</button>
+    <button class="btn btn-primary" type="submit" style="margin-bottom: 10px;">Submit</button> -->
     <button type="submit" name="submit_button" value="Approve">Approve</button>
     <button type="submit" name="submit_button" value="Deny">Deny</button>
 
