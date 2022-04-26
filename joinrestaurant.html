@@ -31,7 +31,7 @@
 
 <br>
 <div class="container-fluid col-md-8 pb-5 px-5 mx-auto">
-<center><h2 class="restOfHeader">Do you own a restuarant?</h2></center>
+<center><h2 class="restOfHeader">Do you own a restaurant?</h2></center>
 <center><h2 class="addItHere"><span>Add it here!</span></h2></center>
 
 <form action="addrestaurant" method="get">
@@ -47,13 +47,19 @@
   <!-- Hours -->
   <div class="form-group row">
     <label for="checkboxes">Hours:</label>
-    <div id="checkboxes">
-      <br>
-      Monday Open? <input type="checkbox" name="mondayopen" checked> <br>
+    <div id="checkboxes" class="container">
+      
+      <div class="row">
+        <div class="col-sm-8 mx-auto">
+            <!-- Column content -->
+            Monday Open? <input type="checkbox" name="mondayopen" checked> <br>
       From: <input type="text" class="timepicker" name="mondaystart" /> 
       To:  <input type="text" class="timepicker" name="mondayend" /> <br>
+        </div>
+      
+      </div>
 
-      Tuesday Open? <input type="checkbox" name="tuedayopen" checked> <br>
+      Tuesday Open? <input type="checkbox" name="tuesdayopen" checked> <br>
       From: <input type="text" class="timepicker" name="tuesdaystart" /> 
       To:  <input type="text" class="timepicker" name="tuesdayend" /> <br>
       
@@ -82,16 +88,10 @@
   </div>
   <div class="form-group row">
     <label for="restaurantMenu">Menu Link:</label>
-    <div class="input-group-prepend">
-      <span class="input-group-text">https://</span>
-    </div>
     <input type="text" class="form-control" name="restaurantMenu" placeholder="Menu" value="">
   </div>
   <div class="form-group row">
     <label for="restaurantMedia">Website Link:</label>
-    <div class="input-group-prepend">
-      <span class="input-group-text">https://</span>
-    </div>
     <input type="text" class="form-control" name="restaurantMedia" placeholder="Website" value="">
   </div>
   <!--Previous Tags-->
@@ -102,14 +102,30 @@
   <!--Restuarant Type-->
   <strong>Restaurant Type:</strong>
   <br>
-  <div class="form-check">
+  <div class="form-check-inline">
+    <label class="form-check-label">
+      <input type="radio" class="form-check-input" id = "fastfood" name="type" value="Fast Food">Fast Food
+    </label>
+  </div>
+  <div class="form-check-inline disabled">
+    <label class="form-check-label">
+      <input type="radio" class="form-check-input" id="casualdining" name="type" value="Casual Dining">Casual Dining
+    </label>
+  </div>
+  <div class="form-check-inline disabled">
+    <label class="form-check-label">
+      <input type="radio" class="form-check-input" id="finedining" name="type" value="Fine Dining">Fine Dining
+    </label>
+  </div>
+  <br>
+  <!--<div class="form-check">
     <input type="radio" class="form-check-input" id = "fastfood" name="type" value="Fast Food">
     <label for="fastfood">Fast Food</label>
     <input type="radio" class="form-check-input" id="casualdining" name="type" value="Casual Dining">
     <label for="casualdining">Casual Dining</label>
     <input type="radio" class="form-check-input" id="finedining" name="type" value="Fine Dining">
     <label for="finedining">Fine Dining</label>
-  </div>
+  </div>-->
   <!--Check Cuisine-->
   <strong>Cuisine(s) - Check all that apply:</strong>
   <br>
