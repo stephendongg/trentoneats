@@ -33,7 +33,7 @@ restaurantMenu, restaurantMedia, restaurantTags, cuisine, type, price, restauran
                 cursor.execute(stmt_str,
                  [restaurantName, restaurantAddress, restaurantHours,
                  restaurantMenu, restaurantMedia, restaurantTags,
-                 restaurantIamge, cuisine, type, price])
+                 restaurantImage, cuisine, type, price])
 
     except (Exception, psycopg2.DatabaseError) as ex:
         print(ex, file=stderr)

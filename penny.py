@@ -269,11 +269,11 @@ def addrestaurant():
     if priceNum is None or priceNum.split() == "":
         priceNum = ""
     priceNum = int(priceNum)
-    price = 'inexpensive'
+    price = 'Inexpensive'
     if priceNum >= 10 and priceNum < 25:
-        price = 'moderate'
+        price = 'Moderate'
     if priceNum >= 25:
-        price = 'pricey'
+        price = 'Pricey'
 
     # trying to add to requests table first
 

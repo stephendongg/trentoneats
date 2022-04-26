@@ -268,13 +268,23 @@
            // }
            var priceVal = ""
            if (document.getElementById('$').checked== true){
-             priceVal += 'inexpensive';
+             priceVal += 'Inexpensive $';
            }
            if (document.getElementById('$$').checked == true){
-             priceVal += ', moderate';
+             if (priceVal == "") {
+               priceVal += 'Moderate $$';
+
+             } else{
+               priceVal += ', Moderate $$';
+             }
            }
            if (document.getElementById('$$$').checked == true){
-             priceVal += ', pricey';
+             if (priceVal == "") {
+               priceVal += 'Pricey $$$';
+             }
+             else {
+               priceVal += ', Pricey $$$';
+             }
            }
 
            console.log("Price: " + priceVal);
