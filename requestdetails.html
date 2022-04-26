@@ -58,7 +58,7 @@
 </div>
 {% endblock %}
 {% block content2 %}
-<div class="container">
+<div class="container" id="approvalbuttons">
   <!-- This is the Post Method -->
 
   <form method="post">
@@ -85,8 +85,8 @@
       </textarea>
     </div>
     <button class="btn btn-primary" type="submit" style="margin-bottom: 10px;">Submit</button> -->
-    <button type="submit" name="submit_button" value="Approve">Approve</button>
-    <button type="submit" name="submit_button" value="Deny">Deny</button>
+    <button type="submit" onclick="window.location.href='/css_page.html'"name="submit_button" value="Approve">Approve</button>
+    <button type="submit" onclick="window.location.href='/searchform'" name="submit_button" value="Deny">Deny</button>
 
   </form>
 </div>
@@ -312,6 +312,31 @@
   document.getElementById("directionsLink").href = link;
 </script>
 
+<!-- switching the href of the addfavorite test -->
+<script type="text/javascript">
+
+  function approval(){
+      if("{{favorite}}" == -1 ) {
+        document.getElementById('favoritebutton').hidden = true;
+        document.getElementById('favoritebuttoncontainer').hidden = true;
+        document.getElementById('favoritebutton').innerHTML = "Not Logged In";
+      }
+      if("{{favorite}}" == 0 ) {
+        document.getElementById('favoritebutton').hidden = false;
+        document.getElementById('favoritebuttoncontainer').hidden = false;
+        document.getElementById('favoritebutton').innerHTML = "Add Favorite";
+      }
+      if("{{favorite}}" == 1 ) {
+        document.getElementById('favoritebutton').hidden = false;
+        document.getElementById('favoritebuttoncontainer').hidden = false;
+        document.getElementById('favoritebutton').innerHTML = "Remove Favorite";
+      }
+
+  }
+  approval();
+
+
+</script>
 
 {% include 'footer.html' %}
 {% endblock %}

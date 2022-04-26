@@ -449,7 +449,7 @@ flow = Flow.from_client_secrets_file(
     scopes=["https://www.googleapis.com/auth/userinfo.profile",
             "https://www.googleapis.com/auth/userinfo.email", "openid"],
     redirect_uri="https://trentoneats.herokuapp.com/callback"
-    # redirect_uri="http://127.0.0.1:8080/callback"
+    #redirect_uri="http://127.0.0.1:8080/callback"
 )
 
 
@@ -604,6 +604,8 @@ def request_details():
     id = request.args.get('id')
     admin = is_admin()
     session['resid'] = id
+    # set approval = 0
+    session['approval'] = 0
     # Info currently is:
     info = get_request_info(id)
     # This line is new.
@@ -638,6 +640,10 @@ def request_details():
             return response
         elif request.form['submit_button'] == 'Approve':
             delete_request_add_res(id)
+            html = render_template('requestform.html', info=info,
+                                   reviews=reviews, id=unique_id, admin=admin)
+            response = make_response(html)
+            return response
 
     html = render_template('requestdetails.html', info=info,
                            reviews=reviews, id=unique_id, admin=admin)
