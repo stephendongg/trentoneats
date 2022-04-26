@@ -96,22 +96,19 @@ def delete_request_add_res(request_id):
                     info_obj['cuisine'] = str(row[11])
                     info_obj['type'] = str(row[12])
 
-    #             stmt_str2 = """
-    # INSERT INTO restaurants (name, address, hours,
-    # open_closed, menu, media, tags, review_count, stars, cuisine, type, price, image)
-    # VALUES ( '"""
-    #             stmt_str2 += info_obj['name'] + \
-    #                 "','" + info_obj['address'] + "','"
-    #             stmt_str2 += info_obj['hours'] + "'" + \
-    #                 "," + info_obj['open_closed'] + \
-    #                 "," + info_obj['menu'] + ", "
-    #             stmt_str2 += info_obj['media'] + ", " + \
-    #                 info_obj['tags'] + ", '0', '0', "
-    #             stmt_str2 += "".join(info_obj['cuisine']) + ", "
-    #             stmt_str2 += "" + \
-    #                 ", ".join(info_obj['type']) + \
-    #                 "', '" + "," + info_obj['price']
-    #             stmt_str2 += "', " + info_obj['image'] + ");"
+                print(info_obj['name'])
+                print(info_obj['address'])
+                print(info_obj['hours'])
+                print(info_obj['open_closed'])
+                print(info_obj['menu'])
+                print(info_obj['media'])
+                print(info_obj['tags'])
+                print(info_obj['review_count'])
+                print(info_obj['stars'])
+                print(info_obj['image'])
+                print(info_obj['price'])
+                print(info_obj['cuisine'])
+                print(info_obj['type'])
 
                 stmt_str2 = """
     INSERT INTO restaurants (name, address, hours,
