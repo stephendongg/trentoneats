@@ -295,6 +295,11 @@ h1.results{
 #AboutCont{
     background-color: #80000046;
 }
+#UnauthorizedCont{
+    background-color: #80000046;
+    height: 100vh;
+
+}
 #TrentonImg{
     display: block;
     margin-left: auto;

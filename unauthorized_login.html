@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block title %} Unable to Add Restaurant Info {% endblock %}
 {% block content %}
-<div class="container-fluid px-5" id="AboutCont">
+<div class="container-fluid px-5" id="UnauthorizedCont">
   <div class="row">
-    <div class="container-fluid pb-5 px-5">
+    <div class="container-fluid pb-5 px-5" id="UnauthorizedContChild">
       {% if id is none %}
       <h3 class="aboutHeader1">Users must be logged in order to access this page!</h3>
       <h3 class="aboutHeader1">Please login and try again.</h3>
@@ -37,9 +37,10 @@
 </div>
 {% endif %}
 
-
-
-
 {% include 'footer.html' %}
+
+
+
+
+<!--{% include 'footer.html' %}-->
 {% endblock %}
-Something something different
