@@ -73,9 +73,9 @@ def restaurant_search(input, cuisine, type, price): #, tags, price, type, cuisin
                     stmt_str += "AND LOWER(type) ILIKE %s"
                     type = '%' + type.lower() + '%'
                 if cuisine != "%%":
-                    c = cuisine.lower().split(",")
+                    c = cuisine.split(",")
                     for i in c:
-                        stmt_str += " AND LOWER(cuisine) ILIKE '%" + i + "%'"
+                        stmt_str += " AND cuisine ILIKE '%" + i + "%'"
 
                 stmt_str += ";"
 
