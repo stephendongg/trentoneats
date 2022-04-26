@@ -31,11 +31,8 @@ class restaurant:
         self._type = rowstring[6]
         self._price = rowstring[7]
         self._tag = rowstring[8]
-        # self._dept = rowstring[1]
-        # self._course_num = rowstring[2]
-        # self._area = rowstring[3]
-        # self._title = rowstring[4]
-        # self._details = details
+        self._hours = rowstring[9]
+
 
     # def __str__(self):
     # # --- The following will be modified to work for restaurants
@@ -46,7 +43,7 @@ class restaurant:
     #     # string_form += str(self._title)
     #     return string_form
 
-    # def by_id(cls, id): 
+    # def by_id(cls, id):
     #     """search through restaurants"""
     #     try:
     #         #with connect(host='localhost', port=5432, user='rmd', password='xxx',
@@ -122,25 +119,6 @@ class restaurant:
         """restaurant price"""
         return self._price
 
-
-
-    # def get_title(self):
-    #     """title"""
-    #     return self._title
-
-    # Example of get functions
-    # def get_courseid(self):
-    #     """course ID"""
-    #     return self._courseid
-    # def get_dept(self):
-    #     """department"""
-    #     return self._dept
-    # def get_coursenum(self):
-    #     """course number"""
-    #     return self._course_num
-    # def get_area(self):
-    #     """area"""
-    #     return self._area
-    # def get_title(self):
-    #     """title"""
-    #     return self._title
+    def get_hours(self):
+        """restaurant hours"""
+        return self._hours
