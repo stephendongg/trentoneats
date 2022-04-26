@@ -56,7 +56,7 @@ def restaurant_search(input, cuisine, type, price): #, tags, price, type, cuisin
                 nullPrice = False
                 nullType = False
                 stmt_str = "SELECT restaurant_id, name, open_closed, address, "
-                stmt_str += "stars, cuisine, type, price, tags "
+                stmt_str += "stars, cuisine, type, price, tags, hours "
                 stmt_str += "FROM restaurants "
                 stmt_str += "WHERE LOWER(name) ILIKE %s"
                 if price == "":
@@ -106,7 +106,7 @@ def restaurant_search(input, cuisine, type, price): #, tags, price, type, cuisin
 
                 # rowstringlist this rowstring will contain all of the necessary values
 
-                rowstring = ["", "", "", "", "", "", "", "", ""]
+                rowstring = ["", "", "", "", "", "", "", "", "", ""]
 
                 # This iwll parse through the rows and get all of the necsary values
                 while row:
@@ -119,6 +119,7 @@ def restaurant_search(input, cuisine, type, price): #, tags, price, type, cuisin
                     rowstring[6] = row[6]
                     rowstring[7] = row[7]
                     rowstring[8] = row[8]
+                    rowstring[9] = row[9]
                     res = restaurant(rowstring)
                     restaurants.append(res)
                     row = cursor.fetchone()
@@ -195,7 +196,7 @@ def request_search(input):
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted
                 stmt_str = "SELECT request_id, name, open_closed, address, "
-                stmt_str += "stars, cuisine, type, price, tags "
+                stmt_str += "stars, cuisine, type, price, tags, hours "
                 stmt_str += "FROM requests "
                 stmt_str += "WHERE LOWER(name) ILIKE %s"
 
@@ -211,7 +212,7 @@ def request_search(input):
 
                 # rowstringlist this rowstring will contain all of the necessary values
 
-                rowstring = ["", "", "", "", "", "", "", "", ""]
+                rowstring = ["", "", "", "", "", "", "", "", "", ""]
 
                 # This iwll parse through the rows and get all of the necsary values
                 while row:
@@ -224,6 +225,7 @@ def request_search(input):
                     rowstring[6] = row[6]
                     rowstring[7] = row[7]
                     rowstring[8] = row[8]
+                    rowstring[9] = row[9]
                     res = restaurant(rowstring)
                     restaurants.append(res)
                     row = cursor.fetchone()

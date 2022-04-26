@@ -94,15 +94,15 @@
     <input type="text" class="form-control" name="restaurantTags" placeholder="Tags" value="">
   </div>-->
   <!--Restuarant Type-->
+  <strong>Restaurant Type:</strong>
+  <br>
   <div class="form-check">
-    <strong>Restaurant Type:</strong>
-    <br>
     <input type="radio" class="form-check-input" id = "fastfood" name="type" value="Fast Food">
-    <label for="fastfood"> Fast Food </label>
+    <label for="fastfood">Fast Food</label>
     <input type="radio" class="form-check-input" id="casualdining" name="type" value="Casual Dining">
-    <label for="casualdining"> Casual Dining </label>
+    <label for="casualdining">Casual Dining</label>
     <input type="radio" class="form-check-input" id="finedining" name="type" value="Fine Dining">
-    <label for="finedining"> Fine Dining </label>
+    <label for="finedining">Fine Dining</label>
   </div>
   <!--Check Cuisine-->
   <strong>Cuisine(s) - Check all that apply:</strong>
@@ -187,10 +187,14 @@
     <!--<input type="checkbox" class="form-control" id="other" name="getcuisine" value="other" onchange="document.getElementById('otherCuisine').disabled = !this.checked;" >
     <label for="other"> Other </label> <input type="text" id = "otherCuisine" name="cuisine" value=""><br><br>-->
   <!--Choosing Price-->
-  <div class="form-group row">
+ <div class="form-group row">
+    <input type="range" value="25" min="1" max="500" oninput="this.nextElementSibling.value = this.value">
+    <output>25</output>
+  </div>
+  <!--<div class="form-group row">
     <input type="range" class="form-control" id="price" name="price" min="0" max="100">
     <label for="price"> Average Cost of Restaurant Meal (between 0 and 100)</label>
-  </div>
+  </div>-->
   <div class="form-group row">
     <label for="image">Image:</label>
     <button type="button" id="upload_widget" name="image" class="cloudinary-button">Upload files</button>

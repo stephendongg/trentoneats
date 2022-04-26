@@ -30,7 +30,7 @@ def add_requests(restaurantName, restaurantAddress, restaurantHours,
     stmt_str += restaurantMedia + "', '" + restaurantTags + "', '0', '0', '"
     stmt_str += ", '".join(cuisine) + "', '" + ", '".join(type)
     stmt_str += "', '" + price + "', '" + restaurantImage + "');"
->>>>>>> a0c047557e72daf8bda1cdaf8fe722bbef45df73
+>>>>>>> 2e3ef7239567117ea636699859852595e818c1e8
 
     try:
         # with connect(
@@ -43,7 +43,7 @@ def add_requests(restaurantName, restaurantAddress, restaurantHours,
                 cursor.execute(stmt_str,
                  [restaurantName, restaurantAddress, restaurantHours,
                  restaurantMenu, restaurantMedia, restaurantTags,
-                 restaurantIamge, cuisine, type, price])
+                 restaurantImage, cuisine, type, price])
 
     except (Exception, psycopg2.DatabaseError) as ex:
         print(ex, file=stderr)
