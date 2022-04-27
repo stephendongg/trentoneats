@@ -214,6 +214,7 @@
 
                     $('.badge').each(function(){
                       if($(this).text() == 'Open'){
+                        //previous green color: #32CD32
                         $(this).css({'background-color' : '#32CD32'})
                       }
                       if($(this).text() == 'Closed'){
@@ -221,6 +222,38 @@
                       }
 
 
+                    });
+                  </script>
+
+                  <!--Code for chaging color of price badges-->
+                  <script>
+                    'use strict';
+                    $('.badge').each(function(){
+                      if($(this).text() == 'Inexpensive $'){
+                        $(this).css({'background-color' : '#6DC825'})
+                      }
+                      if($(this).text() == 'Moderate $$'){
+                        $(this).css({'background-color' : '#5E9A2E'})
+                      }
+                      if($(this).text() == 'Pricey $$$'){
+                        $(this).css({'background-color' : '#3E651E'})
+                      }
+                    });
+                  </script>
+
+                  <!--Code for chaging color of restaurant typee-->
+                  <script>
+                    'use strict';
+                    $('.badge').each(function(){
+                      if($(this).text() == 'Fast Food'){
+                        $(this).css({'background-color' : '#3D5FFF'})
+                      }
+                      if($(this).text() == 'Casual'){
+                        $(this).css({'background-color' : '#EB6DDF'})
+                      }
+                      if($(this).text() == 'Fine Dining'){
+                        $(this).css({'background-color' : '#6934F1'})
+                      }
                     });
                   </script>
 
