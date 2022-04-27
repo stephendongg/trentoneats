@@ -176,7 +176,7 @@
                         }
 
                         if (prevDay) {
-                          prevEndDate = new Date(currentDate.getTime());      
+                          var prevEndDate = new Date(currentDate.getTime());      
                           prevEndDate.setHours(prevEndTime.split(":")[0]);
                           prevEndDate.setMinutes(prevEndTime.split(":")[1]);
                           prevEndDate.setSeconds(prevEndTime.split(":")[2]);
