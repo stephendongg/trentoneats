@@ -111,11 +111,11 @@
   </div>
   <div class="form-group row">
     <label for="restaurantMenu">Menu Link:</label>
-    <input type="text" class="form-control" name="restaurantMenu" placeholder="Menu" value="">
+    <input type="text" id="menuLink" class="form-control" name="restaurantMenu" placeholder="Menu" value="">
   </div>
   <div class="form-group row">
     <label for="restaurantMedia">Website Link:</label>
-    <input type="text" class="form-control" name="restaurantMedia" placeholder="Website" value="">
+    <input type="text" id="webLink" class="form-control" name="restaurantMedia" placeholder="Website" value="">
   </div>
   <!--Previous Tags-->
   <!--<div class="form-group row">
@@ -311,6 +311,38 @@ document.getElementById("upload_widget").addEventListener("click", function(){
            scrollbar: true
         });
   });
+</script>
+
+<!--Make https:// mandatory in website and menu link input fields-->
+<script>
+// Util function
+function addFormatter (input, formatFn) {
+  let oldValue = input.value;
+  
+  const handleInput = event => {
+    const result = formatFn(input.value, oldValue, event);
+    if (typeof result === 'string') {
+      input.value = result;
+    }
+    
+    oldValue = input.value;
+  }
+
+  handleInput();
+  input.addEventListener("input", handleInput);
+}
+
+// Example implementation
+// HOF returning regex prefix formatter
+function regexPrefix (regex, prefix) {
+  return (newValue, oldValue) => regex.test(newValue) ? newValue : (newValue ? oldValue : prefix);
+}
+
+// Apply formatter
+const input_web = document.getElementById('webLink');
+addFormatter(input_web, regexPrefix(/https ?:\/\//, 'https://'));
+const input_menu = document.getElementById('menuLink');
+addFormatter(input_menu, regexPrefix(/https ?:\/\//, 'https://'));
 </script>
 
 <!--Google Maps Autocomplete Feature-->
