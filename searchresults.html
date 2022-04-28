@@ -49,7 +49,7 @@
                     'use strict';
                     function statusFunc() {
                       let resHours = "{{ restaurant.get_hours() }}";
-                      
+
                       let node = document.getElementsByClassName("badge badge-info badge-pill i");
 
                       let hours = resHours.split(",");
@@ -61,10 +61,10 @@
                         index = 6;
                       }
                       let today_hours = hours[index];
-                      
-                      
+
+
                       today_hours = today_hours.split(" ");
-                      
+
 
                       let i = today_hours.length;
 
@@ -99,7 +99,7 @@
                             let minutes = time[1];
                             startTime = hour + ":" + minutes + ":00";
                           }
-                          
+
                         }
                         if (closeAmPm == "AM") {
                           nextDay = true;
@@ -116,7 +116,7 @@
                             endTime = hour + ":" + minutes + ":00";
                           }
                         }
-                      
+
 
 
 
@@ -136,12 +136,12 @@
                         }
 
                         var yest_hours = hours[prev_index];
-                      
+
                         yest_hours = yest_hours.split(" ");
 
                         var j = yest_hours.length;
                         var prevDay = false;
-                        var prevEndTime;
+                        var prevEndTime = 0;
 
                         if (yest_hours[i - 1] != "Closed") {
                           // Check if current time is < yesterday end time
@@ -176,7 +176,7 @@
                         }
 
                         if (prevDay) {
-                          prevEndDate = new Date(currentDate.getTime());      
+                          prevEndDate = new Date(currentDate.getTime());
                           prevEndDate.setHours(prevEndTime.split(":")[0]);
                           prevEndDate.setMinutes(prevEndTime.split(":")[1]);
                           prevEndDate.setSeconds(prevEndTime.split(":")[2]);
@@ -191,7 +191,7 @@
 
 
 
-                        
+
 
 
                     }
@@ -199,9 +199,9 @@
                     }
 
 
-                    
-                    
-                    
+
+
+
 
                     statusFunc();
 

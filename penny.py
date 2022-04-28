@@ -78,6 +78,7 @@ def search_results():
     if (cuisine is None) or (cuisine ==[]):
         cuisine= "%%"
 
+
     try:
         restaurantinfo = restaurant_search(restaurant, cuisine, type, price)
     except Exception as e:

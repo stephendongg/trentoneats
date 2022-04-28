@@ -41,7 +41,7 @@ DATABASE_URL = 'file:trentoneats.sql?mode=ro'
     #return restaurant
 
 
-def restaurant_search(input, cuisine, type, price): #, tags, price, type, cuisine):
+def restaurant_search(input, cuisine, type, price):
     """search through restaurants"""
     try:
         # with connect(host='localhost', port=5432, user='rmd', password='xxx',
@@ -59,19 +59,27 @@ def restaurant_search(input, cuisine, type, price): #, tags, price, type, cuisin
                 stmt_str += "stars, cuisine, type, price, tags, hours "
                 stmt_str += "FROM restaurants "
                 stmt_str += "WHERE LOWER(name) ILIKE %s"
-                if price == "":
-                    nullPrice = True
-                else:
-                    stmt_str += "AND LOWER(price) ILIKE %s "
-                    price = '%' + price + '%'
-                    # p = price.lower().split(", ")
-                    # for i in p:
-                    #     stmt_str += " OR LOWER(price) ILIKE '%" + i + "%'"
+
+                input = '%' + input.lower() + '%'
+                parameters = [input]
+
+                if price != "":
+                    p = price.split(", ")
+                    stmt_str += " AND price IN ("
+                    moreThanOneValue = False
+                    for i in p:
+                        if moreThanOneValue:
+                            stmt_str += ","
+                        stmt_str += "%s"
+                        parameters.append(i)
+                        moreThanOneValue = True
+                    stmt_str += ")"
                 if type == "":
                     nullType = True
                 else:
-                    stmt_str += "AND LOWER(type) ILIKE %s"
+                    stmt_str += " AND LOWER(type) ILIKE %s"
                     type = '%' + type.lower() + '%'
+                    parameters.append(type)
                 if cuisine != "%%":
                     c = cuisine.split(",")
                     for i in c:
@@ -79,25 +87,17 @@ def restaurant_search(input, cuisine, type, price): #, tags, price, type, cuisin
 
                 stmt_str += ";"
 
-                input = '%' + input.lower() + '%'
-
                 print(stmt_str)
-                if not nullPrice and not nullType:
-                    print('Hit 1')
-                    cursor.execute(stmt_str, [input, price, type])
-                    print(stmt_str % (input, price, type))
+                print(parameters)
                 if not nullType:
                     print('Hit 2')
-                    cursor.execute(stmt_str, [input, type])
-                    print(stmt_str % (input, type))
-                elif not nullPrice:
-                    print('Hit 3')
-                    cursor.execute(stmt_str, [input, price])
-                    print(stmt_str % (input, price))
+                    print(stmt_str % tuple(parameters))
+                    cursor.execute(stmt_str, parameters)
                 else:
                     print('Hit 5')
-                    print(stmt_str % input)
-                    cursor.execute(stmt_str, [input])
+                    # print(stmt_str % input)
+                    print(stmt_str % tuple(parameters))
+                    cursor.execute(stmt_str, parameters)
 
                 row = cursor.fetchone()
 
