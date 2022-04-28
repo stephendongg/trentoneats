@@ -99,6 +99,29 @@ h4.resDetails{
 >>>>>>> new_homepage */
     text-align: center;
 }
+/* h1.approvalText{
+    padding-top: 0.4em;
+    color: #FFD700;
+    font-size: 3rem;
+    font-weight: bold;
+    font-family: "Playfair Display", "Georgia", serif;
+    text-align: center;
+/* <<<<<<< HEAD
+    text-align: center;
+}
+h2.addItHere{
+    color: #FFD700;
+    font-size: 5em;
+    font-weight: bold;
+    font-family: "Playfair Display", "Georgia", serif;
+    text-align: center; 
+}
+h4.resDetails{
+    font-family: "Courier", "Baskerville", monospace;
+=======
+>>>>>>> new_homepage */
+    text-align: center;
+} */
 h3.aboutHeader1 {
     font-size: 3rem;
     font-family: "Courier", "Baskerville", monospace;

@@ -2,7 +2,7 @@
 <html>
     <table>
       <script>
-        var index = 0;
+        var badge_index = 0;
       </script>
         <tbody>
             <h1 class="results"> Restaurant Search Results</h1>
@@ -19,18 +19,19 @@
             <br>
             {% if restaurantinfo | length == 0: %}
             {% else %}
-            <table class="table table-borderless" style="margin-top: 0px;" id = "rest_table">
+            <table class="table table-borderless table-responsive-lg col-lg-8 mx-auto" id = "rest_table">
             <tbody>
                 {% for restaurant in restaurantinfo: %}
                 <tr>
                   <td>
-                  <div class="list-group" style="width:1050px; height:106px; margin: auto;">
+                  <div class="list-group">
                       <a href="resdetails?id={{restaurant.get_restaurantid()}}" class="list-group-item list-group-item-action">
-                          <div class="d-flex w-100 justify-content-between">
+                          <div class="d-lg-flex w-100 justify-content-between">
                             <h5 class="mb-1"><strong>{{restaurant.get_name()}}</strong></h5>
                             <!--add stars here-->
                             <div class="Stars" style="--rating: {{restaurant.get_stars()}};" aria-label="Rating of this restaurant is {{restaurant.get_stars()}} out of 5."></div>
                           </div>
+                          
                           <p class="mb-1">{{restaurant.get_address()}}</p>
                           <span class="badge badge-info badge-pill i"></span>
                           <span class="badge badge-info badge-pill ii">{{restaurant.get_cuisine()}}</span>
@@ -48,17 +49,163 @@
                   <script>
                     'use strict';
                     function statusFunc() {
-                      let status = "{{restaurant.get_openclose()}}";
-                      //console.log(status);
+                      let resHours = "{{ restaurant.get_hours() }}";
+
                       let node = document.getElementsByClassName("badge badge-info badge-pill i");
-                      if (status == "True"){
-                        node[index].innerHTML = "Open";
+
+                      let hours = resHours.split(",");
+
+                      var d = new Date();
+                      let day = d.getDay();
+                      let index = day - 1;
+                      if (index == -1) {
+                        index = 6;
                       }
+                      let today_hours = hours[index];
+
+
+                      today_hours = today_hours.split(" ");
+
+
+                      let i = today_hours.length;
+
+                      // Check if restaurant is closed today
+
+                      if (today_hours[i - 1] == "Closed") {
+                        node[badge_index].innerHTML  = "Closed"
+                      }
+
                       else {
-                          node[index].innerHTML = "Closed";
+                        var openAmPm = today_hours[i - 4];
+                        var closeAmPm = today_hours[i - 1];
+
+                        var startTime; // = '15:10:10'
+                        var endTime; // = '22:30:00';
+                        var nextDay = false;
+
+
+                        // CONVERT HOURS TO 24H IF NEEDED
+                        // ADD SOME BOOLEAN TO CHECK FOR NEXT DAY
+                        if (openAmPm == "AM") {
+                          startTime = today_hours[i - 5] + ':00';
+
+                        }
+                        else {
+                          if (today_hours[i - 5].split(":")[0] == 12) {
+                            startTime = today_hours[i - 5] + ':00';
+                          }
+                          else {
+                            let time = today_hours[i-5].split(":");
+                            let hour = parseInt(time[0]) + 12;
+                            let minutes = time[1];
+                            startTime = hour + ":" + minutes + ":00";
+                          }
+
+                        }
+                        if (closeAmPm == "AM") {
+                          nextDay = true;
+                          endTime = today_hours[i-2] + ":00";
+                        }
+                        else {
+                          if (today_hours[i - 2].split(":")[0] == 12) {
+                            endTime = today_hours[i - 2] + ':00';
+                          }
+                          else {
+                            let time = today_hours[i-2].split(":");
+                            let hour = parseInt(time[0]) + 12;
+                            let minutes = time[1];
+                            endTime = hour + ":" + minutes + ":00";
+                          }
+                        }
+
+
+
+
+                        var currentDate = new Date();
+
+                        var startDate = new Date(currentDate.getTime());
+                        // startDate.setDate(startDate.getDate() + 1)
+                        startDate.setHours(startTime.split(":")[0]);
+                        startDate.setMinutes(startTime.split(":")[1]);
+                        startDate.setSeconds(startTime.split(":")[2]);
+
+                        var endDate = new Date(currentDate.getTime());
+                        // CHECK IF IT IS STILL OPEN FROM PREVIOUS DAY
+                        var prev_index = index - 1;
+                        if (prev_index == -1) {
+                          prev_index = 6;
+                        }
+
+                        var yest_hours = hours[prev_index];
+
+                        yest_hours = yest_hours.split(" ");
+
+                        var j = yest_hours.length;
+                        var prevDay = false;
+                        var prevEndTime = 0;
+
+                        if (yest_hours[i - 1] != "Closed") {
+                          // Check if current time is < yesterday end time
+                          var yest_closeAmPm = yest_hours[i - 1];
+                          if (yest_closeAmPm == "AM") {
+                            prevDay = true;
+                            prevEndTime = yest_hours[i-2] + ":00";
+                          }
+                        }
+
+
+
+
+                        if (nextDay) {
+                          endDate.setDate(endDate.getDate() + 1);
+                          endDate.setHours(endTime.split(":")[0]);
+                          endDate.setMinutes(endTime.split(":")[1]);
+                          endDate.setSeconds(endTime.split(":")[2]);
+                        }
+                        else {
+                          endDate.setHours(endTime.split(":")[0]);
+                          endDate.setMinutes(endTime.split(":")[1]);
+                          endDate.setSeconds(endTime.split(":")[2]);
+                        }
+
+
+                        if (startDate < currentDate && endDate > currentDate) {
+                          node[badge_index].innerHTML = "Open";
+                        }
+                        else {
+                          node[badge_index].innerHTML = "Closed";
+                        }
+
+                        if (prevDay) {
+<<<<<<< HEAD
+                          prevEndDate = new Date(currentDate.getTime());
+=======
+                          var prevEndDate = new Date(currentDate.getTime());      
+>>>>>>> refs/remotes/origin/main
+                          prevEndDate.setHours(prevEndTime.split(":")[0]);
+                          prevEndDate.setMinutes(prevEndTime.split(":")[1]);
+                          prevEndDate.setSeconds(prevEndTime.split(":")[2]);
+
+                          if (currentDate < prevEndDate) {
+                            node[badge_index].innerHTML = "Open";
+                          }
+
                       }
-                      index++;
+
+
+
+
+
+
+
+
                     }
+                    badge_index++;
+                    }
+
+
+
+
 
 
                     statusFunc();
@@ -72,6 +219,7 @@
 
                     $('.badge').each(function(){
                       if($(this).text() == 'Open'){
+                        //previous green color: #32CD32
                         $(this).css({'background-color' : '#32CD32'})
                       }
                       if($(this).text() == 'Closed'){
@@ -79,6 +227,38 @@
                       }
 
 
+                    });
+                  </script>
+
+                  <!--Code for changing color of price badges-->
+                  <script>
+                    'use strict';
+                    $('.badge').each(function(){
+                      if($(this).text() == 'Inexpensive $'){
+                        $(this).css({'background-color' : '#6DC825'})
+                      }
+                      if($(this).text() == 'Moderate $$'){
+                        $(this).css({'background-color' : '#5E9A2E'})
+                      }
+                      if($(this).text() == 'Pricey $$$'){
+                        $(this).css({'background-color' : '#3E651E'})
+                      }
+                    });
+                  </script>
+
+                  <!--Code for changing color of restaurant type-->
+                  <script>
+                    'use strict';
+                    $('.badge').each(function(){
+                      if($(this).text() == 'Fast Food'){
+                        $(this).css({'background-color' : '#3D5FFF'})
+                      }
+                      if($(this).text() == 'Casual'){
+                        $(this).css({'background-color' : '#EB6DDF'})
+                      }
+                      if($(this).text() == 'Fine Dining'){
+                        $(this).css({'background-color' : '#6934F1'})
+                      }
                     });
                   </script>
 
@@ -93,7 +273,7 @@
                       while (switching) {
                         switching = false;
                         rows = table.rows;
-                        for (i = 1; i < (rows.length - 1); i++) {
+                        for (i = 0; i < (rows.length - 1); i++) {
                           shouldSwitch = false;
                           x = rows[i].getElementsByTagName("TD")[1];
                           y = rows[i + 1].getElementsByTagName("TD")[1];
@@ -121,11 +301,11 @@
                       while (switching) {
                         switching = false;
                         rows = table.rows;
-                        for (i = 1; i < (rows.length - 1); i++) {
+                        for (i = 0; i < (rows.length - 1); i++) {
                           shouldSwitch = false;
                           x = rows[i].getElementsByTagName("TD")[2];
                           y = rows[i + 1].getElementsByTagName("TD")[2];
-                          if (parseFloat(x.innerText) > parseFloat(y.innerText)) {
+                          if (x.innerText.toLowerCase() > y.innerText.toLowerCase()) {
                             shouldSwitch = true;
                             break;
                           }
@@ -147,11 +327,11 @@
                       while (switching) {
                         switching = false;
                         rows = table.rows;
-                        for (i = 1; i < (rows.length - 1); i++) {
+                        for (i = 0; i < (rows.length - 1); i++) {
                           shouldSwitch = false;
                           x = rows[i].getElementsByTagName("TD")[2];
                           y = rows[i + 1].getElementsByTagName("TD")[2];
-                          if (parseFloat(y.innerText) > parseFloat(x.innerText)) {
+                          if (y.innerText.toLowerCase() > x.innerText.toLowerCase()) {
                             shouldSwitch = true;
                             break;
                           }
@@ -164,13 +344,9 @@
                     }
                     </script>
                 {% endfor %}
-<<<<<<< HEAD
-
-=======
               </tbody>
             </table>
-                
->>>>>>> 74043fe1243c5328c82c824d04ba0a8b96d7f559
+
             {% endif %}
 
 

@@ -23,7 +23,7 @@
   <nav class="navbar sticky-top navbar-expand-md navbar-light" style="background-color: #88d5d5;">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon icon-bar"></span>
+      <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse order-1 order-md-0 justify-content-start" id="navbarNav">
       <ul class="navbar-nav">
@@ -41,8 +41,6 @@
     <a class="navbar-brand justify-content-center mx-auto order-0 order-md-1" href="#"><u>TRENTON EATS</u></a>
     <div class="collapse navbar-collapse order-2 order-md-2 justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
-
-
         {% if id is none %}
         <li class="nav-item active">
           <a class="nav-link" href="login">Login</a>
@@ -70,6 +68,11 @@
   </style>
   {% block content %}
   {% endblock %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Jquery time picker new -->
+
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>

@@ -16,9 +16,9 @@
       </div>
       <h3 class="resDetails">Location & Hours</h3>
       <div class="row">
-        <div class="col-md-6" id="map">
+        <div class="col-md-5" id="map">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-7">
           <h4 class="resDetails"><strong id="OpenClose"></strong></h4>
           <h4 class="resDetails" id="MondayHours"></h4>
           <h4 class="resDetails" id="TuesdayHours"></h4>
@@ -28,14 +28,14 @@
           <h4 class="resDetails" id="SaturdayHours"></h4>
           <h4 class="resDetails" id="SundayHours"></h4>
         </div>
-        <div class="col-sm-4 pt-3">
+        <div class="col-sm-3 pt-3">
           <h4 class="resDetails"><i class="bi bi-geo-alt-fill"></i>{{ info['address'] }}</h4>
         </div>
         <div class="col-sm-2 p-3">
           <a href="" target="__blank__" class="btn btn-light" id="directionsLink"><strong>Get Directions <i
                 class="bi bi-box-arrow-up-right"></i></strong></a>
         </div>
-        <div class="col-sm-6 p-3">
+        <div class="col-sm-7 p-3">
           <h4 class="resDetails"><strong>Cuisine: </strong> {{info['cuisine']}}</h4>
           <h4 class="resDetails"><strong>Price: </strong> {{info['price']}}</h4>
           <h4 class="resDetails"><strong>Type: </strong> {{info['type']}}</h4>
@@ -101,14 +101,16 @@
 
 <div class="container-fluid pt-5 pb-5 bg-info">
   <h2 class="restOfHeader"><u>Details</u></h2>
-  <h4 class="resDetails" id="mediaLink"><strong>Official Website: </strong><a href="{{info['media']}}"
-      target="__blank__">{{info['media']}}</a></h4>
   <h4 class="resDetails"><strong>Review Count: </strong> {{info['review_count']}}</h4>
   <h4 class="resDetails"><strong>Stars: </strong>
     <div class="Stars_Deets" style="--rating: {{info['stars']}};"></div>
   </h4>
-  <h4 class="resDetails" id="menuLink"><a href="{{info['menu']}}" class="btn btn-primary btn-lg" target="__blank__"
-      id="menuLink">Menu <i class="bi bi-box-arrow-up-right"></i></a></h4>
+  <div class="row justify-content-center">
+  <span class="px-2"><h4 class="resDetails" id="menuLink"><a href="{{info['menu']}}" class="btn btn-light btn-lg" target="__blank__"
+      id="menuLink"><strong>Menu</strong> <i class="bi bi-box-arrow-up-right"></i></a></h4> </span>
+    <span class="px-2"><h4 class="resDetails" id="mediaLink"><a href="{{info['media']}}" class="btn btn-light btn-lg"
+    target="__blank__"><strong>Website</strong> <i class="bi bi-box-arrow-up-right"></i></a></h4> </span>
+  </div>
   <!--create a reviews carousel-->
   <!--use reviews table for each restaurant and populate panel with each review (for loop with jinja scripts)-->
   <div id="demo" class="carousel slide" data-ride="carousel">
@@ -370,7 +372,7 @@
     }
 
     if (prevDay) {
-      prevEndDate = new Date(currentDate.getTime());      
+      var prevEndDate = new Date(currentDate.getTime());      
       prevEndDate.setHours(prevEndTime.split(":")[0]);
       prevEndDate.setMinutes(prevEndTime.split(":")[1]);
       prevEndDate.setSeconds(prevEndTime.split(":")[2]);
