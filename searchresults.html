@@ -297,11 +297,11 @@
                       while (switching) {
                         switching = false;
                         rows = table.rows;
-                        for (i = 1; i < (rows.length - 1); i++) {
+                        for (i = 0; i < (rows.length - 1); i++) {
                           shouldSwitch = false;
                           x = rows[i].getElementsByTagName("TD")[2];
                           y = rows[i + 1].getElementsByTagName("TD")[2];
-                          if (parseFloat(x.innerText) > parseFloat(y.innerText)) {
+                          if (x.innerText.toLowerCase() > y.innerText.toLowerCase()) {
                             shouldSwitch = true;
                             break;
                           }
@@ -323,11 +323,11 @@
                       while (switching) {
                         switching = false;
                         rows = table.rows;
-                        for (i = 1; i < (rows.length - 1); i++) {
+                        for (i = 0; i < (rows.length - 1); i++) {
                           shouldSwitch = false;
                           x = rows[i].getElementsByTagName("TD")[2];
                           y = rows[i + 1].getElementsByTagName("TD")[2];
-                          if (parseFloat(y.innerText) > parseFloat(x.innerText)) {
+                          if (y.innerText.toLowerCase() > x.innerText.toLowerCase()) {
                             shouldSwitch = true;
                             break;
                           }
