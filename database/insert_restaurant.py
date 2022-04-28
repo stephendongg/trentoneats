@@ -18,7 +18,7 @@ def insert_restaurant():
         """
         INSERT INTO restaurants ( name, address, hours,
         open_closed, menu, media, tags, review_count, stars,
-        cuisine, type, price)
+        cuisine, type, price, image)
         VALUES (
         '1911 Smokehouse BBQ',
         '11 W Front St, Trenton, NJ 08608',
@@ -31,13 +31,14 @@ def insert_restaurant():
         5.0,
         'BBQ, Grill, American',
         'Fast Food',
-        'Moderate $$');
+        'Moderate $$',
+        'https://hiddentrenton.com/wp-content/uploads/2015/10/smoked-salmon-on-salad.jpg');
         """,
 
         """
         INSERT INTO restaurants ( name, address, hours,
         open_closed, menu, media, tags, review_count, stars,
-        cuisine, type, price)
+        cuisine, type, price, image)
         VALUES (
         'Bamboo Grill Jamaican Restaurant',
         '1005 Chambers St, Trenton, NJ 08611',
@@ -50,13 +51,14 @@ def insert_restaurant():
         3.2,
         'BBQ, Grill, Jamaican',
         'Fast Food',
-        'Moderate $$');
+        'Moderate $$',
+        'https://cdn.usarestaurants.info/assets/uploads/5d0e3573a5822a6c84c9c4c5645632e0_-united-states-new-jersey-mercer-county-trenton-bamboo-grill-jamaican-restaurant-mini-mart-542551htm.jpg');
         """,
 
         """
         INSERT INTO restaurants (name, address, hours,
         open_closed, menu, media, tags, review_count, stars,
-        cuisine, type, price)
+        cuisine, type, price, image)
         VALUES (
         'Ila Mae''s Restaurant',
         '313 Market St, Trenton, NJ 08611',
@@ -68,13 +70,14 @@ def insert_restaurant():
         4.3,
         'Soul',
         'Casual',
-        'Moderate $$');
+        'Moderate $$'
+        'https://b.zmtcdn.com/data/reviews_photos/ae0/5e409171385c4b3f360eb7fe0ad87ae0_1449862294.jpg?fit=around|771.75:416.25&amp;crop=771.75:416.25;*,*');
         """,
 
         """
         INSERT INTO restaurants ( name, address, hours,
         open_closed, menu, media, tags, review_count, stars,
-        cuisine, type, price)
+        cuisine, type, price, image)
         VALUES (
         'Blue Danube Restaurant',
         '538 Adeline St, Trenton, NJ 08611',
@@ -87,13 +90,14 @@ def insert_restaurant():
         4.6,
         'Eastern European',
         'Casual',
-        'Moderate $$');
+        'Moderate $$',
+        'https://vrconcierge.com/wp-content/uploads/2021/07/blue-danube-restaurant-trenton-nj-exterior-1.jpg');
         """,
 
         """
         INSERT INTO restaurants ( name, address, hours,
         open_closed, menu, media, tags, review_count, stars,
-        cuisine, type, price)
+        cuisine, type, price, image)
         VALUES (
         'The Big Easy of Trenton Restaurant',
         '111 S Warren St, Trenton, NJ 08608',
@@ -105,13 +109,14 @@ def insert_restaurant():
         4.5,
         'Dine-in, Soul',
         'Casual',
-        'Moderate $$');
+        'Moderate $$',
+        'https://hiddentrenton.com/wp-content/uploads/2018/05/the-buffet.jpg');
         """,
 
         """
         INSERT INTO restaurants ( name, address, hours,
         open_closed, menu, media, tags, review_count, stars,
-        cuisine, type, price)
+        cuisine, type, price, image)
         VALUES (
         'Don Julio''s Bar and Grill',
         '900 Liberty St, Trenton, NJ 08611',
@@ -124,14 +129,15 @@ def insert_restaurant():
         4.3,
         'Bar & Grill',
         'Casual',
-        'Moderate $$'
+        'Moderate $$',
+        'https://resizer.otstatic.com/v2/photos/wide-huge/1/41970639.png'
         );
         """,
 
         """
         INSERT INTO restaurants (name, address, hours,
         open_closed, menu, media, tags, review_count, stars,
-        cuisine, type, price)
+        cuisine, type, price, image)
         VALUES (
         'The Hummingbird Restaurant',
         '29 S Warren St, Trenton, NJ 08608',
@@ -144,13 +150,14 @@ def insert_restaurant():
         4.2,
         'Jamaican',
         'Casual',
-        'Moderate $$');
+        'Moderate $$',
+        'https://hiddentrenton.com/wp-content/uploads/2010/03/hummingbird1.jpg');
         """,
 
         """
         INSERT INTO restaurants (name, address, hours,
         open_closed, menu, media, tags, review_count, stars,
-        cuisine, type, price)
+        cuisine, type, price, image)
         VALUES (
         'Sabor Latino',
         '293 Ashmore Ave, Trenton, NJ 08611',
@@ -163,13 +170,14 @@ def insert_restaurant():
         4.1,
         'Dominican, Mexican',
         'Casual',
-        'Moderate $$');
+        'Moderate $$',
+        'https://www.trentondaily.com/wp-content/uploads/2019/07/sabor.png');
         """,
 
         """
         INSERT INTO restaurants (name, address, hours,
         open_closed, menu, media, tags, review_count, stars,
-        cuisine, type, price)
+        cuisine, type, price, image)
         VALUES (
         'Trentini''s',
         '635 S Clinton Ave, Trenton, NJ 08611',
@@ -182,13 +190,14 @@ def insert_restaurant():
         4.1,
         'Italian, Mediterranean, Spanish',
         'Casual',
-        'Inexpensive $');
+        'Inexpensive $',
+        'https://trentinismenu.com/assets/img/logo.png');
         """,
 
         """
         INSERT INTO restaurants (name, address, hours,
         open_closed, menu, media, tags, review_count, stars,
-        cuisine, type, price)
+        cuisine, type, price, image)
         VALUES (
         'Mama D Soul Food 2',
         '312 S Broad St, Trenton, NJ 08609',
@@ -201,13 +210,14 @@ def insert_restaurant():
         3.9,
         'Soul',
         'Fast Food',
-        'Inexpensive $');
+        'Inexpensive $',
+        'https://blackenlightenmentapp.com/wp-content/uploads/2018/09/mamad-e1576679700857.jpg');
         """,
 
         """
         INSERT INTO restaurants (name, address, hours,
         open_closed, menu, media, tags, review_count, stars,
-        cuisine, type, price)
+        cuisine, type, price, image)
         VALUES (
         'Cooper''s Riverview',
         '50 Riverview Plaza, Trenton, NJ 08611',
@@ -220,13 +230,14 @@ def insert_restaurant():
         4.0,
         'English',
         'Fine Dining',
-        'Pricey $$$');
+        'Pricey $$$',
+        'https://www.nj.com/resizer/6CK6XH7YNlcxanJteQtof44WHtc=/800x0/smart/arc-anglerfish-arc2-prod-advancelocal.s3.amazonaws.com/public/6RLSBPHNOJCB7KK2NOXOGRFYXE.jpg');
         """,
 
         """
         INSERT INTO restaurants (name, address, hours,
         open_closed, menu, media, tags, review_count, stars,
-        cuisine, type, price)
+        cuisine, type, price, image)
         VALUES (
         'Mi Ranchito Pizza and Tacos',
         '911 Chambers St, Trenton, NJ 08611',
@@ -239,13 +250,14 @@ def insert_restaurant():
         4.7,
         'Mexican, Tacos',
         'Casual',
-        'Inexpensive $');
+        'Inexpensive $',
+        'https://cdn.usarestaurants.info/assets/uploads/7a258e9a8dabd09a7e415256cd08757d_-united-states-new-jersey-mercer-county-trenton-mi-ranchito-pizza-and-tacos-609-498-0174htm.jpg');
         """,
 
         """
         INSERT INTO restaurants (name, address, hours,
         open_closed, menu, media, tags, review_count, stars,
-        cuisine, type, price)
+        cuisine, type, price, image)
         VALUES (
         'El Potrillo',
         '541 Roebling Ave, Trenton, NJ 08611',
@@ -258,13 +270,14 @@ def insert_restaurant():
         3.9,
         'Mexican',
         'Casual',
-        'Moderate $$');
+        'Moderate $$',
+        'https://hiddentrenton.com/wp-content/uploads/2015/03/El_Potrillo.jpg');
         """,
 
         """
         INSERT INTO restaurants (name, address, hours,
         open_closed, menu, media, tags, review_count, stars,
-        cuisine, type, price)
+        cuisine, type, price, image)
         VALUES (
         'Chencha y Chole',
         '865 S Broad St, Trenton, NJ 08611',
@@ -277,13 +290,14 @@ def insert_restaurant():
         4.2,
         'Mexican',
         'Casual',
-        'Inexpensive $');
+        'Inexpensive $',
+        'https://media-cdn.grubhub.com/image/upload/d_search:browse-images:default.jpg/w_1200,h_800,f_auto,fl_lossy,q_80,c_fit/xgqbyondwd2syksoznsj');
         """,
 
         """
         INSERT INTO restaurants (name, address, hours,
         open_closed, menu, media, tags, review_count, stars,
-        cuisine, type, price)
+        cuisine, type, price, image)
         VALUES (
         'Casablanca Restaurant',
         '140 Washington St, Trenton, NJ 08611',
@@ -296,7 +310,8 @@ def insert_restaurant():
         4.1,
         'Spanish',
         'Casual',
-        'Moderate $$');
+        'Moderate $$',
+        'https://hiddentrenton.com/wp-content/uploads/2017/12/Exterior.jpg');
         """,
         """
         INSERT INTO administrators (email)
