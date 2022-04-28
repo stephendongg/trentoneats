@@ -19,18 +19,19 @@
             <br>
             {% if restaurantinfo | length == 0: %}
             {% else %}
-            <table class="table table-borderless" style="margin-top: 0px;" id = "rest_table">
+            <table class="table table-borderless table-responsive-lg col-lg-8 mx-auto" id = "rest_table">
             <tbody>
                 {% for restaurant in restaurantinfo: %}
                 <tr>
                   <td>
-                  <div class="list-group" style="width:1050px; height:106px; margin: auto;">
+                  <div class="list-group">
                       <a href="resdetails?id={{restaurant.get_restaurantid()}}" class="list-group-item list-group-item-action">
-                          <div class="d-flex w-100 justify-content-between">
+                          <div class="d-lg-flex w-100 justify-content-between">
                             <h5 class="mb-1"><strong>{{restaurant.get_name()}}</strong></h5>
                             <!--add stars here-->
                             <div class="Stars" style="--rating: {{restaurant.get_stars()}};" aria-label="Rating of this restaurant is {{restaurant.get_stars()}} out of 5."></div>
                           </div>
+                          
                           <p class="mb-1">{{restaurant.get_address()}}</p>
                           <span class="badge badge-info badge-pill i"></span>
                           <span class="badge badge-info badge-pill ii">{{restaurant.get_cuisine()}}</span>
