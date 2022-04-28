@@ -5,9 +5,10 @@
     {% block title %} Best Restaurants in Trenton | Trenton local eats {% endblock %}
     {% block content %}
     <!--title-->
-    <h1 class="explore fade-in-text1">Explore</h1>
-    <h2 class="restOfHeader fade-in-text2">food, <span class=“trenton”>Trenton</span> style.</h2>
-    
+    <h1 class="explore fade-in-text1 d-none d-sm-block">Explore</h1>
+    <h2 class="restOfHeader fade-in-text2 d-none d-sm-block">food, <span class="trenton">Trenton</span> style.</h2>
+    <h2 class="restOfHeader fade-in-text2 d-sm-none">Food, <span class="trenton">Trenton</span> style.</h2>
+
     <!-- <div class="position-relative fade-in-text2 container-fluid">
         <div class="circle1 rounded-circle position-absolute"></div>
         <div class="circle2 rounded-circle position-absolute"></div>
@@ -112,7 +113,7 @@
               <br>
             <!--filter by open restaurants only-->
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+              <input class="form-check-input" type="checkbox" value="" id="openCheck">
               <label class="form-check-label">
                 Show only open restaurants
               </label>
@@ -255,45 +256,38 @@
            }
            console.log("Type: " + type);
 
-           // Getting price VALUES
-           // var priceVals = [];
-           // if(document. getElementById('$'). clicked == true){
-           //   priceVals.push('inexpensive');
-           // }
-           // if(document. getElementById('$$'). clicked == true){
-           //   priceVals.push('moderate');
-           // }
-           // if(document. getElementById('$$$'). clicked == true){
-           //   priceVals.push('pricey');
-           // }
+          // Getting PRice Values
            var priceVal = ""
            if (document.getElementById('$').checked== true){
-             priceVal += 'Inexpensive $';
+             priceVal += "Inexpensive $";
            }
            if (document.getElementById('$$').checked == true){
              if (priceVal == "") {
-               priceVal += 'Moderate $$';
+               priceVal += "Moderate $$";
 
              } else{
-               priceVal += ', Moderate $$';
+               priceVal += ", Moderate $$";
              }
            }
            if (document.getElementById('$$$').checked == true){
              if (priceVal == "") {
-               priceVal += 'Pricey $$$';
+               priceVal += "Pricey $$$";
              }
              else {
-               priceVal += ', Pricey $$$';
+               priceVal += ", Pricey $$$";
              }
            }
 
            console.log("Price: " + priceVal);
+
+
 
            restaurantInput = encodeURIComponent(restaurantInput);
            type = encodeURIComponent(type);
            priceVal = encodeURIComponent(priceVal);
            cuisineVals = encodeURIComponent(cuisineVals);
            console.log("Cuisine: " + cuisineVals);
+           console.log("Price: " + priceVal);
 
 
            let url = '/searchresults?restaurant=' + restaurantInput

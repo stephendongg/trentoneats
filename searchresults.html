@@ -19,18 +19,19 @@
             <br>
             {% if restaurantinfo | length == 0: %}
             {% else %}
-            <table class="table table-borderless" style="margin-top: 0px;" id = "rest_table">
+            <table class="table table-borderless table-responsive-lg col-lg-8 mx-auto" id = "rest_table">
             <tbody>
                 {% for restaurant in restaurantinfo: %}
                 <tr>
                   <td>
-                  <div class="list-group" style="width:1050px; height:106px; margin: auto;">
+                  <div class="list-group">
                       <a href="resdetails?id={{restaurant.get_restaurantid()}}" class="list-group-item list-group-item-action">
-                          <div class="d-flex w-100 justify-content-between">
+                          <div class="d-lg-flex w-100 justify-content-between">
                             <h5 class="mb-1"><strong>{{restaurant.get_name()}}</strong></h5>
                             <!--add stars here-->
                             <div class="Stars" style="--rating: {{restaurant.get_stars()}};" aria-label="Rating of this restaurant is {{restaurant.get_stars()}} out of 5."></div>
                           </div>
+
                           <p class="mb-1">{{restaurant.get_address()}}</p>
                           <span class="badge badge-info badge-pill i"></span>
                           <span class="badge badge-info badge-pill ii">{{restaurant.get_cuisine()}}</span>
@@ -49,7 +50,7 @@
                     'use strict';
                     function statusFunc() {
                       let resHours = "{{ restaurant.get_hours() }}";
-                      
+
                       let node = document.getElementsByClassName("badge badge-info badge-pill i");
 
                       let hours = resHours.split(",");
@@ -61,10 +62,10 @@
                         index = 6;
                       }
                       let today_hours = hours[index];
-                      
-                      
+
+
                       today_hours = today_hours.split(" ");
-                      
+
 
                       let i = today_hours.length;
 
@@ -99,7 +100,7 @@
                             let minutes = time[1];
                             startTime = hour + ":" + minutes + ":00";
                           }
-                          
+
                         }
                         if (closeAmPm == "AM") {
                           nextDay = true;
@@ -116,7 +117,7 @@
                             endTime = hour + ":" + minutes + ":00";
                           }
                         }
-                      
+
 
 
 
@@ -136,12 +137,12 @@
                         }
 
                         var yest_hours = hours[prev_index];
-                      
+
                         yest_hours = yest_hours.split(" ");
 
                         var j = yest_hours.length;
                         var prevDay = false;
-                        var prevEndTime;
+                        var prevEndTime = 0;
 
                         if (yest_hours[i - 1] != "Closed") {
                           // Check if current time is < yesterday end time
@@ -176,7 +177,7 @@
                         }
 
                         if (prevDay) {
-                          var prevEndDate = new Date(currentDate.getTime());      
+                          var prevEndDate = new Date(currentDate.getTime());
                           prevEndDate.setHours(prevEndTime.split(":")[0]);
                           prevEndDate.setMinutes(prevEndTime.split(":")[1]);
                           prevEndDate.setSeconds(prevEndTime.split(":")[2]);
@@ -191,7 +192,7 @@
 
 
 
-                        
+
 
 
                     }
@@ -199,9 +200,9 @@
                     }
 
 
-                    
-                    
-                    
+
+
+
 
                     statusFunc();
 
@@ -225,7 +226,7 @@
                     });
                   </script>
 
-                  <!--Code for chaging color of price badges-->
+                  <!--Code for changing color of price badges-->
                   <script>
                     'use strict';
                     $('.badge').each(function(){
@@ -241,7 +242,7 @@
                     });
                   </script>
 
-                  <!--Code for chaging color of restaurant typee-->
+                  <!--Code for changing color of restaurant type-->
                   <script>
                     'use strict';
                     $('.badge').each(function(){
@@ -268,7 +269,7 @@
                       while (switching) {
                         switching = false;
                         rows = table.rows;
-                        for (i = 1; i < (rows.length - 1); i++) {
+                        for (i = 0; i < (rows.length - 1); i++) {
                           shouldSwitch = false;
                           x = rows[i].getElementsByTagName("TD")[1];
                           y = rows[i + 1].getElementsByTagName("TD")[1];
@@ -296,11 +297,11 @@
                       while (switching) {
                         switching = false;
                         rows = table.rows;
-                        for (i = 1; i < (rows.length - 1); i++) {
+                        for (i = 0; i < (rows.length - 1); i++) {
                           shouldSwitch = false;
                           x = rows[i].getElementsByTagName("TD")[2];
                           y = rows[i + 1].getElementsByTagName("TD")[2];
-                          if (parseFloat(x.innerText) > parseFloat(y.innerText)) {
+                          if (x.innerText.toLowerCase() > y.innerText.toLowerCase()) {
                             shouldSwitch = true;
                             break;
                           }
@@ -322,11 +323,11 @@
                       while (switching) {
                         switching = false;
                         rows = table.rows;
-                        for (i = 1; i < (rows.length - 1); i++) {
+                        for (i = 0; i < (rows.length - 1); i++) {
                           shouldSwitch = false;
                           x = rows[i].getElementsByTagName("TD")[2];
                           y = rows[i + 1].getElementsByTagName("TD")[2];
-                          if (parseFloat(y.innerText) > parseFloat(x.innerText)) {
+                          if (y.innerText.toLowerCase() > x.innerText.toLowerCase()) {
                             shouldSwitch = true;
                             break;
                           }

@@ -49,7 +49,7 @@ def search_form():
     unique_id = session.get('google_id')
     admin = is_admin()
     html = render_template(
-        'searchform.html', error_msg=error_msg, id=unique_id, admin=admin, randomrestaurant = random.randint(0, restaurants_count() - 1))
+        'searchform.html', error_msg=error_msg, id=unique_id, admin=admin, randomrestaurant=random.randint(0, restaurants_count() - 1))
     response = make_response(html)
     return response
 
@@ -67,16 +67,17 @@ def search_results():
         restaurant = ""
 
     price = request.args.get('price')
-    if (price is None) or (price.split()==""):
-        price=""
+    if (price is None) or (price.split() == ""):
+        price = ""
 
     type = request.args.get('type')
-    if (type is None) or (type.split()==""):
+    if (type is None) or (type.split() == ""):
         type = ""
 
     cuisine = request.args.get('cuisine')
-    if (cuisine is None) or (cuisine ==[]):
-        cuisine= "%%"
+    if (cuisine is None) or (cuisine == []):
+        cuisine = "%%"
+
 
     try:
         restaurantinfo = restaurant_search(restaurant, cuisine, type, price)
@@ -130,6 +131,18 @@ def authorized(function):
             return function()
     return wrapper2
 
+
+def authorize_res_add(function):
+    def wrapper4(*args, **kwargs):
+        unique_id = session.get('google_id')
+        if ((session.get("email") is None)):
+            html = render_template('unauthorized_login.html', id=unique_id)
+            response = make_response(html)
+            return response
+        else:
+            return function()
+    return wrapper4
+
 # Logged in Requirement
 
 
@@ -170,7 +183,7 @@ def myrestaurant():
 
 
 @app.route('/joinrestaurant', methods=['GET'])
-@authorized
+@authorize_res_add
 def joinrestaurant():
     admin = is_admin()
     unique_id = session.get('google_id')
@@ -256,8 +269,8 @@ def addrestaurant():
     if restaurantTags is None or restaurantTags.split() == "":
         restaurantTags = ""
 
-    type= request.args.get('type')
-    if type is None or type.split()=="":
+    type = request.args.get('type')
+    if type is None or type.split() == "":
         type = ""
     cuisine = request.args.getlist('cuisine')
     for i in range(len(cuisine)):
@@ -521,7 +534,7 @@ def callback():
                            #ampm = get_ampm(),
                            # current_time = get_current_time(),
                            #    restaurantinfo=restaurantinfo,
-                           id=unique_id, admin=admin, randomrestaurant = random.randint(0, restaurants_count() - 1))
+                           id=unique_id, admin=admin, randomrestaurant=random.randint(0, restaurants_count() - 1))
     response = make_response(html)
     return response
     # return redirect("/")  # ,id=unique_id)
