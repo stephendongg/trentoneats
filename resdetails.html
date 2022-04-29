@@ -3,14 +3,14 @@
 {% block content %}
 <div class="container-fluid pt-5 pb-5 bg-info">
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-lg-6">
       <!-- <img src= {{info['open_closed']}} class="img-thumbnail"> -->
       <!-- <img src="{{info['image']}}" class="img-thumbnail"> -->
       <img id="temp"
         src="https://thumbor.thedailymeal.com/8luyHYVfcVm8WSPXT-FVz9Ub_kU=/870x565/filters:format(webp)/https://www.thedailymeal.com/sites/default/files/slides/1-tacobell-wiki-sphilbrick.JPG"
         class="img-thumbnail">
     </div>
-    <div class="col-sm-6">
+    <div class="col-lg-6">
       <div class="container-fluid bg-light">
         <h2 class="restOfHeader">{{info['name']}}</h2>
       </div>
@@ -28,14 +28,16 @@
           <h4 class="resDetails" id="SaturdayHours"></h4>
           <h4 class="resDetails" id="SundayHours"></h4>
         </div>
-        <div class="col-sm-3 pt-3">
+      </div>
+      <div class="row">
+        <div class="col-lg-3 pt-3">
           <h4 class="resDetails"><i class="bi bi-geo-alt-fill"></i>{{ info['address'] }}</h4>
         </div>
-        <div class="col-sm-2 p-3">
+        <div class="col-lg-2 p-3">
           <a href="" target="__blank__" class="btn btn-light" id="directionsLink"><strong>Get Directions <i
                 class="bi bi-box-arrow-up-right"></i></strong></a>
         </div>
-        <div class="col-sm-7 p-3">
+        <div class="col-lg-7 p-3">
           <h4 class="resDetails"><strong>Cuisine: </strong> {{info['cuisine']}}</h4>
           <h4 class="resDetails"><strong>Price: </strong> {{info['price']}}</h4>
           <h4 class="resDetails"><strong>Type: </strong> {{info['type']}}</h4>
@@ -43,6 +45,7 @@
       </div>
     </div>
   </div>
+</div>
   <!-- Adding A Favorite [UNDER CONSTRUCTION]-->
   <div class="container" id="favoritebuttoncontainer"  style="text-align: center; padding-top: 20px;">
     <a href="added" id="favoritebutton" class="list-group-item list-group-item-action">Add Favorite Restaurant</a>
@@ -127,7 +130,7 @@
 
     <!-- The slideshow; this is what to fill in with reviews table -->
     <div class="reviews">
-      <div class="carousel-inner">
+      <div class="carousel-inner col-md-7 mx-auto">
         {% for review in reviews %}
         {% if loop.index0 == 0 %}
         <div class="carousel-item active">
