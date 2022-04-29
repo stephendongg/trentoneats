@@ -371,7 +371,7 @@ h1.results{
     position : absolute ; 
 }
 .reviews {
-    width : 900px;
+    /* width : 900px; */
     margin : 50px auto ;
 
 }
