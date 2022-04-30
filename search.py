@@ -90,12 +90,9 @@ def restaurant_search(input, cuisine, type, price):
                 print(stmt_str)
                 print(parameters)
                 if not nullType:
-                    print('Hit 2')
                     print(stmt_str % tuple(parameters))
                     cursor.execute(stmt_str, parameters)
                 else:
-                    print('Hit 5')
-                    # print(stmt_str % input)
                     print(stmt_str % tuple(parameters))
                     cursor.execute(stmt_str, parameters)
 
