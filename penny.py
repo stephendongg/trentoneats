@@ -283,9 +283,9 @@ def addrestaurant():
         priceNum = ""
     priceNum = int(priceNum)
     price = 'Inexpensive $'
-    if priceNum >= 10 and priceNum < 25:
+    if priceNum > 10 and priceNum <= 30:
         price = 'Moderate $$'
-    if priceNum >= 25:
+    if priceNum > 30:
         price = 'Pricey $$$'
 
     # trying to add to requests table first
