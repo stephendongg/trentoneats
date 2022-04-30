@@ -359,6 +359,7 @@ def resdetails():
         if error is None:
             add_review(id, datetime.datetime.now(), text, rating, email)
             update_ratings(id)
+            info = get_restaurant_info(id)
             reviews = review_search(id)
 
     html = render_template('resdetails.html', info=info,
@@ -421,6 +422,7 @@ def test():
             add_review(id, datetime.datetime.now(), text, rating, email)
             update_ratings(id)
             # return redirect(url_for('review.dashboard'))
+            info = get_restaurant_info(id)
             reviews = review_search(id)
         # flash(error)
         # return render_template('review/create.html')
@@ -461,8 +463,8 @@ flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/userinfo.profile",
             "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    redirect_uri="https://trentoneats.herokuapp.com/callback"
-    #redirect_uri="http://127.0.0.1:8080/callback"
+    #redirect_uri="https://trentoneats.herokuapp.com/callback"
+    redirect_uri="http://127.0.0.1:8080/callback"
 )
 
 

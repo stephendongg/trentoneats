@@ -207,7 +207,8 @@ def update_ratings(input):
                 #return averageRating
             with closing(connection.cursor()) as cursor:
                 stmt_str = "UPDATE restaurants "
-                stmt_str += "SET stars = '" + str(averageRating) + "' "
+                stmt_str += "SET stars = '" + str(averageRating) + "', "
+                stmt_str += "review_count = review_count + 1 "
                 stmt_str += "WHERE restaurant_id = '" + input + "';"
 
                 cursor.execute(stmt_str)
