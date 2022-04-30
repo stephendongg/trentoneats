@@ -1,53 +1,217 @@
 <!DOCTYPE html>
 <html>
 {% extends "base.html" %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Jquery time picker new -->
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+crossorigin="anonymous"></script>
+
 <div class="min-vh-100 d-flex flex-column 
                 justify-content-between">
   {% block title %} Best Restaurants in Trenton | Trenton Local Eats {% endblock %}
   {% block content %}
     <table>
       <script>
-        var index = 0;
+        var badge_index = 0;
       </script>
       <tbody>
           <br>
           <h1 class="results"> My Favorite Restaurants</h1>
           {% if restaurantinfo | length == 0: %}
           {% else %}
-              {% for restaurant in restaurantinfo: %}
-                <div class="list-group" style="width:1050px; height:115px; margin: auto;">
-                    <a href="resdetails?id={{restaurant.get_restaurantid()}}" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                          <h5 class="mb-1"><strong>{{restaurant.get_name()}}</strong></h5>
-                          <!--add stars here ; need to grab from database-->
-                          <div class="Stars" style="--rating: {{restaurant.get_stars()}};" aria-label="Rating of this restaurant is {{restaurant.get_stars()}} out of 5."></div>
-                        </div>
-                        <p class="mb-1">{{restaurant.get_address()}}</p>
-                        <span class="badge badge-info badge-pill i"></span>
-                        <span class="badge badge-info badge-pill ii">{{restaurant.get_cuisine()}}</span>
-                        <span class="badge badge-info badge-pill iii">{{restaurant.get_price()}}</span>
-                        <span class="badge badge-info badge-pill iv">{{restaurant.get_type()}}</span>
+          <table class="table table-borderless table-responsive-lg col-lg-8 mx-auto" id = "rest_table">
+            <tbody>
+                {% for restaurant in restaurantinfo: %}
+                <tr>
+                  <td>
+                  <div class="list-group">
+                      <a href="resdetails?id={{restaurant.get_restaurantid()}}" class="list-group-item list-group-item-action">
+                          <div class="d-lg-flex w-100 justify-content-between">
+                            <h5 class="mb-1"><strong>{{restaurant.get_name()}}</strong></h5>
+                            <!--add stars here-->
+                            <div class="Stars" style="--rating: {{restaurant.get_stars()}};" aria-label="Rating of this restaurant is {{restaurant.get_stars()}} out of 5."></div>
+                          </div>
 
-                    </a>
-                </div>
+                          <p class="mb-1">{{restaurant.get_address()}}</p>
+                          <span class="badge badge-info badge-pill i"></span>
+                          <span class="badge badge-info badge-pill ii">{{restaurant.get_cuisine()}}</span>
+                          <span class="badge badge-info badge-pill iii">{{restaurant.get_price()}}</span>
+                          <span class="badge badge-info badge-pill iv">{{restaurant.get_type()}}</span>
+                      </a>
+                  </div>
+                </td>
+                <td style = "display: none;">{{restaurant.get_stars()}}</td>
+                <td style = "display: none;">{{restaurant.get_price()}}</td>
+                </tr>
 
 
                 <!--Function to get whether restaurant is open or closed-->
                 <script>
                   'use strict';
                   function statusFunc() {
-                    let status = "{{restaurant.get_openclose()}}";
-                    console.log(status);
+                    let resHours = "{{ restaurant.get_hours() }}";
+
                     let node = document.getElementsByClassName("badge badge-info badge-pill i");
-                    if (status == "True"){
-                      node[index].innerHTML = "Open";
+
+                    let hours = resHours.split(",");
+
+                    var d = new Date();
+                    let day = d.getDay();
+                    let index = day - 1;
+                    if (index == -1) {
+                      index = 6;
                     }
+                    let today_hours = hours[index];
+
+
+                    today_hours = today_hours.split(" ");
+
+
+                    let i = today_hours.length;
+
+                    // Check if restaurant is closed today
+
+                    if (today_hours[i - 1] == "Closed") {
+                      node[badge_index].innerHTML  = "Closed"
+                    }
+
                     else {
-                        node[index].innerHTML = "Closed";
+                      var openAmPm = today_hours[i - 4];
+                      var closeAmPm = today_hours[i - 1];
+
+                      var startTime; // = '15:10:10'
+                      var endTime; // = '22:30:00';
+                      var nextDay = false;
+
+
+                      // CONVERT HOURS TO 24H IF NEEDED
+                      // ADD SOME BOOLEAN TO CHECK FOR NEXT DAY
+                      if (openAmPm == "AM") {
+                        startTime = today_hours[i - 5] + ':00';
+
+                      }
+                      else {
+                        if (today_hours[i - 5].split(":")[0] == 12) {
+                          startTime = today_hours[i - 5] + ':00';
+                        }
+                        else {
+                          let time = today_hours[i-5].split(":");
+                          let hour = parseInt(time[0]) + 12;
+                          let minutes = time[1];
+                          startTime = hour + ":" + minutes + ":00";
+                        }
+
+                      }
+                      if (closeAmPm == "AM") {
+                        nextDay = true;
+                        endTime = today_hours[i-2] + ":00";
+                      }
+                      else {
+                        if (today_hours[i - 2].split(":")[0] == 12) {
+                          endTime = today_hours[i - 2] + ':00';
+                        }
+                        else {
+                          let time = today_hours[i-2].split(":");
+                          let hour = parseInt(time[0]) + 12;
+                          let minutes = time[1];
+                          endTime = hour + ":" + minutes + ":00";
+                        }
+                      }
+
+
+
+
+                      var currentDate = new Date();
+
+                      var startDate = new Date(currentDate.getTime());
+                      // startDate.setDate(startDate.getDate() + 1)
+                      startDate.setHours(startTime.split(":")[0]);
+                      startDate.setMinutes(startTime.split(":")[1]);
+                      startDate.setSeconds(startTime.split(":")[2]);
+
+                      var endDate = new Date(currentDate.getTime());
+                      // CHECK IF IT IS STILL OPEN FROM PREVIOUS DAY
+                      var prev_index = index - 1;
+                      if (prev_index == -1) {
+                        prev_index = 6;
+                      }
+
+                      var yest_hours = hours[prev_index];
+
+                      yest_hours = yest_hours.split(" ");
+
+                      var j = yest_hours.length;
+                      var prevDay = false;
+                      var prevEndTime = 0;
+
+                      if (yest_hours[i - 1] != "Closed") {
+                        // Check if current time is < yesterday end time
+                        var yest_closeAmPm = yest_hours[i - 1];
+                        if (yest_closeAmPm == "AM") {
+                          prevDay = true;
+                          prevEndTime = yest_hours[i-2] + ":00";
+                        }
+                      }
+
+
+
+
+                      if (nextDay) {
+                        endDate.setDate(endDate.getDate() + 1);
+                        endDate.setHours(endTime.split(":")[0]);
+                        endDate.setMinutes(endTime.split(":")[1]);
+                        endDate.setSeconds(endTime.split(":")[2]);
+                      }
+                      else {
+                        endDate.setHours(endTime.split(":")[0]);
+                        endDate.setMinutes(endTime.split(":")[1]);
+                        endDate.setSeconds(endTime.split(":")[2]);
+                      }
+
+
+                      if (startDate < currentDate && endDate > currentDate) {
+                        node[badge_index].innerHTML = "Open";
+                      }
+                      else {
+                        node[badge_index].innerHTML = "Closed";
+                      }
+
+                      if (prevDay) {
+                        var prevEndDate = new Date(currentDate.getTime());
+                        prevEndDate.setHours(prevEndTime.split(":")[0]);
+                        prevEndDate.setMinutes(prevEndTime.split(":")[1]);
+                        prevEndDate.setSeconds(prevEndTime.split(":")[2]);
+
+                        if (currentDate < prevEndDate) {
+                          node[badge_index].innerHTML = "Open";
+                        }
+
                     }
-                    index++;
+
+
+
+
+
+
+
+
                   }
-                  
+                  badge_index++;
+                  }
+
+
+
+
+
 
                   statusFunc();
 
@@ -60,6 +224,7 @@
 
                   $('.badge').each(function(){
                     if($(this).text() == 'Open'){
+                      //previous green color: #32CD32
                       $(this).css({'background-color' : '#32CD32'})
                     }
                     if($(this).text() == 'Closed'){
@@ -70,9 +235,43 @@
                   });
                 </script>
 
+                 <!--Code for changing color of price badges-->
+                 <script>
+                  'use strict';
+                  $('.badge').each(function(){
+                    if($(this).text() == 'Inexpensive $'){
+                      $(this).css({'background-color' : '#6DC825'})
+                    }
+                    if($(this).text() == 'Moderate $$'){
+                      $(this).css({'background-color' : '#5E9A2E'})
+                    }
+                    if($(this).text() == 'Pricey $$$'){
+                      $(this).css({'background-color' : '#3E651E'})
+                    }
+                  });
+                </script>
+
+                <!--Code for changing color of restaurant type-->
+                <script>
+                  'use strict';
+                  $('.badge').each(function(){
+                    if($(this).text() == 'Fast Food'){
+                      $(this).css({'background-color' : '#3D5FFF'})
+                    }
+                    if($(this).text() == 'Casual'){
+                      $(this).css({'background-color' : '#EB6DDF'})
+                    }
+                    if($(this).text() == 'Fine Dining'){
+                      $(this).css({'background-color' : '#6934F1'})
+                    }
+                  });
+                </script>
+
 
 
               {% endfor %}
+            </tbody>
+          </table>
               
           {% endif %}
           
