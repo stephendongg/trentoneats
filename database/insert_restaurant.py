@@ -31,8 +31,7 @@ def insert_restaurant():
         5.0,
         'BBQ, Grill, American',
         'Fast Food',
-        'Moderate $$',
-        'https://hiddentrenton.com/wp-content/uploads/2015/10/smoked-salmon-on-salad.jpg');
+        'Moderate $$', 'https://hiddentrenton.com/wp-content/uploads/2015/10/smoked-salmon-on-salad.jpg' );
         """,
 
         """
@@ -70,7 +69,7 @@ def insert_restaurant():
         4.3,
         'Soul',
         'Casual',
-        'Moderate $$'
+        'Moderate $$',
         'https://b.zmtcdn.com/data/reviews_photos/ae0/5e409171385c4b3f360eb7fe0ad87ae0_1449862294.jpg?fit=around|771.75:416.25&amp;crop=771.75:416.25;*,*');
         """,
 
@@ -91,7 +90,7 @@ def insert_restaurant():
         'Eastern European',
         'Casual',
         'Moderate $$',
-        'https://vrconcierge.com/wp-content/uploads/2021/07/blue-danube-restaurant-trenton-nj-exterior-1.jpg');
+        'https://vrconcierge.com/wp-content/uploads/2021/07/blue-danube-restaurant-trenton-nj-exterior-1.jpg' );
         """,
 
         """
@@ -344,11 +343,11 @@ def insert_restaurant():
         'kao3@princeton.edu');
         """]
     try:
-        # with connect(
-        #         host='localhost', port=5432, user='rmd', password='trentoneats333',
-        #         database='trentoneats') as connection:
-        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                     database="dequ5ope4nuoit") as connection:
+        with connect(
+                host='localhost', port=5432, user='rmd', password='trentoneats333',
+                database='trentoneats') as connection:
+            # with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+            #              database="dequ5ope4nuoit") as connection:
 
             with connection.cursor() as cursor:
                 # # create table one by one
