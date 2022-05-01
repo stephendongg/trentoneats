@@ -56,7 +56,7 @@ def restaurant_search(input, cuisine, type, price):
                 nullPrice = False
                 nullType = False
                 stmt_str = "SELECT restaurant_id, name, open_closed, address, "
-                stmt_str += "stars, cuisine, type, price, tags, hours "
+                stmt_str += "stars, cuisine, type, price, tags, hours, review_count "
                 stmt_str += "FROM restaurants "
                 stmt_str += "WHERE LOWER(name) ILIKE %s"
 
@@ -103,7 +103,7 @@ def restaurant_search(input, cuisine, type, price):
 
                 # rowstringlist this rowstring will contain all of the necessary values
 
-                rowstring = ["", "", "", "", "", "", "", "", "", ""]
+                rowstring = ["", "", "", "", "", "", "", "", "", "", ""]
 
                 # This iwll parse through the rows and get all of the necsary values
                 while row:
@@ -117,6 +117,7 @@ def restaurant_search(input, cuisine, type, price):
                     rowstring[7] = row[7]
                     rowstring[8] = row[8]
                     rowstring[9] = row[9]
+                    rowstring[10] = row[10]
                     res = restaurant(rowstring)
                     restaurants.append(res)
                     row = cursor.fetchone()

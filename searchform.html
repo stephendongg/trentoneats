@@ -23,7 +23,7 @@
         <input class="rest_search" type="text" id="restaurantInput" placeholder="Enter a restaurant name here!">
 
     </div>
-    <a class = "row pt-0 px-3 justify-content-center" href="resdetails?id={{randomrestaurant - 1}}"> Surprise Me! </a>
+    <a class = "row pt-0 px-3 justify-content-center" id="surpriseme" href="resdetails?id={{randomrestaurant - 1}}"> Surprise Me! </a>
     <br>
     <strong>{{error_msg}}</strong>
     <br>
@@ -194,7 +194,14 @@
 
     <script>
       'use strict';
-
+      function randomizeResult()
+      {
+        randomValue = getRandomInt({{restaurantcount}});
+        newhref = "resdetails?id=" + randomValue;
+        document.getElementById("surpriseme").href = newhref;
+      }
+      randomizeResult()
+      
       function handleResponse(response)
        {
           $('#restaurantsDiv').html(response);

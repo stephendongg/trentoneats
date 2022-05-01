@@ -66,28 +66,6 @@
 
   <form method="post">
     <div class="form-group">
-      <!-- <label for="rating">Give a Rating: </label> -->
-      <!--<select id="rating" name="rating">
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>-->
-      <!-- <br>
-      <label class="rating-label">
-        <input class="user_rating" max="5" oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)"
-          step="0.5" style="--value:2.5" type="range" value="2.5">
-      </label>
-      <br>
-      <label for="exampleFormControlTextarea1">Your review:</label> -->
-      <!-- Add icon library -->
-<!-- 
-      <textarea class="form-control" rows="3" name="review-text">
-      </textarea>
-    </div>
-    <button class="btn btn-primary" type="submit" style="margin-bottom: 10px;">Submit</button> -->
     <button type="submit" onclick="window.location.href='/css_page.html'"name="submit_button" value="Approve">Approve</button>
     <button type="submit" onclick="window.location.href='/searchform'" name="submit_button" value="Deny">Deny</button>
 
@@ -96,16 +74,6 @@
 </div>
 {% endblock %}
 
-<!-- Seeing the Reviews  -->
-<!-- {% for review in reviews %}
-  <blockquote class="blockquote">
-    <p class="mb-0">{{ review[1] }}</p>
-      <footer class="blockquote-footer"> -->
-<!-- From @{{ review[0].split("@")[0] }} -->
-<!-- From @{{ review[0] }}
-      </footer>
-  </blockquote>
-{% endfor %} -->
 
 
 <div class="container-fluid pt-5 pb-5 bg-info">
