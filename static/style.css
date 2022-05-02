@@ -475,4 +475,11 @@ h1.results{
   [dir="rtl"] .rating--nojs::-webkit-slider-thumb {
     box-shadow: var(--w) 0 0 var(--w) var(--fill);
   }
-
+#imgBox{
+    max-width:500px;
+    max-height:500px; 
+    border: 1px solid rgb(255, 255, 255); 
+    background-color: white; 
+    display: flex; 
+    align-items: center 
+}
