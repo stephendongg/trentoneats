@@ -3,15 +3,14 @@
 {% block content %}
 <div class="container-fluid pt-5 pb-5 bg-info">
   <div class="row">
-    <div class="col-sm-3"></div>
-    <div class="col-sm-6" style="display: flex;>
+    <div class="col-lg-6">
       <!-- <img src= {{info['open_closed']}} class="img-thumbnail"> -->
       <!-- <img src="{{info['image']}}" class="img-thumbnail"> -->
-      <div style="width:500px; height:500px; border: 1px solid rgb(255, 255, 255); background-color: white; display: flex; justify-content: center;">
-        <img id="temp"
-          class="img-thumbnail" style="max-width:500px;
+      <div
+        style="width:500px; height:500px; border: 1px solid rgb(255, 255, 255); background-color: white; display: flex; justify-content: center;">
+        <img id="temp" class="img-thumbnail" style="max-width:500px;
           vertical-align: center;">
-        </div>
+      </div>
     </div>
     <div class="col-sm-6">
       <div class="container-fluid bg-light">
@@ -66,8 +65,9 @@
 
   <form method="post">
     <div class="form-group">
-    <button type="submit" onclick="window.location.href='/css_page.html'"name="submit_button" value="Approve">Approve</button>
-    <button type="submit" onclick="window.location.href='/searchform'" name="submit_button" value="Deny">Deny</button>
+      <button type="submit" onclick="window.location.href='/css_page.html'" name="submit_button"
+        value="Approve">Approve</button>
+      <button type="submit" onclick="window.location.href='/searchform'" name="submit_button" value="Deny">Deny</button>
 
   </form>
 </div>
@@ -287,22 +287,22 @@
 <!-- switching the href of the addfavorite test -->
 <script type="text/javascript">
 
-  function approval(){
-      if("{{favorite}}" == -1 ) {
-        document.getElementById('favoritebutton').hidden = true;
-        document.getElementById('favoritebuttoncontainer').hidden = true;
-        document.getElementById('favoritebutton').innerHTML = "Not Logged In";
-      }
-      if("{{favorite}}" == 0 ) {
-        document.getElementById('favoritebutton').hidden = false;
-        document.getElementById('favoritebuttoncontainer').hidden = false;
-        document.getElementById('favoritebutton').innerHTML = "Add Favorite";
-      }
-      if("{{favorite}}" == 1 ) {
-        document.getElementById('favoritebutton').hidden = false;
-        document.getElementById('favoritebuttoncontainer').hidden = false;
-        document.getElementById('favoritebutton').innerHTML = "Remove Favorite";
-      }
+  function approval() {
+    if ("{{favorite}}" == -1) {
+      document.getElementById('favoritebutton').hidden = true;
+      document.getElementById('favoritebuttoncontainer').hidden = true;
+      document.getElementById('favoritebutton').innerHTML = "Not Logged In";
+    }
+    if ("{{favorite}}" == 0) {
+      document.getElementById('favoritebutton').hidden = false;
+      document.getElementById('favoritebuttoncontainer').hidden = false;
+      document.getElementById('favoritebutton').innerHTML = "Add Favorite";
+    }
+    if ("{{favorite}}" == 1) {
+      document.getElementById('favoritebutton').hidden = false;
+      document.getElementById('favoritebuttoncontainer').hidden = false;
+      document.getElementById('favoritebutton').innerHTML = "Remove Favorite";
+    }
 
   }
   approval();
