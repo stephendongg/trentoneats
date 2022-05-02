@@ -206,7 +206,7 @@ def findinfo(id):
                 with closing(connection.cursor()) as cursor:
                     # This needs to be adjusted
                     stmt_str = "SELECT restaurant_id, name, open_closed, address, "
-                    stmt_str += "stars, cuisine, type, price, tags, hours "
+                    stmt_str += "stars, cuisine, type, price, tags, hours, review_count "
                     stmt_str += "FROM restaurants "
                     stmt_str += "WHERE restaurant_id = '" + str(id) + "';"
 
@@ -218,7 +218,7 @@ def findinfo(id):
 
                     # rowstringlist this rowstring will contain all of the necessary values
 
-                    rowstring = ["", "", "", "", "", "", "", "", "", ""]
+                    rowstring = ["", "", "", "", "", "", "", "", "", "", ""]
 
                     # This iwll parse through the rows and get all of the necsary values
                     rowstring[0] = row[0]
@@ -231,6 +231,7 @@ def findinfo(id):
                     rowstring[7] = row[7]
                     rowstring[8] = row[8]
                     rowstring[9] = row[9]
+                    rowstring[10] = row[10]
                     return (rowstring)
         except DatabaseError as error:
             print(sys.argv[0] + ": " + str(error), file=stderr)
