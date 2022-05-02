@@ -21,6 +21,7 @@ from psycopg2 import connect, DatabaseError
 import psycopg2
 import restaurant
 import argparse
+from add_restaurant import add_restaurant
 # loading
 
 
@@ -110,23 +111,40 @@ def delete_request_add_res(request_id):
                 print(info_obj['cuisine'])
                 print(info_obj['type'])
 
-                stmt_str2 = """
-    INSERT INTO restaurants (name, address, hours,
-    open_closed, menu, media, tags, review_count, stars, image, cuisine, type, price)
-    VALUES ( '"""
-                stmt_str2 += info_obj['name'] + \
-                    "','" + info_obj['address'] + "','"
-                stmt_str2 += info_obj['hours'] + \
-                    "', 'TRUE', '" + info_obj['menu'] + "', '"
-                stmt_str2 += info_obj['media'] + "', '" + \
-                    info_obj['tags'] + "', '0', '0', '"
-                stmt_str2 += info_obj['image'] + "', "
-                stmt_str2 += "'" + str(info_obj['cuisine'])
-                stmt_str2 += "', '" + info_obj['type']
-                stmt_str2 += "', '" + info_obj['price'] + "');"
+                name = info_obj['name']
+                address = info_obj['address']
+                hours = info_obj['hours']
+                open_closed = info_obj['open_closed']
+                menu = info_obj['menu']
+                media = info_obj['media']
+                tags = info_obj['tags']
+                review_count = info_obj['review_count']
+                stars = info_obj['stars']
+                image = info_obj['image']
+                cuisine = info_obj['cuisine']
+                type = info_obj['type']
+                price = info_obj['price']
 
-                print(stmt_str2)
-                cursor.execute(stmt_str2)
+                add_restaurant(name, address, hours, menu, media,
+                               tags, cuisine, type, price, image)
+
+    #             stmt_str2 = """
+    # INSERT INTO restaurants (name, address, hours,
+    # open_closed, menu, media, tags, review_count, stars, image, cuisine, type, price)
+    # VALUES ( '"""
+    #             stmt_str2 += info_obj['name'] + \
+    #                 "','" + info_obj['address'] + "','"
+    #             stmt_str2 += info_obj['hours'] + \
+    #                 "', 'TRUE', '" + info_obj['menu'] + "', '"
+    #             stmt_str2 += info_obj['media'] + "', '" + \
+    #                 info_obj['tags'] + "', '0', '0', '"
+    #             stmt_str2 += info_obj['image'] + "', "
+    #             stmt_str2 += "'" + str(info_obj['cuisine'])
+    #             stmt_str2 += "', '" + info_obj['type']
+    #             stmt_str2 += "', '" + info_obj['price'] + "');"
+
+    #             print(stmt_str2)
+    #             cursor.execute(stmt_str2)
 
                 stmt_str3 = "DELETE FROM requests "
                 stmt_str3 += "WHERE request_id =" + request_id + ";"
