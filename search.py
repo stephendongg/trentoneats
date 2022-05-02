@@ -210,7 +210,7 @@ def request_search(input):
 
                 # rowstringlist this rowstring will contain all of the necessary values
 
-                rowstring = ["", "", "", "", "", "", "", "", "", ""]
+                rowstring = ["", "", "", "", "", "", "", "", "", "", ""]
 
                 # This iwll parse through the rows and get all of the necsary values
                 while row:
@@ -224,6 +224,7 @@ def request_search(input):
                     rowstring[7] = row[7]
                     rowstring[8] = row[8]
                     rowstring[9] = row[9]
+                    rowstring[10] = 0
                     res = restaurant(rowstring)
                     restaurants.append(res)
                     row = cursor.fetchone()
