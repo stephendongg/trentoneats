@@ -76,7 +76,7 @@
 
 
 
-<div class="container-fluid pt-5 pb-5 bg-info">
+<!-- <div class="container-fluid pt-5 pb-5 bg-info">
   <h2 class="restOfHeader">Details</h2>
   <h4 class="resDetails" id="mediaLink"><strong>Official Website: </strong><a href="{{info['media']}}"
       target="__blank__">{{info['media']}}</a></h4>
@@ -85,7 +85,27 @@
     <div class="Stars_Deets" style="--rating: {{info['stars']}};"></div>
   </h4>
   <h4 class="resDetails" id="menuLink"><a href="{{info['menu']}}" class="btn btn-primary btn-lg" target="__blank__"
-      id="menuLink">Menu <i class="bi bi-box-arrow-up-right"></i></a></h4>
+      id="menuLink">Menu <i class="bi bi-box-arrow-up-right"></i></a></h4> -->
+
+
+<div class="container-fluid pt-5 pb-5 bg-info">
+  <h2 class="restOfHeader"><u>More Details</u></h2>
+  <h4 class="resDetails"><strong>Review Count: </strong> {{info['review_count']}}</h4>
+  <h4 class="resDetails"><strong>Stars: </strong>
+    <div class="Stars_Deets" style="--rating: {{info['stars']}};"></div>
+  </h4>
+  <div class="row justify-content-center">
+    <span class="px-2">
+      <h4 class="resDetails" id="menuLink"><a href="{{info['menu']}}" class="btn btn-light btn-lg" target="__blank__"
+          id="menuLink"><strong>Menu</strong> <i class="bi bi-box-arrow-up-right"></i></a></h4>
+    </span>
+    <span class="px-2">
+      <h4 class="resDetails" id="mediaLink"><a href="{{info['media']}}" class="btn btn-light btn-lg"
+          target="__blank__"><strong>Website</strong> <i class="bi bi-box-arrow-up-right"></i></a></h4>
+    </span>
+  </div>
+
+
   <!--create a reviews carousel-->
   <!--use reviews table for each restaurant and populate panel with each review (for loop with jinja scripts)-->
   <div id="demo" class="carousel slide" data-ride="carousel">
@@ -146,6 +166,30 @@
   integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 <!--Javascript code to remove link if there is no media/menu-->
+<script type="text/javascript">
+
+  function myFunction() {
+    if ("{{info['media']}}" == "") {
+      document.getElementById('mediaLink').innerHTML = "";
+    }
+
+  }
+  myFunction();
+
+</script>
+
+<script type="text/javascript">
+
+  function myFunction() {
+    if ("{{info['menu']}}" == "") {
+      document.getElementById('menuLink').innerHTML = "";
+    }
+
+  }
+  myFunction();
+
+</script>
+
 <script type="text/javascript">
 
   function myFunction() {

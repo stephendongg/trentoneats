@@ -49,7 +49,7 @@ def search_form():
     unique_id = session.get('google_id')
     admin = is_admin()
     html = render_template(
-        'searchform.html', error_msg=error_msg, id=unique_id, admin=admin, restaurantcount= restaurants_count(), randomrestaurant=random.randint(0, restaurants_count() - 1))
+        'searchform.html', error_msg=error_msg, id=unique_id, admin=admin, restaurantcount=restaurants_count(), randomrestaurant=random.randint(0, restaurants_count() - 1))
     response = make_response(html)
     return response
 
@@ -77,7 +77,6 @@ def search_results():
     cuisine = request.args.get('cuisine')
     if (cuisine is None) or (cuisine == []):
         cuisine = "%%"
-
 
     try:
         restaurantinfo = restaurant_search(restaurant, cuisine, type, price)
@@ -258,10 +257,10 @@ def addrestaurant():
     if restaurantHours is None or restaurantHours.split() == "":
         restaurantHours = ""
     restaurantMenu = request.args.get('restaurantMenu')
-    if restaurantMenu is None or restaurantMenu.split() == "":
+    if restaurantMenu is None or restaurantMenu.split() == "" or str(restaurantMenu) == "https://":
         restaurantMenu = ""
     restaurantMedia = request.args.get('restaurantMedia')
-    if restaurantMedia is None or restaurantMedia.split() == "":
+    if restaurantMedia is None or restaurantMedia.split() == "" or str(restaurantMedia) == "https://":
         restaurantMedia = ""
     restaurantTags = request.args.get('restaurantTags')
     restaurantImage = request.args.get('restaurantImage')
@@ -475,7 +474,7 @@ flow = Flow.from_client_secrets_file(
     scopes=["https://www.googleapis.com/auth/userinfo.profile",
             "https://www.googleapis.com/auth/userinfo.email", "openid"],
     redirect_uri="https://trentoneats.herokuapp.com/callback"
-    #redirect_uri="http://127.0.0.1:8080/callback"
+    # redirect_uri="http://127.0.0.1:8080/callback"
 )
 
 
@@ -547,7 +546,7 @@ def callback():
                            #ampm = get_ampm(),
                            # current_time = get_current_time(),
                            #    restaurantinfo=restaurantinfo,
-                           id=unique_id, admin=admin, restaurantcount= restaurants_count(), randomrestaurant=random.randint(0, restaurants_count() - 1))
+                           id=unique_id, admin=admin, restaurantcount=restaurants_count(), randomrestaurant=random.randint(0, restaurants_count() - 1))
     response = make_response(html)
     return response
     # return redirect("/")  # ,id=unique_id)
