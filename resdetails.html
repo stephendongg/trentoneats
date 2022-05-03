@@ -6,10 +6,10 @@
     <div class="col-lg-6">
       <!-- <img src= {{info['open_closed']}} class="img-thumbnail"> -->
       <!-- <img src="{{info['image']}}" class="img-thumbnail"> -->
-      <div style="width:500px; height:500px; border: 1px solid rgb(255, 255, 255); background-color: white; display: flex; align-items: center">
+      <div class="m-auto" id="imgBox">
         <img id="temp"
-          class="img-thumbnail" style="max-width:500px;
-          vertical-align: center;">
+          class="img-thumbnail m-auto" style="width:500px; height:500px;
+          vertical-align: center; object-fit: cover;" >
         </div>
     </div>
     <div class="col-lg-6">
@@ -47,12 +47,11 @@
       </div>
     </div>
   </div>
-</div>
   <!-- Adding A Favorite [UNDER CONSTRUCTION]-->
   <div class="container" id="favoritebuttoncontainer"  style="text-align: center; padding-top: 20px;">
-    <a href="added" id="favoritebutton" class="list-group-item list-group-item-action">Add Favorite Restaurant</a>
+    <a href="added" id="favoritebutton" class="list-group-item list-group-item-action" style="background-color: #88d5d5; width: 50%; margin: 0 auto">Add Favorite</a>
   </div>
-  
+</div>
 </div>
 
 {% block content2 %}
@@ -105,7 +104,7 @@
 
 
 <div class="container-fluid pt-5 pb-5 bg-info">
-  <h2 class="restOfHeader"><u>Details</u></h2>
+  <h2 class="restOfHeader"><u>More Details</u></h2>
   <h4 class="resDetails"><strong>Review Count: </strong> {{info['review_count']}}</h4>
   <h4 class="resDetails"><strong>Stars: </strong>
     <div class="Stars_Deets" style="--rating: {{info['stars']}};"></div>
@@ -451,12 +450,12 @@
       if("{{favorite}}" == 0 ) {
         document.getElementById('favoritebutton').hidden = false;
         document.getElementById('favoritebuttoncontainer').hidden = false;
-        document.getElementById('favoritebutton').innerHTML = "Add Favorite";
+        document.getElementById('favoritebutton').innerHTML = "Add this restaurant as a favorite!".bold();
       }
       if("{{favorite}}" == 1 ) {
         document.getElementById('favoritebutton').hidden = false;
         document.getElementById('favoritebuttoncontainer').hidden = false;
-        document.getElementById('favoritebutton').innerHTML = "Remove Favorite";
+        document.getElementById('favoritebutton').innerHTML = "Remove as favorite".bold();
       }
 
   }

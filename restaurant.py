@@ -32,6 +32,7 @@ class restaurant:
         self._price = rowstring[7]
         self._tag = rowstring[8]
         self._hours = rowstring[9]
+        self._reviewcount = rowstring[10]
 
 
     # def __str__(self):
@@ -122,3 +123,7 @@ class restaurant:
     def get_hours(self):
         """restaurant hours"""
         return self._hours
+
+    def get_reviewcount(self):
+        """restaurant hours"""
+        return self._reviewcount

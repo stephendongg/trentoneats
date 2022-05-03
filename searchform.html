@@ -23,7 +23,7 @@
         <input class="rest_search" type="text" id="restaurantInput" placeholder="Enter a restaurant name here!">
 
     </div>
-    <a class = "row pt-0 px-3 justify-content-center" href="resdetails?id={{randomrestaurant - 1}}"> Surprise Me! </a>
+    <a class = "row pt-0 px-3 justify-content-center" id="surpriseme" onclick =randomizeResult() > Surprise Me! </a>
     <br>
     <strong>{{error_msg}}</strong>
     <br>
@@ -190,11 +190,22 @@
     <!-- CDNs for font-awesome, bootstrap, JQuery
     <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-
+    <script>
+      function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+      }
+      function randomizeResult()
+      {
+        randomValue = getRandomInt('{{restaurantcount}}' - 1) + 1;
+        newhref = "resdetails?id=" + randomValue;
+        document.getElementById("surpriseme").href = newhref;
+      }
+      randomizeResult()
+    </script>
 
     <script>
       'use strict';
-
+      
       function handleResponse(response)
        {
           $('#restaurantsDiv').html(response);

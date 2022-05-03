@@ -49,7 +49,7 @@ def search_form():
     unique_id = session.get('google_id')
     admin = is_admin()
     html = render_template(
-        'searchform.html', error_msg=error_msg, id=unique_id, admin=admin, randomrestaurant=random.randint(0, restaurants_count() - 1))
+        'searchform.html', error_msg=error_msg, id=unique_id, admin=admin, restaurantcount= restaurants_count(), randomrestaurant=random.randint(0, restaurants_count() - 1))
     response = make_response(html)
     return response
 
@@ -365,6 +365,7 @@ def resdetails():
         if error is None:
             add_review(id, datetime.datetime.now(), text, rating, email)
             update_ratings(id)
+            info = get_restaurant_info(id)
             reviews = review_search(id)
 
     html = render_template('resdetails.html', info=info,
@@ -432,6 +433,7 @@ def test():
             add_review(id, datetime.datetime.now(), text, rating, email)
             update_ratings(id)
             # return redirect(url_for('review.dashboard'))
+            info = get_restaurant_info(id)
             reviews = review_search(id)
         # flash(error)
         # return render_template('review/create.html')
@@ -545,7 +547,7 @@ def callback():
                            #ampm = get_ampm(),
                            # current_time = get_current_time(),
                            #    restaurantinfo=restaurantinfo,
-                           id=unique_id, admin=admin, randomrestaurant=random.randint(0, restaurants_count() - 1))
+                           id=unique_id, admin=admin, restaurantcount= restaurants_count(), randomrestaurant=random.randint(0, restaurants_count() - 1))
     response = make_response(html)
     return response
     # return redirect("/")  # ,id=unique_id)
