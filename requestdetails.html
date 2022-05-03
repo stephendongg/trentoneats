@@ -6,24 +6,21 @@
     <div class="col-lg-6">
       <!-- <img src= {{info['open_closed']}} class="img-thumbnail"> -->
       <!-- <img src="{{info['image']}}" class="img-thumbnail"> -->
-      <div
-        style="width:500px; height:500px; border: 1px solid rgb(255, 255, 255); background-color: white; display: flex; justify-content: center;">
-        <img id="temp" class="img-thumbnail" style="max-width:500px;
-          vertical-align: center;">
-      </div>
+      <div class="m-auto" id="imgBox">
+        <img id="temp"
+          class="img-thumbnail m-auto" style="width:500px; height:500px;
+          vertical-align: center; object-fit: cover;" >
+        </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-lg-6">
       <div class="container-fluid bg-light">
         <h2 class="restOfHeader">{{info['name']}}</h2>
       </div>
       <h3 class="resDetails">Location & Hours</h3>
       <div class="row">
-        <div class="col-md-6" id="map">
+        <div class="col-md-5" id="map">
         </div>
-        <script async
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGum5waTdk-9CADxl2qUegf1d4kzm146U&callback=initMap">
-          </script>
-        <div class="col-md-6">
+        <div class="col-md-7">
           <h4 class="resDetails"><strong id="OpenClose"></strong></h4>
           <h4 class="resDetails" id="MondayHours"></h4>
           <h4 class="resDetails" id="TuesdayHours"></h4>
@@ -33,14 +30,16 @@
           <h4 class="resDetails" id="SaturdayHours"></h4>
           <h4 class="resDetails" id="SundayHours"></h4>
         </div>
-        <div class="col-sm-4 pt-3">
+      </div>
+      <div class="row">
+        <div class="col-lg-3 pt-3">
           <h4 class="resDetails"><i class="bi bi-geo-alt-fill"></i>{{ info['address'] }}</h4>
         </div>
-        <div class="col-sm-2 p-3">
+        <div class="col-lg-2 p-3">
           <a href="" target="__blank__" class="btn btn-light" id="directionsLink"><strong>Get Directions <i
                 class="bi bi-box-arrow-up-right"></i></strong></a>
         </div>
-        <div class="col-sm-6 p-3">
+        <div class="col-lg-7 p-3">
           <h4 class="resDetails"><strong>Cuisine: </strong> {{info['cuisine']}}</h4>
           <h4 class="resDetails"><strong>Price: </strong> {{info['price']}}</h4>
           <h4 class="resDetails"><strong>Type: </strong> {{info['type']}}</h4>
@@ -48,7 +47,6 @@
       </div>
     </div>
   </div>
-</div>
 <!-- Adding A Favorite [UNDER CONSTRUCTION]-->
 <!-- <div class="container" style="text-align: center; padding-top: 20px;">
   <a href="test" class="list-group-item list-group-item-action">Add Favorite Restaurant</a>
