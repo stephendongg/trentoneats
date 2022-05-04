@@ -6,24 +6,21 @@
     <div class="col-lg-6">
       <!-- <img src= {{info['open_closed']}} class="img-thumbnail"> -->
       <!-- <img src="{{info['image']}}" class="img-thumbnail"> -->
-      <div
-        style="width:500px; height:500px; border: 1px solid rgb(255, 255, 255); background-color: white; display: flex; justify-content: center;">
-        <img id="temp" class="img-thumbnail" style="max-width:500px;
-          vertical-align: center;">
-      </div>
+      <div class="m-auto" id="imgBox">
+        <img id="temp"
+          class="img-thumbnail m-auto" style="width:500px; height:500px;
+          vertical-align: center; object-fit: cover;" >
+        </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-lg-6">
       <div class="container-fluid bg-light">
         <h2 class="restOfHeader">{{info['name']}}</h2>
       </div>
       <h3 class="resDetails">Location & Hours</h3>
       <div class="row">
-        <div class="col-md-6" id="map">
+        <div class="col-md-5" id="map">
         </div>
-        <script async
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGum5waTdk-9CADxl2qUegf1d4kzm146U&callback=initMap">
-          </script>
-        <div class="col-md-6">
+        <div class="col-md-7">
           <h4 class="resDetails"><strong id="OpenClose"></strong></h4>
           <h4 class="resDetails" id="MondayHours"></h4>
           <h4 class="resDetails" id="TuesdayHours"></h4>
@@ -33,14 +30,16 @@
           <h4 class="resDetails" id="SaturdayHours"></h4>
           <h4 class="resDetails" id="SundayHours"></h4>
         </div>
-        <div class="col-sm-4 pt-3">
+      </div>
+      <div class="row">
+        <div class="col-lg-3 pt-3">
           <h4 class="resDetails"><i class="bi bi-geo-alt-fill"></i>{{ info['address'] }}</h4>
         </div>
-        <div class="col-sm-2 p-3">
+        <div class="col-lg-2 p-3">
           <a href="" target="__blank__" class="btn btn-light" id="directionsLink"><strong>Get Directions <i
                 class="bi bi-box-arrow-up-right"></i></strong></a>
         </div>
-        <div class="col-sm-6 p-3">
+        <div class="col-lg-7 p-3">
           <h4 class="resDetails"><strong>Cuisine: </strong> {{info['cuisine']}}</h4>
           <h4 class="resDetails"><strong>Price: </strong> {{info['price']}}</h4>
           <h4 class="resDetails"><strong>Type: </strong> {{info['type']}}</h4>
@@ -48,7 +47,6 @@
       </div>
     </div>
   </div>
-</div>
 <!-- Adding A Favorite [UNDER CONSTRUCTION]-->
 <!-- <div class="container" style="text-align: center; padding-top: 20px;">
   <a href="test" class="list-group-item list-group-item-action">Add Favorite Restaurant</a>
@@ -76,7 +74,7 @@
 
 
 
-<div class="container-fluid pt-5 pb-5 bg-info">
+<!-- <div class="container-fluid pt-5 pb-5 bg-info">
   <h2 class="restOfHeader">Details</h2>
   <h4 class="resDetails" id="mediaLink"><strong>Official Website: </strong><a href="{{info['media']}}"
       target="__blank__">{{info['media']}}</a></h4>
@@ -85,7 +83,27 @@
     <div class="Stars_Deets" style="--rating: {{info['stars']}};"></div>
   </h4>
   <h4 class="resDetails" id="menuLink"><a href="{{info['menu']}}" class="btn btn-primary btn-lg" target="__blank__"
-      id="menuLink">Menu <i class="bi bi-box-arrow-up-right"></i></a></h4>
+      id="menuLink">Menu <i class="bi bi-box-arrow-up-right"></i></a></h4> -->
+
+
+<div class="container-fluid pt-5 pb-5 bg-info">
+  <h2 class="restOfHeader"><u>More Details</u></h2>
+  <h4 class="resDetails"><strong>Review Count: </strong> {{info['review_count']}}</h4>
+  <h4 class="resDetails"><strong>Stars: </strong>
+    <div class="Stars_Deets" style="--rating: {{info['stars']}};"></div>
+  </h4>
+  <div class="row justify-content-center">
+    <span class="px-2">
+      <h4 class="resDetails" id="menuLink"><a href="{{info['menu']}}" class="btn btn-light btn-lg" target="__blank__"
+          id="menuLink"><strong>Menu</strong> <i class="bi bi-box-arrow-up-right"></i></a></h4>
+    </span>
+    <span class="px-2">
+      <h4 class="resDetails" id="mediaLink"><a href="{{info['media']}}" class="btn btn-light btn-lg"
+          target="__blank__"><strong>Website</strong> <i class="bi bi-box-arrow-up-right"></i></a></h4>
+    </span>
+  </div>
+
+
   <!--create a reviews carousel-->
   <!--use reviews table for each restaurant and populate panel with each review (for loop with jinja scripts)-->
   <div id="demo" class="carousel slide" data-ride="carousel">
@@ -149,6 +167,30 @@
 <script type="text/javascript">
 
   function myFunction() {
+    if ("{{info['media']}}" == "") {
+      document.getElementById('mediaLink').innerHTML = "";
+    }
+
+  }
+  myFunction();
+
+</script>
+
+<script type="text/javascript">
+
+  function myFunction() {
+    if ("{{info['menu']}}" == "") {
+      document.getElementById('menuLink').innerHTML = "";
+    }
+
+  }
+  myFunction();
+
+</script>
+
+<script type="text/javascript">
+
+  function myFunction() {
     if ("{{info['media']}}" == "None") {
       document.getElementById('mediaLink').innerHTML = "";
     }
@@ -184,38 +226,14 @@
 </script>
 
 <!--Function to get whether restaurant is open or closed-->
-<script>
-  'use strict';
-
-
-  function statusFunc() {
-    let status = "{{ info['open_closed'] }}";
-    let node = document.getElementById("OpenClose");
-    if (status == "True") {
-      node.innerHTML = "Open now";
-    }
-    else {
-      node.innerHTML = "Closed now";
-    }
-  }
-
-  statusFunc();
-</script>
 
 <script>
   'use strict';
-  let resData = "{{ info }}";
+  let resHours = "{{ info['hours'] }}";
+  console.log(resHours);
 
   // Find index in split where hours are
-  let hours = resData.split(/&#39|&#34/);
-  let hoursIndex = 0;
-  for (let i = 0; i < hours.length; i++) {
-    if (hours[i].includes('AM') & hours[i].includes('day')) {
-      hoursIndex = i;
-    }
-  }
-  hours = hours[hoursIndex].split(";")[1];
-  hours = hours.split(",");
+  let hours = resHours.split(",");
   let hourNode = document.getElementById("MondayHours");
   hourNode.innerHTML = hours[0];
   if (typeof hours[1] != 'undefined') {
@@ -242,6 +260,154 @@
     hourNode = document.getElementById("SundayHours");
     hourNode.innerHTML = hours[6];
   }
+
+</script>
+
+<!--Open/Close relating to time function-->
+<script>
+  const d = new Date();
+  let day = d.getDay();
+  index = day - 1;
+  if (index == -1) {
+    index = 6;
+  }
+  today_hours = hours[index];
+  
+  today_hours = today_hours.split(" ");
+  console.log("today hours ", today_hours)
+
+  var i = today_hours.length;
+
+  // Check if restaurant is closed today
+
+  if (today_hours[i - 1] == "Closed") {
+    document.getElementById("OpenClose").innerHTML = "Closed now"
+  }
+
+  else {
+    var openAmPm = today_hours[i - 4];
+    var closeAmPm = today_hours[i - 1];
+
+    var startTime; // = '15:10:10'
+    var endTime; // = '22:30:00';
+    var nextDay = false;
+
+
+    // CONVERT HOURS TO 24H IF NEEDED
+    // ADD SOME BOOLEAN TO CHECK FOR NEXT DAY
+    if (openAmPm == "AM") {
+      startTime = today_hours[i - 5] + ':00';
+
+    }
+    else {
+      if (today_hours[i - 5].split(":")[0] == 12) {
+        startTime = today_hours[i - 5] + ':00';
+      }
+      else {
+        let time = today_hours[i-5].split(":");
+        let hour = parseInt(time[0]) + 12;
+        let minutes = time[1];
+        startTime = hour + ":" + minutes + ":00";
+      }
+      
+    }
+    if (closeAmPm == "AM") {
+      nextDay = true;
+      endTime = today_hours[i-2] + ":00";
+    }
+    else {
+      if (today_hours[i - 2].split(":")[0] == 12) {
+        endTime = today_hours[i - 2] + ':00';
+      }
+      else {
+        let time = today_hours[i-2].split(":");
+        let hour = parseInt(time[0]) + 12;
+        let minutes = time[1];
+        endTime = hour + ":" + minutes + ":00";
+      }
+    }
+  
+
+
+
+    var currentDate = new Date();
+
+    var startDate = new Date(currentDate.getTime());
+    console.log("Start date before = ", startDate);
+    // startDate.setDate(startDate.getDate() + 1)
+    startDate.setHours(startTime.split(":")[0]);
+    startDate.setMinutes(startTime.split(":")[1]);
+    startDate.setSeconds(startTime.split(":")[2]);
+    console.log("Start date after = ", startDate);
+
+    var endDate = new Date(currentDate.getTime());
+    // CHECK IF IT IS STILL OPEN FROM PREVIOUS DAY
+    var prev_index = index - 1;
+    if (prev_index == -1) {
+      prev_index = 6;
+    }
+
+    var yest_hours = hours[prev_index];
+  
+    yest_hours = yest_hours.split(" ");
+    console.log("Yest hours ", yest_hours)
+
+    var j = yest_hours.length;
+    var prevDay = false;
+    var prevEndTime;
+
+    if (yest_hours[i - 1] != "Closed") {
+      // Check if current time is < yesterday end time
+      var yest_closeAmPm = yest_hours[i - 1];
+      if (yest_closeAmPm == "AM") {
+        prevDay = true;
+        prevEndTime = yest_hours[i-2] + ":00";
+      }
+    }
+
+
+
+
+    if (nextDay) {
+      endDate.setDate(endDate.getDate() + 1);
+      endDate.setHours(endTime.split(":")[0]);
+      endDate.setMinutes(endTime.split(":")[1]);
+      endDate.setSeconds(endTime.split(":")[2]);
+    }
+    else {
+      endDate.setHours(endTime.split(":")[0]);
+      endDate.setMinutes(endTime.split(":")[1]);
+      endDate.setSeconds(endTime.split(":")[2]);
+    }
+
+
+    if (startDate < currentDate && endDate > currentDate) {
+      document.getElementById("OpenClose").innerHTML = "Open now";
+    }
+    else {
+      document.getElementById("OpenClose").innerHTML = "Closed now";
+    }
+
+    if (prevDay) {
+      var prevEndDate = new Date(currentDate.getTime());      
+      prevEndDate.setHours(prevEndTime.split(":")[0]);
+      prevEndDate.setMinutes(prevEndTime.split(":")[1]);
+      prevEndDate.setSeconds(prevEndTime.split(":")[2]);
+
+      if (currentDate < prevEndDate) {
+        document.getElementById("OpenClose").innerHTML = "Open now";
+      }
+
+  }
+
+
+
+
+
+    
+
+
+}
 
 </script>
 
@@ -308,6 +474,10 @@
   approval();
 
 
+</script>
+
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGum5waTdk-9CADxl2qUegf1d4kzm146U&callback=initMap">
 </script>
 
 {% include 'footer.html' %}
