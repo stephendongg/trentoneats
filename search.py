@@ -149,8 +149,11 @@ def get_restaurant_info(res_id):
                 stmt_str += "WHERE restaurant_id = '" + res_id + "'; "
 
                 cursor.execute(stmt_str)
+
                 print(stmt_str)
                 row = cursor.fetchone()
+                if row == None:
+                    raise KeyError("No such id in database")
 
                 # hashmap to hold object info
                 info_obj = {}
@@ -284,6 +287,10 @@ def get_request_info(res_id):
                 cursor.execute(stmt_str)
                 print(stmt_str)
                 row = cursor.fetchone()
+
+                if row == None:
+                    raise KeyError("No such id in database")
+
 
                 # hashmap to hold object info
                 info_obj = {}

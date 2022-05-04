@@ -190,7 +190,7 @@ def insert_restaurant():
         'Italian, Mediterranean, Spanish',
         'Casual',
         'Inexpensive $',
-        'https://trentinismenu.com/assets/img/logo.png');
+        'https://www.trentondaily.com/wp-content/uploads/2019/05/trentinis.jpg');
         """,
 
         """

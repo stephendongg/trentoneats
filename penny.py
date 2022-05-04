@@ -326,7 +326,13 @@ def resdetails():
     id = request.args.get('id')
     admin = is_admin()
     session['resid'] = id
-    info = get_restaurant_info(id)
+    try:
+        info = get_restaurant_info(id)
+    except KeyError:
+        html = render_template('no_such_id.html')
+        response = make_response(html)
+        return response
+
     unique_id = session.get('google_id')
 
     reviews = review_search(id)
@@ -374,7 +380,7 @@ def test():
     #id = request.args.get('id')
     name = request.args.get('name')
     id = session['resid']
-    info = get_restaurant_info(id)
+
     # This line is new.
     unique_id = session.get('google_id')
     admin = is_admin()
@@ -382,7 +388,12 @@ def test():
 
     reviews = review_search(id)
     # Info currently is:
-    info = get_restaurant_info(id)
+    try:
+        info = get_restaurant_info(id)
+    except KeyError:
+        html = render_template('no_such_id.html')
+        response = make_response(html)
+        return response
     # This line is new.
     #html = render_template('resdetails.html', info=info, id=unique_id)
 
@@ -601,7 +612,7 @@ def request_results():
 
 
 @app.route('/requests', methods=['GET'])
-def reqeusts_area():
+def requests_area():
     error_msg = request.args.get('error_msg')
     if error_msg is None:
         error_msg = ''
@@ -622,7 +633,12 @@ def request_details():
     # set approval = 0
     session['approval'] = 0
     # Info currently is:
-    info = get_request_info(id)
+    try:
+        info = get_request_info(id)
+    except KeyError:
+        html = render_template('no_such_id.html')
+        response = make_response(html)
+        return response
     # This line is new.
     unique_id = session.get('google_id')
     #html = render_template('resdetails.html', info=info, id=unique_id)

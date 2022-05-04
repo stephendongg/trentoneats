@@ -6,9 +6,9 @@
     <div class="col-lg-6">
       <!-- <img src= {{info['open_closed']}} class="img-thumbnail"> -->
       <!-- <img src="{{info['image']}}" class="img-thumbnail"> -->
-      <div style="width:500px; height:500px; border: 1px solid rgb(255, 255, 255); background-color: white; display: flex; align-items: center">
+      <div class="m-auto" id="imgBox">
         <img id="temp"
-          class="img-thumbnail" style="width:500px; height:500px;
+          class="img-thumbnail m-auto" style="width:500px; height:500px;
           vertical-align: center; object-fit: cover;" >
         </div>
     </div>
@@ -104,7 +104,7 @@
 
 
 <div class="container-fluid pt-5 pb-5 bg-info">
-  <h2 class="restOfHeader"><u>Details</u></h2>
+  <h2 class="restOfHeader"><u>More Details</u></h2>
   <h4 class="resDetails"><strong>Review Count: </strong> {{info['review_count']}}</h4>
   <h4 class="resDetails"><strong>Stars: </strong>
     <div class="Stars_Deets" style="--rating: {{info['stars']}};"></div>
