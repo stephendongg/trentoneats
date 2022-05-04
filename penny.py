@@ -366,6 +366,8 @@ def resdetails():
             update_ratings(id)
             info = get_restaurant_info(id)
             reviews = review_search(id)
+            return redirect(url_for('test'))
+            
 
     html = render_template('resdetails.html', info=info,
                            reviews=reviews, id=unique_id, admin=admin, favorite=favorite, loggedin=isLoggedin)
@@ -474,7 +476,7 @@ flow = Flow.from_client_secrets_file(
     scopes=["https://www.googleapis.com/auth/userinfo.profile",
             "https://www.googleapis.com/auth/userinfo.email", "openid"],
     redirect_uri="https://trentoneats.herokuapp.com/callback"
-    # redirect_uri="http://127.0.0.1:8080/callback"
+    #redirect_uri="http://127.0.0.1:8080/callback"
 )
 
 

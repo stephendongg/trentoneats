@@ -438,6 +438,11 @@
   document.getElementById("directionsLink").href = link;
 </script>
 
+<script>  
+  if ( window.history.replaceState ) { 
+          window.history.replaceState( null, null, window.location.href ); 
+      } 
+  </script> 
 <!-- switching the href of the addfavorite test -->
 <script type="text/javascript">
 
