@@ -436,6 +436,7 @@ def test():
             # return redirect(url_for('review.dashboard'))
             info = get_restaurant_info(id)
             reviews = review_search(id)
+            return redirect(url_for('test'))
         # flash(error)
         # return render_template('review/create.html')
 
