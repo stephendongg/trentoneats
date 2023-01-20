@@ -36,11 +36,12 @@ DATABASE_URL = 'file:trentoneats.sql?mode=ro'
 def review_search(input):
     """search through restaurants"""
     try:
-        # with connect(host='localhost', port=5432, user='rmd', password='xxx',
-        #              database="trentoneats") as connection:
+        with connect(host='localhost', port=5432, user='rmd', password='xxx',
+                     database="trentoneats") as connection:
         # dequ5ope4nuoit
-        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                     database="dequ5ope4nuoit") as connection:
+
+        # with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+        #              database="dequ5ope4nuoit") as connection:
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted
@@ -92,7 +93,7 @@ def review_search(input):
 
 
 def add_review(restaurant_id, date, text, rating, email):
-
+    
     stmt_str = """
     INSERT INTO reviews (restaurant_id, date,
     text, overall, email) 
@@ -100,8 +101,10 @@ def add_review(restaurant_id, date, text, rating, email):
     stmt_str += str(restaurant_id) + "', '" + str(date) + "', '" + text + "', '" + rating + "', '" + email +"');"
 
     try:
+        # with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+        #         database="dequ5ope4nuoit") as connection:
         with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                database="dequ5ope4nuoit") as connection:
+            database="dequ5ope4nuoit") as connection:
 
             with connection.cursor() as cursor:
                 print(stmt_str)
@@ -115,10 +118,10 @@ def add_review(restaurant_id, date, text, rating, email):
 def get_restaurant_info(res_id):
     """find all information on one restaurant"""
     try:
-        # with connect(host='localhost', port=5432, user='rmd', password='xxx',
-        #              database="trentoneats") as connection:
-        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                     database="dequ5ope4nuoit") as connection:
+        with connect(host='localhost', port=5432, user='rmd', password='xxx',
+                     database="trentoneats") as connection:
+        # with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+        #              database="dequ5ope4nuoit") as connection:
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted
@@ -164,8 +167,12 @@ def update_ratings(input):
         # with connect(host='localhost', port=5432, user='rmd', password='xxx',
         #              database="trentoneats") as connection:
         # dequ5ope4nuoit
+        # with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+        #              database="dequ5ope4nuoit") as connection:
+        # with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+        #         database="dequ5ope4nuoit") as connection:
         with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                     database="dequ5ope4nuoit") as connection:
+                database="dequ5ope4nuoit") as connection:
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted

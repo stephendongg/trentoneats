@@ -44,11 +44,11 @@ DATABASE_URL = 'file:trentoneats.sql?mode=ro'
 def restaurant_search(input, cuisine, type, price):
     """search through restaurants"""
     try:
-        # with connect(host='localhost', port=5432, user='rmd', password='xxx',
-        #               database="trentoneats") as connection:
+        with connect(host='localhost', port=5432, user='rmd', password='xxx',
+                      database="trentoneats") as connection:
         # dequ5ope4nuoit
-        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                database="dequ5ope4nuoit") as connection:
+        # with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+        #         database="dequ5ope4nuoit") as connection:
 
             with closing(connection.cursor()) as cursor:
 
@@ -136,10 +136,10 @@ def restaurant_search(input, cuisine, type, price):
 def get_restaurant_info(res_id):
     """find all information on one restaurant"""
     try:
-        # with connect(host='localhost', port=5432, user='rmd', password='xxx',
-        #              database="trentoneats") as connection:
-        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                     database="dequ5ope4nuoit") as connection:
+        with connect(host='localhost', port=5432, user='rmd', password='xxx',
+                     database="trentoneats") as connection:
+        # with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+        #              database="dequ5ope4nuoit") as connection:
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted
@@ -188,11 +188,11 @@ def get_restaurant_info(res_id):
 def request_search(input):
     """search through restaurants"""
     try:
-        # with connect(host='localhost', port=5432, user='rmd', password='xxx',
-        #              database="trentoneats") as connection:
+        with connect(host='localhost', port=5432, user='rmd', password='xxx',
+                     database="trentoneats") as connection:
         # dequ5ope4nuoit
-        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                     database="dequ5ope4nuoit") as connection:
+        # with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+        #              database="dequ5ope4nuoit") as connection:
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted
@@ -245,11 +245,11 @@ def request_search(input):
 def restaurants_count():
     """search through restaurants"""
     try:
-        # with connect(host='localhost', port=5432, user='rmd', password='xxx',
-        #              database="trentoneats") as connection:
+        with connect(host='localhost', port=5432, user='rmd', password='xxx',
+                     database="trentoneats") as connection:
         # dequ5ope4nuoit
-        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                     database="dequ5ope4nuoit") as connection:
+        # with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+        #              database="dequ5ope4nuoit") as connection:
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted
@@ -272,10 +272,10 @@ def restaurants_count():
 def get_request_info(res_id):
     """find all information on one restaurant"""
     try:
-        # with connect(host='localhost', port=5432, user='rmd', password='xxx',
-        #              database="trentoneats") as connection:
-        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                     database="dequ5ope4nuoit") as connection:
+        with connect(host='localhost', port=5432, user='rmd', password='xxx',
+                     database="trentoneats") as connection:
+        # with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+        #              database="dequ5ope4nuoit") as connection:
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted

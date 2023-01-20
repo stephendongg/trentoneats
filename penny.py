@@ -476,8 +476,11 @@ flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/userinfo.profile",
             "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    redirect_uri="https://trentoneats.herokuapp.com/callback"
-    #redirect_uri="http://127.0.0.1:8080/callback"
+    # redirect_uri="https://trentoneats.herokuapp.com/callback"
+    #redirect_uri="http://127.0.0.:8080/callback"
+    # redirect_uri="http://192.168.0.34:8080/"
+    redirect_uri = "http://localhost:8080/callback"
+    
 )
 
 

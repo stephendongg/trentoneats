@@ -37,9 +37,12 @@ DATABASE_URL = 'file:trentoneats.sql?mode=ro'
 def user_exists(email):
     """search through restaurants"""
     try:
+         with connect(
+                host='localhost', port=5432, user='rmd', password='trentoneats333',
+                database='trentoneats') as connection:
     
-        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                     database="dequ5ope4nuoit") as connection:
+        # with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+        #              database="dequ5ope4nuoit") as connection:
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted
@@ -116,8 +119,11 @@ def add_favorite_restaurant(email, restaurantid):
     stmt_str += email + "', '" + restaurantid +  "');"
 
     try:
-        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                database="dequ5ope4nuoit") as connection:
+         with connect(
+                host='localhost', port=5432, user='rmd', password='trentoneats333',
+                database='trentoneats') as connection:
+        # with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+        #         database="dequ5ope4nuoit") as connection:
 
             with connection.cursor() as cursor:
                 print(stmt_str)
@@ -136,8 +142,11 @@ def delete_favorite_restaurant(email, restaurantid):
 
 
     try:
-        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                database="dequ5ope4nuoit") as connection:
+         with connect(
+                host='localhost', port=5432, user='rmd', password='trentoneats333',
+                database='trentoneats') as connection:
+        # with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+        #         database="dequ5ope4nuoit") as connection:
 
             with connection.cursor() as cursor:
                 print(stmt_str)
@@ -151,9 +160,11 @@ def delete_favorite_restaurant(email, restaurantid):
 def is_favorite_restaurant(email, restaurantid):
     """search through restaurants"""
     try:
-    
-        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                     database="dequ5ope4nuoit") as connection:
+         with connect(
+                host='localhost', port=5432, user='rmd', password='trentoneats333',
+                database='trentoneats') as connection:
+        # with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+        #              database="dequ5ope4nuoit") as connection:
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted
@@ -197,11 +208,12 @@ def is_favorite_restaurant(email, restaurantid):
 def findinfo(id): 
         """search through restaurants"""
         try:
-            #with connect(host='localhost', port=5432, user='rmd', password='xxx',
-            #              database="trentoneats") as connection:
+            with connect(host='localhost', port=5432, user='rmd', password='xxx',
+                         database="trentoneats") as connection:
             # dequ5ope4nuoit
-            with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                        database="dequ5ope4nuoit") as connection:
+
+            # with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+            #             database="dequ5ope4nuoit") as connection:
 
                 with closing(connection.cursor()) as cursor:
                     # This needs to be adjusted
@@ -241,9 +253,11 @@ def get_favorites(email):
     """search through restaurants"""
     print("test")
     try:
-    
-        with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
-                     database="dequ5ope4nuoit") as connection:
+         with connect(
+                host='localhost', port=5432, user='rmd', password='trentoneats333',
+                database='trentoneats') as connection:
+        # with connect(host='ec2-3-229-161-70.compute-1.amazonaws.com', port=5432, user='jazlvqafdamomp', password='6bc2f9e25e0ab4a2e167d5aed92096137eaacd1667e2863a6659e019dbb7e81a',
+        #              database="dequ5ope4nuoit") as connection:
 
             with closing(connection.cursor()) as cursor:
                 # This needs to be adjusted
