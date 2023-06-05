@@ -13,7 +13,7 @@ The project sort of fell apart after confusion of who was going to maintain the 
 1) The Database -> originally used Heroku's free database program, but that fell apart when all heroku databases got deleted. 
 2) Google Maps Api key = cannot get restaurant location features. 
 
-I am currently working on making the file run locally.
+A future step would be making the file run locally.
 
 
 
